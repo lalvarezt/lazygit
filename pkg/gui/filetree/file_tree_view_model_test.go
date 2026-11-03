@@ -10,6 +10,37 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestRestoredSelectionFollowsNodeOrder(t *testing.T) {
+	file := func(path, previousPath string) *FileNode {
+		return NewFileNode(&Node[models.File]{path: path, File: &models.File{Path: path, PreviousPath: previousPath}})
+	}
+	dir := func(path string, compression int) *FileNode {
+		return NewFileNode(&Node[models.File]{path: path, CompressionLevel: compression})
+	}
+	for _, test := range []struct {
+		name     string
+		previous []*FileNode
+		current  []*FileNode
+		want     int
+	}{
+		{name: "selected node precedes its successors", previous: []*FileNode{file("selected", ""), file("next", "")}, current: []*FileNode{file("next", ""), file("selected", "")}, want: 1},
+		{name: "immediate successor", previous: []*FileNode{file("missing", ""), file("next", "")}, current: []*FileNode{file("next", "")}, want: 0},
+		{name: "successor order", previous: []*FileNode{file("missing", ""), file("also-missing", ""), file("later", ""), file("earlier", "")}, current: []*FileNode{file("earlier", ""), file("later", "")}, want: 1},
+		{name: "compressed aliases follow current order", previous: []*FileNode{file("missing", ""), file("also-missing", ""), dir("./a/b/c", 2)}, current: []*FileNode{dir("./a", 0), dir("./a/b", 0), dir("./a/b/c", 0)}, want: 0},
+		{name: "rename skips old half", previous: []*FileNode{file("missing", ""), file("also-missing", ""), file("new", "old")}, current: []*FileNode{file("old", ""), file("new", "")}, want: 1},
+		{name: "rename alias can precede new half", previous: []*FileNode{file("missing", ""), file("also-missing", ""), file("new", "old")}, current: []*FileNode{file("old", ""), file("renamed-again", "old"), file("new", "")}, want: 1},
+		{name: "no survivor", previous: []*FileNode{file("missing", ""), file("also-missing", ""), file("still-missing", "")}, current: []*FileNode{file("other", "")}, want: -1},
+		{name: "no successor", previous: []*FileNode{file("missing", "")}, current: []*FileNode{file("other", "")}, want: -1},
+		{name: "no previous nodes", current: []*FileNode{file("other", "")}, want: -1},
+		{name: "no current nodes", previous: []*FileNode{file("missing", "")}, want: -1},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			view := &FileTreeViewModel{}
+			assert.Equal(t, test.want, view.findNewSelectedIdx(test.previous, test.current))
+		})
+	}
+}
+
 func TestSetStatusFilterPreservingSelection(t *testing.T) {
 	files := []*models.File{
 		{Path: "file1"},

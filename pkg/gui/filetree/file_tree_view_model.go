@@ -139,6 +139,10 @@ func (self *FileTreeViewModel) SetTree() {
 // comes first in currNodes and takes over the selection; this keeps the cursor
 // on the same line.
 func (self *FileTreeViewModel) findNewSelectedIdx(prevNodes []*FileNode, currNodes []*FileNode) int {
+	if len(prevNodes) == 0 || len(currNodes) == 0 {
+		return -1
+	}
+
 	// Paths are compared as the user sees them, without the "./" prefix of the
 	// root item, so that they line up with the names of a rename.
 	getPaths := func(node *FileNode) []string {
@@ -151,19 +155,41 @@ func (self *FileTreeViewModel) findNewSelectedIdx(prevNodes []*FileNode, currNod
 		return node.GetPaths()
 	}
 
-	for _, prevNode := range prevNodes {
+	// A refresh usually keeps the selected node or removes just that file.
+	// Check its immediate successor too before indexing the remaining nodes.
+	directCount := min(2, len(prevNodes))
+	for _, prevNode := range prevNodes[:directCount] {
 		selectedPaths := getPaths(prevNode)
-
 		for idx, node := range currNodes {
 			paths := getPaths(node)
-
-			// If you started off with a rename selected, and now it's broken in two, we want you to jump to the new file, not the old file.
-			// This is because the new should be in the same position as the rename was meaning less cursor jumping
 			foundOldFileInRename := isOldFileInRename(prevNode, node)
-			foundNode := utils.StringArraysOverlap(paths, selectedPaths) && !foundOldFileInRename
-			if foundNode {
+			if utils.StringArraysOverlap(paths, selectedPaths) && !foundOldFileInRename {
 				return idx
 			}
+		}
+	}
+	if len(prevNodes) == directCount {
+		return -1
+	}
+
+	indicesByPath := make(map[string][]int, len(currNodes))
+	for idx, node := range currNodes {
+		for _, path := range getPaths(node) {
+			indicesByPath[path] = append(indicesByPath[path], idx)
+		}
+	}
+	for _, prevNode := range prevNodes[directCount:] {
+		firstIdx := len(currNodes)
+		for _, path := range getPaths(prevNode) {
+			for _, idx := range indicesByPath[path] {
+				if !isOldFileInRename(prevNode, currNodes[idx]) {
+					firstIdx = min(firstIdx, idx)
+					break
+				}
+			}
+		}
+		if firstIdx < len(currNodes) {
+			return firstIdx
 		}
 	}
 
