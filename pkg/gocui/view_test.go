@@ -31,6 +31,50 @@ func WithSimulationScreen(t *testing.T, width, height int) {
 	})
 }
 
+func TestDrawClearsUncoveredCells(t *testing.T) {
+	for _, test := range []struct {
+		name    string
+		content string
+		originX int
+		originY int
+		wrap    bool
+		mask    string
+		want    []string
+	}{
+		{name: "shorter content", content: "a\nb", want: []string{"a     ", "b     ", "      "}},
+		{name: "empty content", want: []string{"      ", "      ", "      "}},
+		{name: "horizontal scroll", content: "界a", originX: 1, want: []string{" a    ", "      ", "      "}},
+		{name: "vertical scroll", content: "first\nlast", originY: 1, want: []string{"last  ", "      ", "      "}},
+		{name: "wrapped content", content: "1234567", wrap: true, want: []string{"123456", "7     ", "      "}},
+		{name: "masked content", content: "ab", mask: "*", want: []string{"******", "      ", "      "}},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			WithSimulationScreen(t, 8, 5)
+			v := NewView("diff", 0, 0, 7, 4, OutputNormal)
+			v.FgColor = ColorGreen
+			v.BgColor = ColorBlue
+			v.SetContent("界界界\n界界界\n界界界")
+			v.draw(true)
+
+			v.SetContent(test.content)
+			v.Wrap = test.wrap
+			v.Mask = test.mask
+			v.SetOrigin(test.originX, test.originY)
+			v.draw(true)
+
+			for y, want := range test.want {
+				var row strings.Builder
+				for x := range 6 {
+					ch, style, _ := Screen.Get(x+1, y+1)
+					row.WriteString(ch)
+					assert.Equal(t, getTcellStyle(oldStyle{fg: v.FgColor, bg: v.BgColor, outputMode: v.outMode}), style)
+				}
+				assert.Equal(t, want, row.String())
+			}
+		})
+	}
+}
+
 func TestWriteString(t *testing.T) {
 	tests := []struct {
 		existingLines  []string

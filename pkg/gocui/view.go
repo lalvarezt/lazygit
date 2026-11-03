@@ -1861,8 +1861,6 @@ func (v *View) draw(isWindowFocused bool) {
 	}
 	defer func() { v.needsRedraw = false }()
 
-	v.clearRunes()
-
 	maxX, maxY := v.InnerSize()
 
 	if v.Wrap {
@@ -1880,14 +1878,8 @@ func (v *View) draw(isWindowFocused bool) {
 		v.SetOriginY(visibleViewLinesHeight - maxY)
 	}
 
-	if len(v.viewLines) == 0 {
-		return
-	}
-
-	start := v.oy
-	if start > len(v.viewLines)-1 {
-		start = len(v.viewLines) - 1
-	}
+	start := min(v.oy, max(0, len(v.viewLines)-1))
+	v.clearRunes(min(maxY, len(v.viewLines)-start))
 
 	emptyCell := cell{chr: " ", width: 1, fgColor: ColorDefault, bgColor: ColorDefault}
 
@@ -2084,11 +2076,11 @@ func (v *View) isHoveredHyperlink(x, y int) bool {
 	return false
 }
 
-// clearRunes erases all the cells in the view.
-func (v *View) clearRunes() {
+// clearRunes erases the rows below the drawn content.
+func (v *View) clearRunes(fromY int) {
 	maxX, maxY := v.InnerSize()
 	for x := range maxX {
-		for y := range maxY {
+		for y := fromY; y < maxY; y++ {
 			tcellSetCell(v.x0+x+1, v.y0+y+1, " ", v.FgColor, v.BgColor, v.outMode)
 		}
 	}
