@@ -8,6 +8,33 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestTypeStringAtCursor(t *testing.T) {
+	for _, test := range []struct {
+		name           string
+		content        string
+		cursor         int
+		pasted         string
+		overwrite      bool
+		expected       string
+		expectedCursor int
+	}{
+		{name: "insert in middle", content: "before after", cursor: 7, pasted: "new ", expected: "before new after", expectedCursor: 11},
+		{name: "insert Unicode and newline", content: "ab", cursor: 1, pasted: "界é\n", expected: "a界é\nb", expectedCursor: 8},
+		{name: "combining character joins neighbor", content: "ab", cursor: 1, pasted: "́", expected: "áb", expectedCursor: 3},
+		{name: "insert emoji", pasted: "👩‍💻", expected: "👩‍💻", expectedCursor: 11},
+		{name: "overwrite graphemes", content: "prefix 界é suffix", cursor: 7, pasted: "AB", overwrite: true, expected: "prefix AB suffix", expectedCursor: 9},
+		{name: "overwrite at end", content: "a", cursor: 1, pasted: "界\nz", overwrite: true, expected: "a界\nz", expectedCursor: 6},
+		{name: "empty paste", content: "ab", cursor: 1, expected: "ab", expectedCursor: 1},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			area := &TextArea{content: test.content, cursor: test.cursor, overwrite: test.overwrite, AutoWrap: true, AutoWrapWidth: 6}
+			area.TypeString(test.pasted)
+			assert.Equal(t, test.expected, area.GetUnwrappedContent())
+			assert.Equal(t, test.expectedCursor, area.cursor)
+		})
+	}
+}
+
 func TestTextArea(t *testing.T) {
 	tests := []struct {
 		actions           func(*TextArea)

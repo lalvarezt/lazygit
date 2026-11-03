@@ -667,6 +667,11 @@ func (self *TextArea) Clear() {
 }
 
 func (self *TextArea) TypeString(str string) {
+	if !self.overwrite {
+		self.TypeCharacter(str)
+		return
+	}
+
 	state := -1
 	for str != "" {
 		var chr string
