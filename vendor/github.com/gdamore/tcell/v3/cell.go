@@ -282,7 +282,13 @@ func (cb *CellBuffer) FillArea(x, y, w, h int, r rune, style Style) {
 	if x0 >= x1 {
 		return
 	}
-	str := string(r)
+	var str string
+	if r >= 0 && r < utf8.RuneSelf {
+		// Single-byte slice conversions share Go's static byte strings.
+		str = string([]byte{byte(r)})
+	} else {
+		str = string(r)
+	}
 	for row := y0; row < y1; row++ {
 		cells := cb.cells[row*cb.w+x0 : row*cb.w+x1]
 		for i := range cells {
