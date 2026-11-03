@@ -92,48 +92,7 @@ func BuildTreeFromCommitFiles(
 	showRootItem bool,
 	cmp func(a, b *Node[models.CommitFile]) int,
 ) *Node[models.CommitFile] {
-	root := &Node[models.CommitFile]{}
-
-	var curr *Node[models.CommitFile]
-	for _, file := range files {
-		splitPath := SplitFileTreePath(file.Path, showRootItem)
-		curr = root
-	outer:
-		for i := range splitPath {
-			var setFile *models.CommitFile
-			isFile := i == len(splitPath)-1
-			if isFile {
-				setFile = file
-			}
-
-			path := join(splitPath[:i+1])
-
-			for _, existingChild := range curr.Children {
-				if existingChild.path == path {
-					curr = existingChild
-					continue outer
-				}
-			}
-
-			if i == 0 && len(files) == 1 && len(splitPath) == 2 {
-				// skip the root item when there's only one file at top level; we don't need it in that case
-				continue outer
-			}
-
-			newChild := &Node[models.CommitFile]{
-				path: path,
-				File: setFile,
-			}
-			curr.Children = append(curr.Children, newChild)
-
-			curr = newChild
-		}
-	}
-
-	root.Sort(cmp)
-	root.Compress()
-
-	return root
+	return buildTree(files, func(file *models.CommitFile) string { return file.Path }, showRootItem, cmp)
 }
 
 func BuildFlatTreeFromFiles(
