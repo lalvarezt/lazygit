@@ -75,6 +75,35 @@ func TestDrawClearsUncoveredCells(t *testing.T) {
 	}
 }
 
+func TestClearRunesClipsToView(t *testing.T) {
+	WithSimulationScreen(t, 8, 5)
+	background := getTcellStyle(oldStyle{fg: ColorRed, bg: ColorYellow, outputMode: OutputNormal})
+	Screen.Fill('x', background)
+	v := NewView("diff", -3, -2, 6, 4, OutputNormal)
+	v.FgColor = ColorGreen
+	v.BgColor = ColorBlue
+	v.clearRunes(2)
+
+	for y, row := range []string{
+		"xxxxxxxx",
+		"      xx",
+		"      xx",
+		"      xx",
+		"xxxxxxxx",
+	} {
+		for x, want := range row {
+			content, style, width := Screen.Get(x, y)
+			assert.Equal(t, string(want), content)
+			assert.Equal(t, 1, width)
+			if want == ' ' {
+				assert.Equal(t, getTcellStyle(oldStyle{fg: v.FgColor, bg: v.BgColor, outputMode: v.outMode}), style)
+			} else {
+				assert.Equal(t, background, style)
+			}
+		}
+	}
+}
+
 func TestWriteString(t *testing.T) {
 	tests := []struct {
 		existingLines  []string

@@ -20,6 +20,7 @@ func BenchmarkViewDraw(b *testing.B) {
 		}{
 			{"full", strings.Repeat(strings.Repeat("diff content ", 20)+"\n", 100)},
 			{"short", "short content"},
+			{"empty", ""},
 			{"unicode", strings.Repeat(strings.Repeat("界é ", 40)+"\n", 100)},
 		} {
 			b.Run(size.name+"/"+content.name, func(b *testing.B) {

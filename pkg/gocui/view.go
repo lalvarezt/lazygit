@@ -2095,11 +2095,11 @@ func (v *View) isHoveredHyperlink(x, y int) bool {
 // clearRunes erases the rows below the drawn content.
 func (v *View) clearRunes(fromY int) {
 	maxX, maxY := v.InnerSize()
-	for x := range maxX {
-		for y := fromY; y < maxY; y++ {
-			tcellSetCell(v.x0+x+1, v.y0+y+1, " ", v.FgColor, v.BgColor, v.outMode)
-		}
+	if fromY >= maxY || maxX <= 0 {
+		return
 	}
+	style := getTcellStyle(oldStyle{fg: v.FgColor, bg: v.BgColor, outputMode: v.outMode})
+	Screen.FillArea(v.x0+1, v.y0+fromY+1, maxX, maxY-fromY, ' ', style)
 }
 
 // BufferLines returns the lines in the view's internal
