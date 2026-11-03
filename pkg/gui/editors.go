@@ -14,25 +14,18 @@ func (gui *Gui) handleEditorKeypress(v *gocui.View, key gocui.Key, allowMultilin
 	return gocui.DefaultEditor.Edit(v, key)
 }
 
-// we've just copy+pasted the editor from gocui to here so that we can also re-
-// render the commit message length on each keypress
 func (gui *Gui) commitMessageEditor(v *gocui.View, key gocui.Key) bool {
 	matched := gui.handleEditorKeypress(v, key, false)
-	v.RenderTextArea()
 	gui.c.Contexts().CommitMessage.RenderSubtitle()
 	return matched
 }
 
 func (gui *Gui) commitDescriptionEditor(v *gocui.View, key gocui.Key) bool {
-	matched := gui.handleEditorKeypress(v, key, true)
-	v.RenderTextArea()
-	return matched
+	return gui.handleEditorKeypress(v, key, true)
 }
 
 func (gui *Gui) promptEditor(v *gocui.View, key gocui.Key) bool {
 	matched := gui.handleEditorKeypress(v, key, false)
-
-	v.RenderTextArea()
 
 	suggestionsContext := gui.State.Contexts.Suggestions
 	// Capture the suggestions function and the input here, on the UI thread; the
@@ -59,8 +52,6 @@ func (gui *Gui) menuFilterEditor(v *gocui.View, key gocui.Key) bool {
 		return false
 	}
 
-	v.RenderTextArea()
-
 	content := v.TextArea.GetContent()
 	if content == contentBefore {
 		// The key just moved the cursor around within the filter; refiltering would
@@ -77,7 +68,6 @@ func (gui *Gui) menuFilterEditor(v *gocui.View, key gocui.Key) bool {
 
 func (gui *Gui) searchEditor(v *gocui.View, key gocui.Key) bool {
 	matched := gui.handleEditorKeypress(v, key, false)
-	v.RenderTextArea()
 
 	searchString := v.TextArea.GetContent()
 
