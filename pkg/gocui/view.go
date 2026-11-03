@@ -976,7 +976,7 @@ func (v *View) InclusionGutterWidthWhenShown() int {
 // setCharacter sets a character (grapheme cluster) at the given point relative to the view. It applies
 // the specified colors, taking into account if the cell must be highlighted. Also, it checks if the
 // position is valid. width is the number of columns the character takes up.
-func (v *View) setCharacter(x, y int, ch string, width int, fgColor, bgColor Attribute, isWindowFocused bool) {
+func (v *View) setCharacter(cells *tcell.CellBuffer, x, y int, ch string, width int, fgColor, bgColor Attribute, isWindowFocused bool) {
 	maxX, maxY := v.Size()
 	if x < 0 || x >= maxX || y < 0 || y >= maxY {
 		return
@@ -1031,10 +1031,10 @@ func (v *View) setCharacter(x, y int, ch string, width int, fgColor, bgColor Att
 
 	screenX, screenY := v.x0+x+1, v.y0+y+1
 	style := getTcellStyle(oldStyle{fg: fgColor, bg: bgColor, outputMode: v.outMode})
-	_, paintedWidth := Screen.Put(screenX, screenY, ch, style)
+	_, paintedWidth := cells.Put(screenX, screenY, ch, style)
 	if paintedWidth < width {
 		style = getTcellStyle(oldStyle{fg: v.FgColor, bg: v.BgColor, outputMode: v.outMode})
-		Screen.FillArea(screenX+paintedWidth, screenY, width-paintedWidth, 1, ' ', style)
+		cells.FillArea(screenX+paintedWidth, screenY, width-paintedWidth, 1, ' ', style)
 	}
 }
 
@@ -1887,7 +1887,10 @@ func (v *View) draw(isWindowFocused bool) {
 	}
 
 	start := min(v.oy, max(0, len(v.viewLines)-1))
-	v.clearRunes(min(maxY, len(v.viewLines)-start))
+	locked := Screen.LockCells()
+	defer locked.Unlock()
+	cells := locked.CellBuffer
+	v.clearRunes(cells, min(maxY, len(v.viewLines)-start))
 
 	emptyCell := cell{chr: " ", width: 1, fgColor: ColorDefault, bgColor: ColorDefault}
 
@@ -1911,10 +1914,10 @@ func (v *View) draw(isWindowFocused bool) {
 		// content begins after it. The blanks go through setCharacter like everything
 		// else, so that a selection reaching the left edge covers the gutter too.
 		for gx := range gutterWidth {
-			v.setCharacter(gx, y, " ", 1, v.FgColor, v.BgColor, isWindowFocused)
+			v.setCharacter(cells, gx, y, " ", 1, v.FgColor, v.BgColor, isWindowFocused)
 		}
 		if gutterWidth > 0 && vline.linesY < len(v.inclusionGutterMarks) && v.inclusionGutterMarks[vline.linesY] {
-			v.setCharacter(0, y, v.InclusionGutterMarker, uniseg.StringWidth(v.InclusionGutterMarker),
+			v.setCharacter(cells, 0, y, v.InclusionGutterMarker, uniseg.StringWidth(v.InclusionGutterMarker),
 				v.InclusionGutterMarkerColor, v.BgColor, isWindowFocused)
 		}
 
@@ -1968,7 +1971,7 @@ func (v *View) draw(isWindowFocused bool) {
 				fgColor |= AttrUnderline
 			}
 
-			v.setCharacter(x, y, c.chr, c.width, fgColor, bgColor, isWindowFocused)
+			v.setCharacter(cells, x, y, c.chr, c.width, fgColor, bgColor, isWindowFocused)
 
 			x += c.width
 			cellIdx++
@@ -2093,13 +2096,13 @@ func (v *View) isHoveredHyperlink(x, y int) bool {
 }
 
 // clearRunes erases the rows below the drawn content.
-func (v *View) clearRunes(fromY int) {
+func (v *View) clearRunes(cells *tcell.CellBuffer, fromY int) {
 	maxX, maxY := v.InnerSize()
 	if fromY >= maxY || maxX <= 0 {
 		return
 	}
 	style := getTcellStyle(oldStyle{fg: v.FgColor, bg: v.BgColor, outputMode: v.outMode})
-	Screen.FillArea(v.x0+1, v.y0+fromY+1, maxX, maxY-fromY, ' ', style)
+	cells.FillArea(v.x0+1, v.y0+fromY+1, maxX, maxY-fromY, ' ', style)
 }
 
 // BufferLines returns the lines in the view's internal

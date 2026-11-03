@@ -82,7 +82,11 @@ func TestClearRunesClipsToView(t *testing.T) {
 	v := NewView("diff", -3, -2, 6, 4, OutputNormal)
 	v.FgColor = ColorGreen
 	v.BgColor = ColorBlue
-	v.clearRunes(2)
+	func() {
+		cells := Screen.LockCells()
+		defer cells.Unlock()
+		v.clearRunes(cells.CellBuffer, 2)
+	}()
 
 	for y, row := range []string{
 		"xxxxxxxx",
@@ -102,6 +106,14 @@ func TestClearRunesClipsToView(t *testing.T) {
 			}
 		}
 	}
+}
+
+func TestViewDrawAllocations(t *testing.T) {
+	WithSimulationScreen(t, 8, 5)
+	v := NewView("diff", 0, 0, 7, 4, OutputNormal)
+	v.SetContent("界é \x1b[32mtext\x1b[0m\nshort")
+	v.draw(true)
+	assert.Zero(t, testing.AllocsPerRun(100, func() { v.draw(true) }))
 }
 
 func TestWriteString(t *testing.T) {
