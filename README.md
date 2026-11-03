@@ -1,3 +1,22 @@
+## Personal fork disclaimer
+
+> [!WARNING]
+> **This is a personal project, provided as-is.**
+>
+> I maintain this fork for my own use. Expect rough edges and changes driven by
+> my needs, with no guarantees of stability, maintenance, or support.
+>
+> Most of the changes in this fork were developed with AI assistance.
+
+This fork builds on [Lazygit](https://github.com/jesseduffield/lazygit) by
+[Jesse Duffield](https://github.com/jesseduffield) and the
+[Lazygit contributors](https://github.com/jesseduffield/lazygit/graphs/contributors).
+
+See the [performance summary](docs-master/dev/Performance-summary.html) for the
+changes, before-and-after benchmarks, and CPU profiles.
+
+---
+
 <div align="center">
 <sup>Special thanks to:</sup>
 <br>
