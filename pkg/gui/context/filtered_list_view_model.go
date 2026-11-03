@@ -14,7 +14,7 @@ func NewFilteredListViewModel[T HasID](getList func() []T, getFilterFields func(
 		SearchHistory: NewSearchHistory(),
 	}
 
-	listViewModel := NewListViewModel(filteredList.GetFilteredList)
+	listViewModel := newListViewModel(filteredList.GetFilteredList, filteredList.filteredLength)
 
 	self.ListViewModel = listViewModel
 

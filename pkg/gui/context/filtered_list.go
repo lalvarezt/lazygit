@@ -60,6 +60,13 @@ func (self *FilteredList[T]) GetFilteredList() []T {
 	return utils.ValuesAtIndices(self.getList(), self.filteredIndices)
 }
 
+func (self *FilteredList[T]) filteredLength() int {
+	if self.filteredIndices == nil {
+		return len(self.getList())
+	}
+	return len(self.filteredIndices)
+}
+
 // TODO: update to just 'Len'
 func (self *FilteredList[T]) UnfilteredLen() int {
 	return len(self.getList())
