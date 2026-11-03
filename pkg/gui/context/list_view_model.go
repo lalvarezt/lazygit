@@ -16,11 +16,15 @@ type ListViewModel[T HasID] struct {
 }
 
 func NewListViewModel[T HasID](getModel func() []T) *ListViewModel[T] {
+	return newListViewModel(getModel, func() int { return len(getModel()) })
+}
+
+func newListViewModel[T HasID](getModel func() []T, getLength func() int) *ListViewModel[T] {
 	self := &ListViewModel[T]{
 		getModel: getModel,
 	}
 
-	self.ListCursor = traits.NewListCursor(func() int { return len(getModel()) })
+	self.ListCursor = traits.NewListCursor(getLength)
 
 	return self
 }
