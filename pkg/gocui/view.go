@@ -6,7 +6,6 @@ package gocui
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"slices"
 	"sort"
@@ -2574,8 +2573,9 @@ func (v *View) SelectedBufferLineRange() (int, int, bool) {
 }
 
 func (v *View) RenderTextArea() {
-	v.Clear()
-	fmt.Fprint(v, v.TextArea.GetContent())
+	if !v.renderTextAreaCells() {
+		v.SetContent(v.TextArea.GetContent())
+	}
 	cursorX, cursorY := v.TextArea.GetCursorXY()
 	prevOriginX, prevOriginY := v.Origin()
 	width, height := v.InnerWidth(), v.InnerHeight()
@@ -2585,6 +2585,60 @@ func (v *View) RenderTextArea() {
 
 	v.SetCursor(newViewCursorX, newViewCursorY)
 	v.SetOrigin(newOriginX, newOriginY)
+}
+
+// renderTextAreaCells uses the graphemes already measured by the text area.
+// Control sequences and automatic hyperlinks need the normal writer.
+func (v *View) renderTextAreaCells() bool {
+	if v.AutoRenderHyperLinks {
+		return false
+	}
+
+	textCells := v.TextArea.cells
+	pendingNewline := !v.Editable && len(textCells) > 0 && textCells[len(textCells)-1].char == "\n"
+	if pendingNewline {
+		textCells = textCells[:len(textCells)-1]
+	}
+	lineCount := 1
+	for _, c := range textCells {
+		if strings.ContainsAny(c.char, "\t\r\x1b") {
+			return false
+		}
+		if c.char == "\n" {
+			lineCount++
+		}
+	}
+
+	v.writeMutex.Lock()
+	defer v.writeMutex.Unlock()
+	v.clear()
+	v.firstDirtyLine = 0
+	v.searcher.positionsStale = true
+	v.buf.lines = make([]lineType, 0, lineCount)
+	content := make([]cell, 0, len(textCells))
+	lineStart := 0
+	appendLine := func(complete bool) {
+		var lineCells []cell
+		if lineStart < len(content) {
+			lineCells = content[lineStart:len(content):len(content)]
+		}
+		v.buf.lines = append(v.buf.lines, lineType{cells: lineCells, metadataCollected: complete})
+		lineStart = len(content)
+	}
+	for _, c := range textCells {
+		if c.char == "\n" {
+			appendLine(true)
+			v.buf.ei.notifyRowAdvance()
+		} else {
+			content = append(content, cell{chr: c.char, width: c.width})
+			v.buf.ei.notifyCellsWritten(c.width)
+		}
+	}
+	appendLine(false)
+	v.buf.wy = len(v.buf.lines) - 1
+	v.buf.wx = len(v.buf.lines[v.buf.wy].cells)
+	v.buf.pendingNewline = pendingNewline
+	return true
 }
 
 func updatedCursorAndOrigin(prevOrigin int, size int, cursor int) (int, int) {
