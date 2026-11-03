@@ -159,7 +159,7 @@ func (self *FileTreeViewModel) findNewSelectedIdx(prevNodes []*FileNode, currNod
 
 			// If you started off with a rename selected, and now it's broken in two, we want you to jump to the new file, not the old file.
 			// This is because the new should be in the same position as the rename was meaning less cursor jumping
-			foundOldFileInRename := prevNode.File != nil && prevNode.File.IsRename() && node.GetPath() == prevNode.File.PreviousPath
+			foundOldFileInRename := isOldFileInRename(prevNode, node)
 			foundNode := utils.StringArraysOverlap(paths, selectedPaths) && !foundOldFileInRename
 			if foundNode {
 				return idx
@@ -168,6 +168,10 @@ func (self *FileTreeViewModel) findNewSelectedIdx(prevNodes []*FileNode, currNod
 	}
 
 	return -1
+}
+
+func isOldFileInRename(previous, current *FileNode) bool {
+	return previous.File != nil && previous.File.IsRename() && current.GetPath() == previous.File.PreviousPath
 }
 
 func (self *FileTreeViewModel) SetStatusFilter(filter FileTreeDisplayFilter) {
