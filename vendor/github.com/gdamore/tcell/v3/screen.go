@@ -54,6 +54,13 @@ type Screen interface {
 	// remainder of the string, and the width displayed.
 	Put(x int, y int, str string, style Style) (string, int)
 
+	// LockCells locks the screen and returns its cell buffer. Call Unlock on
+	// the returned handle when finished, typically with defer. Changes become
+	// visible on the next Show or Sync. While locked, do not call other Screen
+	// methods. The buffer must not be accessed after Unlock or from another
+	// goroutine.
+	LockCells() LockedCellBuffer
+
 	// PutStr writes a string starting at the given position, using the
 	// default style. The content is clipped to the screen dimensions.
 	PutStr(x int, y int, str string)
@@ -395,6 +402,23 @@ type baseScreen struct {
 	screenImpl
 	// Content strings are shared by cells and protected by the screen lock.
 	contentCache map[string]string
+}
+
+// LockedCellBuffer holds a screen's cell buffer and its lock.
+type LockedCellBuffer struct {
+	*CellBuffer
+	locker sync.Locker
+}
+
+// Unlock releases the screen lock. The handle and its buffer must not be used
+// afterwards.
+func (b LockedCellBuffer) Unlock() {
+	b.locker.Unlock()
+}
+
+func (b *baseScreen) LockCells() LockedCellBuffer {
+	b.Lock()
+	return LockedCellBuffer{CellBuffer: b.GetCells(), locker: b}
 }
 
 func (b *baseScreen) Put(x int, y int, str string, style Style) (remain string, width int) {
