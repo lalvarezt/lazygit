@@ -1315,6 +1315,7 @@ func (b *viewBuffer) write(v *View, p []byte) {
 	var chr []byte
 	var width int
 	remaining := p[:until]
+	cells := make([]cell, 0, 1)
 
 	for len(remaining) > 0 {
 		chr, remaining, width, state = uniseg.FirstGraphemeCluster(remaining, state)
@@ -1333,7 +1334,7 @@ func (b *viewBuffer) write(v *View, p []byte) {
 			b.wx = 0
 			b.ei.notifyColumnReset()
 		default:
-			truncateLine, cells := b.parseInput(v, chr, width, b.wx, b.wy)
+			truncateLine, parsedCells := b.parseInput(v, chr, width, b.wx, cells[:0])
 			if cd, ok := b.ei.instruction.(cursorDown); ok {
 				b.ei.instructionRead()
 				for range cd.n {
@@ -1341,9 +1342,10 @@ func (b *viewBuffer) write(v *View, p []byte) {
 					advanceToNextLine()
 				}
 			}
-			if cells == nil {
+			if parsedCells == nil {
 				continue
 			}
+			cells = parsedCells
 			b.writeCells(cells)
 			if truncateLine {
 				b.lines[b.wy].cells = b.lines[b.wy].cells[:b.wx]
@@ -1439,9 +1441,9 @@ func (b *viewBuffer) autoRenderHyperlinksInCurrentLine(v *View) {
 
 // parseInput parses char by char the input written to the View. It returns nil
 // while processing ESC sequences. Otherwise, it returns a cell slice that
-// contains the processed data.
-func (b *viewBuffer) parseInput(v *View, ch []byte, width int, x int, _ int) (bool, []cell) {
-	cells := []cell{}
+// contains the processed data in the supplied scratch slice. The caller must
+// copy the returned cells before reusing the scratch slice.
+func (b *viewBuffer) parseInput(v *View, ch []byte, width int, x int, cells []cell) (bool, []cell) {
 	truncateLine := false
 
 	isEscape, err := b.ei.parseOne(ch)
