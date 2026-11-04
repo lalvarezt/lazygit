@@ -706,7 +706,11 @@ func calculateNewOrigin(selectedLine int, oldOrigin int, lineCount int, viewHeig
 
 func (s *searcher) search(str string, modelSearchResults []SearchPosition) {
 	s.searchString = str
-	s.searchPositions = []SearchPosition{}
+	if str == "" || s.searchPositions == nil {
+		s.searchPositions = []SearchPosition{}
+	} else {
+		s.searchPositions = s.searchPositions[:0]
+	}
 	s.modelSearchResults = modelSearchResults
 	s.currentSearchIndex = 0
 }
@@ -1771,7 +1775,7 @@ func (v *View) updateSearchPositions() {
 
 	if v.searcher.searchString != "" {
 		search := newLineSearcher(v.searcher.searchString)
-		v.searcher.searchPositions = []SearchPosition{}
+		v.searcher.searchPositions = v.searcher.searchPositions[:0]
 
 		if v.searcher.modelSearchResults != nil {
 			for _, result := range v.searcher.modelSearchResults {

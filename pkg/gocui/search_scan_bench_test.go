@@ -36,6 +36,25 @@ func BenchmarkSearchOrdinaryText(b *testing.B) {
 	}
 }
 
+func BenchmarkSearchQueryLifetime(b *testing.B) {
+	for _, clearSearch := range []bool{false, true} {
+		b.Run(fmt.Sprintf("clear=%t", clearSearch), func(b *testing.B) {
+			v := NewView("search", 0, 0, 80, 24, OutputNormal)
+			v.SetContent(strings.Repeat(strings.Repeat("a", 200)+"\n", 2000))
+			v.UpdateSearchResults("a", nil)
+			queries := []string{"aa", "aaa", "aaaa", "a"}
+			b.ReportAllocs()
+			b.ResetTimer()
+			for i := 0; b.Loop(); i++ {
+				v.UpdateSearchResults(queries[i%len(queries)], nil)
+				if clearSearch {
+					v.ClearSearch()
+				}
+			}
+		})
+	}
+}
+
 func BenchmarkNearestSearchPosition(b *testing.B) {
 	for _, count := range []int{100, 1000, 10000, 100000} {
 		b.Run(fmt.Sprintf("matches=%d", count), func(b *testing.B) {

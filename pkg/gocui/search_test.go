@@ -98,6 +98,68 @@ func TestSearchModelPositionsAcrossLines(t *testing.T) {
 	assert.Empty(t, v.searcher.searchPositions)
 }
 
+func TestSearchResultBufferReuse(t *testing.T) {
+	for _, model := range []bool{false, true} {
+		t.Run(fmt.Sprintf("model=%t", model), func(t *testing.T) {
+			v := NewView("search", 0, 0, 80, 24, OutputNormal)
+			v.SetContent("aaaa\naaaa")
+			var modelResults []SearchPosition
+			if model {
+				modelResults = []SearchPosition{{Y: 0}, {Y: 1}}
+			}
+			v.UpdateSearchResults("a", modelResults)
+			assert.Len(t, v.searcher.searchPositions, 8)
+			firstResult := &v.searcher.searchPositions[0]
+			capacity := cap(v.searcher.searchPositions)
+
+			v.UpdateSearchResults("aa", modelResults)
+			assert.Len(t, v.searcher.searchPositions, 6)
+			assert.Same(t, firstResult, &v.searcher.searchPositions[0])
+
+			v.Clear()
+			writeLines(v, "aa", "aa")
+			_, total := v.GetSearchStatus()
+			assert.Equal(t, 2, total)
+			assert.Same(t, firstResult, &v.searcher.searchPositions[0])
+
+			v.UpdateSearchResults("missing", nil)
+			assert.Empty(t, v.searcher.searchPositions)
+			assert.Equal(t, capacity, cap(v.searcher.searchPositions))
+
+			v.UpdateSearchResults("a", nil)
+			assert.Len(t, v.searcher.searchPositions, 4)
+			assert.Same(t, firstResult, &v.searcher.searchPositions[0])
+		})
+	}
+}
+
+func TestClearSearchReleasesResultBuffer(t *testing.T) {
+	for _, emptyQuery := range []bool{false, true} {
+		t.Run(fmt.Sprintf("emptyQuery=%t", emptyQuery), func(t *testing.T) {
+			v := NewView("search", 0, 0, 80, 24, OutputNormal)
+			v.SetContent("aaaa")
+			v.UpdateSearchResults("a", nil)
+			assert.Positive(t, cap(v.searcher.searchPositions))
+
+			if emptyQuery {
+				v.UpdateSearchResults("", nil)
+			} else {
+				v.ClearSearch()
+			}
+			assert.False(t, v.IsSearching())
+			assert.Empty(t, v.searcher.searchPositions)
+			assert.Zero(t, cap(v.searcher.searchPositions))
+
+			v.UpdateSearchResults("aa", nil)
+			assert.Equal(t, []SearchPosition{
+				{XStart: 0, XEnd: 2},
+				{XStart: 1, XEnd: 3},
+				{XStart: 2, XEnd: 4},
+			}, v.searcher.searchPositions)
+		})
+	}
+}
+
 func TestNearestSearchPosition(t *testing.T) {
 	v := NewView("search", 0, 0, 80, 24, OutputNormal)
 	assert.Zero(t, v.nearestSearchPosition())
