@@ -1,0 +1,1537 @@
+{
+  "date": "2026-11-04",
+  "platform": "Linux amd64, Intel Core i7-1370P, Go benchmarks with optimized compilation",
+  "scope": "Staged microbenchmarks, not whole-application speedups. Medians of three runs. Search benchmarks warm rendered-line layout.",
+  "rows": [
+    {
+      "group": "Filtered navigation",
+      "benchmark": "BenchmarkFilteredListNavigation/items=100",
+      "before": {
+        "ns": 274.8,
+        "bytes": 896,
+        "allocations": 1
+      },
+      "after": {
+        "ns": 31.39,
+        "bytes": 8,
+        "allocations": 1
+      },
+      "speedup": 8.754380375915897,
+      "samples": {
+        "before": [
+          {
+            "ns": 297.1,
+            "bytes": 896,
+            "allocations": 1
+          },
+          {
+            "ns": 263.7,
+            "bytes": 896,
+            "allocations": 1
+          },
+          {
+            "ns": 274.8,
+            "bytes": 896,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 31.39,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 35.08,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 30.7,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ]
+      }
+    },
+    {
+      "group": "Filtered navigation",
+      "benchmark": "BenchmarkFilteredListNavigation/items=1000",
+      "before": {
+        "ns": 2446,
+        "bytes": 8192,
+        "allocations": 1
+      },
+      "after": {
+        "ns": 29.61,
+        "bytes": 8,
+        "allocations": 1
+      },
+      "speedup": 82.60722728807835,
+      "samples": {
+        "before": [
+          {
+            "ns": 2361,
+            "bytes": 8192,
+            "allocations": 1
+          },
+          {
+            "ns": 2456,
+            "bytes": 8192,
+            "allocations": 1
+          },
+          {
+            "ns": 2446,
+            "bytes": 8192,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 29.33,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 29.61,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 29.83,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ]
+      }
+    },
+    {
+      "group": "Filtered navigation",
+      "benchmark": "BenchmarkFilteredListNavigation/items=10000",
+      "before": {
+        "ns": 24525,
+        "bytes": 81920,
+        "allocations": 1
+      },
+      "after": {
+        "ns": 30.44,
+        "bytes": 8,
+        "allocations": 1
+      },
+      "speedup": 805.6833114323258,
+      "samples": {
+        "before": [
+          {
+            "ns": 25685,
+            "bytes": 81920,
+            "allocations": 1
+          },
+          {
+            "ns": 24013,
+            "bytes": 81920,
+            "allocations": 1
+          },
+          {
+            "ns": 24525,
+            "bytes": 81920,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 30.44,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 30.67,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 30.28,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ]
+      }
+    },
+    {
+      "group": "File-tree range selection",
+      "benchmark": "BenchmarkFileTreeRangeSelection/files=100",
+      "before": {
+        "ns": 17781,
+        "bytes": 2920,
+        "allocations": 106
+      },
+      "after": {
+        "ns": 1723,
+        "bytes": 1712,
+        "allocations": 103
+      },
+      "speedup": 10.319791062100986,
+      "samples": {
+        "before": [
+          {
+            "ns": 18171,
+            "bytes": 2920,
+            "allocations": 106
+          },
+          {
+            "ns": 17511,
+            "bytes": 2920,
+            "allocations": 106
+          },
+          {
+            "ns": 17781,
+            "bytes": 2920,
+            "allocations": 106
+          }
+        ],
+        "after": [
+          {
+            "ns": 2034,
+            "bytes": 1712,
+            "allocations": 103
+          },
+          {
+            "ns": 1666,
+            "bytes": 1712,
+            "allocations": 103
+          },
+          {
+            "ns": 1723,
+            "bytes": 1712,
+            "allocations": 103
+          }
+        ]
+      }
+    },
+    {
+      "group": "File-tree range selection",
+      "benchmark": "BenchmarkFileTreeRangeSelection/files=1000",
+      "before": {
+        "ns": 1584299,
+        "bytes": 25480,
+        "allocations": 1009
+      },
+      "after": {
+        "ns": 17204,
+        "bytes": 16208,
+        "allocations": 1003
+      },
+      "speedup": 92.08899093234132,
+      "samples": {
+        "before": [
+          {
+            "ns": 1615009,
+            "bytes": 25480,
+            "allocations": 1009
+          },
+          {
+            "ns": 1584299,
+            "bytes": 25480,
+            "allocations": 1009
+          },
+          {
+            "ns": 1563610,
+            "bytes": 25480,
+            "allocations": 1009
+          }
+        ],
+        "after": [
+          {
+            "ns": 17204,
+            "bytes": 16208,
+            "allocations": 1003
+          },
+          {
+            "ns": 16955,
+            "bytes": 16208,
+            "allocations": 1003
+          },
+          {
+            "ns": 17520,
+            "bytes": 16208,
+            "allocations": 1003
+          }
+        ]
+      }
+    },
+    {
+      "group": "File-tree range selection",
+      "benchmark": "BenchmarkFileTreeRangeSelection/files=10000",
+      "before": {
+        "ns": 157220757,
+        "bytes": 390344,
+        "allocations": 10016
+      },
+      "after": {
+        "ns": 176778,
+        "bytes": 161940,
+        "allocations": 10003
+      },
+      "speedup": 889.3683433458915,
+      "samples": {
+        "before": [
+          {
+            "ns": 158572536,
+            "bytes": 390344,
+            "allocations": 10016
+          },
+          {
+            "ns": 157220757,
+            "bytes": 390344,
+            "allocations": 10016
+          },
+          {
+            "ns": 155900777,
+            "bytes": 390344,
+            "allocations": 10016
+          }
+        ],
+        "after": [
+          {
+            "ns": 173506,
+            "bytes": 161940,
+            "allocations": 10003
+          },
+          {
+            "ns": 177327,
+            "bytes": 161940,
+            "allocations": 10003
+          },
+          {
+            "ns": 176778,
+            "bytes": 161940,
+            "allocations": 10003
+          }
+        ]
+      }
+    },
+    {
+      "group": "File-tree navigation",
+      "benchmark": "BenchmarkFileTreeNavigation/files=100",
+      "before": {
+        "ns": 1242,
+        "bytes": 8,
+        "allocations": 1
+      },
+      "after": {
+        "ns": 20.66,
+        "bytes": 8,
+        "allocations": 1
+      },
+      "speedup": 60.1161665053243,
+      "samples": {
+        "before": [
+          {
+            "ns": 1268,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 1237,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 1242,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 20.75,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 20.32,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 20.66,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ]
+      }
+    },
+    {
+      "group": "File-tree navigation",
+      "benchmark": "BenchmarkFileTreeNavigation/files=1000",
+      "before": {
+        "ns": 11758,
+        "bytes": 8,
+        "allocations": 1
+      },
+      "after": {
+        "ns": 20.54,
+        "bytes": 8,
+        "allocations": 1
+      },
+      "speedup": 572.444011684518,
+      "samples": {
+        "before": [
+          {
+            "ns": 11758,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 11695,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 11978,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 20.22,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 20.54,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 20.67,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ]
+      }
+    },
+    {
+      "group": "File-tree navigation",
+      "benchmark": "BenchmarkFileTreeNavigation/files=10000",
+      "before": {
+        "ns": 106553,
+        "bytes": 8,
+        "allocations": 1
+      },
+      "after": {
+        "ns": 20.46,
+        "bytes": 8,
+        "allocations": 1
+      },
+      "speedup": 5207.8690127077225,
+      "samples": {
+        "before": [
+          {
+            "ns": 104783,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 106553,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 106650,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 20.13,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 20.46,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 22.31,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ]
+      }
+    },
+    {
+      "group": "Search rebuilding",
+      "benchmark": "BenchmarkSearchRepeatedPrefix/query=1",
+      "before": {
+        "ns": 12818625,
+        "bytes": 76274200,
+        "allocations": 16028
+      },
+      "after": {
+        "ns": 12993542,
+        "bytes": 76322696,
+        "allocations": 18031
+      },
+      "speedup": 0.9865381587253114,
+      "samples": {
+        "before": [
+          {
+            "ns": 12818625,
+            "bytes": 76274664,
+            "allocations": 16029
+          },
+          {
+            "ns": 12986039,
+            "bytes": 76274194,
+            "allocations": 16028
+          },
+          {
+            "ns": 12771164,
+            "bytes": 76274200,
+            "allocations": 16028
+          }
+        ],
+        "after": [
+          {
+            "ns": 11917006,
+            "bytes": 76325008,
+            "allocations": 18033
+          },
+          {
+            "ns": 12993542,
+            "bytes": 76322696,
+            "allocations": 18031
+          },
+          {
+            "ns": 13139979,
+            "bytes": 76322209,
+            "allocations": 18030
+          }
+        ]
+      }
+    },
+    {
+      "group": "Search rebuilding",
+      "benchmark": "BenchmarkSearchRepeatedPrefix/query=32",
+      "before": {
+        "ns": 64700010,
+        "bytes": 960,
+        "allocations": 4
+      },
+      "after": {
+        "ns": 4505308,
+        "bytes": 1472,
+        "allocations": 6
+      },
+      "speedup": 14.360840590698794,
+      "samples": {
+        "before": [
+          {
+            "ns": 64700010,
+            "bytes": 960,
+            "allocations": 4
+          },
+          {
+            "ns": 66836886,
+            "bytes": 960,
+            "allocations": 4
+          },
+          {
+            "ns": 64661380,
+            "bytes": 960,
+            "allocations": 4
+          }
+        ],
+        "after": [
+          {
+            "ns": 4505308,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 4522382,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 4470601,
+            "bytes": 1472,
+            "allocations": 6
+          }
+        ]
+      }
+    },
+    {
+      "group": "Search rebuilding",
+      "benchmark": "BenchmarkSearchRepeatedPrefix/query=128",
+      "before": {
+        "ns": 172171573,
+        "bytes": 4416,
+        "allocations": 6
+      },
+      "after": {
+        "ns": 4032006,
+        "bytes": 6464,
+        "allocations": 8
+      },
+      "speedup": 42.7012194426298,
+      "samples": {
+        "before": [
+          {
+            "ns": 172171573,
+            "bytes": 4416,
+            "allocations": 6
+          },
+          {
+            "ns": 173504688,
+            "bytes": 4416,
+            "allocations": 6
+          },
+          {
+            "ns": 171661935,
+            "bytes": 4416,
+            "allocations": 6
+          }
+        ],
+        "after": [
+          {
+            "ns": 3985849,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 4075966,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 4032006,
+            "bytes": 6464,
+            "allocations": 8
+          }
+        ]
+      }
+    },
+    {
+      "group": "Search rebuilding",
+      "benchmark": "BenchmarkSearchOrdinaryText/match",
+      "before": {
+        "ns": 669497,
+        "bytes": 175144,
+        "allocations": 2015
+      },
+      "after": {
+        "ns": 665586,
+        "bytes": 175240,
+        "allocations": 2017
+      },
+      "speedup": 1.0058760250365844,
+      "samples": {
+        "before": [
+          {
+            "ns": 692301,
+            "bytes": 175144,
+            "allocations": 2015
+          },
+          {
+            "ns": 660987,
+            "bytes": 175144,
+            "allocations": 2015
+          },
+          {
+            "ns": 669497,
+            "bytes": 175144,
+            "allocations": 2015
+          }
+        ],
+        "after": [
+          {
+            "ns": 658971,
+            "bytes": 175240,
+            "allocations": 2017
+          },
+          {
+            "ns": 665586,
+            "bytes": 175240,
+            "allocations": 2017
+          },
+          {
+            "ns": 691324,
+            "bytes": 175240,
+            "allocations": 2017
+          }
+        ]
+      }
+    },
+    {
+      "group": "Search rebuilding",
+      "benchmark": "BenchmarkSearchOrdinaryText/missing",
+      "before": {
+        "ns": 573227,
+        "bytes": 192,
+        "allocations": 2
+      },
+      "after": {
+        "ns": 588191,
+        "bytes": 320,
+        "allocations": 4
+      },
+      "speedup": 0.9745592843141089,
+      "samples": {
+        "before": [
+          {
+            "ns": 577062,
+            "bytes": 192,
+            "allocations": 2
+          },
+          {
+            "ns": 573227,
+            "bytes": 192,
+            "allocations": 2
+          },
+          {
+            "ns": 557180,
+            "bytes": 192,
+            "allocations": 2
+          }
+        ],
+        "after": [
+          {
+            "ns": 578382,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 621137,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 588191,
+            "bytes": 320,
+            "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "group": "Search rebuilding",
+      "benchmark": "BenchmarkSearchOrdinaryText/MATCH",
+      "before": {
+        "ns": 433880,
+        "bytes": 192,
+        "allocations": 2
+      },
+      "after": {
+        "ns": 445943,
+        "bytes": 288,
+        "allocations": 4
+      },
+      "speedup": 0.9729494576661143,
+      "samples": {
+        "before": [
+          {
+            "ns": 428380,
+            "bytes": 192,
+            "allocations": 2
+          },
+          {
+            "ns": 454221,
+            "bytes": 192,
+            "allocations": 2
+          },
+          {
+            "ns": 433880,
+            "bytes": 192,
+            "allocations": 2
+          }
+        ],
+        "after": [
+          {
+            "ns": 439777,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 445943,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 450176,
+            "bytes": 288,
+            "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "group": "Nearest search result",
+      "benchmark": "BenchmarkNearestSearchPosition/matches=100",
+      "before": {
+        "ns": 41.67,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 3.983,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 10.461963344212904,
+      "samples": {
+        "before": [
+          {
+            "ns": 41.67,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 40.76,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 41.7,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 4.08,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 3.983,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 3.967,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Nearest search result",
+      "benchmark": "BenchmarkNearestSearchPosition/matches=1000",
+      "before": {
+        "ns": 415.6,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 5.88,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 70.68027210884354,
+      "samples": {
+        "before": [
+          {
+            "ns": 415.6,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 427.1,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 401.2,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 5.702,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 5.939,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 5.88,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Nearest search result",
+      "benchmark": "BenchmarkNearestSearchPosition/matches=10000",
+      "before": {
+        "ns": 3813,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 8.291,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 459.89627306718126,
+      "samples": {
+        "before": [
+          {
+            "ns": 3813,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 3784,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 3844,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 8.325,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 8.291,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 8.11,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Nearest search result",
+      "benchmark": "BenchmarkNearestSearchPosition/matches=100000",
+      "before": {
+        "ns": 39271,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 10.25,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 3831.317073170732,
+      "samples": {
+        "before": [
+          {
+            "ns": 40543,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 38620,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 39271,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 10.25,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 10.13,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 10.62,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Scroll search selection",
+      "benchmark": "BenchmarkScrollSearchPosition/matches=100/up=false",
+      "before": {
+        "ns": 56.84,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 16.79,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 3.3853484216795717,
+      "samples": {
+        "before": [
+          {
+            "ns": 56.84,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 57.34,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 54.65,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 16.7,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16.79,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16.89,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Scroll search selection",
+      "benchmark": "BenchmarkScrollSearchPosition/matches=100/up=true",
+      "before": {
+        "ns": 38.22,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 16.27,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 2.3491087891825444,
+      "samples": {
+        "before": [
+          {
+            "ns": 39.5,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 38.09,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 38.22,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 16.9,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16.27,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 15.88,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Scroll search selection",
+      "benchmark": "BenchmarkScrollSearchPosition/matches=1000/up=false",
+      "before": {
+        "ns": 427.6,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 18.74,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 22.817502668089652,
+      "samples": {
+        "before": [
+          {
+            "ns": 427.6,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 427.3,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 440.7,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 18.74,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 18.28,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 19.01,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Scroll search selection",
+      "benchmark": "BenchmarkScrollSearchPosition/matches=1000/up=true",
+      "before": {
+        "ns": 310.2,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 18.52,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 16.749460043196542,
+      "samples": {
+        "before": [
+          {
+            "ns": 308,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 310.2,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 322.2,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 17.81,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 18.76,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 18.52,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Scroll search selection",
+      "benchmark": "BenchmarkScrollSearchPosition/matches=10000/up=false",
+      "before": {
+        "ns": 4332,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 21.53,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 201.20761727821642,
+      "samples": {
+        "before": [
+          {
+            "ns": 4332,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4327,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4602,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 22.71,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 21.09,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 21.53,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Scroll search selection",
+      "benchmark": "BenchmarkScrollSearchPosition/matches=10000/up=true",
+      "before": {
+        "ns": 3138,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 21.04,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 149.14448669201522,
+      "samples": {
+        "before": [
+          {
+            "ns": 3176,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 3131,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 3138,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 20.19,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 21.18,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 21.04,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Scroll search selection",
+      "benchmark": "BenchmarkScrollSearchPosition/matches=100000/up=false",
+      "before": {
+        "ns": 44045,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 24.38,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 1806.6037735849056,
+      "samples": {
+        "before": [
+          {
+            "ns": 42707,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 44179,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 44045,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 24.49,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 24.38,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 23.88,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Scroll search selection",
+      "benchmark": "BenchmarkScrollSearchPosition/matches=100000/up=true",
+      "before": {
+        "ns": 35958,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 25.45,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 1412.8880157170925,
+      "samples": {
+        "before": [
+          {
+            "ns": 34926,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 35958,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 38768,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 25.45,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 25.62,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 24.96,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Refresh after directory removal",
+      "benchmark": "BenchmarkRefreshAfterDirectoryRemoval/files=100",
+      "before": {
+        "ns": 82730,
+        "bytes": 86392,
+        "allocations": 2655
+      },
+      "after": {
+        "ns": 76090,
+        "bytes": 78601,
+        "allocations": 2349
+      },
+      "speedup": 1.0872650808253383,
+      "samples": {
+        "before": [
+          {
+            "ns": 86329,
+            "bytes": 86404,
+            "allocations": 2655
+          },
+          {
+            "ns": 82730,
+            "bytes": 86392,
+            "allocations": 2655
+          },
+          {
+            "ns": 81964,
+            "bytes": 86392,
+            "allocations": 2655
+          }
+        ],
+        "after": [
+          {
+            "ns": 86211,
+            "bytes": 78610,
+            "allocations": 2349
+          },
+          {
+            "ns": 76090,
+            "bytes": 78601,
+            "allocations": 2349
+          },
+          {
+            "ns": 76029,
+            "bytes": 78600,
+            "allocations": 2349
+          }
+        ]
+      }
+    },
+    {
+      "group": "Refresh after directory removal",
+      "benchmark": "BenchmarkRefreshAfterDirectoryRemoval/files=1000",
+      "before": {
+        "ns": 846143,
+        "bytes": 924472,
+        "allocations": 26071
+      },
+      "after": {
+        "ns": 773910,
+        "bytes": 851268,
+        "allocations": 23065
+      },
+      "speedup": 1.0933351423292115,
+      "samples": {
+        "before": [
+          {
+            "ns": 846143,
+            "bytes": 924472,
+            "allocations": 26071
+          },
+          {
+            "ns": 845327,
+            "bytes": 924476,
+            "allocations": 26071
+          },
+          {
+            "ns": 855003,
+            "bytes": 924439,
+            "allocations": 26071
+          }
+        ],
+        "after": [
+          {
+            "ns": 821351,
+            "bytes": 851268,
+            "allocations": 23065
+          },
+          {
+            "ns": 773910,
+            "bytes": 851307,
+            "allocations": 23065
+          },
+          {
+            "ns": 768895,
+            "bytes": 851268,
+            "allocations": 23065
+          }
+        ]
+      }
+    },
+    {
+      "group": "Refresh after directory removal",
+      "benchmark": "BenchmarkRefreshAfterDirectoryRemoval/files=5000",
+      "before": {
+        "ns": 4366501,
+        "bytes": 4478455,
+        "allocations": 130114
+      },
+      "after": {
+        "ns": 3892005,
+        "bytes": 4112675,
+        "allocations": 115108
+      },
+      "speedup": 1.1219155679399178,
+      "samples": {
+        "before": [
+          {
+            "ns": 4655021,
+            "bytes": 4479788,
+            "allocations": 130115
+          },
+          {
+            "ns": 4178089,
+            "bytes": 4478446,
+            "allocations": 130114
+          },
+          {
+            "ns": 4366501,
+            "bytes": 4478455,
+            "allocations": 130114
+          }
+        ],
+        "after": [
+          {
+            "ns": 3867582,
+            "bytes": 4112675,
+            "allocations": 115108
+          },
+          {
+            "ns": 4142049,
+            "bytes": 4113573,
+            "allocations": 115109
+          },
+          {
+            "ns": 3892005,
+            "bytes": 4112671,
+            "allocations": 115108
+          }
+        ]
+      }
+    }
+  ]
+}
