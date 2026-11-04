@@ -386,6 +386,35 @@ but none of these timing results meets the 5× target, so these prototypes remai
 outside the application. Their samples and limits are preserved in the
 measurement and profiling data. No new live application speedup is claimed.
 
+## Search result storage follow-up
+
+The direct-append and reusable-result experiments now ship in `c7744f620`
+and `1784ee790`. This supersedes the earlier decision to keep them outside
+the application. Both model and rendered-view searches append into the same
+result buffer. Query changes and content refreshes reuse its capacity;
+`ClearSearch` and an empty query release it.
+
+Fresh measurements against `643a94c3a` put the warmed 400,000-match rebuild at
+15.92 ms before, 11.68 ms with direct appends, and 2.91 ms with reuse. Allocation
+falls from 76,322,208 bytes and 18,030 allocations to 32 bytes and 3 allocations
+per rebuild. Alternating queries improves from 16.40 ms to 3.41 ms. Clearing
+search after each changing query improves from 16.81 ms to 12.15 ms.
+
+The many-match fixture retains 11,345,904 bytes of result capacity during an
+active search. Smaller or missing queries and content changes keep that
+capacity until search is cleared. Initial result growth is outside the warmed
+timings. These are synthetic benchmark results, not measured live latency.
+
+The [search storage report](Performance-search-results.html) shows all search
+cases. [Its data](performance-search-results.json) records five samples per
+case, source revisions, commands, fixture details, and limits. The new query
+lifetime benchmark runs against both implementations with the same source;
+a Go overlay supplies the baseline application files.
+
+Build, unit tests, lint, the gocui race suite, and selected search integration
+tests pass. Unit tests run with `NO_COLOR` unset because the context-mode runner
+sets it and presentation tests assert ANSI color output.
+
 ## Writer capacity probe
 
 A benchmark-only probe pre-sizes all 2,000 destination lines and their cell

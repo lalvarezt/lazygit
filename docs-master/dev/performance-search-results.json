@@ -1,0 +1,788 @@
+{
+  "date": "2026-11-04",
+  "revisions": {
+    "before": "643a94c3ae0b6bad7fc72edceaa6556f68283c79",
+    "directAppend": "c7744f6207c18aac6d910dce878acd2c2f7ea5a9",
+    "after": "1784ee790b2336f4c1694eb4b506255c038b77c1"
+  },
+  "settings": {
+    "samples": 5,
+    "benchtime": "200ms",
+    "GOMAXPROCS": "1",
+    "GOGC": "100",
+    "GOMEMLIMIT": "off",
+    "GOFLAGS": "-mod=vendor",
+    "GOTOOLCHAIN": "local"
+  },
+  "goVersion": "go version go1.27.3 linux/amd64",
+  "cpu": "13th Gen Intel(R) Core(TM) i7-1370P",
+  "command": "go test ./pkg/gocui -run='^$' -bench='Benchmark(SearchRepeatedPrefix|SearchOrdinaryText|SearchQueryLifetime)$' -benchmem -benchtime=200ms -count=5",
+  "baselineMethod": "The existing repeated-prefix and ordinary-text benchmarks ran at the before revision. The new lifetime benchmark uses identical sources from the after revision and a Go overlay replacing search.go and view.go with the before revision. No application changes other than these two files enter this comparison.",
+  "fixtures": {
+    "repeated": "2,000 lines of 200 a characters, warmed layout and initial search.",
+    "ordinary": "2,000 ordinary diff lines, warmed layout and initial search.",
+    "lifetime": "Same repeated fixture, initial a search warmed, alternating aa, aaa, aaaa, a. clear=true clears search after each rebuild."
+  },
+  "retention": {
+    "matches": 400000,
+    "capacity": 472746,
+    "resultBytes": 11345904,
+    "clearedCapacity": 0,
+    "method": "Capacity multiplied by unsafe.Sizeof(SearchPosition{}) after the warmed a query. A temporary benchmark overlay measures 472746 positions at 24 bytes each; ClearSearch leaves zero result capacity."
+  },
+  "limits": [
+    "Synthetic warmed benchmarks, not live application latency.",
+    "Initial buffer growth is excluded from warmed reuse timings.",
+    "Capacity persists through smaller and missing queries, and content changes, until ClearSearch or an empty query.",
+    "Clearing each iteration prevents reuse across search sessions.",
+    "Other weak areas in Performance-summary.html have not been changed in this pass."
+  ],
+  "checks": [
+    "just format",
+    "just build",
+    "just unit-test with NO_COLOR unset",
+    "just lint",
+    "go test -race ./pkg/gocui",
+    "just e2e filter_and_search main_view/search_collapses_the_selection main_view/search_follows_the_selection main_view/search_scrolls_to_a_match_off_the_edge"
+  ],
+  "rows": [
+    {
+      "name": "BenchmarkSearchRepeatedPrefix/query=1",
+      "before": {
+        "nsPerOp": 15924791,
+        "bytesPerOp": 76322208,
+        "allocsPerOp": 18030,
+        "samples": [
+          {
+            "nsPerOp": 14954300,
+            "bytesPerOp": 76322208,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 16816929,
+            "bytesPerOp": 76322208,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 15924791,
+            "bytesPerOp": 76322208,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 14262070,
+            "bytesPerOp": 76322208,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 16796619,
+            "bytesPerOp": 76322208,
+            "allocsPerOp": 18030
+          }
+        ]
+      },
+      "directAppend": {
+        "nsPerOp": 11676101,
+        "bytesPerOp": 55857160,
+        "allocsPerOp": 38,
+        "samples": [
+          {
+            "nsPerOp": 11676101,
+            "bytesPerOp": 55857160,
+            "allocsPerOp": 38
+          },
+          {
+            "nsPerOp": 11588833,
+            "bytesPerOp": 55857160,
+            "allocsPerOp": 38
+          },
+          {
+            "nsPerOp": 11792152,
+            "bytesPerOp": 55857160,
+            "allocsPerOp": 38
+          },
+          {
+            "nsPerOp": 11372924,
+            "bytesPerOp": 55857160,
+            "allocsPerOp": 38
+          },
+          {
+            "nsPerOp": 11750373,
+            "bytesPerOp": 55857160,
+            "allocsPerOp": 38
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 2907199,
+        "bytesPerOp": 32,
+        "allocsPerOp": 3,
+        "samples": [
+          {
+            "nsPerOp": 2953105,
+            "bytesPerOp": 32,
+            "allocsPerOp": 3
+          },
+          {
+            "nsPerOp": 2907199,
+            "bytesPerOp": 32,
+            "allocsPerOp": 3
+          },
+          {
+            "nsPerOp": 2907162,
+            "bytesPerOp": 32,
+            "allocsPerOp": 3
+          },
+          {
+            "nsPerOp": 2897437,
+            "bytesPerOp": 32,
+            "allocsPerOp": 3
+          },
+          {
+            "nsPerOp": 2942034,
+            "bytesPerOp": 32,
+            "allocsPerOp": 3
+          }
+        ]
+      },
+      "speedup": 5.4777093002577395
+    },
+    {
+      "name": "BenchmarkSearchRepeatedPrefix/query=32",
+      "before": {
+        "nsPerOp": 4594732,
+        "bytesPerOp": 1472,
+        "allocsPerOp": 6,
+        "samples": [
+          {
+            "nsPerOp": 4656207,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4594732,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4557434,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4635597,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4556241,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          }
+        ]
+      },
+      "directAppend": {
+        "nsPerOp": 4769661,
+        "bytesPerOp": 1472,
+        "allocsPerOp": 6,
+        "samples": [
+          {
+            "nsPerOp": 4769661,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4812463,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4733661,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4712509,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4783226,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 4374038,
+        "bytesPerOp": 1472,
+        "allocsPerOp": 6,
+        "samples": [
+          {
+            "nsPerOp": 4374038,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4417486,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4336790,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4363722,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          },
+          {
+            "nsPerOp": 4403288,
+            "bytesPerOp": 1472,
+            "allocsPerOp": 6
+          }
+        ]
+      },
+      "speedup": 1.0504554372870103
+    },
+    {
+      "name": "BenchmarkSearchRepeatedPrefix/query=128",
+      "before": {
+        "nsPerOp": 4047041,
+        "bytesPerOp": 6464,
+        "allocsPerOp": 8,
+        "samples": [
+          {
+            "nsPerOp": 4718190,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 4180804,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 4041809,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 4031537,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 4047041,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          }
+        ]
+      },
+      "directAppend": {
+        "nsPerOp": 4042559,
+        "bytesPerOp": 6464,
+        "allocsPerOp": 8,
+        "samples": [
+          {
+            "nsPerOp": 4057251,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 4015796,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 4016848,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 4114801,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 4042559,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 3864344,
+        "bytesPerOp": 6464,
+        "allocsPerOp": 8,
+        "samples": [
+          {
+            "nsPerOp": 3863964,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 3864344,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 4001670,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 3865352,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          },
+          {
+            "nsPerOp": 3863994,
+            "bytesPerOp": 6464,
+            "allocsPerOp": 8
+          }
+        ]
+      },
+      "speedup": 1.0472776233171788
+    },
+    {
+      "name": "BenchmarkSearchOrdinaryText/match",
+      "before": {
+        "nsPerOp": 727697,
+        "bytesPerOp": 175240,
+        "allocsPerOp": 2017,
+        "samples": [
+          {
+            "nsPerOp": 732911,
+            "bytesPerOp": 175240,
+            "allocsPerOp": 2017
+          },
+          {
+            "nsPerOp": 727697,
+            "bytesPerOp": 175240,
+            "allocsPerOp": 2017
+          },
+          {
+            "nsPerOp": 721723,
+            "bytesPerOp": 175240,
+            "allocsPerOp": 2017
+          },
+          {
+            "nsPerOp": 723977,
+            "bytesPerOp": 175240,
+            "allocsPerOp": 2017
+          },
+          {
+            "nsPerOp": 751410,
+            "bytesPerOp": 175240,
+            "allocsPerOp": 2017
+          }
+        ]
+      },
+      "directAppend": {
+        "nsPerOp": 640059,
+        "bytesPerOp": 127240,
+        "allocsPerOp": 17,
+        "samples": [
+          {
+            "nsPerOp": 649521,
+            "bytesPerOp": 127240,
+            "allocsPerOp": 17
+          },
+          {
+            "nsPerOp": 641428,
+            "bytesPerOp": 127240,
+            "allocsPerOp": 17
+          },
+          {
+            "nsPerOp": 635308,
+            "bytesPerOp": 127240,
+            "allocsPerOp": 17
+          },
+          {
+            "nsPerOp": 624231,
+            "bytesPerOp": 127240,
+            "allocsPerOp": 17
+          },
+          {
+            "nsPerOp": 640059,
+            "bytesPerOp": 127240,
+            "allocsPerOp": 17
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 600081,
+        "bytesPerOp": 288,
+        "allocsPerOp": 4,
+        "samples": [
+          {
+            "nsPerOp": 599780,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 600081,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 599649,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 603381,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 610527,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          }
+        ]
+      },
+      "speedup": 1.212664623609146
+    },
+    {
+      "name": "BenchmarkSearchOrdinaryText/missing",
+      "before": {
+        "nsPerOp": 617857,
+        "bytesPerOp": 320,
+        "allocsPerOp": 4,
+        "samples": [
+          {
+            "nsPerOp": 605381,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 622496,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 617857,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 620353,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 617490,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          }
+        ]
+      },
+      "directAppend": {
+        "nsPerOp": 564532,
+        "bytesPerOp": 320,
+        "allocsPerOp": 4,
+        "samples": [
+          {
+            "nsPerOp": 564532,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 582224,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 564221,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 565458,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 564059,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 576579,
+        "bytesPerOp": 320,
+        "allocsPerOp": 4,
+        "samples": [
+          {
+            "nsPerOp": 611754,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 571752,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 576579,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 571750,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 580795,
+            "bytesPerOp": 320,
+            "allocsPerOp": 4
+          }
+        ]
+      },
+      "speedup": 1.0715912303431099
+    },
+    {
+      "name": "BenchmarkSearchOrdinaryText/MATCH",
+      "before": {
+        "nsPerOp": 449954,
+        "bytesPerOp": 288,
+        "allocsPerOp": 4,
+        "samples": [
+          {
+            "nsPerOp": 448248,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 449063,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 481058,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 449954,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 451799,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          }
+        ]
+      },
+      "directAppend": {
+        "nsPerOp": 421031,
+        "bytesPerOp": 288,
+        "allocsPerOp": 4,
+        "samples": [
+          {
+            "nsPerOp": 420254,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 419877,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 421031,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 422671,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 430704,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 427056,
+        "bytesPerOp": 288,
+        "allocsPerOp": 4,
+        "samples": [
+          {
+            "nsPerOp": 426321,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 424728,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 427093,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 435540,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          },
+          {
+            "nsPerOp": 427056,
+            "bytesPerOp": 288,
+            "allocsPerOp": 4
+          }
+        ]
+      },
+      "speedup": 1.0536182608369862
+    },
+    {
+      "name": "BenchmarkSearchQueryLifetime/clear=false",
+      "before": {
+        "nsPerOp": 16401911,
+        "bytesPerOp": 76322260,
+        "allocsPerOp": 18030,
+        "samples": [
+          {
+            "nsPerOp": 16401911,
+            "bytesPerOp": 76322260,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 16955227,
+            "bytesPerOp": 76322258,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 15766599,
+            "bytesPerOp": 76322258,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 17053287,
+            "bytesPerOp": 76322260,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 16024079,
+            "bytesPerOp": 76322260,
+            "allocsPerOp": 18030
+          }
+        ]
+      },
+      "directAppend": null,
+      "after": {
+        "nsPerOp": 3409678,
+        "bytesPerOp": 84,
+        "allocsPerOp": 3,
+        "samples": [
+          {
+            "nsPerOp": 3404287,
+            "bytesPerOp": 84,
+            "allocsPerOp": 3
+          },
+          {
+            "nsPerOp": 3400496,
+            "bytesPerOp": 84,
+            "allocsPerOp": 3
+          },
+          {
+            "nsPerOp": 3409678,
+            "bytesPerOp": 84,
+            "allocsPerOp": 3
+          },
+          {
+            "nsPerOp": 3421824,
+            "bytesPerOp": 84,
+            "allocsPerOp": 3
+          },
+          {
+            "nsPerOp": 3418871,
+            "bytesPerOp": 84,
+            "allocsPerOp": 3
+          }
+        ]
+      },
+      "speedup": 4.810398811852615
+    },
+    {
+      "name": "BenchmarkSearchQueryLifetime/clear=true",
+      "before": {
+        "nsPerOp": 16812777,
+        "bytesPerOp": 76322258,
+        "allocsPerOp": 18030,
+        "samples": [
+          {
+            "nsPerOp": 16263156,
+            "bytesPerOp": 76322258,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 16812777,
+            "bytesPerOp": 76322258,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 15784382,
+            "bytesPerOp": 76322260,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 17668833,
+            "bytesPerOp": 76322258,
+            "allocsPerOp": 18030
+          },
+          {
+            "nsPerOp": 17262939,
+            "bytesPerOp": 76322258,
+            "allocsPerOp": 18030
+          }
+        ]
+      },
+      "directAppend": null,
+      "after": {
+        "nsPerOp": 12150053,
+        "bytesPerOp": 55035783,
+        "allocsPerOp": 37,
+        "samples": [
+          {
+            "nsPerOp": 12273819,
+            "bytesPerOp": 54956290,
+            "allocsPerOp": 37
+          },
+          {
+            "nsPerOp": 12153795,
+            "bytesPerOp": 55035783,
+            "allocsPerOp": 37
+          },
+          {
+            "nsPerOp": 11744123,
+            "bytesPerOp": 55047688,
+            "allocsPerOp": 37
+          },
+          {
+            "nsPerOp": 12150053,
+            "bytesPerOp": 55035783,
+            "allocsPerOp": 37
+          },
+          {
+            "nsPerOp": 11988215,
+            "bytesPerOp": 54941521,
+            "allocsPerOp": 37
+          }
+        ]
+      },
+      "speedup": 1.3837616181591965
+    }
+  ]
+}
