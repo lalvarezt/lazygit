@@ -14,6 +14,10 @@ func BenchmarkEditorParagraphInput(b *testing.B) {
 	benchmarkEditorInput(b, "body text ")
 }
 
+func BenchmarkEditorUnbrokenInput(b *testing.B) {
+	benchmarkEditorInput(b, "a")
+}
+
 func benchmarkEditorInput(b *testing.B, body string) {
 	b.Helper()
 	for _, size := range []int{256, 1024, 4096} {

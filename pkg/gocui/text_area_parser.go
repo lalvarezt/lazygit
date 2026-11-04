@@ -7,9 +7,9 @@ import (
 	"github.com/rivo/uniseg"
 )
 
-// Checkpoints follow line transitions, when no breakable whitespace remains in
-// the pending word. Its cells stay contiguous after outputCells in the completed
-// layout, so restarting only copies that word.
+// Checkpoints have no breakable whitespace in the pending word. Its cells stay
+// contiguous after outputCells in the completed layout, so restarting only
+// copies that word.
 type textAreaCheckpoint struct {
 	nextByte       int
 	graphemeState  int
@@ -74,6 +74,9 @@ func (p *textAreaParser) parse() {
 		}
 		p.pending = append(p.pending, c)
 		p.consume(c)
+		if p.checkpointing && p.lastWhitespace == -1 && p.nextByte-p.checkpoints[len(p.checkpoints)-1].nextByte >= 128 {
+			p.checkpoint()
+		}
 	}
 	p.emit(len(p.pending))
 }
@@ -138,6 +141,11 @@ func (p *textAreaParser) emit(count int) {
 
 func (p *textAreaParser) checkpoint() {
 	if !p.checkpointing {
+		return
+	}
+	// URL-style trailers can match through whitespace by looking ahead into
+	// text that a later edit may change. Dashed keys match on the key alone.
+	if p.trailer.didMatch && !p.trailer.keyContainsDash {
 		return
 	}
 	p.checkpoints = append(p.checkpoints, textAreaCheckpoint{

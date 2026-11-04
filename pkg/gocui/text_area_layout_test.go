@@ -35,9 +35,14 @@ func TestTextAreaLayoutAfterParagraphReplacements(t *testing.T) {
 		strings.Repeat("a paragraph with several different words ", 15),
 		"subject\n\n" + strings.Repeat("body words [1]: notes ", 15) + "\n\nSigned-off-by: Someone <name@example.com>\n",
 		strings.Repeat("界 é 👩‍💻 🇦🇧 words ", 15),
+		strings.Repeat("a", 400),
+		strings.Repeat("界é👩‍💻🇦🇧", 40),
+		"Name:" + strings.Repeat(" ", 260) + "https://example.com",
+		"Signed-off-by:" + strings.Repeat(" ", 260) + "Person",
+		"[" + strings.Repeat("1", 260) + "]: footnote",
 	}
 	insertions := []string{"x", " ", "\n", "\n\n", "界", "é", "\u0301", "👩", "\u200d", "💻", "🇦", "\r", "\xff", "[1]: ", "Signed-off-by: "}
-	for _, width := range []int{5, 12, 72} {
+	for _, width := range []int{-1, 5, 12, 72} {
 		for _, content := range initialContents {
 			area := &TextArea{AutoWrap: true, AutoWrapWidth: width}
 			area.TypeString(content)
@@ -56,6 +61,17 @@ func TestTextAreaLayoutAfterParagraphReplacements(t *testing.T) {
 				assertTextAreaLayout(t, area)
 			}
 		}
+	}
+}
+
+func TestTextAreaLayoutAfterTrailerURLChanges(t *testing.T) {
+	area := &TextArea{AutoWrap: true, AutoWrapWidth: 72}
+	prefix := "Name:" + strings.Repeat(" ", 260)
+	area.TypeString(prefix + "https://example.com")
+	for _, first := range []string{"x", "h", "x", "h"} {
+		area.replaceContent(len(prefix), len(prefix)+1, first)
+		area.updateCells()
+		assertTextAreaLayout(t, area)
 	}
 }
 
