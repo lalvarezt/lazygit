@@ -30,7 +30,6 @@ func (c *TextAreaCell) nextCursorXY() (int, int) {
 
 type textAreaLayout struct {
 	checkpoints    []textAreaCheckpoint
-	pending        []TextAreaCell
 	trailerStart   int
 	content        string
 	width          int
@@ -217,7 +216,7 @@ func (self *TextArea) updateCells() {
 		checkpoints = append(checkpoints, checkpoint)
 	}
 	remainingBytes := len(self.content) - checkpoint.nextByte
-	remainingCells := checkpoint.pendingCells + remainingBytes
+	remainingCells := remainingBytes
 	if width > 0 {
 		remainingCells += (checkpoint.lineWidth + remainingBytes) / width
 	}
@@ -231,8 +230,9 @@ func (self *TextArea) updateCells() {
 		lineWidth:         checkpoint.lineWidth,
 		lastWhitespace:    -1,
 		trailer:           checkpoint.trailer,
-		pending:           append(self.layout.pending[:0], oldCells[checkpoint.outputCells:checkpoint.outputCells+checkpoint.pendingCells]...),
-		result:            slices.Grow(oldCells[:checkpoint.outputCells], remainingCells),
+		cells:             slices.Grow(oldCells[:checkpoint.outputCells+checkpoint.pendingCells], remainingCells),
+		pendingStart:      checkpoint.outputCells,
+		positioned:        checkpoint.pendingCells,
 		checkpointing:     true,
 		checkpoints:       checkpoints,
 		ownedText:         true,
@@ -240,14 +240,14 @@ func (self *TextArea) updateCells() {
 	p.footnote.didFailToMatch = checkpoint.footnoteFailed
 	p.footnote.lineStr.WriteString(checkpoint.footnotePrefix)
 	p.parse()
-	self.cells = p.result
+	self.cells = p.cells
 	if len(oldCells) > len(self.cells) {
 		clear(oldCells[len(self.cells):])
 	}
 	if len(oldCheckpoints) > len(p.checkpoints) {
 		clear(oldCheckpoints[len(p.checkpoints):])
 	}
-	self.layout.pending, self.layout.checkpoints = p.pending, p.checkpoints
+	self.layout.checkpoints = p.checkpoints
 	self.layout.unchangedRows = checkpoint.row
 	self.layout.unchangedCells = checkpoint.outputCells + checkpoint.pendingCells
 	self.layout.content, self.layout.width, self.layout.ready = self.content, width, true
@@ -673,7 +673,6 @@ func (self *TextArea) SetCursor2D(x int, y int) {
 
 func (self *TextArea) Clear() {
 	self.layout.checkpoints = nil
-	self.layout.pending = nil
 	self.layout.trailerStart = 0
 	self.layout.content = ""
 	self.layout.ready = false

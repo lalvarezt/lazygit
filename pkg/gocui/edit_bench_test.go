@@ -18,6 +18,25 @@ func BenchmarkEditorUnbrokenInput(b *testing.B) {
 	benchmarkEditorInput(b, "a")
 }
 
+func BenchmarkEditorEditUnbrokenText(b *testing.B) {
+	for _, size := range []int{4096, 100000, 1000000} {
+		b.Run(fmt.Sprintf("bytes=%d", size), func(b *testing.B) {
+			v := NewView("editor", 0, 0, 80, 24, OutputNormal)
+			v.TextArea.AutoWrap = true
+			v.TextArea.AutoWrapWidth = 72
+			v.TextArea.TypeString(strings.Repeat("a", size))
+			v.RenderTextArea()
+			key := NewKeyRune('b')
+			backspace := NewKeyName(KeyBackspace)
+			b.ReportAllocs()
+			for b.Loop() {
+				SimpleEditor(v, key)
+				SimpleEditor(v, backspace)
+			}
+		})
+	}
+}
+
 func benchmarkEditorInput(b *testing.B, body string) {
 	b.Helper()
 	for _, size := range []int{256, 1024, 4096} {

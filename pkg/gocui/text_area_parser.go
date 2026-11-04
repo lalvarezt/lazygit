@@ -7,9 +7,8 @@ import (
 	"github.com/rivo/uniseg"
 )
 
-// Checkpoints have no breakable whitespace in the pending word. Its cells stay
-// contiguous after outputCells in the completed layout, so restarting only
-// copies that word.
+// Checkpoints have no breakable whitespace in the pending word. Its cells
+// remain an unchanged prefix with stable coordinates in the completed layout.
 type textAreaCheckpoint struct {
 	nextByte       int
 	graphemeState  int
@@ -33,8 +32,9 @@ type textAreaParser struct {
 	lastWhitespace    int
 	footnote          footNoteMatcher
 	trailer           trailerMatcher
-	pending           []TextAreaCell // current visual line, including any incomplete word
-	result            []TextAreaCell // completed lines
+	cells             []TextAreaCell // completed lines followed by the current visual line
+	pendingStart      int
+	positioned        int // prefix of pending cells with stable coordinates
 	softLineBreaks    []int
 	checkpointing     bool
 	checkpoints       []textAreaCheckpoint
@@ -52,11 +52,11 @@ func contentToCells(content string, width int) ([]TextAreaCell, []int) {
 		trailerBlockStart: startOfTrailerBlock(content),
 		graphemeState:     -1,
 		lastWhitespace:    -1,
-		result:            make([]TextAreaCell, 0, len(content)+estimatedBreaks),
+		cells:             make([]TextAreaCell, 0, len(content)+estimatedBreaks),
 		softLineBreaks:    make([]int, 0, estimatedBreaks),
 	}
 	p.parse()
-	return p.result, p.softLineBreaks
+	return p.cells, p.softLineBreaks
 }
 
 func (p *textAreaParser) parse() {
@@ -72,18 +72,18 @@ func (p *textAreaParser) parse() {
 				c.char = strings.Clone(chr)
 			}
 		}
-		p.pending = append(p.pending, c)
+		p.cells = append(p.cells, c)
 		p.consume(c)
 		if p.checkpointing && p.lastWhitespace == -1 && p.nextByte-p.checkpoints[len(p.checkpoints)-1].nextByte >= 128 {
 			p.checkpoint()
 		}
 	}
-	p.emit(len(p.pending))
+	p.emit(len(p.cells) - p.pendingStart)
 }
 
 func (p *textAreaParser) consume(c TextAreaCell) {
 	if c.char == "\n" {
-		p.emit(len(p.pending))
+		p.emit(len(p.cells) - p.pendingStart)
 		p.row++
 		p.lastWhitespace = -1
 		p.lineWidth = 0
@@ -98,18 +98,21 @@ func (p *textAreaParser) consume(c TextAreaCell) {
 	wrapped := false
 	if c.char == " " && !p.footnote.isFootNote() &&
 		!(inTrailerBlock && p.trailer.isTrailer(p.content[p.nextByte:])) {
-		p.lastWhitespace = len(p.pending)
+		p.lastWhitespace = len(p.cells) - p.pendingStart
 	} else if p.width > 0 && p.lineWidth > p.width && p.lastWhitespace >= 0 {
 		p.emit(p.lastWhitespace)
-		contentIndex := p.pending[0].contentIndex
+		contentIndex := p.cells[p.pendingStart].contentIndex
 		p.row++
-		p.result = append(p.result, TextAreaCell{char: "\n", width: 1, contentIndex: contentIndex, x: 0, y: p.row})
+		p.cells = append(p.cells, TextAreaCell{})
+		copy(p.cells[p.pendingStart+1:], p.cells[p.pendingStart:len(p.cells)-1])
+		p.cells[p.pendingStart] = TextAreaCell{char: "\n", width: 1, contentIndex: contentIndex, x: 0, y: p.row}
+		p.pendingStart++
 		if p.softLineBreaks != nil {
 			p.softLineBreaks = append(p.softLineBreaks, contentIndex)
 		}
 		p.lastWhitespace = -1
 		p.lineWidth = 0
-		for _, c := range p.pending {
+		for _, c := range p.cells[p.pendingStart:] {
 			p.lineWidth += c.width
 		}
 		p.footnote.reset()
@@ -127,16 +130,19 @@ func (p *textAreaParser) consume(c TextAreaCell) {
 }
 
 func (p *textAreaParser) emit(count int) {
+	start := p.pendingStart + min(p.positioned, count)
 	x := 0
-	for i := range count {
-		p.pending[i].x = x
-		p.pending[i].y = p.row
-		x += p.pending[i].width
+	if start > p.pendingStart {
+		last := p.cells[start-1]
+		x = last.x + last.width
 	}
-	p.result = append(p.result, p.pending[:count]...)
-	remaining := copy(p.pending, p.pending[count:])
-	clear(p.pending[remaining:])
-	p.pending = p.pending[:remaining]
+	for i := start; i < p.pendingStart+count; i++ {
+		p.cells[i].x = x
+		p.cells[i].y = p.row
+		x += p.cells[i].width
+	}
+	p.pendingStart += count
+	p.positioned = max(0, p.positioned-count)
 }
 
 func (p *textAreaParser) checkpoint() {
@@ -151,8 +157,8 @@ func (p *textAreaParser) checkpoint() {
 	p.checkpoints = append(p.checkpoints, textAreaCheckpoint{
 		nextByte:       p.nextByte,
 		graphemeState:  p.graphemeState,
-		outputCells:    len(p.result),
-		pendingCells:   len(p.pending),
+		outputCells:    p.pendingStart,
+		pendingCells:   len(p.cells) - p.pendingStart,
 		lineWidth:      p.lineWidth,
 		row:            p.row,
 		footnotePrefix: p.footnote.lineStr.String(),
