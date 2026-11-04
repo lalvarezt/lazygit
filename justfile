@@ -21,6 +21,10 @@ print-log: build
 unit-test:
     go test ./... -short
 
+# Compare identical benchmark cases against two pinned revisions.
+perf-compare base="" head="HEAD":
+    node scripts/compare_performance.cjs "{{base}}" "{{head}}"
+
 # Run both unit tests and integration tests.
 [unix]
 test: unit-test e2e
