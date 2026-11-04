@@ -292,6 +292,39 @@ The original-parser differential checks, unit tests, integration tests, build,
 lint, and full gocui race suite pass. The user chose a separate performance
 commit for this change, which spans the earlier parser and checkpoint storage.
 
+## Remaining scans and allocation costs
+
+A fresh profile at `209c9135f` measures an insert and backspace in 1 MB of
+existing unbroken text. Trailer-boundary detection accounts for 64.7% of CPU
+samples; the renderer's control-character check accounts for 13.8%. Both scan
+the full text after each edit. The checkpoint parser itself uses little CPU.
+These percentages include background GC and describe this benchmark only.
+
+A prototype replaces the reverse substring search for two newlines with repeated
+reverse byte searches. Across three samples per fixture, edit pairs improve by
+1.58× at 4 KB, 2.60× at 100 KB, and 2.62× at 1 MB. The prototype is not shipped
+because these whole-operation gains fall below the 5× target. Reusing the known
+unchanged prefix for trailer and control-character detection is the next editor
+candidate; its cache and invalidation design awaits the user's choice.
+
+Independent profiles identify allocation costs in two other paths. Searching
+2,000 lines of 200 `a` characters for `a` allocates about 76.3 MB per rebuild,
+including temporary per-line results copied into the combined result list.
+Writing 2,000 colored diff lines allocates about 11.7 MB, mostly while growing
+cell arrays. These are repeated synthetic workloads, not live latency results.
+No speedup from changing either allocation path has been measured.
+
+Building a tree of 10,000 commit files takes about 3.13 ms in one profiled
+benchmark run. CPU cost is spread across path splitting and joining, sorting,
+allocation, and GC. A separate directory-removal refresh takes about 3.73 ms;
+its CPU profile also includes fixture setup while the benchmark timer is
+stopped, so it cannot isolate refresh CPU cost.
+
+The `remainingHotspotRanking` section of the
+[profiling data](performance-live-ranking.json) records the commands, source
+revision, profile summaries, and limits. Raw logs, overlays, and profiles remain
+locally under `.git/perf-investigation/resume-*`.
+
 Reproduce the committed benchmarks with:
 
 ```sh

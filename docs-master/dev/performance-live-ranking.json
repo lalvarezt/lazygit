@@ -226,5 +226,222 @@
       }
     },
     "limits": "One matched live 4 KB typing profile pair; it does not measure the 1 MB insert/backspace benchmark. Both marker observations fall in the first 100 ms interval. Parser array sizes exclude strings and rendered view cells."
+  },
+  "remainingHotspotRanking": {
+    "source": "209c9135f",
+    "kind": "synthetic benchmark profiles, not live app profiles",
+    "editor": {
+      "command": "go test ./pkg/gocui -run='^$' -bench='^BenchmarkEditorEditUnbrokenText$/bytes=1000000$' -benchtime=2s -cpuprofile=editor.cpu",
+      "nsPerEditPair": 2462895,
+      "cpuSamplesSeconds": 2.69,
+      "trailerSearchSamplePercent": 64.68,
+      "controlScanSamplePercent": 13.75,
+      "nextCandidate": "Incremental trailer and control detection using the unchanged text prefix; design choice pending."
+    },
+    "trailerByteSearchPrototype": {
+      "shipped": false,
+      "description": "Replace strings.LastIndex of two newlines with repeated strings.LastIndexByte calls, checking each preceding byte.",
+      "baselineCommand": "go test ./pkg/gocui -run='^$' -bench='^BenchmarkEditorEditUnbrokenText$' -benchtime=150ms -count=3",
+      "prototype": "Only startOfTrailerBlock is replaced through a Go overlay of the baseline source.",
+      "rows": [
+        {
+          "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=4096",
+          "before": [
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=4096",
+              "ns": 18199,
+              "bytes": 4904,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=4096",
+              "ns": 19961,
+              "bytes": 4902,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=4096",
+              "ns": 17689,
+              "bytes": 4906,
+              "allocations": 1
+            }
+          ],
+          "after": [
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=4096",
+              "ns": 13523,
+              "bytes": 4895,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=4096",
+              "ns": 11457,
+              "bytes": 4889,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=4096",
+              "ns": 11518,
+              "bytes": 4889,
+              "allocations": 1
+            }
+          ],
+          "speedup": 1.5800486195520056
+        },
+        {
+          "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=100000",
+          "before": [
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=100000",
+              "ns": 253533,
+              "bytes": 106496,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=100000",
+              "ns": 251293,
+              "bytes": 106504,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=100000",
+              "ns": 254936,
+              "bytes": 106496,
+              "allocations": 1
+            }
+          ],
+          "after": [
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=100000",
+              "ns": 97802,
+              "bytes": 106496,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=100000",
+              "ns": 97408,
+              "bytes": 106496,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=100000",
+              "ns": 95594,
+              "bytes": 106496,
+              "allocations": 1
+            }
+          ],
+          "speedup": 2.602794431668857
+        },
+        {
+          "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=1000000",
+          "before": [
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=1000000",
+              "ns": 2559110,
+              "bytes": 1007616,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=1000000",
+              "ns": 2443113,
+              "bytes": 1007616,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=1000000",
+              "ns": 2570688,
+              "bytes": 1007616,
+              "allocations": 1
+            }
+          ],
+          "after": [
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=1000000",
+              "ns": 1050794,
+              "bytes": 1007900,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=1000000",
+              "ns": 970537,
+              "bytes": 1007616,
+              "allocations": 1
+            },
+            {
+              "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=1000000",
+              "ns": 975801,
+              "bytes": 1007616,
+              "allocations": 1
+            }
+          ],
+          "speedup": 2.6225736599982987
+        }
+      ]
+    },
+    "search": {
+      "command": "go test ./pkg/gocui -run='^$' -bench='^BenchmarkSearchRepeatedPrefix$/query=1$' -benchtime=2s -cpuprofile=matches.cpu -memprofile=matches.mem",
+      "samples": [
+        {
+          "benchmark": "BenchmarkSearchRepeatedPrefix/query=1",
+          "ns": 12687033,
+          "bytes": 76322245,
+          "allocations": 18030
+        }
+      ],
+      "fixture": "2,000 lines of 200 a characters; search for a; rendered layout warmed.",
+      "allocationProfile": {
+        "updateSearchPositionsFlatPercent": 67.16,
+        "lineSearcherPositionsFlatPercent": 32.12
+      },
+      "limits": [
+        "One profiled benchmark run; includes initial fixture allocation.",
+        "Allocation changes have not been prototyped or measured."
+      ]
+    },
+    "coloredDiffWriter": {
+      "command": "go test ./pkg/gocui -run='^$' -bench='^BenchmarkViewWrite$/colored$' -benchtime=2s -cpuprofile=colored.cpu -memprofile=colored.mem",
+      "samples": [
+        {
+          "benchmark": "BenchmarkViewWrite/colored",
+          "ns": 6412225,
+          "bytes": 11727456,
+          "allocations": 30019
+        }
+      ],
+      "writeCellsAllocationProfilePercent": 87.19,
+      "limits": [
+        "One profiled benchmark run, writing 2,000 lines per operation.",
+        "This command excludes BenchmarkViewWriteLongLine, unlike the earlier unanchored exploratory run."
+      ]
+    },
+    "treeBuild": {
+      "command": "go test ./pkg/gui/filetree -run='^$' -bench='^BenchmarkBuildCommitFileTree$/files=10000$' -benchtime=2s -cpuprofile=tree-build.cpu",
+      "samples": [
+        {
+          "benchmark": "BenchmarkBuildCommitFileTree/files=10000",
+          "ns": 3132905,
+          "bytes": 3026600,
+          "allocations": 50111
+        }
+      ],
+      "limits": [
+        "One profiled run. Fixture construction occurs once before the timed loop."
+      ]
+    },
+    "treeRefresh": {
+      "command": "go test ./pkg/gui/filetree -run='^$' -bench='^BenchmarkRefreshAfterDirectoryRemoval$/files=5000$' -benchtime=2s -cpuprofile=tree.cpu",
+      "samples": [
+        {
+          "benchmark": "BenchmarkRefreshAfterDirectoryRemoval/files=5000",
+          "ns": 3730244,
+          "bytes": 4112756,
+          "allocations": 115108
+        }
+      ],
+      "limits": [
+        "The CPU profile includes per-iteration setup during stopped benchmark timing; it does not isolate refresh CPU cost."
+      ]
+    },
+    "artifactDirectory": ".git/perf-investigation/resume-*"
   }
 }
