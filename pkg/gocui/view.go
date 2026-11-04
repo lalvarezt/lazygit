@@ -1311,6 +1311,9 @@ func (b *viewBuffer) write(v *View, p []byte) {
 	if !v.Editable && until > 0 && p[until-1] == '\n' {
 		b.pendingNewline = true
 		until--
+		if until > 0 && p[until-1] == '\r' {
+			until--
+		}
 	}
 
 	state := -1

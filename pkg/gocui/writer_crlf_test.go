@@ -15,42 +15,27 @@ func TestDiffLineContentsWithCRLF(t *testing.T) {
 		{
 			name:   "one line",
 			chunks: []string{"first\r\n"},
-			/* EXPECTED:
-			want: []string{"first"},
-			ACTUAL: */
-			want: []string{"first\r"},
+			want:   []string{"first"},
 		},
 		{
 			name:   "lines in one write",
 			chunks: []string{"first\r\nsecond\r\n"},
-			/* EXPECTED:
-			want: []string{"first", "second"},
-			ACTUAL: */
-			want: []string{"first", "second\r"},
+			want:   []string{"first", "second"},
 		},
 		{
 			name:   "lines in separate writes",
 			chunks: []string{"first\r\n", "second\r\n"},
-			/* EXPECTED:
-			want: []string{"first", "second"},
-			ACTUAL: */
-			want: []string{"first\r", "second\r"},
+			want:   []string{"first", "second"},
 		},
 		{
 			name:   "tabs",
 			chunks: []string{"first\tvalue\r\n"},
-			/* EXPECTED:
-			want: []string{"first\tvalue"},
-			ACTUAL: */
-			want: []string{"first\tvalue\r"},
+			want:   []string{"first\tvalue"},
 		},
 		{
 			name:   "bare carriage return before CRLF",
 			chunks: []string{"before\rafter\r\n"},
-			/* EXPECTED:
-			want: []string{"before\rafter"},
-			ACTUAL: */
-			want: []string{"before\rafter\r"},
+			want:   []string{"before\rafter"},
 		},
 		{
 			name:   "bare carriage return before LF",
