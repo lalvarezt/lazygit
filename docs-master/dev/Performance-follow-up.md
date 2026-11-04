@@ -218,8 +218,13 @@ Tests cover 3,200 replacements across ordinary and unbroken Unicode text,
 footnotes, and trailers, plus targeted changes to trailer URL schemes. A
 temporary independent oracle compares the incremental layouts with the original
 parser. Build, unit tests, lint, integration tests, and editor race checks pass.
-A broader race run exposed a baseline terminal suspend/resume race; that issue
-is being handled separately from the editor changes.
+A broader race run exposed a baseline terminal suspend/resume race. The input
+loop could exit while a terminal `Read` was still running, allowing resume to
+replace state that the old reader could still access. A separate demonstration
+and fix (`82dd68c27`, `fa9ab54a5`) make shutdown wait for outstanding reads after
+stopping the terminal. The full gocui race suite and repeated suspend/resume
+checks now pass. The Windows test target and Plan 9 tcell package compile; the
+gocui Plan 9 target has pre-existing unsupported Unix syscall references.
 
 Reproduce the committed benchmarks with:
 
