@@ -69,10 +69,16 @@ func (self *Node[T]) GetInternalPath() string {
 // directories that were squished into it, so for "a/b/c" with a
 // CompressionLevel of 2 this returns "a/b/c", "a/b" and "a".
 func (self *Node[T]) GetPaths() []string {
-	splitPath := split(self.path)
-	paths := make([]string, 0, self.CompressionLevel+1)
-	for i := 0; i <= self.CompressionLevel; i++ {
-		paths = append(paths, strings.TrimPrefix(join(splitPath[:len(splitPath)-i]), "./"))
+	nodePath := self.path
+	paths := make([]string, self.CompressionLevel+1)
+	paths[0] = self.GetPath()
+	for i := 1; i < len(paths); i++ {
+		if slash := strings.LastIndexByte(nodePath, '/'); slash >= 0 {
+			nodePath = nodePath[:slash]
+		} else {
+			nodePath = ""
+		}
+		paths[i] = strings.TrimPrefix(nodePath, "./")
 	}
 	return paths
 }

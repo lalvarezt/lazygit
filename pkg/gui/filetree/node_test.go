@@ -7,6 +7,32 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestGetPaths(t *testing.T) {
+	for _, test := range []struct {
+		name        string
+		path        string
+		compression int
+		want        []string
+	}{
+		{name: "file", path: "file", want: []string{"file"}},
+		{name: "nested file", path: "dir/file", want: []string{"dir/file"}},
+		{name: "root prefix", path: "./dir/file", want: []string{"dir/file"}},
+		{name: "root", path: ".", want: []string{"."}},
+		{name: "empty path", want: []string{""}},
+		{name: "compressed directories", path: "a/b/c", compression: 2, want: []string{"a/b/c", "a/b", "a"}},
+		{name: "compressed with root prefix", path: "./a/b/c", compression: 2, want: []string{"a/b/c", "a/b", "a"}},
+		{name: "partially compressed", path: "a/b/c", compression: 1, want: []string{"a/b/c", "a/b"}},
+		{name: "compressed root", path: "./a", compression: 1, want: []string{"a", "."}},
+		{name: "Unicode directories", path: "界/é/文件", compression: 2, want: []string{"界/é/文件", "界/é", "界"}},
+		{name: "backslash in name", path: `a/b\c/d`, compression: 1, want: []string{`a/b\c/d`, `a/b\c`}},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			node := &Node[models.File]{path: test.path, CompressionLevel: test.compression}
+			assert.Equal(t, test.want, node.GetPaths())
+		})
+	}
+}
+
 func TestGetVisualDepthAtIndex(t *testing.T) {
 	scenarios := []struct {
 		name           string
