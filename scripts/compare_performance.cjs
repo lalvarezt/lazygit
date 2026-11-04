@@ -113,6 +113,7 @@ function measure() {
     BenchmarkNearestSearchPosition: p => `Find the nearest result near the end of ${value(p, 'matches')} search matches.`,
     BenchmarkScrollSearchPosition: p => `Select a visible result after a distant scroll ${value(p, 'up') === 'true' ? 'up' : 'down'} across ${value(p, 'matches')} matches; reset each iteration.`,
     BenchmarkRenderCommitGraph: () => 'Render a graph of 50 commits generated with seed 1234.',
+    BenchmarkRenderCommitGraphVariants: p => `Render ${value(p, 'commits')} commits generated with seed 1234, using ${value(p, 'symbols')} symbols; ${value(p, 'selected') === 'true' ? 'select the middle commit' : 'no selected commit'}.`,
   };
   function value(parts, name) { return parts.find(part => part.startsWith(`${name}=`))?.slice(name.length + 1); }
   for (const name of families) if (!descriptions[name]) throw new Error(`Missing description: ${name}`);
