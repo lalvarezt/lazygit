@@ -13,6 +13,7 @@ type HasID interface {
 type ListViewModel[T HasID] struct {
 	*traits.ListCursor
 	getModel func() []T
+	getRange func(int, int) []T
 }
 
 func NewListViewModel[T HasID](getModel func() []T) *ListViewModel[T] {
@@ -22,6 +23,7 @@ func NewListViewModel[T HasID](getModel func() []T) *ListViewModel[T] {
 func newListViewModel[T HasID](getModel func() []T, getLength func() int) *ListViewModel[T] {
 	self := &ListViewModel[T]{
 		getModel: getModel,
+		getRange: func(start, end int) []T { return getModel()[start:end] },
 	}
 
 	self.ListCursor = traits.NewListCursor(getLength)
@@ -34,7 +36,8 @@ func (self *ListViewModel[T]) GetSelected() T {
 		return Zero[T]()
 	}
 
-	return self.getModel()[self.GetSelectedLineIdx()]
+	index := self.GetSelectedLineIdx()
+	return self.getRange(index, index+1)[0]
 }
 
 func (self *ListViewModel[T]) GetSelectedItemId() string {
@@ -52,7 +55,7 @@ func (self *ListViewModel[T]) GetSelectedItems() ([]T, int, int) {
 
 	startIdx, endIdx := self.GetSelectionRange()
 
-	return self.getModel()[startIdx : endIdx+1], startIdx, endIdx
+	return self.getRange(startIdx, endIdx+1), startIdx, endIdx
 }
 
 func (self *ListViewModel[T]) GetSelectedItemIds() ([]string, int, int) {
@@ -74,6 +77,6 @@ func Zero[T any]() T {
 }
 
 func (self *ListViewModel[T]) GetItem(index int) types.HasUrn {
-	item := self.getModel()[index]
+	item := self.getRange(index, index+1)[0]
 	return any(item).(types.HasUrn)
 }
