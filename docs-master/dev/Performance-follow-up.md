@@ -471,9 +471,11 @@ Cell capacity stays the same or falls for all five measured line fixtures.
 A temporary differential harness compares 2,400 snapshots from 300 deterministic
 mixed-input streams against the pre-batch writer. Cells, styles, hyperlinks,
 metadata, text as written, and cursor state match. Tests also compare normal
-writes with small chunks containing Unicode, ANSI, metadata, carriage returns,
-tabs, cursor motion, and soft wrapping. Their interior CRLF pairs keep the same
-newline boundaries because CRLF storage has a separate consistency issue.
+writes one grapheme at a time, including Unicode, ANSI, metadata, carriage
+returns, tabs, cursor motion, and soft wrapping. The shared CRLF correction at
+the foundation also makes the stored text consistent at line-write boundaries.
+All 2,400 differential snapshots match after replaying the batching change on
+that corrected foundation.
 
 An editor smoke check showed a small paragraph-input timing difference. A
 longer seven-sample recheck shows overlapping timings and no material slowdown;

@@ -1289,5 +1289,13 @@
       },
       "speedup": 1.0029691269511878
     }
-  ]
+  ],
+  "postFoundationDifferentialValidation": {
+    "before": "5eccaf2ab4dbf44978b8c5ea58644e5fcdcf224c",
+    "after": "7acd1d734c33598ac3b5ddd2949faa631ebaf9a3",
+    "streams": 300,
+    "writes": 2400,
+    "seed": 996,
+    "matched": true
+  }
 }
