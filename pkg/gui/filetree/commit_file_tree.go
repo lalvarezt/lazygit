@@ -20,11 +20,10 @@ type ICommitFileTree interface {
 }
 
 type CommitFileTree struct {
+	treeView[models.CommitFile]
 	getFiles       func() []*models.CommitFile
-	tree           *Node[models.CommitFile]
 	showTree       bool
 	common         *common.Common
-	collapsedPaths *CollapsedPaths
 	textFilter     string
 	useFuzzySearch bool
 }
@@ -39,23 +38,15 @@ func (self *CommitFileTree) CollapseAll() {
 	}
 }
 
-func (self *CommitFileTree) ExpandAll() {
-	self.collapsedPaths.ExpandAll()
-}
-
 var _ ICommitFileTree = &CommitFileTree{}
 
 func NewCommitFileTree(getFiles func() []*models.CommitFile, common *common.Common, showTree bool) *CommitFileTree {
 	return &CommitFileTree{
-		getFiles:       getFiles,
-		common:         common,
-		showTree:       showTree,
-		collapsedPaths: NewCollapsedPaths(),
+		getFiles: getFiles,
+		common:   common,
+		showTree: showTree,
+		treeView: newTreeView[models.CommitFile](),
 	}
-}
-
-func (self *CommitFileTree) ExpandToPath(path string) {
-	self.collapsedPaths.ExpandToPath(path)
 }
 
 func (self *CommitFileTree) ToggleShowTree() {
@@ -65,12 +56,7 @@ func (self *CommitFileTree) ToggleShowTree() {
 
 func (self *CommitFileTree) Get(index int) *CommitFileNode {
 	// need to traverse the three depth first until we get to the index.
-	return NewCommitFileNode(self.tree.GetNodeAtIndex(index+1, self.collapsedPaths)) // ignoring root
-}
-
-func (self *CommitFileTree) GetIndexForPath(path string) (int, bool) {
-	index, found := self.tree.GetIndexForPath(path, self.collapsedPaths)
-	return index - 1, found
+	return NewCommitFileNode(self.getNode(index)) // ignoring root
 }
 
 func (self *CommitFileTree) GetAllItems() []*CommitFileNode {
@@ -79,13 +65,13 @@ func (self *CommitFileTree) GetAllItems() []*CommitFileNode {
 	}
 
 	// ignoring root
-	return lo.Map(self.tree.Flatten(self.collapsedPaths)[1:], func(node *Node[models.CommitFile], _ int) *CommitFileNode {
+	return lo.Map(self.getNodes(), func(node *Node[models.CommitFile], _ int) *CommitFileNode {
 		return NewCommitFileNode(node)
 	})
 }
 
 func (self *CommitFileTree) Len() int {
-	return self.tree.Size(self.collapsedPaths) - 1 // ignoring root
+	return self.length()
 }
 
 func (self *CommitFileTree) GetItem(index int) types.HasUrn {
@@ -127,20 +113,8 @@ func (self *CommitFileTree) GetTextFilter() string {
 	return self.textFilter
 }
 
-func (self *CommitFileTree) IsCollapsed(path string) bool {
-	return self.collapsedPaths.IsCollapsed(path)
-}
-
-func (self *CommitFileTree) ToggleCollapsed(path string) {
-	self.collapsedPaths.ToggleCollapsed(path)
-}
-
 func (self *CommitFileTree) GetRoot() *CommitFileNode {
 	return NewCommitFileNode(self.tree)
-}
-
-func (self *CommitFileTree) CollapsedPaths() *CollapsedPaths {
-	return self.collapsedPaths
 }
 
 func (self *CommitFileTree) GetFile(path string) *models.CommitFile {
@@ -151,10 +125,6 @@ func (self *CommitFileTree) GetFile(path string) *models.CommitFile {
 	}
 
 	return nil
-}
-
-func (self *CommitFileTree) GetVisualDepth(index int) int {
-	return self.tree.GetVisualDepthAtIndex(index+1, self.collapsedPaths) // +1 to skip root
 }
 
 func (self *CommitFileTree) InTreeMode() bool {

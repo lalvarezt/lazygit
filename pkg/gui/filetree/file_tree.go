@@ -56,8 +56,8 @@ type IFileTree interface {
 }
 
 type FileTree struct {
+	treeView[models.File]
 	getFiles func() []*models.File
-	tree     *Node[models.File]
 	showTree bool
 	common   *common.Common
 	filter   FileTreeDisplayFilter
@@ -66,7 +66,6 @@ type FileTree struct {
 	// conflicts have been resolved, so that their diffs can be reviewed while
 	// the remaining files are still being worked on.
 	conflictedPaths *set.Set[string]
-	collapsedPaths  *CollapsedPaths
 	textFilter      string
 	useFuzzySearch  bool
 }
@@ -80,16 +79,12 @@ func NewFileTree(getFiles func() []*models.File, common *common.Common, showTree
 		showTree:        showTree,
 		filter:          DisplayAll,
 		conflictedPaths: set.New[string](),
-		collapsedPaths:  NewCollapsedPaths(),
+		treeView:        newTreeView[models.File](),
 	}
 }
 
 func (self *FileTree) InTreeMode() bool {
 	return self.showTree
-}
-
-func (self *FileTree) ExpandToPath(path string) {
-	self.collapsedPaths.ExpandToPath(path)
 }
 
 func (self *FileTree) getFilesForDisplay() []*models.File {
@@ -149,7 +144,7 @@ func (self *FileTree) ToggleShowTree() {
 
 func (self *FileTree) Get(index int) *FileNode {
 	// need to traverse the tree depth first until we get to the index.
-	return NewFileNode(self.tree.GetNodeAtIndex(index+1, self.collapsedPaths)) // ignoring root
+	return NewFileNode(self.getNode(index)) // ignoring root
 }
 
 func (self *FileTree) GetFile(path string) *models.File {
@@ -162,11 +157,6 @@ func (self *FileTree) GetFile(path string) *models.File {
 	return nil
 }
 
-func (self *FileTree) GetIndexForPath(path string) (int, bool) {
-	index, found := self.tree.GetIndexForPath(path, self.collapsedPaths)
-	return index - 1, found
-}
-
 // note: this gets all items when the filter is taken into consideration. There may
 // be hidden files that aren't included here. Files off the screen however will
 // be included
@@ -176,14 +166,14 @@ func (self *FileTree) GetAllItems() []*FileNode {
 	}
 
 	// ignoring root
-	return lo.Map(self.tree.Flatten(self.collapsedPaths)[1:], func(node *Node[models.File], _ int) *FileNode {
+	return lo.Map(self.getNodes(), func(node *Node[models.File], _ int) *FileNode {
 		return NewFileNode(node)
 	})
 }
 
 func (self *FileTree) Len() int {
 	// -1 because we're ignoring the root
-	return max(self.tree.Size(self.collapsedPaths)-1, 0)
+	return max(self.length(), 0)
 }
 
 func (self *FileTree) GetItem(index int) types.HasUrn {
@@ -207,14 +197,6 @@ func (self *FileTree) SetTree() {
 	}
 }
 
-func (self *FileTree) IsCollapsed(path string) bool {
-	return self.collapsedPaths.IsCollapsed(path)
-}
-
-func (self *FileTree) ToggleCollapsed(path string) {
-	self.collapsedPaths.ToggleCollapsed(path)
-}
-
 func (self *FileTree) CollapseAll() {
 	dirPaths := lo.FilterMap(self.GetAllItems(), func(file *FileNode, index int) (string, bool) {
 		return file.path, !file.IsFile()
@@ -225,24 +207,12 @@ func (self *FileTree) CollapseAll() {
 	}
 }
 
-func (self *FileTree) ExpandAll() {
-	self.collapsedPaths.ExpandAll()
-}
-
 func (self *FileTree) Tree() *FileNode {
 	return NewFileNode(self.tree)
 }
 
 func (self *FileTree) GetRoot() *FileNode {
 	return NewFileNode(self.tree)
-}
-
-func (self *FileTree) CollapsedPaths() *CollapsedPaths {
-	return self.collapsedPaths
-}
-
-func (self *FileTree) GetVisualDepth(index int) int {
-	return self.tree.GetVisualDepthAtIndex(index+1, self.collapsedPaths) // +1 to skip root
 }
 
 func (self *FileTree) GetStatusFilter() FileTreeDisplayFilter {
