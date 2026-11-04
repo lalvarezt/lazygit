@@ -66,8 +66,11 @@ func AutoWrapContent(content string, autoWrapWidth int) []int {
 // lines are ignored, and a message that consists of a single paragraph is
 // treated as its own trailer block.
 func startOfTrailerBlock(content string) int {
-	end := len(strings.TrimRight(content, "\n"))
-	if blankLine := strings.LastIndex(content[:end], "\n\n"); blankLine >= 0 {
+	return lastBlankLineEnd(strings.TrimRight(content, "\n"))
+}
+
+func lastBlankLineEnd(content string) int {
+	if blankLine := strings.LastIndex(content, "\n\n"); blankLine >= 0 {
 		return blankLine + len("\n\n")
 	}
 	return 0
