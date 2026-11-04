@@ -1320,6 +1320,11 @@ func (b *viewBuffer) write(v *View, p []byte) {
 	cells := make([]cell, 0, 1)
 
 	for len(remaining) > 0 {
+		if count := b.writeASCII(remaining); count > 0 {
+			remaining = remaining[count:]
+			state = -1
+			continue
+		}
 		chr, remaining, width, state = uniseg.FirstGraphemeCluster(remaining, state)
 
 		switch {
@@ -1371,6 +1376,55 @@ func (b *viewBuffer) write(v *View, p []byte) {
 	} else {
 		b.autoRenderHyperlinksInCurrentLine(v)
 	}
+}
+
+func (b *viewBuffer) writeASCII(p []byte) int {
+	if len(p) < 2 || p[0] < ' ' || p[0] > '~' || b.ei.state != stateNone || len(b.ei.orphanedMetadata) > 0 {
+		return 0
+	}
+	if _, ready := b.ei.instruction.(noInstruction); !ready {
+		return 0
+	}
+
+	count := 0
+	for count < len(p) && p[count] >= ' ' && p[count] <= '~' {
+		count++
+	}
+	// A following Unicode character can extend the last ASCII grapheme.
+	if count > 0 && count < len(p) && p[count] >= utf8.RuneSelf {
+		count--
+	}
+	if count < 2 {
+		return 0
+	}
+
+	b.noteAsWritten(p[:count])
+	if count < 256 && cap(b.lines[b.wy].cells) == 0 {
+		// Small initial runs leave room for the rest of a mixed-text line.
+		capacity := 1
+		for capacity < count {
+			capacity *= 2
+		}
+		b.lines[b.wy].cells = slices.Grow(b.lines[b.wy].cells, capacity)
+	}
+	c := cell{
+		fgColor:   b.ei.curFgColor,
+		bgColor:   b.ei.curBgColor,
+		hyperlink: b.ei.hyperlink.String(),
+		metadata:  b.ei.metadata.String(),
+		width:     1,
+	}
+	cells := b.cellsToWrite(count)
+	for i := range cells {
+		c.chr = string([]byte{p[i]})
+		cells[i] = c
+	}
+	if c.metadata != "" {
+		b.ei.metadataConsumed = true
+	}
+	b.ei.curch = c.chr
+	b.ei.notifyCellsWritten(count)
+	return count
 }
 
 // exported functions use the mutex. Non-exported functions are for internal use
