@@ -31,6 +31,7 @@ func (c *TextAreaCell) nextCursorXY() (int, int) {
 type textAreaLayout struct {
 	checkpoints    []textAreaCheckpoint
 	trailerStart   int
+	firstControl   int // first tab, carriage return, or escape byte; -1 if absent
 	content        string
 	width          int
 	ready          bool
@@ -74,6 +75,35 @@ func lastBlankLineEnd(content string) int {
 		return blankLine + len("\n\n")
 	}
 	return 0
+}
+
+func (self *TextArea) scanContent() (trailerStart, firstControl int) {
+	if !self.layout.ready || !self.hasChanges {
+		return startOfTrailerBlock(self.content), strings.IndexAny(self.content, "\t\r\x1b")
+	}
+
+	end := len(strings.TrimRight(self.content, "\n"))
+	start := 0
+	if self.layout.trailerStart <= self.changedFromByte && self.layout.trailerStart <= end {
+		trailerStart = self.layout.trailerStart
+		// A separator can overlap the edit boundary. Trailing blank lines
+		// can also become interior text when non-newline content is appended.
+		unchanged := min(self.changedFromByte, len(strings.TrimRight(self.layout.content, "\n")))
+		start = max(0, trailerStart-1, unchanged-1)
+		start = min(start, end)
+	}
+	if next := lastBlankLineEnd(self.content[start:end]); next > 0 {
+		trailerStart = start + next
+	}
+
+	firstControl = self.layout.firstControl
+	if firstControl < 0 || firstControl >= self.changedFromByte {
+		firstControl = strings.IndexAny(self.content[self.changedFromByte:], "\t\r\x1b")
+		if firstControl >= 0 {
+			firstControl += self.changedFromByte
+		}
+	}
+	return trailerStart, firstControl
 }
 
 var footNoteRe = regexp.MustCompile(`^\[\d+\]:\s*$`)
@@ -209,7 +239,7 @@ func (self *TextArea) updateCells() {
 		self.hasChanges = false
 		return
 	}
-	trailerStart := startOfTrailerBlock(self.content)
+	trailerStart, firstControl := self.scanContent()
 	checkpoint, index := self.checkpointBeforeEdit(width, trailerStart)
 	oldCells, oldCheckpoints := self.cells, self.layout.checkpoints
 	checkpoints := oldCheckpoints[:0]
@@ -255,6 +285,7 @@ func (self *TextArea) updateCells() {
 	self.layout.unchangedCells = checkpoint.outputCells + checkpoint.pendingCells
 	self.layout.content, self.layout.width, self.layout.ready = self.content, width, true
 	self.layout.trailerStart = trailerStart
+	self.layout.firstControl = firstControl
 	self.hasChanges = false
 	self.layout.revision++
 }
@@ -677,6 +708,7 @@ func (self *TextArea) SetCursor2D(x int, y int) {
 func (self *TextArea) Clear() {
 	self.layout.checkpoints = nil
 	self.layout.trailerStart = 0
+	self.layout.firstControl = -1
 	self.layout.content = ""
 	self.layout.ready = false
 	self.hasChanges = false

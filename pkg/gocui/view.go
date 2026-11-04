@@ -2596,7 +2596,7 @@ func (r textAreaRendering) prefix(area *TextArea, editable bool, columns, lastLi
 // renderTextAreaCells uses the graphemes already measured by the text area.
 // Control sequences and automatic hyperlinks need the normal writer.
 func (v *View) renderTextAreaCells() bool {
-	if v.AutoRenderHyperLinks || strings.ContainsAny(v.TextArea.content, "\t\r\x1b") {
+	if v.AutoRenderHyperLinks || v.TextArea.layout.ready && v.TextArea.layout.firstControl >= 0 {
 		return false
 	}
 	textCells := v.TextArea.cells
