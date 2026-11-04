@@ -22,7 +22,7 @@ operation and cannot be combined into an application speedup.
 | Distant scroll down across 100,000 matches | 44.045 µs | 24.38 ns | 1,807× |
 | Distant scroll up across 100,000 matches | 35.958 µs | 25.45 ns | 1,413× |
 
-The [measurement data](performance-follow-up.json) contains all 62 comparisons,
+The [measurement data](performance-follow-up.json) contains all 77 comparisons,
 including the individual samples, allocation counts, smaller workloads, ordinary
 search text, and file-tree refresh costs.
 
@@ -253,6 +253,45 @@ full gocui race suite pass.
 A separate reverse-byte-search prototype for trailer boundaries gives 2.8–4.9×
 across four fixtures. It is not included in this change.
 
+## One cell buffer for completed and pending text
+
+`8913c16a6` keeps completed lines and the pending word in one cell buffer. A
+checkpoint resumes directly in that buffer and retains coordinates for the
+unchanged pending prefix. Soft wrapping inserts a break before the unfinished
+word. The separate pending-word array is removed.
+
+The edit benchmark starts with unbroken text already present. Each iteration
+inserts one character, backspaces it, and updates the layout and view after
+each key. It does not type the initial text one character at a time.
+
+| Initial text | Before per pair | After per pair | Speedup |
+| --- | ---: | ---: | ---: |
+| 4,096 bytes | 40.67 µs | 17.64 µs | 2.31× |
+| 100,000 bytes | 1.267 ms | 0.256 ms | 4.95× |
+| 1,000,000 bytes | 23.66 ms | 2.779 ms | 8.51× |
+
+Full 4 KB unbroken typing improves from 45.2 ms to 21.0 ms, about 2.15×. Spaced
+paragraph input, newline-separated input, and 100 KB bulk paste remain near
+their matched baselines. All measurements have three samples. The baseline
+uses `b6e79411b` through a Go overlay.
+
+For a 4,096-byte unbroken word, parser cell storage stays at 204,768 bytes and
+checkpoint storage at 2,664 bytes; the additional 204,768-byte pending-word
+array disappears. At 1,000,000 bytes, the removed pending array held 54,214,656
+bytes. These figures count parser backing arrays, excluding strings and
+rendered view cells. Clearing text releases the cells and checkpoints.
+
+A matched live 4,116-byte paste records 0.23 app CPU seconds before and
+0.19 seconds after over 12-second profiles. Both final-marker observations occur
+at 104 ms, with observations 100 ms apart. Terminal captures are identical.
+This small-input live profile does not measure the large-text edit workload.
+The [single-buffer chart](Performance-editor-single-buffer.html) distinguishes
+the edit and full-input comparisons.
+
+The original-parser differential checks, unit tests, integration tests, build,
+lint, and full gocui race suite pass. The user chose a separate performance
+commit for this change, which spans the earlier parser and checkpoint storage.
+
 Reproduce the committed benchmarks with:
 
 ```sh
@@ -262,4 +301,5 @@ go test ./pkg/gocui -run='^$' -bench='Benchmark(SearchRepeatedPrefix|SearchOrdin
 go test ./pkg/gocui ./pkg/gui -run='^$' -bench='Benchmark(EditorInput|CommitDescriptionInput)' -benchmem -benchtime=300ms -count=3
 go test ./pkg/gocui -run='^$' -bench='Benchmark(EditorParagraphInput|EditorUnbrokenInput|PasteText)' -benchmem -benchtime=150ms -count=3
 go test ./pkg/gocui -run='^$' -bench=BenchmarkNotifyCellsWritten -benchmem -benchtime=150ms -count=3
+go test ./pkg/gocui -run='^$' -bench=BenchmarkEditorEditUnbrokenText -benchmem -benchtime=150ms -count=3
 ```

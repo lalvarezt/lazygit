@@ -190,5 +190,41 @@
     "checkpointCapacityBytes": 2664,
     "pendingScratchCapacityBytes": 204768,
     "limits": "One matched CPU profile pair. Marker observations have 100 ms resolution. Scratch storage already exists in the checkpoint parser; periodic checkpoints add restart descriptors."
+  },
+  "singleBufferEditor": {
+    "baseline": "b6e79411b parser and text-area sources compiled via Go overlay",
+    "implementation": "8913c16a6",
+    "before": {
+      "inputBytes": 4116,
+      "profileSeconds": 12,
+      "terminal": "100x30",
+      "cpuSeconds": 0.23,
+      "markerObservedMs": 104,
+      "observationIntervalMs": 100
+    },
+    "after": {
+      "inputBytes": 4116,
+      "profileSeconds": 12,
+      "terminal": "100x30",
+      "cpuSeconds": 0.19,
+      "markerObservedMs": 104,
+      "observationIntervalMs": 100
+    },
+    "terminalCapturesIdentical": true,
+    "parserArrayBytes": {
+      "unbroken4096": {
+        "cells": 204768,
+        "checkpoints": 2664,
+        "beforePendingScratch": 204768,
+        "afterPendingScratch": 0
+      },
+      "unbroken1000000": {
+        "cells": 48668640,
+        "checkpoints": 655344,
+        "beforePendingScratch": 54214656,
+        "afterPendingScratch": 0
+      }
+    },
+    "limits": "One matched live 4 KB typing profile pair; it does not measure the 1 MB insert/backspace benchmark. Both marker observations fall in the first 100 ms interval. Parser array sizes exclude strings and rendered view cells."
   }
 }

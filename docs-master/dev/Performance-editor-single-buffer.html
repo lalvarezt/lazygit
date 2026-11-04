@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Single-buffer editor measurements</title>
+<style>
+:root{color-scheme:light dark;font-family:system-ui,sans-serif;background:#111827;color:#e5e7eb}
+body{max-width:850px;margin:32px auto;padding:0 20px}h1{font-size:24px}h2{font-size:18px;margin-top:28px}p{line-height:1.5;color:#cbd5e1;font-size:14px}
+.chart{display:grid;grid-template-columns:115px 1fr 105px;gap:10px;align-items:center;font-size:14px}.track{background:#253249;height:24px;border-radius:3px}.bar{height:100%;min-width:2px;background:#f59e0b}.after{background:#38bdf8}.value{text-align:right;font-variant-numeric:tabular-nums}.note{font-size:13px}
+</style>
+</head>
+<body>
+<h1>Single-buffer editor measurements</h1>
+<p>Median of three runs on Linux amd64, Intel Core i7-1370P. Baseline source is <code>b6e79411b</code>, compiled with a Go overlay. The implementation is <code>8913c16a6</code>. Lower is better. Each chart uses its own scale.</p>
+<h2>Edit pairs in 1 MB of existing unbroken text</h2>
+<p>One inserted character followed by backspace, updating layout and view after each key. Initial text creation is outside the timed loop.</p>
+<div class="chart">
+<div>Before</div><div class="track"><div class="bar" style="width:100%"></div></div><div class="value">23.66 ms</div>
+<div>Single buffer</div><div class="track"><div class="bar after" style="width:11.75%"></div></div><div class="value">2.779 ms</div>
+</div>
+<p class="note">8.51× faster per edit pair. At 100 KB the improvement is 4.95×; at 4 KB it is 2.31×. The separate pending-word array is removed, saving 54,214,656 bytes of backing storage at 1 MB.</p>
+<h2>Typing all 4,096 unbroken characters</h2>
+<p>Layout and view update on every key, including the initial input.</p>
+<div class="chart">
+<div>Before</div><div class="track"><div class="bar" style="width:100%"></div></div><div class="value">45.2 ms</div>
+<div>Single buffer</div><div class="track"><div class="bar after" style="width:46.46%"></div></div><div class="value">21.0 ms</div>
+</div>
+<p class="note">2.15× faster for the complete input sequence. Spaced paragraphs, newline-separated input, and bulk paste remain near their matched baselines.</p>
+<h2>Matched live 4,116-byte paste, sampled app CPU</h2>
+<div class="chart">
+<div>Before</div><div class="track"><div class="bar" style="width:100%"></div></div><div class="value">0.23 s</div>
+<div>Single buffer</div><div class="track"><div class="bar after" style="width:82.61%"></div></div><div class="value">0.19 s</div>
+</div>
+<p class="note">One profile pair over 12 seconds, 100 × 30 terminal. Final-marker observations both occur at 104 ms, with 100 ms observation intervals. Terminal captures are identical. This workload does not measure edits to large existing text.</p>
+<p><a href="Performance-follow-up.md">Investigation notes</a> · <a href="performance-follow-up.json">All samples and allocations</a> · <a href="performance-live-ranking.json">Live profile data</a></p>
+</body>
+</html>

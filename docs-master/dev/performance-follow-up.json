@@ -3164,6 +3164,771 @@
           }
         ]
       }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkEditorInput/bytes=256",
+      "before": {
+        "ns": 187814,
+        "bytes": 153851,
+        "allocations": 338
+      },
+      "after": {
+        "ns": 174270,
+        "bytes": 152196,
+        "allocations": 333
+      },
+      "speedup": 1.0777184828140243,
+      "samples": {
+        "before": [
+          {
+            "ns": 188310,
+            "bytes": 153857,
+            "allocations": 338
+          },
+          {
+            "ns": 186598,
+            "bytes": 153847,
+            "allocations": 338
+          },
+          {
+            "ns": 187814,
+            "bytes": 153851,
+            "allocations": 338
+          }
+        ],
+        "after": [
+          {
+            "ns": 182682,
+            "bytes": 152209,
+            "allocations": 333
+          },
+          {
+            "ns": 174270,
+            "bytes": 152195,
+            "allocations": 333
+          },
+          {
+            "ns": 171344,
+            "bytes": 152196,
+            "allocations": 333
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkEditorInput/bytes=1024",
+      "before": {
+        "ns": 1371224,
+        "bytes": 1032211,
+        "allocations": 1270
+      },
+      "after": {
+        "ns": 1324885,
+        "bytes": 1030600,
+        "allocations": 1265
+      },
+      "speedup": 1.0349758658298644,
+      "samples": {
+        "before": [
+          {
+            "ns": 1371224,
+            "bytes": 1032205,
+            "allocations": 1270
+          },
+          {
+            "ns": 1344830,
+            "bytes": 1032211,
+            "allocations": 1270
+          },
+          {
+            "ns": 1394694,
+            "bytes": 1032216,
+            "allocations": 1270
+          }
+        ],
+        "after": [
+          {
+            "ns": 1281979,
+            "bytes": 1030610,
+            "allocations": 1265
+          },
+          {
+            "ns": 1324885,
+            "bytes": 1030569,
+            "allocations": 1265
+          },
+          {
+            "ns": 1360052,
+            "bytes": 1030600,
+            "allocations": 1265
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkEditorInput/bytes=4096",
+      "before": {
+        "ns": 15501883,
+        "bytes": 11042865,
+        "allocations": 4965
+      },
+      "after": {
+        "ns": 15733501,
+        "bytes": 11041196,
+        "allocations": 4960
+      },
+      "speedup": 0.9852786738310818,
+      "samples": {
+        "before": [
+          {
+            "ns": 15433438,
+            "bytes": 11042891,
+            "allocations": 4965
+          },
+          {
+            "ns": 15501883,
+            "bytes": 11042865,
+            "allocations": 4965
+          },
+          {
+            "ns": 16034281,
+            "bytes": 11042811,
+            "allocations": 4965
+          }
+        ],
+        "after": [
+          {
+            "ns": 16405934,
+            "bytes": 11041196,
+            "allocations": 4960
+          },
+          {
+            "ns": 15733501,
+            "bytes": 11041413,
+            "allocations": 4962
+          },
+          {
+            "ns": 15328246,
+            "bytes": 11041163,
+            "allocations": 4960
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=256",
+      "before": {
+        "ns": 350888,
+        "bytes": 169207,
+        "allocations": 294
+      },
+      "after": {
+        "ns": 336364,
+        "bytes": 161670,
+        "allocations": 287
+      },
+      "speedup": 1.0431794127790133,
+      "samples": {
+        "before": [
+          {
+            "ns": 358107,
+            "bytes": 169204,
+            "allocations": 294
+          },
+          {
+            "ns": 350888,
+            "bytes": 169207,
+            "allocations": 294
+          },
+          {
+            "ns": 343374,
+            "bytes": 169207,
+            "allocations": 294
+          }
+        ],
+        "after": [
+          {
+            "ns": 336364,
+            "bytes": 161670,
+            "allocations": 287
+          },
+          {
+            "ns": 338184,
+            "bytes": 161669,
+            "allocations": 287
+          },
+          {
+            "ns": 327578,
+            "bytes": 161670,
+            "allocations": 287
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=1024",
+      "before": {
+        "ns": 2143745,
+        "bytes": 1127324,
+        "allocations": 1105
+      },
+      "after": {
+        "ns": 2019908,
+        "bytes": 1119789,
+        "allocations": 1098
+      },
+      "speedup": 1.0613082378009295,
+      "samples": {
+        "before": [
+          {
+            "ns": 2143745,
+            "bytes": 1127324,
+            "allocations": 1105
+          },
+          {
+            "ns": 2029663,
+            "bytes": 1127334,
+            "allocations": 1105
+          },
+          {
+            "ns": 2179602,
+            "bytes": 1127322,
+            "allocations": 1105
+          }
+        ],
+        "after": [
+          {
+            "ns": 2019908,
+            "bytes": 1119789,
+            "allocations": 1098
+          },
+          {
+            "ns": 2129951,
+            "bytes": 1119791,
+            "allocations": 1098
+          },
+          {
+            "ns": 1975409,
+            "bytes": 1119786,
+            "allocations": 1098
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=4096",
+      "before": {
+        "ns": 18531380,
+        "bytes": 11454418,
+        "allocations": 4318
+      },
+      "after": {
+        "ns": 18649348,
+        "bytes": 11446835,
+        "allocations": 4311
+      },
+      "speedup": 0.9936744169286776,
+      "samples": {
+        "before": [
+          {
+            "ns": 18885111,
+            "bytes": 11454418,
+            "allocations": 4318
+          },
+          {
+            "ns": 18122742,
+            "bytes": 11454432,
+            "allocations": 4319
+          },
+          {
+            "ns": 18531380,
+            "bytes": 11454357,
+            "allocations": 4318
+          }
+        ],
+        "after": [
+          {
+            "ns": 18937769,
+            "bytes": 11446858,
+            "allocations": 4311
+          },
+          {
+            "ns": 18649348,
+            "bytes": 11446821,
+            "allocations": 4311
+          },
+          {
+            "ns": 18564726,
+            "bytes": 11446835,
+            "allocations": 4311
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=256",
+      "before": {
+        "ns": 571061,
+        "bytes": 143938,
+        "allocations": 292
+      },
+      "after": {
+        "ns": 521434,
+        "bytes": 111825,
+        "allocations": 283
+      },
+      "speedup": 1.0951740776397396,
+      "samples": {
+        "before": [
+          {
+            "ns": 571061,
+            "bytes": 143938,
+            "allocations": 292
+          },
+          {
+            "ns": 546058,
+            "bytes": 143937,
+            "allocations": 292
+          },
+          {
+            "ns": 582765,
+            "bytes": 143938,
+            "allocations": 292
+          }
+        ],
+        "after": [
+          {
+            "ns": 516137,
+            "bytes": 111826,
+            "allocations": 283
+          },
+          {
+            "ns": 521434,
+            "bytes": 111824,
+            "allocations": 283
+          },
+          {
+            "ns": 541206,
+            "bytes": 111825,
+            "allocations": 283
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=1024",
+      "before": {
+        "ns": 4053365,
+        "bytes": 977351,
+        "allocations": 1068
+      },
+      "after": {
+        "ns": 2661734,
+        "bytes": 855127,
+        "allocations": 1057
+      },
+      "speedup": 1.5228287274385794,
+      "samples": {
+        "before": [
+          {
+            "ns": 3954011,
+            "bytes": 977349,
+            "allocations": 1068
+          },
+          {
+            "ns": 4053365,
+            "bytes": 977366,
+            "allocations": 1068
+          },
+          {
+            "ns": 4243793,
+            "bytes": 977351,
+            "allocations": 1068
+          }
+        ],
+        "after": [
+          {
+            "ns": 2661734,
+            "bytes": 855127,
+            "allocations": 1057
+          },
+          {
+            "ns": 2650182,
+            "bytes": 855126,
+            "allocations": 1057
+          },
+          {
+            "ns": 2826265,
+            "bytes": 855140,
+            "allocations": 1057
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=4096",
+      "before": {
+        "ns": 45203848,
+        "bytes": 11310160,
+        "allocations": 4153
+      },
+      "after": {
+        "ns": 20985721,
+        "bytes": 10630950,
+        "allocations": 4138
+      },
+      "speedup": 2.1540288275060933,
+      "samples": {
+        "before": [
+          {
+            "ns": 45203848,
+            "bytes": 11310160,
+            "allocations": 4153
+          },
+          {
+            "ns": 43976052,
+            "bytes": 11310188,
+            "allocations": 4153
+          },
+          {
+            "ns": 46341874,
+            "bytes": 11310160,
+            "allocations": 4153
+          }
+        ],
+        "after": [
+          {
+            "ns": 21558234,
+            "bytes": 10630950,
+            "allocations": 4138
+          },
+          {
+            "ns": 20847668,
+            "bytes": 10630950,
+            "allocations": 4138
+          },
+          {
+            "ns": 20985721,
+            "bytes": 10630950,
+            "allocations": 4138
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkPasteText/bytes=1000",
+      "before": {
+        "ns": 33633,
+        "bytes": 64081,
+        "allocations": 15
+      },
+      "after": {
+        "ns": 30672,
+        "bytes": 60673,
+        "allocations": 9
+      },
+      "speedup": 1.096537558685446,
+      "samples": {
+        "before": [
+          {
+            "ns": 33633,
+            "bytes": 64081,
+            "allocations": 15
+          },
+          {
+            "ns": 34246,
+            "bytes": 64081,
+            "allocations": 15
+          },
+          {
+            "ns": 32965,
+            "bytes": 64081,
+            "allocations": 15
+          }
+        ],
+        "after": [
+          {
+            "ns": 30672,
+            "bytes": 60673,
+            "allocations": 9
+          },
+          {
+            "ns": 31018,
+            "bytes": 60673,
+            "allocations": 9
+          },
+          {
+            "ns": 29834,
+            "bytes": 60673,
+            "allocations": 9
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkPasteText/bytes=10000",
+      "before": {
+        "ns": 327444,
+        "bytes": 597458,
+        "allocations": 18
+      },
+      "after": {
+        "ns": 315784,
+        "bytes": 594050,
+        "allocations": 12
+      },
+      "speedup": 1.0369239733488713,
+      "samples": {
+        "before": [
+          {
+            "ns": 319312,
+            "bytes": 597463,
+            "allocations": 18
+          },
+          {
+            "ns": 339122,
+            "bytes": 597458,
+            "allocations": 18
+          },
+          {
+            "ns": 327444,
+            "bytes": 597458,
+            "allocations": 18
+          }
+        ],
+        "after": [
+          {
+            "ns": 315784,
+            "bytes": 594050,
+            "allocations": 12
+          },
+          {
+            "ns": 312072,
+            "bytes": 594051,
+            "allocations": 12
+          },
+          {
+            "ns": 322814,
+            "bytes": 594049,
+            "allocations": 12
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor input",
+      "benchmark": "BenchmarkPasteText/bytes=100000",
+      "before": {
+        "ns": 2750591,
+        "bytes": 6886872,
+        "allocations": 25
+      },
+      "after": {
+        "ns": 2810509,
+        "bytes": 6883477,
+        "allocations": 19
+      },
+      "speedup": 0.9786807300741609,
+      "samples": {
+        "before": [
+          {
+            "ns": 2736954,
+            "bytes": 6886872,
+            "allocations": 25
+          },
+          {
+            "ns": 2796005,
+            "bytes": 6886889,
+            "allocations": 25
+          },
+          {
+            "ns": 2750591,
+            "bytes": 6886865,
+            "allocations": 25
+          }
+        ],
+        "after": [
+          {
+            "ns": 2893522,
+            "bytes": 6883493,
+            "allocations": 19
+          },
+          {
+            "ns": 2722149,
+            "bytes": 6883477,
+            "allocations": 19
+          },
+          {
+            "ns": 2810509,
+            "bytes": 6883456,
+            "allocations": 19
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor edits",
+      "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=4096",
+      "before": {
+        "ns": 40672,
+        "bytes": 4955,
+        "allocations": 1
+      },
+      "after": {
+        "ns": 17636,
+        "bytes": 4902,
+        "allocations": 1
+      },
+      "speedup": 2.3061918802449535,
+      "samples": {
+        "before": [
+          {
+            "ns": 43905,
+            "bytes": 4961,
+            "allocations": 1
+          },
+          {
+            "ns": 40672,
+            "bytes": 4955,
+            "allocations": 1
+          },
+          {
+            "ns": 39601,
+            "bytes": 4948,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 17636,
+            "bytes": 4903,
+            "allocations": 1
+          },
+          {
+            "ns": 17730,
+            "bytes": 4902,
+            "allocations": 1
+          },
+          {
+            "ns": 17188,
+            "bytes": 4902,
+            "allocations": 1
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor edits",
+      "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=100000",
+      "before": {
+        "ns": 1267196,
+        "bytes": 106496,
+        "allocations": 1
+      },
+      "after": {
+        "ns": 255911,
+        "bytes": 106496,
+        "allocations": 1
+      },
+      "speedup": 4.951705866492648,
+      "samples": {
+        "before": [
+          {
+            "ns": 1267196,
+            "bytes": 106496,
+            "allocations": 1
+          },
+          {
+            "ns": 1252652,
+            "bytes": 106496,
+            "allocations": 1
+          },
+          {
+            "ns": 1278727,
+            "bytes": 106496,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 260883,
+            "bytes": 106504,
+            "allocations": 1
+          },
+          {
+            "ns": 255911,
+            "bytes": 106496,
+            "allocations": 1
+          },
+          {
+            "ns": 255821,
+            "bytes": 106496,
+            "allocations": 1
+          }
+        ]
+      }
+    },
+    {
+      "group": "Single-buffer editor edits",
+      "benchmark": "BenchmarkEditorEditUnbrokenText/bytes=1000000",
+      "before": {
+        "ns": 23662810,
+        "bytes": 1007616,
+        "allocations": 1
+      },
+      "after": {
+        "ns": 2779360,
+        "bytes": 1007616,
+        "allocations": 1
+      },
+      "speedup": 8.513762161073053,
+      "samples": {
+        "before": [
+          {
+            "ns": 23662810,
+            "bytes": 1007616,
+            "allocations": 1
+          },
+          {
+            "ns": 23747734,
+            "bytes": 1007616,
+            "allocations": 1
+          },
+          {
+            "ns": 23236228,
+            "bytes": 1007616,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 2661324,
+            "bytes": 1007616,
+            "allocations": 1
+          },
+          {
+            "ns": 2903758,
+            "bytes": 1007616,
+            "allocations": 1
+          },
+          {
+            "ns": 2779360,
+            "bytes": 1007616,
+            "allocations": 1
+          }
+        ]
+      }
     }
   ]
 }
