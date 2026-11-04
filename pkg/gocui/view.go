@@ -1784,11 +1784,9 @@ func (v *View) updateSearchPositions() {
 				// If a view line exists for this line index:
 				if v.buf.lines[result.Y].cells != nil {
 					// search this view line for the search string
-					positions := search.positions(v.buf.lines[result.Y].cells, result.Y)
-					if len(positions) > 0 {
-						// If we found any occurrences, add them
-						v.searcher.searchPositions = append(v.searcher.searchPositions, positions...)
-					} else {
+					previousCount := len(v.searcher.searchPositions)
+					v.searcher.searchPositions = search.appendPositions(v.searcher.searchPositions, v.buf.lines[result.Y].cells, result.Y)
+					if len(v.searcher.searchPositions) == previousCount {
 						// Otherwise, the search string was found in the model
 						// but not in the view line; this can happen if the view
 						// renders only truncated versions of the model strings.
@@ -1807,7 +1805,7 @@ func (v *View) updateSearchPositions() {
 		} else {
 			v.refreshViewLinesIfNeeded()
 			for y, line := range v.viewLines {
-				v.searcher.searchPositions = append(v.searcher.searchPositions, search.positions(line.line, y)...)
+				v.searcher.searchPositions = search.appendPositions(v.searcher.searchPositions, line.line, y)
 			}
 		}
 	}

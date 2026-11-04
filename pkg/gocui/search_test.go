@@ -79,6 +79,25 @@ func TestSearchPositionsWithOverlappingPrefixes(t *testing.T) {
 	}
 }
 
+func TestSearchModelPositionsAcrossLines(t *testing.T) {
+	v := NewView("search", 0, 0, 80, 24, OutputNormal)
+	v.SetContent("xx xx\nx\nother xx")
+	v.UpdateSearchResults("xx", []SearchPosition{
+		{XStart: 20, XEnd: 22, Y: 0},
+		{XStart: 0, XEnd: 1, Y: 1},
+		{XStart: 20, XEnd: 22, Y: 2},
+	})
+	assert.Equal(t, []SearchPosition{
+		{XStart: 0, XEnd: 2, Y: 0},
+		{XStart: 3, XEnd: 5, Y: 0},
+		{XStart: 0, XEnd: 1, Y: 1},
+		{XStart: 6, XEnd: 8, Y: 2},
+	}, v.searcher.searchPositions)
+
+	v.UpdateSearchResults("xx", []SearchPosition{})
+	assert.Empty(t, v.searcher.searchPositions)
+}
+
 func TestNearestSearchPosition(t *testing.T) {
 	v := NewView("search", 0, 0, 80, 24, OutputNormal)
 	assert.Zero(t, v.nearestSearchPosition())

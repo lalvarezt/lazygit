@@ -40,8 +40,7 @@ func newLineSearcher(query string) lineSearcher {
 	return s
 }
 
-func (s lineSearcher) positions(line []cell, y int) []SearchPosition {
-	var result []SearchPosition
+func (s lineSearcher) appendPositions(result []SearchPosition, line []cell, y int) []SearchPosition {
 	if len(line) < len(s.graphemes) {
 		return result
 	}
