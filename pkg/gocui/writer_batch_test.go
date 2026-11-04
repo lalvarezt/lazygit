@@ -43,16 +43,8 @@ func TestWriteMatchesSmallChunks(t *testing.T) {
 			}
 
 			batch.writeString(test.input)
-			graphemes := stringToGraphemes(test.input)
-			for i := 0; i < len(graphemes); i++ {
-				chunk := graphemes[i]
-				// The writer defers a final newline. Keep interior CRLFs
-				// inside a write so both inputs use the same newline handling.
-				for strings.HasSuffix(chunk, "\r\n") && i+1 < len(graphemes) {
-					i++
-					chunk += graphemes[i]
-				}
-				single.writeString(chunk)
+			for _, chr := range stringToGraphemes(test.input) {
+				single.writeString(chr)
 			}
 
 			assert.Equal(t, single.buf.lines, batch.buf.lines)
