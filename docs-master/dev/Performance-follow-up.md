@@ -415,6 +415,43 @@ Build, unit tests, lint, the gocui race suite, and selected search integration
 tests pass. Unit tests run with `NO_COLOR` unset because the context-mode runner
 sets it and presentation tests assert ANSI color output.
 
+## Selection and graph allocation follow-up
+
+Selection recovery spent most of its sampled CPU time splitting and rejoining
+paths that nodes already stored. `e47b40cef` uses the stored path and parent
+prefixes for compressed-directory aliases. The 5,000-file single-removal
+fixture improves from 428.22 µs to 106.62 µs, about 4×, while allocation falls
+from 320,160 bytes to 80,048 bytes. Recovery when many files disappear improves
+from 2.03 ms to 0.71 ms. Rename handling and node ordering are unchanged.
+
+Graph rendering now owns each row's cells in one slice in `d48c4dc0a`, and
+`1ac1a7ef2` replaces three column maps with per-column flags. The existing
+50-commit fixture improves from 87.10 µs to 56.58 µs. It allocates 109,576 bytes
+in 585 allocations, down from 131,296 bytes in 1,139 allocations. New fixtures
+cover both symbol sets and a real selected commit at 50 and 500 commits. Their
+combined gains range from 1.42× to 1.99×. The original fixture also improves
+with four CPUs, from 84.12 µs to 53.68 µs.
+
+The column array uses memory proportional to the incoming graph's width and
+the number of new parents. A sparse, wide input can use more flag storage than
+the maps. Sparse-column and many-parent tests pass against both implementations.
+
+The [selection and graph report](Performance-selection-graph.html) and
+[its data](performance-selection-graph.json) preserve all five samples per
+case, source revisions, and commands. These are synthetic measurements;
+selection timings exclude tree reconstruction. Build, unit tests, lint,
+file-tree and graph race tests, rename and range-selection integration tests,
+and the commit-graph integration test pass.
+
+The full fork-base comparison was rerun at `2769d840b`. All 90 cases have five
+matched samples per revision and faster medians than the fork base. The
+remaining weakest cases are 100-file tree construction at about 10% faster,
+and writing metadata and colored output at about 13–17% faster. Writing takes
+milliseconds per fixture, while the small tree build takes about 32 µs, so the
+writer remains the larger cost to investigate. The refreshed
+[summary](Performance-summary.html) and [data](performance-comparison.json)
+include the new query-lifetime and graph variants.
+
 ## Writer capacity probe
 
 A benchmark-only probe pre-sizes all 2,000 destination lines and their cell

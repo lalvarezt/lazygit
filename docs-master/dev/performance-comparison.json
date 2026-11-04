@@ -5,7 +5,7 @@
   },
   "revisions": {
     "before": "c9c0db40bd47894e95c4fdaab0f3eadb40edb55c",
-    "after": "0e8210a56a1acb296af540f868c9597888f85510"
+    "after": "2769d840bbab37febefe82706436717f2f01a073"
   },
   "settings": {
     "samples": 5,
@@ -28,7 +28,7 @@
     },
     {
       "path": "pkg/gocui/search_scan_bench_test.go",
-      "sha256": "adde25018babec6a46fd7047f15b050f55c915d192caa7748c1978b5214bca77"
+      "sha256": "e800ed19072d905227854bfe431cf52fb01bf5310c416a6f50aa6e40670d71ed"
     },
     {
       "path": "pkg/gocui/text_area_bench_test.go",
@@ -63,6 +63,10 @@
       "sha256": "5ada551da02ef8f8a4242a16a85be66926c0607fb4bebdba421cf15c3a4a52f6"
     },
     {
+      "path": "pkg/gui/presentation/graph/graph_bench_test.go",
+      "sha256": "8cbbd90dc254d0241f6727f05827e6b3dd860d2a49c122b0c86f0ab98710239b"
+    },
+    {
       "path": "pkg/gocui/search_test.go",
       "symbol": "BenchmarkWriteToSearchedView",
       "sha256": "01c8d9c014ae22e3c0434d985f3fa91f4ce0e92698f75d441354a0f3092800f5"
@@ -87,59 +91,59 @@
     {
       "id": "gocui/BenchmarkDrawSearchedView/lines=100",
       "description": "Redraw an 80 × 24 searched viewport within 100 lines.",
-      "before": 651897,
-      "after": 53305,
+      "before": 653504,
+      "after": 53038,
       "samples": {
         "before": [
           {
-            "ns": 661315,
+            "ns": 669723,
             "bytes": 1,
             "allocations": 0
           },
           {
-            "ns": 651897,
+            "ns": 656263,
             "bytes": 1,
             "allocations": 0
           },
           {
-            "ns": 651340,
+            "ns": 653308,
             "bytes": 1,
             "allocations": 0
           },
           {
-            "ns": 654542,
+            "ns": 652542,
             "bytes": 1,
             "allocations": 0
           },
           {
-            "ns": 651147,
+            "ns": 653504,
             "bytes": 1,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 53240,
+            "ns": 52999,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 53446,
+            "ns": 52913,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 53296,
+            "ns": 53122,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 53305,
+            "ns": 53215,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 53837,
+            "ns": 53038,
             "bytes": 0,
             "allocations": 0
           }
@@ -149,59 +153,59 @@
     {
       "id": "gocui/BenchmarkDrawSearchedView/lines=1000",
       "description": "Redraw an 80 × 24 searched viewport within 1000 lines.",
-      "before": 5319910,
-      "after": 54503,
+      "before": 5303122,
+      "after": 54613,
       "samples": {
         "before": [
           {
-            "ns": 5319910,
+            "ns": 5349920,
             "bytes": 14,
             "allocations": 0
           },
           {
-            "ns": 5292275,
+            "ns": 5288859,
             "bytes": 14,
             "allocations": 0
           },
           {
-            "ns": 5377562,
+            "ns": 5296250,
             "bytes": 14,
             "allocations": 0
           },
           {
-            "ns": 5368526,
+            "ns": 5303122,
             "bytes": 14,
             "allocations": 0
           },
           {
-            "ns": 5309281,
+            "ns": 5382354,
             "bytes": 14,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 55043,
+            "ns": 54873,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 53162,
+            "ns": 54518,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 54428,
+            "ns": 54981,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 54503,
+            "ns": 54613,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 54645,
+            "ns": 54484,
             "bytes": 0,
             "allocations": 0
           }
@@ -211,59 +215,59 @@
     {
       "id": "gocui/BenchmarkDrawSearchedView/lines=10000",
       "description": "Redraw an 80 × 24 searched viewport within 10000 lines.",
-      "before": 51231284,
-      "after": 56500,
+      "before": 51246389,
+      "after": 56669,
       "samples": {
         "before": [
           {
-            "ns": 51301694,
+            "ns": 51341198,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 51227988,
+            "ns": 51229609,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 51231284,
+            "ns": 51246389,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 51193103,
+            "ns": 51198194,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 51483964,
+            "ns": 51366986,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 56324,
+            "ns": 56669,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 56266,
+            "ns": 57303,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 57013,
+            "ns": 55910,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 57367,
+            "ns": 55946,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 56500,
+            "ns": 56705,
             "bytes": 0,
             "allocations": 0
           }
@@ -273,59 +277,59 @@
     {
       "id": "gocui/BenchmarkEditorEditUnbrokenText/bytes=4096",
       "description": "Insert and backspace one character in 4096 bytes of existing unbroken text; update layout and view after each key.",
-      "before": 1255935,
-      "after": 9996,
+      "before": 1307638,
+      "after": 9911,
       "samples": {
         "before": [
           {
-            "ns": 1285764,
-            "bytes": 3506337,
+            "ns": 1276006,
+            "bytes": 3506336,
             "allocations": 8261
           },
           {
-            "ns": 1241181,
+            "ns": 1398496,
             "bytes": 3506330,
             "allocations": 8261
           },
           {
-            "ns": 1255935,
+            "ns": 1296020,
             "bytes": 3506331,
             "allocations": 8261
           },
           {
-            "ns": 1278698,
-            "bytes": 3506331,
+            "ns": 1364030,
+            "bytes": 3506332,
             "allocations": 8261
           },
           {
-            "ns": 1252182,
+            "ns": 1307638,
             "bytes": 3506331,
             "allocations": 8261
           }
         ],
         "after": [
           {
-            "ns": 9979,
+            "ns": 9953,
             "bytes": 4880,
             "allocations": 1
           },
           {
-            "ns": 10308,
+            "ns": 9861,
+            "bytes": 4879,
+            "allocations": 1
+          },
+          {
+            "ns": 10104,
             "bytes": 4880,
             "allocations": 1
           },
           {
-            "ns": 9996,
-            "bytes": 4880,
+            "ns": 9911,
+            "bytes": 4879,
             "allocations": 1
           },
           {
-            "ns": 10053,
-            "bytes": 4880,
-            "allocations": 1
-          },
-          {
-            "ns": 9878,
+            "ns": 9877,
             "bytes": 4879,
             "allocations": 1
           }
@@ -335,59 +339,59 @@
     {
       "id": "gocui/BenchmarkEditorEditUnbrokenText/bytes=100000",
       "description": "Insert and backspace one character in 100000 bytes of existing unbroken text; update layout and view after each key.",
-      "before": 52249788,
-      "after": 18816,
+      "before": 52942012,
+      "after": 17406,
       "samples": {
         "before": [
           {
-            "ns": 51324919,
+            "ns": 51630846,
             "bytes": 117681536,
             "allocations": 200124
           },
           {
-            "ns": 52249788,
+            "ns": 53421372,
             "bytes": 117681536,
             "allocations": 200124
           },
           {
-            "ns": 53178090,
+            "ns": 52942012,
             "bytes": 117681536,
             "allocations": 200124
           },
           {
-            "ns": 55568249,
+            "ns": 54813523,
             "bytes": 117681536,
             "allocations": 200124
           },
           {
-            "ns": 51700243,
+            "ns": 52426506,
             "bytes": 117681536,
             "allocations": 200124
           }
         ],
         "after": [
           {
-            "ns": 19402,
+            "ns": 17737,
             "bytes": 106496,
             "allocations": 1
           },
           {
-            "ns": 18816,
+            "ns": 17950,
             "bytes": 106496,
             "allocations": 1
           },
           {
-            "ns": 18704,
+            "ns": 17406,
             "bytes": 106496,
             "allocations": 1
           },
           {
-            "ns": 18910,
+            "ns": 17377,
             "bytes": 106496,
             "allocations": 1
           },
           {
-            "ns": 18608,
+            "ns": 17299,
             "bytes": 106496,
             "allocations": 1
           }
@@ -397,59 +401,59 @@
     {
       "id": "gocui/BenchmarkEditorEditUnbrokenText/bytes=1000000",
       "description": "Insert and backspace one character in 1000000 bytes of existing unbroken text; update layout and view after each key.",
-      "before": 480179389,
-      "after": 162164,
+      "before": 518033408,
+      "after": 159965,
       "samples": {
         "before": [
           {
-            "ns": 480179389,
+            "ns": 498883467,
             "bytes": 1150587400,
             "allocations": 2000164
           },
           {
-            "ns": 457625859,
+            "ns": 519859746,
+            "bytes": 1150587400,
+            "allocations": 2000164
+          },
+          {
+            "ns": 489509571,
+            "bytes": 1150587400,
+            "allocations": 2000164
+          },
+          {
+            "ns": 518033408,
+            "bytes": 1150587400,
+            "allocations": 2000164
+          },
+          {
+            "ns": 522992907,
             "bytes": 1150587536,
             "allocations": 2000166
-          },
-          {
-            "ns": 510696706,
-            "bytes": 1150587264,
-            "allocations": 2000162
-          },
-          {
-            "ns": 463849929,
-            "bytes": 1150587400,
-            "allocations": 2000164
-          },
-          {
-            "ns": 495055252,
-            "bytes": 1150587264,
-            "allocations": 2000162
           }
         ],
         "after": [
           {
-            "ns": 179655,
+            "ns": 188316,
             "bytes": 1007616,
             "allocations": 1
           },
           {
-            "ns": 162164,
+            "ns": 159287,
             "bytes": 1007616,
             "allocations": 1
           },
           {
-            "ns": 162041,
+            "ns": 159965,
             "bytes": 1007616,
             "allocations": 1
           },
           {
-            "ns": 164910,
+            "ns": 172020,
             "bytes": 1007616,
             "allocations": 1
           },
           {
-            "ns": 160770,
+            "ns": 157715,
             "bytes": 1007616,
             "allocations": 1
           }
@@ -459,59 +463,59 @@
     {
       "id": "gocui/BenchmarkEditorInput/bytes=256",
       "description": "Type 250 bytes with hard newlines, updating layout and view per key.",
-      "before": 5219707,
-      "after": 150179,
+      "before": 5305000,
+      "after": 149416,
       "samples": {
         "before": [
           {
-            "ns": 5184314,
-            "bytes": 14260942,
+            "ns": 5518918,
+            "bytes": 14260941,
             "allocations": 47850
           },
           {
-            "ns": 5219707,
-            "bytes": 14260931,
+            "ns": 5285984,
+            "bytes": 14260935,
             "allocations": 47850
           },
           {
-            "ns": 5226981,
-            "bytes": 14260929,
-            "allocations": 47850
-          },
-          {
-            "ns": 5193846,
+            "ns": 5305000,
             "bytes": 14260934,
             "allocations": 47850
           },
           {
-            "ns": 5246545,
-            "bytes": 14260931,
+            "ns": 5350038,
+            "bytes": 14260934,
+            "allocations": 47850
+          },
+          {
+            "ns": 5291635,
+            "bytes": 14260934,
             "allocations": 47850
           }
         ],
         "after": [
           {
-            "ns": 149823,
+            "ns": 150661,
             "bytes": 152208,
             "allocations": 333
           },
           {
-            "ns": 150179,
+            "ns": 148745,
             "bytes": 152208,
             "allocations": 333
           },
           {
-            "ns": 149966,
+            "ns": 149416,
             "bytes": 152208,
             "allocations": 333
           },
           {
-            "ns": 150921,
+            "ns": 149287,
             "bytes": 152208,
             "allocations": 333
           },
           {
-            "ns": 151839,
+            "ns": 151492,
             "bytes": 152208,
             "allocations": 333
           }
@@ -521,59 +525,59 @@
     {
       "id": "gocui/BenchmarkEditorInput/bytes=1024",
       "description": "Type 1020 bytes with hard newlines, updating layout and view per key.",
-      "before": 88182655,
-      "after": 692261,
+      "before": 87788689,
+      "after": 693538,
       "samples": {
         "before": [
           {
-            "ns": 88919917,
-            "bytes": 238799904,
+            "ns": 87788689,
+            "bytes": 238799888,
             "allocations": 749516
           },
           {
-            "ns": 88086704,
-            "bytes": 238798877,
+            "ns": 87758254,
+            "bytes": 238798893,
             "allocations": 749514
           },
           {
-            "ns": 88182655,
-            "bytes": 238798944,
+            "ns": 87833828,
+            "bytes": 238798928,
             "allocations": 749515
           },
           {
-            "ns": 87814275,
-            "bytes": 238798882,
-            "allocations": 749514
+            "ns": 89987989,
+            "bytes": 238798853,
+            "allocations": 749513
           },
           {
-            "ns": 90147433,
+            "ns": 87503303,
             "bytes": 238798928,
             "allocations": 749515
           }
         ],
         "after": [
           {
-            "ns": 690496,
+            "ns": 709881,
             "bytes": 1030550,
             "allocations": 1265
           },
           {
-            "ns": 696733,
+            "ns": 693538,
             "bytes": 1030550,
             "allocations": 1265
           },
           {
-            "ns": 692261,
+            "ns": 690519,
             "bytes": 1030550,
             "allocations": 1265
           },
           {
-            "ns": 695199,
+            "ns": 700080,
             "bytes": 1030550,
             "allocations": 1265
           },
           {
-            "ns": 681203,
+            "ns": 692512,
             "bytes": 1030550,
             "allocations": 1265
           }
@@ -583,59 +587,59 @@
     {
       "id": "gocui/BenchmarkEditorInput/bytes=4096",
       "description": "Type 4090 bytes with hard newlines, updating layout and view per key.",
-      "before": 1542104808,
-      "after": 4051522,
+      "before": 1555430934,
+      "after": 4072957,
       "samples": {
         "before": [
           {
-            "ns": 1542104808,
-            "bytes": 3808808008,
-            "allocations": 11816995
+            "ns": 1538129009,
+            "bytes": 3808808080,
+            "allocations": 11816997
           },
           {
-            "ns": 1556841487,
-            "bytes": 3808799016,
-            "allocations": 11816996
+            "ns": 1550829782,
+            "bytes": 3808798760,
+            "allocations": 11816992
           },
           {
-            "ns": 1537390129,
-            "bytes": 3808799200,
+            "ns": 1559445650,
+            "bytes": 3808797944,
+            "allocations": 11816980
+          },
+          {
+            "ns": 1560506985,
+            "bytes": 3808797792,
+            "allocations": 11816978
+          },
+          {
+            "ns": 1555430934,
+            "bytes": 3808799264,
             "allocations": 11816998
-          },
-          {
-            "ns": 1533629675,
-            "bytes": 3808799000,
-            "allocations": 11816996
-          },
-          {
-            "ns": 1550635199,
-            "bytes": 3808799016,
-            "allocations": 11816996
           }
         ],
         "after": [
           {
-            "ns": 3985674,
+            "ns": 4027537,
             "bytes": 11041056,
             "allocations": 4959
           },
           {
-            "ns": 4029572,
+            "ns": 4014528,
             "bytes": 11041056,
             "allocations": 4959
           },
           {
-            "ns": 4085207,
+            "ns": 4093371,
             "bytes": 11041056,
             "allocations": 4959
           },
           {
-            "ns": 4051522,
+            "ns": 4177840,
             "bytes": 11041056,
             "allocations": 4959
           },
           {
-            "ns": 4059633,
+            "ns": 4072957,
             "bytes": 11041056,
             "allocations": 4959
           }
@@ -645,59 +649,59 @@
     {
       "id": "gocui/BenchmarkEditorParagraphInput/bytes=256",
       "description": "Type 250 bytes of a spaced paragraph, wrapping at 72 columns.",
-      "before": 4456155,
-      "after": 397965,
+      "before": 4520094,
+      "after": 392829,
       "samples": {
         "before": [
           {
-            "ns": 4487774,
-            "bytes": 11106694,
-            "allocations": 38138
-          },
-          {
-            "ns": 4455642,
-            "bytes": 11106692,
-            "allocations": 38138
-          },
-          {
-            "ns": 4448735,
+            "ns": 4574903,
             "bytes": 11106687,
             "allocations": 38138
           },
           {
-            "ns": 4496415,
-            "bytes": 11106692,
+            "ns": 4520476,
+            "bytes": 11106693,
             "allocations": 38138
           },
           {
-            "ns": 4456155,
-            "bytes": 11106687,
+            "ns": 4512739,
+            "bytes": 11106689,
+            "allocations": 38138
+          },
+          {
+            "ns": 4520094,
+            "bytes": 11106691,
+            "allocations": 38138
+          },
+          {
+            "ns": 4502228,
+            "bytes": 11106689,
             "allocations": 38138
           }
         ],
         "after": [
           {
-            "ns": 396240,
+            "ns": 392829,
             "bytes": 161680,
             "allocations": 287
           },
           {
-            "ns": 397965,
+            "ns": 393323,
             "bytes": 161680,
             "allocations": 287
           },
           {
-            "ns": 393271,
+            "ns": 393201,
             "bytes": 161680,
             "allocations": 287
           },
           {
-            "ns": 399560,
+            "ns": 392351,
             "bytes": 161680,
             "allocations": 287
           },
           {
-            "ns": 399215,
+            "ns": 391522,
             "bytes": 161680,
             "allocations": 287
           }
@@ -707,59 +711,59 @@
     {
       "id": "gocui/BenchmarkEditorParagraphInput/bytes=1024",
       "description": "Type 1020 bytes of a spaced paragraph, wrapping at 72 columns.",
-      "before": 74812315,
-      "after": 1775866,
+      "before": 75574279,
+      "after": 1765613,
       "samples": {
         "before": [
           {
-            "ns": 74507765,
-            "bytes": 189734520,
+            "ns": 75270148,
+            "bytes": 189734488,
             "allocations": 592125
           },
           {
-            "ns": 76290146,
-            "bytes": 189734472,
+            "ns": 76422730,
+            "bytes": 189734386,
+            "allocations": 592123
+          },
+          {
+            "ns": 75301611,
+            "bytes": 189734493,
             "allocations": 592125
           },
           {
-            "ns": 75268061,
-            "bytes": 189734442,
+            "ns": 76458581,
+            "bytes": 189734405,
             "allocations": 592124
           },
           {
-            "ns": 74465709,
-            "bytes": 189734498,
-            "allocations": 592125
-          },
-          {
-            "ns": 74812315,
-            "bytes": 189734488,
+            "ns": 75574279,
+            "bytes": 189734482,
             "allocations": 592125
           }
         ],
         "after": [
           {
-            "ns": 1784364,
+            "ns": 1760259,
             "bytes": 1119766,
             "allocations": 1098
           },
           {
-            "ns": 1785722,
+            "ns": 1768184,
             "bytes": 1119766,
             "allocations": 1098
           },
           {
-            "ns": 1763009,
+            "ns": 1770764,
             "bytes": 1119766,
             "allocations": 1098
           },
           {
-            "ns": 1756442,
+            "ns": 1765613,
             "bytes": 1119766,
             "allocations": 1098
           },
           {
-            "ns": 1775866,
+            "ns": 1757393,
             "bytes": 1119766,
             "allocations": 1098
           }
@@ -769,59 +773,59 @@
     {
       "id": "gocui/BenchmarkEditorParagraphInput/bytes=4096",
       "description": "Type 4090 bytes of a spaced paragraph, wrapping at 72 columns.",
-      "before": 1350996291,
-      "after": 8527146,
+      "before": 1362058382,
+      "after": 8332160,
       "samples": {
         "before": [
           {
-            "ns": 1352300135,
-            "bytes": 3319992496,
-            "allocations": 9305945
+            "ns": 1362058382,
+            "bytes": 3319991800,
+            "allocations": 9305935
           },
           {
-            "ns": 1345572240,
-            "bytes": 3319986864,
-            "allocations": 9305940
-          },
-          {
-            "ns": 1354427696,
-            "bytes": 3319986568,
+            "ns": 1375306315,
+            "bytes": 3319986728,
             "allocations": 9305938
           },
           {
-            "ns": 1350996291,
-            "bytes": 3319986592,
-            "allocations": 9305936
+            "ns": 1374220912,
+            "bytes": 3319986792,
+            "allocations": 9305938
           },
           {
-            "ns": 1346657426,
-            "bytes": 3319987712,
-            "allocations": 9305952
+            "ns": 1350131289,
+            "bytes": 3319986744,
+            "allocations": 9305938
+          },
+          {
+            "ns": 1350827425,
+            "bytes": 3319987256,
+            "allocations": 9305946
           }
         ],
         "after": [
           {
-            "ns": 8422118,
+            "ns": 8302650,
             "bytes": 11446688,
             "allocations": 4310
           },
           {
-            "ns": 8436781,
+            "ns": 8272215,
             "bytes": 11446688,
             "allocations": 4310
           },
           {
-            "ns": 8527146,
+            "ns": 8332160,
             "bytes": 11446688,
             "allocations": 4310
           },
           {
-            "ns": 8638799,
+            "ns": 8365927,
             "bytes": 11446688,
             "allocations": 4310
           },
           {
-            "ns": 8644349,
+            "ns": 8424960,
             "bytes": 11446688,
             "allocations": 4310
           }
@@ -831,59 +835,59 @@
     {
       "id": "gocui/BenchmarkEditorUnbrokenInput/bytes=256",
       "description": "Type 256 unbroken ASCII characters, updating layout and view per key.",
-      "before": 4569232,
-      "after": 630637,
+      "before": 4628007,
+      "after": 628255,
       "samples": {
         "before": [
           {
-            "ns": 4568084,
+            "ns": 4605787,
             "bytes": 12852888,
             "allocations": 37672
           },
           {
-            "ns": 4557520,
-            "bytes": 12852888,
-            "allocations": 37672
-          },
-          {
-            "ns": 4645791,
+            "ns": 4628007,
             "bytes": 12852889,
             "allocations": 37672
           },
           {
-            "ns": 4578700,
-            "bytes": 12852886,
+            "ns": 4656725,
+            "bytes": 12852888,
             "allocations": 37672
           },
           {
-            "ns": 4569232,
-            "bytes": 12852890,
+            "ns": 4608316,
+            "bytes": 12852887,
+            "allocations": 37672
+          },
+          {
+            "ns": 4723642,
+            "bytes": 12852889,
             "allocations": 37672
           }
         ],
         "after": [
           {
-            "ns": 647657,
+            "ns": 643519,
             "bytes": 111840,
             "allocations": 283
           },
           {
-            "ns": 630614,
+            "ns": 634003,
             "bytes": 111840,
             "allocations": 283
           },
           {
-            "ns": 634801,
+            "ns": 628255,
             "bytes": 111840,
             "allocations": 283
           },
           {
-            "ns": 623813,
+            "ns": 609914,
             "bytes": 111840,
             "allocations": 283
           },
           {
-            "ns": 630637,
+            "ns": 622411,
             "bytes": 111840,
             "allocations": 283
           }
@@ -893,59 +897,59 @@
     {
       "id": "gocui/BenchmarkEditorUnbrokenInput/bytes=1024",
       "description": "Type 1024 unbroken ASCII characters, updating layout and view per key.",
-      "before": 71739062,
-      "after": 2730565,
+      "before": 72872295,
+      "after": 2707665,
       "samples": {
         "before": [
           {
-            "ns": 71790838,
-            "bytes": 202376421,
-            "allocations": 548313
-          },
-          {
-            "ns": 71739062,
-            "bytes": 202376381,
-            "allocations": 548313
-          },
-          {
-            "ns": 72798448,
-            "bytes": 202376341,
+            "ns": 73277582,
+            "bytes": 202376320,
             "allocations": 548312
           },
           {
-            "ns": 71335128,
-            "bytes": 202376394,
+            "ns": 72992862,
+            "bytes": 202376370,
             "allocations": 548313
           },
           {
-            "ns": 71499858,
-            "bytes": 202376386,
+            "ns": 72810084,
+            "bytes": 202376344,
             "allocations": 548313
+          },
+          {
+            "ns": 72439803,
+            "bytes": 202376448,
+            "allocations": 548313
+          },
+          {
+            "ns": 72872295,
+            "bytes": 202376298,
+            "allocations": 548312
           }
         ],
         "after": [
           {
-            "ns": 2730565,
+            "ns": 2679316,
             "bytes": 855141,
             "allocations": 1057
           },
           {
-            "ns": 2742946,
+            "ns": 2706261,
             "bytes": 855141,
             "allocations": 1057
           },
           {
-            "ns": 2754443,
+            "ns": 2707665,
             "bytes": 855141,
             "allocations": 1057
           },
           {
-            "ns": 2727923,
+            "ns": 2738824,
             "bytes": 855141,
             "allocations": 1057
           },
           {
-            "ns": 2691937,
+            "ns": 2812464,
             "bytes": 855141,
             "allocations": 1057
           }
@@ -955,59 +959,59 @@
     {
       "id": "gocui/BenchmarkEditorUnbrokenInput/bytes=4096",
       "description": "Type 4096 unbroken ASCII characters, updating layout and view per key.",
-      "before": 1302142695,
-      "after": 12822212,
+      "before": 1313540642,
+      "after": 12499522,
       "samples": {
         "before": [
           {
-            "ns": 1300320334,
-            "bytes": 3630865480,
-            "allocations": 8510512
+            "ns": 1332856675,
+            "bytes": 3630862008,
+            "allocations": 8510460
           },
           {
-            "ns": 1302142695,
-            "bytes": 3630865544,
-            "allocations": 8510512
-          },
-          {
-            "ns": 1310961884,
-            "bytes": 3630862576,
-            "allocations": 8510470
-          },
-          {
-            "ns": 1311600789,
+            "ns": 1308443698,
             "bytes": 3630865224,
             "allocations": 8510508
           },
           {
-            "ns": 1298650503,
-            "bytes": 3630865176,
+            "ns": 1313540642,
+            "bytes": 3630865472,
+            "allocations": 8510510
+          },
+          {
+            "ns": 1321633812,
+            "bytes": 3630865192,
+            "allocations": 8510508
+          },
+          {
+            "ns": 1310721934,
+            "bytes": 3630865192,
             "allocations": 8510508
           }
         ],
         "after": [
           {
-            "ns": 12939201,
+            "ns": 12444901,
             "bytes": 10630896,
             "allocations": 4138
           },
           {
-            "ns": 12822212,
+            "ns": 12522771,
             "bytes": 10630896,
             "allocations": 4138
           },
           {
-            "ns": 12398399,
+            "ns": 12757904,
             "bytes": 10630896,
             "allocations": 4138
           },
           {
-            "ns": 12417010,
+            "ns": 12499522,
             "bytes": 10630896,
             "allocations": 4138
           },
           {
-            "ns": 13140536,
+            "ns": 12372025,
             "bytes": 10630896,
             "allocations": 4138
           }
@@ -1017,59 +1021,59 @@
     {
       "id": "gocui/BenchmarkGuiFlush/80x24",
       "description": "Flush two panes through a mock terminal at 80x24, changing selection and scroll position.",
-      "before": 279656,
-      "after": 204827,
+      "before": 277368,
+      "after": 204683,
       "samples": {
         "before": [
           {
-            "ns": 269219,
+            "ns": 270472,
             "bytes": 90289,
             "allocations": 3098
           },
           {
-            "ns": 279656,
+            "ns": 277456,
             "bytes": 90286,
             "allocations": 3098
           },
           {
-            "ns": 279472,
-            "bytes": 90286,
+            "ns": 277368,
+            "bytes": 90287,
             "allocations": 3098
           },
           {
-            "ns": 280487,
-            "bytes": 90286,
+            "ns": 283540,
+            "bytes": 90287,
             "allocations": 3098
           },
           {
-            "ns": 280867,
+            "ns": 277029,
             "bytes": 90286,
             "allocations": 3098
           }
         ],
         "after": [
           {
-            "ns": 199929,
+            "ns": 196353,
             "bytes": 90311,
             "allocations": 3099
           },
           {
-            "ns": 204460,
+            "ns": 204683,
+            "bytes": 90313,
+            "allocations": 3099
+          },
+          {
+            "ns": 202340,
             "bytes": 90309,
             "allocations": 3099
           },
           {
-            "ns": 205168,
+            "ns": 207462,
             "bytes": 90309,
             "allocations": 3099
           },
           {
-            "ns": 204841,
-            "bytes": 90310,
-            "allocations": 3099
-          },
-          {
-            "ns": 204827,
+            "ns": 204687,
             "bytes": 90309,
             "allocations": 3099
           }
@@ -1079,60 +1083,60 @@
     {
       "id": "gocui/BenchmarkGuiFlush/160x48",
       "description": "Flush two panes through a mock terminal at 160x48, changing selection and scroll position.",
-      "before": 888679,
-      "after": 545001,
+      "before": 870725,
+      "after": 542106,
       "samples": {
         "before": [
           {
-            "ns": 890243,
-            "bytes": 185331,
+            "ns": 875333,
+            "bytes": 185338,
             "allocations": 6272
           },
           {
-            "ns": 902810,
-            "bytes": 185299,
-            "allocations": 6271
-          },
-          {
-            "ns": 882896,
-            "bytes": 185326,
+            "ns": 872151,
+            "bytes": 185327,
             "allocations": 6272
           },
           {
-            "ns": 884929,
-            "bytes": 185321,
+            "ns": 868098,
+            "bytes": 185329,
             "allocations": 6272
           },
           {
-            "ns": 888679,
-            "bytes": 185312,
-            "allocations": 6271
+            "ns": 870725,
+            "bytes": 185335,
+            "allocations": 6272
+          },
+          {
+            "ns": 867871,
+            "bytes": 185339,
+            "allocations": 6272
           }
         ],
         "after": [
           {
-            "ns": 555019,
-            "bytes": 185559,
+            "ns": 550468,
+            "bytes": 185562,
             "allocations": 6279
           },
           {
-            "ns": 550976,
-            "bytes": 185563,
+            "ns": 542106,
+            "bytes": 185556,
             "allocations": 6279
           },
           {
-            "ns": 545001,
-            "bytes": 185563,
+            "ns": 538312,
+            "bytes": 185567,
             "allocations": 6279
           },
           {
-            "ns": 541854,
-            "bytes": 185563,
+            "ns": 548002,
+            "bytes": 185548,
             "allocations": 6279
           },
           {
-            "ns": 539291,
-            "bytes": 185564,
+            "ns": 539936,
+            "bytes": 185567,
             "allocations": 6279
           }
         ]
@@ -1141,54 +1145,54 @@
     {
       "id": "gocui/BenchmarkNearestSearchPosition/matches=100",
       "description": "Find the nearest result near the end of 100 search matches.",
-      "before": 42.66,
-      "after": 3.961,
+      "before": 43.34,
+      "after": 3.969,
       "samples": {
         "before": [
           {
-            "ns": 42.83,
+            "ns": 43.52,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 42.59,
+            "ns": 43.39,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 42.89,
+            "ns": 43.24,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 42.59,
+            "ns": 43.34,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 42.66,
+            "ns": 42.97,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 3.991,
+            "ns": 4.01,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3.971,
+            "ns": 3.969,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3.95,
+            "ns": 4.021,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3.941,
+            "ns": 3.956,
             "bytes": 0,
             "allocations": 0
           },
@@ -1203,59 +1207,59 @@
     {
       "id": "gocui/BenchmarkNearestSearchPosition/matches=1000",
       "description": "Find the nearest result near the end of 1000 search matches.",
-      "before": 415,
-      "after": 5.702,
+      "before": 321.3,
+      "after": 5.786,
       "samples": {
         "before": [
           {
-            "ns": 418.4,
+            "ns": 322.9,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 414.6,
+            "ns": 320.2,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 415,
+            "ns": 325.1,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 415.7,
+            "ns": 320.5,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 414,
+            "ns": 321.3,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 5.702,
+            "ns": 5.706,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 5.733,
+            "ns": 5.648,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 5.71,
+            "ns": 5.786,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 5.604,
+            "ns": 5.903,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 5.55,
+            "ns": 5.946,
             "bytes": 0,
             "allocations": 0
           }
@@ -1265,59 +1269,59 @@
     {
       "id": "gocui/BenchmarkNearestSearchPosition/matches=10000",
       "description": "Find the nearest result near the end of 10000 search matches.",
-      "before": 3974,
-      "after": 8.01,
+      "before": 3135,
+      "after": 8.232,
       "samples": {
         "before": [
           {
-            "ns": 4031,
+            "ns": 3135,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3966,
+            "ns": 3133,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3990,
+            "ns": 3142,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3970,
+            "ns": 3168,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3974,
+            "ns": 3128,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 8.01,
+            "ns": 8.165,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 7.972,
+            "ns": 8.214,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 8.01,
+            "ns": 8.293,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 8.049,
+            "ns": 8.232,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 8.015,
+            "ns": 8.318,
             "bytes": 0,
             "allocations": 0
           }
@@ -1327,59 +1331,59 @@
     {
       "id": "gocui/BenchmarkNearestSearchPosition/matches=100000",
       "description": "Find the nearest result near the end of 100000 search matches.",
-      "before": 40250,
-      "after": 9.969,
+      "before": 38060,
+      "after": 10.48,
       "samples": {
         "before": [
           {
-            "ns": 39954,
+            "ns": 38060,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 40336,
+            "ns": 40667,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 40250,
+            "ns": 38030,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 39872,
+            "ns": 37934,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 41366,
+            "ns": 38774,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 9.969,
+            "ns": 10.2,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 9.844,
+            "ns": 10.5,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 10.11,
+            "ns": 10.48,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 10.13,
+            "ns": 10.51,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 9.797,
+            "ns": 10.47,
             "bytes": 0,
             "allocations": 0
           }
@@ -1389,59 +1393,59 @@
     {
       "id": "gocui/BenchmarkPasteText/bytes=1000",
       "description": "Insert 986 bytes into prefilled text with TypeString, including layout.",
-      "before": 127771,
-      "after": 30258,
+      "before": 124793,
+      "after": 31063,
       "samples": {
         "before": [
           {
-            "ns": 127771,
+            "ns": 123246,
             "bytes": 627552,
             "allocations": 989
           },
           {
-            "ns": 128401,
+            "ns": 123999,
             "bytes": 627552,
             "allocations": 989
           },
           {
-            "ns": 126399,
+            "ns": 124936,
             "bytes": 627552,
             "allocations": 989
           },
           {
-            "ns": 128368,
+            "ns": 124793,
             "bytes": 627552,
             "allocations": 989
           },
           {
-            "ns": 125985,
+            "ns": 126225,
             "bytes": 627552,
             "allocations": 989
           }
         ],
         "after": [
           {
-            "ns": 30236,
+            "ns": 30088,
             "bytes": 60672,
             "allocations": 9
           },
           {
-            "ns": 30354,
+            "ns": 31016,
             "bytes": 60672,
             "allocations": 9
           },
           {
-            "ns": 30354,
+            "ns": 31063,
             "bytes": 60672,
             "allocations": 9
           },
           {
-            "ns": 30154,
+            "ns": 37638,
             "bytes": 60672,
             "allocations": 9
           },
           {
-            "ns": 30258,
+            "ns": 35141,
             "bytes": 60672,
             "allocations": 9
           }
@@ -1451,59 +1455,59 @@
     {
       "id": "gocui/BenchmarkPasteText/bytes=10000",
       "description": "Insert 9996 bytes into prefilled text with TypeString, including layout.",
-      "before": 6246487,
-      "after": 308221,
+      "before": 6050303,
+      "after": 313383,
       "samples": {
         "before": [
           {
-            "ns": 6146048,
+            "ns": 6050303,
             "bytes": 54231920,
             "allocations": 9999
           },
           {
-            "ns": 6246487,
+            "ns": 5886521,
             "bytes": 54231920,
             "allocations": 9999
           },
           {
-            "ns": 6253113,
+            "ns": 6317205,
             "bytes": 54231920,
             "allocations": 9999
           },
           {
-            "ns": 5769033,
+            "ns": 6085948,
             "bytes": 54231920,
             "allocations": 9999
           },
           {
-            "ns": 6346805,
+            "ns": 5766462,
             "bytes": 54231920,
             "allocations": 9999
           }
         ],
         "after": [
           {
-            "ns": 309382,
+            "ns": 323480,
             "bytes": 594048,
             "allocations": 12
           },
           {
-            "ns": 307370,
+            "ns": 336225,
             "bytes": 594048,
             "allocations": 12
           },
           {
-            "ns": 307948,
+            "ns": 313383,
             "bytes": 594048,
             "allocations": 12
           },
           {
-            "ns": 308221,
+            "ns": 307500,
             "bytes": 594048,
             "allocations": 12
           },
           {
-            "ns": 309292,
+            "ns": 303706,
             "bytes": 594048,
             "allocations": 12
           }
@@ -1513,59 +1517,59 @@
     {
       "id": "gocui/BenchmarkPasteText/bytes=100000",
       "description": "Insert 99994 bytes into prefilled text with TypeString, including layout.",
-      "before": 399676612,
-      "after": 2779520,
+      "before": 387542290,
+      "after": 2745836,
       "samples": {
         "before": [
           {
-            "ns": 396040704,
+            "ns": 388761667,
             "bytes": 5319993072,
             "allocations": 99997
           },
           {
-            "ns": 409108391,
+            "ns": 385616771,
             "bytes": 5319993072,
             "allocations": 99997
           },
           {
-            "ns": 403228767,
+            "ns": 387542290,
             "bytes": 5319993072,
             "allocations": 99997
           },
           {
-            "ns": 396828413,
+            "ns": 390882164,
             "bytes": 5319993072,
             "allocations": 99997
           },
           {
-            "ns": 399676612,
+            "ns": 385818418,
             "bytes": 5319993072,
             "allocations": 99997
           }
         ],
         "after": [
           {
-            "ns": 2819927,
+            "ns": 2964620,
             "bytes": 6883456,
             "allocations": 19
           },
           {
-            "ns": 2737192,
+            "ns": 2765966,
             "bytes": 6883456,
             "allocations": 19
           },
           {
-            "ns": 2941690,
+            "ns": 2696091,
             "bytes": 6883456,
             "allocations": 19
           },
           {
-            "ns": 2779520,
+            "ns": 2688069,
             "bytes": 6883456,
             "allocations": 19
           },
           {
-            "ns": 2730103,
+            "ns": 2745836,
             "bytes": 6883456,
             "allocations": 19
           }
@@ -1575,59 +1579,59 @@
     {
       "id": "gocui/BenchmarkScrollSearchPosition/matches=100/up=false",
       "description": "Select a visible result after a distant scroll down across 100 matches; reset each iteration.",
-      "before": 55.17,
-      "after": 16.16,
+      "before": 54.09,
+      "after": 16.17,
       "samples": {
         "before": [
           {
-            "ns": 55.39,
+            "ns": 54.09,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 55.17,
+            "ns": 54.16,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 55.02,
+            "ns": 54.06,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 55.29,
+            "ns": 53.89,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 54.87,
+            "ns": 54.36,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 16.14,
+            "ns": 16.21,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16.13,
+            "ns": 16.17,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16.16,
+            "ns": 16.48,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16.28,
+            "ns": 15.91,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16.18,
+            "ns": 16.1,
             "bytes": 0,
             "allocations": 0
           }
@@ -1637,32 +1641,32 @@
     {
       "id": "gocui/BenchmarkScrollSearchPosition/matches=100/up=true",
       "description": "Select a visible result after a distant scroll up across 100 matches; reset each iteration.",
-      "before": 37,
-      "after": 15.77,
+      "before": 39.01,
+      "after": 15.72,
       "samples": {
         "before": [
           {
-            "ns": 35.61,
+            "ns": 39.29,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 37,
+            "ns": 39.01,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 37.73,
+            "ns": 39.1,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 36.6,
+            "ns": 38.84,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 40.02,
+            "ns": 37.77,
             "bytes": 0,
             "allocations": 0
           }
@@ -1674,22 +1678,22 @@
             "allocations": 0
           },
           {
-            "ns": 15.77,
+            "ns": 15.72,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 15.87,
+            "ns": 15.68,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 15.71,
+            "ns": 15.94,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 15.78,
+            "ns": 15.73,
             "bytes": 0,
             "allocations": 0
           }
@@ -1699,59 +1703,59 @@
     {
       "id": "gocui/BenchmarkScrollSearchPosition/matches=1000/up=false",
       "description": "Select a visible result after a distant scroll down across 1000 matches; reset each iteration.",
-      "before": 426.2,
-      "after": 18.21,
+      "before": 421.1,
+      "after": 18.06,
       "samples": {
         "before": [
           {
-            "ns": 426.2,
+            "ns": 421.4,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 428.6,
+            "ns": 418.6,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 425.6,
+            "ns": 421.1,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 427.3,
+            "ns": 443.5,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 425.8,
+            "ns": 420.2,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 18.22,
+            "ns": 18.07,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 18.21,
+            "ns": 18.06,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 18.95,
+            "ns": 18.02,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 18.18,
+            "ns": 18.06,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 18.16,
+            "ns": 18.04,
             "bytes": 0,
             "allocations": 0
           }
@@ -1761,59 +1765,59 @@
     {
       "id": "gocui/BenchmarkScrollSearchPosition/matches=1000/up=true",
       "description": "Select a visible result after a distant scroll up across 1000 matches; reset each iteration.",
-      "before": 310,
-      "after": 17.93,
+      "before": 302.4,
+      "after": 18.03,
       "samples": {
         "before": [
           {
-            "ns": 310,
+            "ns": 304.9,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 315.5,
+            "ns": 301.9,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 311,
+            "ns": 302.4,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 309.8,
+            "ns": 304.1,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 308.7,
+            "ns": 302.1,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 17.96,
+            "ns": 18,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 18.08,
+            "ns": 18.23,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 17.93,
+            "ns": 18.06,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 17.83,
+            "ns": 18.02,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 17.9,
+            "ns": 18.03,
             "bytes": 0,
             "allocations": 0
           }
@@ -1823,59 +1827,59 @@
     {
       "id": "gocui/BenchmarkScrollSearchPosition/matches=10000/up=false",
       "description": "Select a visible result after a distant scroll down across 10000 matches; reset each iteration.",
-      "before": 4215,
-      "after": 20.79,
+      "before": 4131,
+      "after": 20.75,
       "samples": {
         "before": [
           {
-            "ns": 4226,
+            "ns": 4117,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 4215,
+            "ns": 4153,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 4207,
+            "ns": 4179,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 4194,
+            "ns": 4131,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 4234,
+            "ns": 4119,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 20.86,
+            "ns": 20.72,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 20.97,
+            "ns": 20.75,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 20.79,
+            "ns": 20.66,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 20.77,
+            "ns": 21.36,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 20.79,
+            "ns": 20.82,
             "bytes": 0,
             "allocations": 0
           }
@@ -1885,59 +1889,59 @@
     {
       "id": "gocui/BenchmarkScrollSearchPosition/matches=10000/up=true",
       "description": "Select a visible result after a distant scroll up across 10000 matches; reset each iteration.",
-      "before": 3040,
-      "after": 20.46,
+      "before": 2988,
+      "after": 20.83,
       "samples": {
         "before": [
           {
-            "ns": 3057,
+            "ns": 2971,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3052,
+            "ns": 2993,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3039,
+            "ns": 3001,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3040,
+            "ns": 2984,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 3034,
+            "ns": 2988,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 20.44,
+            "ns": 21.31,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 20.44,
+            "ns": 20.82,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 20.46,
+            "ns": 20.85,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 20.47,
+            "ns": 20.83,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 20.66,
+            "ns": 20.77,
             "bytes": 0,
             "allocations": 0
           }
@@ -1947,59 +1951,59 @@
     {
       "id": "gocui/BenchmarkScrollSearchPosition/matches=100000/up=false",
       "description": "Select a visible result after a distant scroll down across 100000 matches; reset each iteration.",
-      "before": 42955,
-      "after": 23.17,
+      "before": 42349,
+      "after": 23.57,
       "samples": {
         "before": [
           {
-            "ns": 42955,
+            "ns": 43679,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 42828,
+            "ns": 42089,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 42719,
+            "ns": 42349,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 44179,
+            "ns": 42270,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 43850,
+            "ns": 42727,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 23.17,
+            "ns": 23.93,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 23.23,
+            "ns": 23.66,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 23.26,
+            "ns": 23.2,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 22.98,
+            "ns": 23.57,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 23.11,
+            "ns": 23.39,
             "bytes": 0,
             "allocations": 0
           }
@@ -2009,39 +2013,44 @@
     {
       "id": "gocui/BenchmarkScrollSearchPosition/matches=100000/up=true",
       "description": "Select a visible result after a distant scroll up across 100000 matches; reset each iteration.",
-      "before": 35853,
-      "after": 24.38,
+      "before": 37632,
+      "after": 24.6,
       "samples": {
         "before": [
           {
-            "ns": 35225,
+            "ns": 37512,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 35853,
+            "ns": 37632,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 36682,
+            "ns": 37149,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 35607,
+            "ns": 37764,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 38687,
+            "ns": 39339,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 24.38,
+            "ns": 24.73,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 24.48,
             "bytes": 0,
             "allocations": 0
           },
@@ -2051,17 +2060,12 @@
             "allocations": 0
           },
           {
-            "ns": 24.31,
+            "ns": 24.63,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 24.71,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 24.35,
+            "ns": 24.6,
             "bytes": 0,
             "allocations": 0
           }
@@ -2071,61 +2075,61 @@
     {
       "id": "gocui/BenchmarkSearchOrdinaryText/match",
       "description": "Search 2,000 ordinary diff lines for \"match\"; rendered layout warmed.",
-      "before": 810618,
-      "after": 742793,
+      "before": 800785,
+      "after": 603731,
       "samples": {
         "before": [
           {
-            "ns": 816626,
+            "ns": 803950,
             "bytes": 175144,
             "allocations": 2015
           },
           {
-            "ns": 812855,
+            "ns": 816852,
             "bytes": 175144,
             "allocations": 2015
           },
           {
-            "ns": 809974,
+            "ns": 799500,
             "bytes": 175144,
             "allocations": 2015
           },
           {
-            "ns": 810618,
+            "ns": 800785,
             "bytes": 175144,
             "allocations": 2015
           },
           {
-            "ns": 798149,
+            "ns": 795777,
             "bytes": 175144,
             "allocations": 2015
           }
         ],
         "after": [
           {
-            "ns": 753237,
-            "bytes": 175240,
-            "allocations": 2017
+            "ns": 608621,
+            "bytes": 288,
+            "allocations": 4
           },
           {
-            "ns": 750395,
-            "bytes": 175240,
-            "allocations": 2017
+            "ns": 596000,
+            "bytes": 288,
+            "allocations": 4
           },
           {
-            "ns": 738299,
-            "bytes": 175240,
-            "allocations": 2017
+            "ns": 612430,
+            "bytes": 288,
+            "allocations": 4
           },
           {
-            "ns": 741269,
-            "bytes": 175240,
-            "allocations": 2017
+            "ns": 601010,
+            "bytes": 288,
+            "allocations": 4
           },
           {
-            "ns": 742793,
-            "bytes": 175240,
-            "allocations": 2017
+            "ns": 603731,
+            "bytes": 288,
+            "allocations": 4
           }
         ]
       }
@@ -2133,59 +2137,59 @@
     {
       "id": "gocui/BenchmarkSearchOrdinaryText/MATCH",
       "description": "Search 2,000 ordinary diff lines for \"MATCH\"; rendered layout warmed.",
-      "before": 530939,
-      "after": 466309,
+      "before": 551215,
+      "after": 433453,
       "samples": {
         "before": [
           {
-            "ns": 532011,
+            "ns": 556976,
             "bytes": 192,
             "allocations": 2
           },
           {
-            "ns": 533677,
+            "ns": 539193,
             "bytes": 192,
             "allocations": 2
           },
           {
-            "ns": 528221,
+            "ns": 554727,
             "bytes": 192,
             "allocations": 2
           },
           {
-            "ns": 529467,
+            "ns": 551215,
             "bytes": 192,
             "allocations": 2
           },
           {
-            "ns": 530939,
+            "ns": 550691,
             "bytes": 192,
             "allocations": 2
           }
         ],
         "after": [
           {
-            "ns": 462822,
+            "ns": 435832,
             "bytes": 288,
             "allocations": 4
           },
           {
-            "ns": 466309,
+            "ns": 433887,
             "bytes": 288,
             "allocations": 4
           },
           {
-            "ns": 466777,
+            "ns": 433453,
             "bytes": 288,
             "allocations": 4
           },
           {
-            "ns": 474815,
+            "ns": 433382,
             "bytes": 288,
             "allocations": 4
           },
           {
-            "ns": 465394,
+            "ns": 432701,
             "bytes": 288,
             "allocations": 4
           }
@@ -2195,61 +2199,185 @@
     {
       "id": "gocui/BenchmarkSearchOrdinaryText/missing",
       "description": "Search 2,000 ordinary diff lines for \"missing\"; rendered layout warmed.",
-      "before": 732016,
-      "after": 642595,
+      "before": 714679,
+      "after": 560017,
       "samples": {
         "before": [
           {
-            "ns": 727317,
+            "ns": 700110,
             "bytes": 192,
             "allocations": 2
           },
           {
-            "ns": 732186,
+            "ns": 721128,
             "bytes": 192,
             "allocations": 2
           },
           {
-            "ns": 732016,
+            "ns": 709534,
             "bytes": 192,
             "allocations": 2
           },
           {
-            "ns": 740967,
+            "ns": 714679,
             "bytes": 192,
             "allocations": 2
           },
           {
-            "ns": 729796,
+            "ns": 722083,
             "bytes": 192,
             "allocations": 2
           }
         ],
         "after": [
           {
-            "ns": 646081,
+            "ns": 555201,
             "bytes": 320,
             "allocations": 4
           },
           {
-            "ns": 643214,
+            "ns": 564869,
             "bytes": 320,
             "allocations": 4
           },
           {
-            "ns": 639227,
+            "ns": 560017,
             "bytes": 320,
             "allocations": 4
           },
           {
-            "ns": 642595,
+            "ns": 556788,
             "bytes": 320,
             "allocations": 4
           },
           {
-            "ns": 640504,
+            "ns": 560871,
             "bytes": 320,
             "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "gocui/BenchmarkSearchQueryLifetime/clear=false",
+      "description": "Alternate aa, aaa, aaaa, and a queries across 2,000 lines of 200 a characters; keep search active; rendered layout and initial a query warmed.",
+      "before": 18297274,
+      "after": 3406574,
+      "samples": {
+        "before": [
+          {
+            "ns": 17860310,
+            "bytes": 76274219,
+            "allocations": 16028
+          },
+          {
+            "ns": 17389873,
+            "bytes": 76274219,
+            "allocations": 16028
+          },
+          {
+            "ns": 19636203,
+            "bytes": 76274220,
+            "allocations": 16028
+          },
+          {
+            "ns": 18297274,
+            "bytes": 76274220,
+            "allocations": 16028
+          },
+          {
+            "ns": 18680560,
+            "bytes": 76274220,
+            "allocations": 16028
+          }
+        ],
+        "after": [
+          {
+            "ns": 3479470,
+            "bytes": 84,
+            "allocations": 3
+          },
+          {
+            "ns": 3399263,
+            "bytes": 83,
+            "allocations": 3
+          },
+          {
+            "ns": 3406574,
+            "bytes": 83,
+            "allocations": 3
+          },
+          {
+            "ns": 3404989,
+            "bytes": 84,
+            "allocations": 3
+          },
+          {
+            "ns": 3422260,
+            "bytes": 84,
+            "allocations": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "gocui/BenchmarkSearchQueryLifetime/clear=true",
+      "description": "Alternate aa, aaa, aaaa, and a queries across 2,000 lines of 200 a characters; clear search after each query; rendered layout and initial a query warmed.",
+      "before": 18298713,
+      "after": 12012209,
+      "samples": {
+        "before": [
+          {
+            "ns": 18298713,
+            "bytes": 76274220,
+            "allocations": 16028
+          },
+          {
+            "ns": 18100680,
+            "bytes": 76274219,
+            "allocations": 16028
+          },
+          {
+            "ns": 18388053,
+            "bytes": 76274219,
+            "allocations": 16028
+          },
+          {
+            "ns": 18122510,
+            "bytes": 76274220,
+            "allocations": 16028
+          },
+          {
+            "ns": 18662701,
+            "bytes": 76274220,
+            "allocations": 16028
+          }
+        ],
+        "after": [
+          {
+            "ns": 11893917,
+            "bytes": 55010892,
+            "allocations": 37
+          },
+          {
+            "ns": 12012375,
+            "bytes": 54984444,
+            "allocations": 37
+          },
+          {
+            "ns": 11659241,
+            "bytes": 55010892,
+            "allocations": 37
+          },
+          {
+            "ns": 12012209,
+            "bytes": 55010892,
+            "allocations": 37
+          },
+          {
+            "ns": 12148363,
+            "bytes": 55010892,
+            "allocations": 37
           }
         ]
       }
@@ -2257,61 +2385,61 @@
     {
       "id": "gocui/BenchmarkSearchRepeatedPrefix/query=1",
       "description": "Search 2,000 lines of 200 a characters for a; rendered layout warmed.",
-      "before": 15566518,
-      "after": 16494818,
+      "before": 15415330,
+      "after": 2923488,
       "samples": {
         "before": [
           {
-            "ns": 15328040,
+            "ns": 15289241,
             "bytes": 76274192,
             "allocations": 16028
           },
           {
-            "ns": 15488169,
+            "ns": 15415330,
             "bytes": 76274192,
             "allocations": 16028
           },
           {
-            "ns": 15792020,
+            "ns": 15773806,
             "bytes": 76274192,
             "allocations": 16028
           },
           {
-            "ns": 15792359,
+            "ns": 15603005,
             "bytes": 76274192,
             "allocations": 16028
           },
           {
-            "ns": 15566518,
+            "ns": 14813274,
             "bytes": 76274192,
             "allocations": 16028
           }
         ],
         "after": [
           {
-            "ns": 15885676,
-            "bytes": 76322208,
-            "allocations": 18030
+            "ns": 3089352,
+            "bytes": 32,
+            "allocations": 3
           },
           {
-            "ns": 17418834,
-            "bytes": 76322208,
-            "allocations": 18030
+            "ns": 2923488,
+            "bytes": 32,
+            "allocations": 3
           },
           {
-            "ns": 16494818,
-            "bytes": 76322208,
-            "allocations": 18030
+            "ns": 2907529,
+            "bytes": 32,
+            "allocations": 3
           },
           {
-            "ns": 14926305,
-            "bytes": 76322208,
-            "allocations": 18030
+            "ns": 2924230,
+            "bytes": 32,
+            "allocations": 3
           },
           {
-            "ns": 16801209,
-            "bytes": 76322208,
-            "allocations": 18030
+            "ns": 2907359,
+            "bytes": 32,
+            "allocations": 3
           }
         ]
       }
@@ -2319,59 +2447,59 @@
     {
       "id": "gocui/BenchmarkSearchRepeatedPrefix/query=32",
       "description": "Search 2,000 lines of 200 a characters for a 32-character query ending in b; rendered layout warmed.",
-      "before": 55467060,
-      "after": 4667575,
+      "before": 56783754,
+      "after": 4385412,
       "samples": {
         "before": [
           {
-            "ns": 55467060,
+            "ns": 56484859,
             "bytes": 960,
             "allocations": 4
           },
           {
-            "ns": 56529852,
+            "ns": 56616045,
             "bytes": 960,
             "allocations": 4
           },
           {
-            "ns": 55444587,
+            "ns": 58365886,
             "bytes": 960,
             "allocations": 4
           },
           {
-            "ns": 55675895,
+            "ns": 56783754,
             "bytes": 960,
             "allocations": 4
           },
           {
-            "ns": 55375268,
+            "ns": 57019458,
             "bytes": 960,
             "allocations": 4
           }
         ],
         "after": [
           {
-            "ns": 4778271,
+            "ns": 4375037,
             "bytes": 1472,
             "allocations": 6
           },
           {
-            "ns": 4649697,
+            "ns": 4480087,
             "bytes": 1472,
             "allocations": 6
           },
           {
-            "ns": 4699834,
+            "ns": 4385412,
             "bytes": 1472,
             "allocations": 6
           },
           {
-            "ns": 4659311,
+            "ns": 4389606,
             "bytes": 1472,
             "allocations": 6
           },
           {
-            "ns": 4667575,
+            "ns": 4377254,
             "bytes": 1472,
             "allocations": 6
           }
@@ -2381,59 +2509,59 @@
     {
       "id": "gocui/BenchmarkSearchRepeatedPrefix/query=128",
       "description": "Search 2,000 lines of 200 a characters for a 128-character query ending in b; rendered layout warmed.",
-      "before": 168469749,
-      "after": 4160420,
+      "before": 166461250,
+      "after": 3896160,
       "samples": {
         "before": [
           {
-            "ns": 168469749,
+            "ns": 166461250,
             "bytes": 4416,
             "allocations": 6
           },
           {
-            "ns": 168935170,
+            "ns": 166888904,
             "bytes": 4416,
             "allocations": 6
           },
           {
-            "ns": 168657104,
+            "ns": 166055558,
             "bytes": 4416,
             "allocations": 6
           },
           {
-            "ns": 166332224,
+            "ns": 167399764,
             "bytes": 4416,
             "allocations": 6
           },
           {
-            "ns": 167399205,
+            "ns": 164598450,
             "bytes": 4416,
             "allocations": 6
           }
         ],
         "after": [
           {
-            "ns": 4127511,
+            "ns": 3911638,
             "bytes": 6464,
             "allocations": 8
           },
           {
-            "ns": 4128328,
+            "ns": 3880938,
             "bytes": 6464,
             "allocations": 8
           },
           {
-            "ns": 4203338,
+            "ns": 3896160,
             "bytes": 6464,
             "allocations": 8
           },
           {
-            "ns": 4160420,
+            "ns": 3879459,
             "bytes": 6464,
             "allocations": 8
           },
           {
-            "ns": 4215512,
+            "ns": 4005917,
             "bytes": 6464,
             "allocations": 8
           }
@@ -2443,163 +2571,44 @@
     {
       "id": "gocui/BenchmarkViewDraw/80x24/empty",
       "description": "Redraw a 80x24 view with empty content.",
-      "before": 55283,
-      "after": 4747,
+      "before": 55901,
+      "after": 4770,
       "samples": {
         "before": [
           {
-            "ns": 56540,
+            "ns": 57646,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 55204,
+            "ns": 55525,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 56307,
+            "ns": 55706,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 55283,
+            "ns": 58017,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 55152,
+            "ns": 55901,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 4754,
+            "ns": 4732,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 4745,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 4801,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 4747,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 4740,
-            "bytes": 0,
-            "allocations": 0
-          }
-        ]
-      }
-    },
-    {
-      "id": "gocui/BenchmarkViewDraw/80x24/full",
-      "description": "Redraw a 80x24 view with full content.",
-      "before": 121862,
-      "after": 39311,
-      "samples": {
-        "before": [
-          {
-            "ns": 122949,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 121589,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 121691,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 123846,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 121862,
-            "bytes": 0,
-            "allocations": 0
-          }
-        ],
-        "after": [
-          {
-            "ns": 39296,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 39203,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 39336,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 39311,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 39721,
-            "bytes": 0,
-            "allocations": 0
-          }
-        ]
-      }
-    },
-    {
-      "id": "gocui/BenchmarkViewDraw/80x24/short",
-      "description": "Redraw a 80x24 view with short content.",
-      "before": 55203,
-      "after": 4760,
-      "samples": {
-        "before": [
-          {
-            "ns": 56598,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 55203,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 55100,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 55492,
-            "bytes": 0,
-            "allocations": 0
-          },
-          {
-            "ns": 55084,
-            "bytes": 0,
-            "allocations": 0
-          }
-        ],
-        "after": [
-          {
-            "ns": 4768,
+            "ns": 4956,
             "bytes": 0,
             "allocations": 0
           },
@@ -2609,17 +2618,136 @@
             "allocations": 0
           },
           {
-            "ns": 4760,
+            "ns": 4770,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 4748,
+            "ns": 4751,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "gocui/BenchmarkViewDraw/80x24/full",
+      "description": "Redraw a 80x24 view with full content.",
+      "before": 119953,
+      "after": 39231,
+      "samples": {
+        "before": [
+          {
+            "ns": 120591,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 4757,
+            "ns": 123086,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 119755,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 119401,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 119953,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 39231,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 39194,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 39131,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 40897,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 39457,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "gocui/BenchmarkViewDraw/80x24/short",
+      "description": "Redraw a 80x24 view with short content.",
+      "before": 55643,
+      "after": 4772,
+      "samples": {
+        "before": [
+          {
+            "ns": 55643,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 55127,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 55331,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 56030,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 56693,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 4758,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4788,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4944,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4772,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4745,
             "bytes": 0,
             "allocations": 0
           }
@@ -2629,59 +2757,59 @@
     {
       "id": "gocui/BenchmarkViewDraw/80x24/unicode",
       "description": "Redraw a 80x24 view with unicode content.",
-      "before": 143826,
-      "after": 30116,
+      "before": 144425,
+      "after": 30199,
       "samples": {
         "before": [
           {
-            "ns": 148743,
+            "ns": 149309,
             "bytes": 41184,
             "allocations": 858
           },
           {
-            "ns": 143449,
+            "ns": 143075,
             "bytes": 41184,
             "allocations": 858
           },
           {
-            "ns": 143826,
+            "ns": 144125,
             "bytes": 41184,
             "allocations": 858
           },
           {
-            "ns": 143960,
+            "ns": 147019,
             "bytes": 41184,
             "allocations": 858
           },
           {
-            "ns": 142406,
+            "ns": 144425,
             "bytes": 41184,
             "allocations": 858
           }
         ],
         "after": [
           {
-            "ns": 30116,
+            "ns": 30273,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 30283,
+            "ns": 31331,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 30018,
+            "ns": 30083,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 30219,
+            "ns": 30014,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 29943,
+            "ns": 30199,
             "bytes": 0,
             "allocations": 0
           }
@@ -2691,59 +2819,59 @@
     {
       "id": "gocui/BenchmarkViewDraw/160x48/empty",
       "description": "Redraw a 160x48 view with empty content.",
-      "before": 228501,
-      "after": 16979,
+      "before": 224713,
+      "after": 16311,
       "samples": {
         "before": [
           {
-            "ns": 234253,
+            "ns": 231485,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 226814,
+            "ns": 224538,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 228501,
+            "ns": 223312,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 228962,
+            "ns": 224713,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 227164,
+            "ns": 230017,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 16803,
+            "ns": 16298,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16979,
+            "ns": 16285,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16997,
+            "ns": 16348,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 17026,
+            "ns": 16607,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16871,
+            "ns": 16311,
             "bytes": 0,
             "allocations": 0
           }
@@ -2753,59 +2881,59 @@
     {
       "id": "gocui/BenchmarkViewDraw/160x48/full",
       "description": "Redraw a 160x48 view with full content.",
-      "before": 513360,
-      "after": 170732,
+      "before": 520828,
+      "after": 168922,
       "samples": {
         "before": [
           {
-            "ns": 530883,
+            "ns": 527447,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 512457,
+            "ns": 522218,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 512555,
-            "bytes": 1,
-            "allocations": 0
-          },
-          {
-            "ns": 513360,
+            "ns": 520828,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 514575,
+            "ns": 516297,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 516814,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 167272,
+            "ns": 166420,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 171470,
+            "ns": 170261,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 171056,
+            "ns": 168922,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 170732,
+            "ns": 167834,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 170145,
+            "ns": 172298,
             "bytes": 0,
             "allocations": 0
           }
@@ -2815,59 +2943,59 @@
     {
       "id": "gocui/BenchmarkViewDraw/160x48/short",
       "description": "Redraw a 160x48 view with short content.",
-      "before": 230216,
-      "after": 16978,
+      "before": 225196,
+      "after": 16319,
       "samples": {
         "before": [
           {
-            "ns": 234216,
+            "ns": 235400,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 228158,
+            "ns": 232397,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 227616,
+            "ns": 221426,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 230216,
+            "ns": 223855,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 231069,
+            "ns": 225196,
             "bytes": 0,
             "allocations": 0
           }
         ],
         "after": [
           {
-            "ns": 16738,
+            "ns": 16010,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16978,
+            "ns": 16270,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16998,
+            "ns": 16570,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 16865,
+            "ns": 16333,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 17304,
+            "ns": 16319,
             "bytes": 0,
             "allocations": 0
           }
@@ -2877,59 +3005,59 @@
     {
       "id": "gocui/BenchmarkViewDraw/160x48/unicode",
       "description": "Redraw a 160x48 view with unicode content.",
-      "before": 621941,
-      "after": 126054,
+      "before": 609216,
+      "after": 126561,
       "samples": {
         "before": [
           {
-            "ns": 620149,
+            "ns": 624959,
             "bytes": 174432,
             "allocations": 3634
           },
           {
-            "ns": 623576,
+            "ns": 607673,
             "bytes": 174432,
             "allocations": 3634
           },
           {
-            "ns": 629951,
+            "ns": 608390,
             "bytes": 174432,
             "allocations": 3634
           },
           {
-            "ns": 620267,
+            "ns": 609732,
             "bytes": 174432,
             "allocations": 3634
           },
           {
-            "ns": 621941,
+            "ns": 609216,
             "bytes": 174432,
             "allocations": 3634
           }
         ],
         "after": [
           {
-            "ns": 128338,
+            "ns": 128886,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 125553,
+            "ns": 126250,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 125493,
+            "ns": 126608,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 128919,
+            "ns": 126561,
             "bytes": 0,
             "allocations": 0
           },
           {
-            "ns": 126054,
+            "ns": 126112,
             "bytes": 0,
             "allocations": 0
           }
@@ -2939,59 +3067,59 @@
     {
       "id": "gocui/BenchmarkViewWrite/colored",
       "description": "Write 2,000 colored lines into a new view.",
-      "before": 9542340,
-      "after": 7549789,
+      "before": 9071234,
+      "after": 7518638,
       "samples": {
         "before": [
           {
-            "ns": 9542340,
-            "bytes": 16047050,
+            "ns": 9104430,
+            "bytes": 16047048,
             "allocations": 84019
           },
           {
-            "ns": 9339028,
+            "ns": 8958529,
             "bytes": 16047051,
             "allocations": 84019
           },
           {
-            "ns": 9543959,
-            "bytes": 16047051,
+            "ns": 9223384,
+            "bytes": 16047054,
             "allocations": 84019
           },
           {
-            "ns": 9673109,
-            "bytes": 16047050,
+            "ns": 9071234,
+            "bytes": 16047056,
             "allocations": 84019
           },
           {
-            "ns": 9342502,
+            "ns": 9021692,
             "bytes": 16047051,
             "allocations": 84019
           }
         ],
         "after": [
           {
-            "ns": 7618816,
+            "ns": 7518638,
             "bytes": 11727226,
             "allocations": 30019
           },
           {
-            "ns": 7587826,
+            "ns": 7552832,
             "bytes": 11727225,
             "allocations": 30019
           },
           {
-            "ns": 7359204,
-            "bytes": 11727224,
+            "ns": 7493535,
+            "bytes": 11727225,
             "allocations": 30019
           },
           {
-            "ns": 7291558,
-            "bytes": 11727228,
+            "ns": 7563344,
+            "bytes": 11727227,
             "allocations": 30019
           },
           {
-            "ns": 7549789,
+            "ns": 7447970,
             "bytes": 11727225,
             "allocations": 30019
           }
@@ -3001,59 +3129,59 @@
     {
       "id": "gocui/BenchmarkViewWrite/metadata",
       "description": "Write 2,000 metadata lines into a new view.",
-      "before": 5728847,
-      "after": 4848973,
+      "before": 5665774,
+      "after": 4915635,
       "samples": {
         "before": [
           {
-            "ns": 5686490,
+            "ns": 5557618,
             "bytes": 8143024,
             "allocations": 46018
           },
           {
-            "ns": 5748466,
+            "ns": 5709460,
             "bytes": 8143024,
             "allocations": 46018
           },
           {
-            "ns": 5673529,
+            "ns": 5835540,
             "bytes": 8143024,
             "allocations": 46018
           },
           {
-            "ns": 5728847,
+            "ns": 5665774,
             "bytes": 8143024,
             "allocations": 46018
           },
           {
-            "ns": 5816190,
+            "ns": 5617612,
             "bytes": 8143024,
             "allocations": 46018
           }
         ],
         "after": [
           {
-            "ns": 4801333,
+            "ns": 4853286,
+            "bytes": 5903200,
+            "allocations": 18018
+          },
+          {
+            "ns": 4915635,
+            "bytes": 5903200,
+            "allocations": 18018
+          },
+          {
+            "ns": 4887141,
             "bytes": 5903201,
             "allocations": 18018
           },
           {
-            "ns": 4895481,
+            "ns": 5059887,
             "bytes": 5903200,
             "allocations": 18018
           },
           {
-            "ns": 4829036,
-            "bytes": 5903200,
-            "allocations": 18018
-          },
-          {
-            "ns": 4848973,
-            "bytes": 5903200,
-            "allocations": 18018
-          },
-          {
-            "ns": 4853610,
+            "ns": 5059936,
             "bytes": 5903200,
             "allocations": 18018
           }
@@ -3063,59 +3191,59 @@
     {
       "id": "gocui/BenchmarkViewWrite/plain",
       "description": "Write 2,000 plain lines into a new view.",
-      "before": 13888611,
-      "after": 10137824,
+      "before": 13455921,
+      "after": 10408902,
       "samples": {
         "before": [
           {
-            "ns": 14350603,
+            "ns": 13725180,
             "bytes": 29775040,
             "allocations": 112019
           },
           {
-            "ns": 13179409,
+            "ns": 13153714,
             "bytes": 29775040,
             "allocations": 112019
           },
           {
-            "ns": 13888611,
+            "ns": 13455921,
             "bytes": 29775040,
             "allocations": 112019
           },
           {
-            "ns": 14363808,
+            "ns": 13290976,
             "bytes": 29775040,
             "allocations": 112019
           },
           {
-            "ns": 13480969,
+            "ns": 13622166,
             "bytes": 29775040,
             "allocations": 112019
           }
         ],
         "after": [
           {
-            "ns": 10761318,
+            "ns": 11139145,
             "bytes": 21935216,
             "allocations": 14019
           },
           {
-            "ns": 10063511,
+            "ns": 10477247,
             "bytes": 21935216,
             "allocations": 14019
           },
           {
-            "ns": 10137824,
+            "ns": 10408902,
             "bytes": 21935216,
             "allocations": 14019
           },
           {
-            "ns": 10374633,
+            "ns": 10370742,
             "bytes": 21935216,
             "allocations": 14019
           },
           {
-            "ns": 10121327,
+            "ns": 10239323,
             "bytes": 21935216,
             "allocations": 14019
           }
@@ -3125,60 +3253,60 @@
     {
       "id": "gocui/BenchmarkViewWrite/unicode",
       "description": "Write 2,000 unicode lines into a new view.",
-      "before": 7954165,
-      "after": 6346493,
+      "before": 7873039,
+      "after": 6272290,
       "samples": {
         "before": [
           {
-            "ns": 7878124,
-            "bytes": 15428397,
-            "allocations": 76019
-          },
-          {
-            "ns": 7920930,
+            "ns": 7897149,
             "bytes": 15428399,
             "allocations": 76019
           },
           {
-            "ns": 7954165,
-            "bytes": 15428401,
+            "ns": 7873039,
+            "bytes": 15428400,
             "allocations": 76019
           },
           {
-            "ns": 8079535,
-            "bytes": 15428397,
+            "ns": 7755148,
+            "bytes": 15428400,
             "allocations": 76019
           },
           {
-            "ns": 8095646,
+            "ns": 7951111,
             "bytes": 15428399,
+            "allocations": 76019
+          },
+          {
+            "ns": 7818560,
+            "bytes": 15428397,
             "allocations": 76019
           }
         ],
         "after": [
           {
-            "ns": 6394918,
-            "bytes": 11268568,
-            "allocations": 24019
-          },
-          {
-            "ns": 6139632,
-            "bytes": 11268565,
-            "allocations": 24019
-          },
-          {
-            "ns": 6064357,
+            "ns": 6272290,
             "bytes": 11268566,
             "allocations": 24019
           },
           {
-            "ns": 6375449,
+            "ns": 6316874,
             "bytes": 11268565,
             "allocations": 24019
           },
           {
-            "ns": 6346493,
-            "bytes": 11268568,
+            "ns": 6147108,
+            "bytes": 11268564,
+            "allocations": 24019
+          },
+          {
+            "ns": 6308749,
+            "bytes": 11268566,
+            "allocations": 24019
+          },
+          {
+            "ns": 6236003,
+            "bytes": 11268566,
             "allocations": 24019
           }
         ]
@@ -3187,59 +3315,59 @@
     {
       "id": "gocui/BenchmarkViewWriteLongLine",
       "description": "Write one 13,001-byte line into a new view.",
-      "before": 1879279,
-      "after": 1249134,
+      "before": 1846340,
+      "after": 1267177,
       "samples": {
         "before": [
           {
-            "ns": 1904521,
+            "ns": 1797029,
             "bytes": 5499888,
             "allocations": 13026
           },
           {
-            "ns": 1934906,
+            "ns": 1849464,
             "bytes": 5499888,
             "allocations": 13026
           },
           {
-            "ns": 1879279,
+            "ns": 1846340,
             "bytes": 5499888,
             "allocations": 13026
           },
           {
-            "ns": 1872983,
+            "ns": 1833730,
             "bytes": 5499888,
             "allocations": 13026
           },
           {
-            "ns": 1872214,
+            "ns": 1847903,
             "bytes": 5499888,
             "allocations": 13026
           }
         ],
         "after": [
           {
-            "ns": 1249134,
+            "ns": 1317006,
             "bytes": 4460064,
             "allocations": 26
           },
           {
-            "ns": 1311619,
+            "ns": 1270224,
             "bytes": 4460064,
             "allocations": 26
           },
           {
-            "ns": 1253123,
+            "ns": 1266650,
             "bytes": 4460064,
             "allocations": 26
           },
           {
-            "ns": 1222488,
+            "ns": 1254182,
             "bytes": 4460064,
             "allocations": 26
           },
           {
-            "ns": 1191323,
+            "ns": 1267177,
             "bytes": 4460064,
             "allocations": 26
           }
@@ -3249,61 +3377,61 @@
     {
       "id": "gocui/BenchmarkWriteToSearchedView",
       "description": "Write 2,000 lines into a searched view and read search status.",
-      "before": 15674764,
-      "after": 11401348,
+      "before": 14674323,
+      "after": 11191696,
       "samples": {
         "before": [
           {
-            "ns": 15753926,
-            "bytes": 30242929,
+            "ns": 15389778,
+            "bytes": 30242923,
             "allocations": 116691
           },
           {
-            "ns": 15494391,
-            "bytes": 30242931,
+            "ns": 14711819,
+            "bytes": 30242908,
             "allocations": 116691
           },
           {
-            "ns": 15674764,
-            "bytes": 30242896,
+            "ns": 14674323,
+            "bytes": 30242898,
             "allocations": 116691
           },
           {
-            "ns": 16240390,
-            "bytes": 30242888,
+            "ns": 14153721,
+            "bytes": 30242915,
             "allocations": 116691
           },
           {
-            "ns": 15544941,
-            "bytes": 30242934,
+            "ns": 14434317,
+            "bytes": 30242945,
             "allocations": 116691
           }
         ],
         "after": [
           {
-            "ns": 11814590,
-            "bytes": 22491888,
-            "allocations": 19802
+            "ns": 11155746,
+            "bytes": 22443930,
+            "allocations": 17803
           },
           {
-            "ns": 11401348,
-            "bytes": 22491875,
-            "allocations": 19802
+            "ns": 11191696,
+            "bytes": 22443849,
+            "allocations": 17802
           },
           {
-            "ns": 10739626,
-            "bytes": 22491899,
-            "allocations": 19802
+            "ns": 11442428,
+            "bytes": 22443888,
+            "allocations": 17802
           },
           {
-            "ns": 11010463,
-            "bytes": 22491890,
-            "allocations": 19802
+            "ns": 10955047,
+            "bytes": 22443910,
+            "allocations": 17802
           },
           {
-            "ns": 11495736,
-            "bytes": 22491900,
-            "allocations": 19802
+            "ns": 11338085,
+            "bytes": 22443863,
+            "allocations": 17802
           }
         ]
       }
@@ -3311,59 +3439,59 @@
     {
       "id": "gui/BenchmarkCommitDescriptionInput/bytes=256",
       "description": "Type 250 bytes through the commit-description editor.",
-      "before": 10529949,
-      "after": 163344,
+      "before": 10652893,
+      "after": 162036,
       "samples": {
         "before": [
           {
-            "ns": 10468763,
-            "bytes": 25272824,
+            "ns": 10808308,
+            "bytes": 25272819,
             "allocations": 94766
           },
           {
-            "ns": 10534194,
-            "bytes": 25272799,
+            "ns": 10910556,
+            "bytes": 25272802,
             "allocations": 94766
           },
           {
-            "ns": 10529949,
-            "bytes": 25272800,
+            "ns": 10652893,
+            "bytes": 25272797,
             "allocations": 94766
           },
           {
-            "ns": 10386468,
-            "bytes": 25272798,
+            "ns": 10649141,
+            "bytes": 25272797,
             "allocations": 94766
           },
           {
-            "ns": 10641925,
-            "bytes": 25272795,
+            "ns": 10530444,
+            "bytes": 25272797,
             "allocations": 94766
           }
         ],
         "after": [
           {
-            "ns": 162654,
+            "ns": 160777,
             "bytes": 152208,
             "allocations": 333
           },
           {
-            "ns": 164545,
+            "ns": 162036,
             "bytes": 152208,
             "allocations": 333
           },
           {
-            "ns": 163777,
+            "ns": 161978,
             "bytes": 152208,
             "allocations": 333
           },
           {
-            "ns": 163344,
+            "ns": 162467,
             "bytes": 152208,
             "allocations": 333
           },
           {
-            "ns": 163054,
+            "ns": 166042,
             "bytes": 152208,
             "allocations": 333
           }
@@ -3373,59 +3501,59 @@
     {
       "id": "gui/BenchmarkCommitDescriptionInput/bytes=1024",
       "description": "Type 1020 bytes through the commit-description editor.",
-      "before": 179841781,
-      "after": 767717,
+      "before": 174895904,
+      "after": 768148,
       "samples": {
         "before": [
           {
-            "ns": 173562077,
+            "ns": 173817477,
             "bytes": 422625108,
             "allocations": 1494999
           },
           {
-            "ns": 175878022,
-            "bytes": 422623716,
-            "allocations": 1494998
+            "ns": 182526892,
+            "bytes": 422622176,
+            "allocations": 1494977
           },
           {
-            "ns": 184296830,
-            "bytes": 422622360,
-            "allocations": 1494979
-          },
-          {
-            "ns": 180595057,
-            "bytes": 422623728,
+            "ns": 174895904,
+            "bytes": 422623760,
             "allocations": 1494999
           },
           {
-            "ns": 179841781,
-            "bytes": 422623516,
-            "allocations": 1494996
+            "ns": 177758376,
+            "bytes": 422623760,
+            "allocations": 1494999
+          },
+          {
+            "ns": 174657024,
+            "bytes": 422623712,
+            "allocations": 1494999
           }
         ],
         "after": [
           {
-            "ns": 768134,
+            "ns": 767152,
             "bytes": 1030550,
             "allocations": 1265
           },
           {
-            "ns": 767983,
+            "ns": 768148,
             "bytes": 1030550,
             "allocations": 1265
           },
           {
-            "ns": 766369,
+            "ns": 769530,
             "bytes": 1030550,
             "allocations": 1265
           },
           {
-            "ns": 767717,
+            "ns": 770398,
             "bytes": 1030550,
             "allocations": 1265
           },
           {
-            "ns": 766174,
+            "ns": 768020,
             "bytes": 1030550,
             "allocations": 1265
           }
@@ -3435,59 +3563,59 @@
     {
       "id": "gui/BenchmarkCommitDescriptionInput/bytes=4096",
       "description": "Type 4090 bytes through the commit-description editor.",
-      "before": 3063585307,
-      "after": 4472398,
+      "before": 3043256694,
+      "after": 4485223,
       "samples": {
         "before": [
           {
-            "ns": 3063585307,
-            "bytes": 6769815520,
-            "allocations": 23617363
+            "ns": 3035357140,
+            "bytes": 6769815336,
+            "allocations": 23617360
           },
           {
-            "ns": 3064185424,
-            "bytes": 6769805832,
-            "allocations": 23617353
+            "ns": 3045960187,
+            "bytes": 6769806776,
+            "allocations": 23617365
           },
           {
-            "ns": 3087686277,
-            "bytes": 6769806576,
-            "allocations": 23617359
+            "ns": 3070548945,
+            "bytes": 6769805064,
+            "allocations": 23617341
           },
           {
-            "ns": 3062949263,
-            "bytes": 6769806128,
-            "allocations": 23617355
+            "ns": 3043256694,
+            "bytes": 6769807176,
+            "allocations": 23617373
           },
           {
-            "ns": 3055336033,
-            "bytes": 6769807016,
-            "allocations": 23617369
+            "ns": 3042994161,
+            "bytes": 6769806296,
+            "allocations": 23617357
           }
         ],
         "after": [
           {
-            "ns": 4584307,
+            "ns": 4485223,
             "bytes": 11041056,
             "allocations": 4959
           },
           {
-            "ns": 4459256,
+            "ns": 4468840,
             "bytes": 11041056,
             "allocations": 4959
           },
           {
-            "ns": 4493582,
+            "ns": 4549703,
             "bytes": 11041056,
             "allocations": 4959
           },
           {
-            "ns": 4472398,
+            "ns": 4501141,
             "bytes": 11041056,
             "allocations": 4959
           },
           {
-            "ns": 4435258,
+            "ns": 4463424,
             "bytes": 11041056,
             "allocations": 4959
           }
@@ -3497,27 +3625,12 @@
     {
       "id": "gui/context/BenchmarkFilteredListNavigation/items=100",
       "description": "Reset selection to the midpoint, move one row, retrieve it, and count 100 filtered branches.",
-      "before": 2550,
-      "after": 36.6,
+      "before": 2630,
+      "after": 37.72,
       "samples": {
         "before": [
           {
-            "ns": 2546,
-            "bytes": 8064,
-            "allocations": 9
-          },
-          {
-            "ns": 2545,
-            "bytes": 8064,
-            "allocations": 9
-          },
-          {
-            "ns": 2550,
-            "bytes": 8064,
-            "allocations": 9
-          },
-          {
-            "ns": 2557,
+            "ns": 2659,
             "bytes": 8064,
             "allocations": 9
           },
@@ -3525,31 +3638,46 @@
             "ns": 2701,
             "bytes": 8064,
             "allocations": 9
+          },
+          {
+            "ns": 2630,
+            "bytes": 8064,
+            "allocations": 9
+          },
+          {
+            "ns": 2628,
+            "bytes": 8064,
+            "allocations": 9
+          },
+          {
+            "ns": 2610,
+            "bytes": 8064,
+            "allocations": 9
           }
         ],
         "after": [
           {
-            "ns": 35.39,
+            "ns": 37.19,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 36.9,
+            "ns": 38.08,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 36.57,
+            "ns": 38.26,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 36.6,
+            "ns": 37.62,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 36.63,
+            "ns": 37.72,
             "bytes": 8,
             "allocations": 1
           }
@@ -3559,59 +3687,59 @@
     {
       "id": "gui/context/BenchmarkFilteredListNavigation/items=1000",
       "description": "Reset selection to the midpoint, move one row, retrieve it, and count 1000 filtered branches.",
-      "before": 24449,
-      "after": 36.77,
+      "before": 25264,
+      "after": 38.13,
       "samples": {
         "before": [
           {
-            "ns": 24301,
+            "ns": 25262,
             "bytes": 73728,
             "allocations": 9
           },
           {
-            "ns": 24538,
+            "ns": 25466,
             "bytes": 73728,
             "allocations": 9
           },
           {
-            "ns": 24542,
+            "ns": 25858,
             "bytes": 73728,
             "allocations": 9
           },
           {
-            "ns": 24449,
+            "ns": 25264,
             "bytes": 73728,
             "allocations": 9
           },
           {
-            "ns": 24391,
+            "ns": 25208,
             "bytes": 73728,
             "allocations": 9
           }
         ],
         "after": [
           {
-            "ns": 36.77,
+            "ns": 37.99,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 37.27,
+            "ns": 38.13,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 36.87,
+            "ns": 38.02,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 36.73,
+            "ns": 38.14,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 36.73,
+            "ns": 38.43,
             "bytes": 8,
             "allocations": 1
           }
@@ -3621,59 +3749,59 @@
     {
       "id": "gui/context/BenchmarkFilteredListNavigation/items=10000",
       "description": "Reset selection to the midpoint, move one row, retrieve it, and count 10000 filtered branches.",
-      "before": 279020,
-      "after": 37.4,
+      "before": 279835,
+      "after": 38.14,
       "samples": {
         "before": [
           {
-            "ns": 279624,
+            "ns": 282810,
             "bytes": 737280,
             "allocations": 9
           },
           {
-            "ns": 277812,
+            "ns": 277793,
             "bytes": 737280,
             "allocations": 9
           },
           {
-            "ns": 281064,
+            "ns": 279835,
             "bytes": 737280,
             "allocations": 9
           },
           {
-            "ns": 279020,
+            "ns": 280093,
             "bytes": 737280,
             "allocations": 9
           },
           {
-            "ns": 276664,
+            "ns": 277439,
             "bytes": 737280,
             "allocations": 9
           }
         ],
         "after": [
           {
-            "ns": 37.62,
+            "ns": 38.97,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 37.4,
+            "ns": 38.3,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 37.38,
+            "ns": 38.14,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 37.3,
+            "ns": 37.93,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 37.69,
+            "ns": 38,
             "bytes": 8,
             "allocations": 1
           }
@@ -3683,59 +3811,59 @@
     {
       "id": "gui/filetree/BenchmarkBuildCommitFileTree/files=100",
       "description": "Build and sort a tree of 100 commit files supplied in reverse order.",
-      "before": 35221,
-      "after": 32068,
+      "before": 35065,
+      "after": 31576,
       "samples": {
         "before": [
           {
-            "ns": 39948,
+            "ns": 34560,
             "bytes": 20888,
             "allocations": 516
           },
           {
-            "ns": 35529,
+            "ns": 35065,
             "bytes": 20888,
             "allocations": 516
           },
           {
-            "ns": 34877,
+            "ns": 34960,
             "bytes": 20888,
             "allocations": 516
           },
           {
-            "ns": 35009,
+            "ns": 35347,
             "bytes": 20888,
             "allocations": 516
           },
           {
-            "ns": 35221,
+            "ns": 35422,
             "bytes": 20888,
             "allocations": 516
           }
         ],
         "after": [
           {
-            "ns": 31684,
+            "ns": 31600,
             "bytes": 28352,
             "allocations": 531
           },
           {
-            "ns": 32010,
+            "ns": 31256,
             "bytes": 28352,
             "allocations": 531
           },
           {
-            "ns": 32272,
+            "ns": 31786,
             "bytes": 28352,
             "allocations": 531
           },
           {
-            "ns": 32318,
+            "ns": 31531,
             "bytes": 28352,
             "allocations": 531
           },
           {
-            "ns": 32068,
+            "ns": 31576,
             "bytes": 28352,
             "allocations": 531
           }
@@ -3745,59 +3873,59 @@
     {
       "id": "gui/filetree/BenchmarkBuildCommitFileTree/files=1000",
       "description": "Build and sort a tree of 1000 commit files supplied in reverse order.",
-      "before": 1267774,
-      "after": 325481,
+      "before": 1273375,
+      "after": 324224,
       "samples": {
         "before": [
           {
-            "ns": 1270132,
+            "ns": 1275357,
             "bytes": 201944,
             "allocations": 5019
           },
           {
-            "ns": 1266197,
+            "ns": 1270568,
             "bytes": 201944,
             "allocations": 5019
           },
           {
-            "ns": 1267774,
+            "ns": 1273375,
             "bytes": 201944,
             "allocations": 5019
           },
           {
-            "ns": 1296306,
+            "ns": 1265804,
             "bytes": 201944,
             "allocations": 5019
           },
           {
-            "ns": 1266314,
+            "ns": 1340641,
             "bytes": 201944,
             "allocations": 5019
           }
         ],
         "after": [
           {
-            "ns": 329217,
+            "ns": 322895,
             "bytes": 311472,
             "allocations": 5045
           },
           {
-            "ns": 325524,
+            "ns": 323146,
             "bytes": 311472,
             "allocations": 5045
           },
           {
-            "ns": 325481,
+            "ns": 329697,
             "bytes": 311472,
             "allocations": 5045
           },
           {
-            "ns": 324750,
+            "ns": 324224,
             "bytes": 311472,
             "allocations": 5045
           },
           {
-            "ns": 324143,
+            "ns": 325082,
             "bytes": 311472,
             "allocations": 5045
           }
@@ -3807,59 +3935,59 @@
     {
       "id": "gui/filetree/BenchmarkBuildCommitFileTree/files=10000",
       "description": "Build and sort a tree of 10000 commit files supplied in reverse order.",
-      "before": 107311314,
-      "after": 3693326,
+      "before": 108405009,
+      "after": 3686593,
       "samples": {
         "before": [
           {
-            "ns": 107311314,
+            "ns": 109743615,
             "bytes": 2152536,
             "allocations": 50026
           },
           {
-            "ns": 107637482,
+            "ns": 109203892,
             "bytes": 2152536,
             "allocations": 50026
           },
           {
-            "ns": 108322028,
+            "ns": 107127066,
             "bytes": 2152536,
             "allocations": 50026
           },
           {
-            "ns": 105524756,
+            "ns": 108405009,
             "bytes": 2152536,
             "allocations": 50026
           },
           {
-            "ns": 105344070,
+            "ns": 106743074,
             "bytes": 2152536,
             "allocations": 50026
           }
         ],
         "after": [
           {
-            "ns": 3667127,
+            "ns": 3762083,
             "bytes": 3026576,
             "allocations": 50111
           },
           {
-            "ns": 3711332,
+            "ns": 3653380,
             "bytes": 3026576,
             "allocations": 50111
           },
           {
-            "ns": 3691510,
+            "ns": 3725624,
             "bytes": 3026576,
             "allocations": 50111
           },
           {
-            "ns": 3700319,
+            "ns": 3686593,
             "bytes": 3026576,
             "allocations": 50111
           },
           {
-            "ns": 3693326,
+            "ns": 3642250,
             "bytes": 3026576,
             "allocations": 50111
           }
@@ -3869,59 +3997,59 @@
     {
       "id": "gui/filetree/BenchmarkFileTreeNavigation/files=100",
       "description": "Reset selection to the midpoint, move one row, retrieve it, and count rows in a 100-file tree.",
-      "before": 1417,
-      "after": 28.17,
+      "before": 1430,
+      "after": 28.79,
       "samples": {
         "before": [
           {
-            "ns": 1415,
+            "ns": 1431,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 1417,
+            "ns": 1430,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 1416,
+            "ns": 1429,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 1418,
+            "ns": 1427,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 1420,
+            "ns": 1448,
             "bytes": 8,
             "allocations": 1
           }
         ],
         "after": [
           {
-            "ns": 27.53,
+            "ns": 28.78,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 28.06,
+            "ns": 28.87,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 28.17,
+            "ns": 28.72,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 28.24,
+            "ns": 28.81,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 28.5,
+            "ns": 28.79,
             "bytes": 8,
             "allocations": 1
           }
@@ -3931,101 +4059,39 @@
     {
       "id": "gui/filetree/BenchmarkFileTreeNavigation/files=1000",
       "description": "Reset selection to the midpoint, move one row, retrieve it, and count rows in a 1000-file tree.",
-      "before": 13388,
-      "after": 28.36,
+      "before": 13486,
+      "after": 29.01,
       "samples": {
         "before": [
           {
-            "ns": 13555,
+            "ns": 13486,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 13465,
+            "ns": 13478,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 13350,
+            "ns": 13576,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 13388,
+            "ns": 13554,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 13330,
+            "ns": 13484,
             "bytes": 8,
             "allocations": 1
           }
         ],
         "after": [
           {
-            "ns": 28.65,
-            "bytes": 8,
-            "allocations": 1
-          },
-          {
-            "ns": 28.36,
-            "bytes": 8,
-            "allocations": 1
-          },
-          {
-            "ns": 28.32,
-            "bytes": 8,
-            "allocations": 1
-          },
-          {
-            "ns": 28.36,
-            "bytes": 8,
-            "allocations": 1
-          },
-          {
-            "ns": 28.32,
-            "bytes": 8,
-            "allocations": 1
-          }
-        ]
-      }
-    },
-    {
-      "id": "gui/filetree/BenchmarkFileTreeNavigation/files=10000",
-      "description": "Reset selection to the midpoint, move one row, retrieve it, and count rows in a 10000-file tree.",
-      "before": 133294,
-      "after": 29.2,
-      "samples": {
-        "before": [
-          {
-            "ns": 133012,
-            "bytes": 8,
-            "allocations": 1
-          },
-          {
-            "ns": 132723,
-            "bytes": 8,
-            "allocations": 1
-          },
-          {
-            "ns": 133294,
-            "bytes": 8,
-            "allocations": 1
-          },
-          {
-            "ns": 133592,
-            "bytes": 8,
-            "allocations": 1
-          },
-          {
-            "ns": 133676,
-            "bytes": 8,
-            "allocations": 1
-          }
-        ],
-        "after": [
-          {
-            "ns": 29.46,
+            "ns": 28.85,
             "bytes": 8,
             "allocations": 1
           },
@@ -4035,17 +4101,79 @@
             "allocations": 1
           },
           {
-            "ns": 29.47,
+            "ns": 29.22,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 28.98,
+            "ns": 28.99,
             "bytes": 8,
             "allocations": 1
           },
           {
-            "ns": 29.2,
+            "ns": 29.13,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "gui/filetree/BenchmarkFileTreeNavigation/files=10000",
+      "description": "Reset selection to the midpoint, move one row, retrieve it, and count rows in a 10000-file tree.",
+      "before": 133214,
+      "after": 29.83,
+      "samples": {
+        "before": [
+          {
+            "ns": 133697,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 133214,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 131784,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 132645,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 133843,
+            "bytes": 8,
+            "allocations": 1
+          }
+        ],
+        "after": [
+          {
+            "ns": 30.24,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 29.89,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 29.8,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 29.68,
+            "bytes": 8,
+            "allocations": 1
+          },
+          {
+            "ns": 29.83,
             "bytes": 8,
             "allocations": 1
           }
@@ -4055,59 +4183,59 @@
     {
       "id": "gui/filetree/BenchmarkFileTreeRangeSelection/files=100",
       "description": "Retrieve a range spanning a 100-file tree.",
-      "before": 20818,
-      "after": 1791,
+      "before": 21396,
+      "after": 1767,
       "samples": {
         "before": [
           {
-            "ns": 19348,
+            "ns": 20927,
             "bytes": 2920,
             "allocations": 106
           },
           {
-            "ns": 19442,
+            "ns": 21400,
             "bytes": 2920,
             "allocations": 106
           },
           {
-            "ns": 20818,
+            "ns": 21333,
             "bytes": 2920,
             "allocations": 106
           },
           {
-            "ns": 21320,
+            "ns": 21396,
             "bytes": 2920,
             "allocations": 106
           },
           {
-            "ns": 21269,
+            "ns": 21400,
             "bytes": 2920,
             "allocations": 106
           }
         ],
         "after": [
           {
-            "ns": 1785,
+            "ns": 1768,
             "bytes": 1712,
             "allocations": 103
           },
           {
-            "ns": 1805,
+            "ns": 1780,
             "bytes": 1712,
             "allocations": 103
           },
           {
-            "ns": 1790,
+            "ns": 1758,
             "bytes": 1712,
             "allocations": 103
           },
           {
-            "ns": 1795,
+            "ns": 1750,
             "bytes": 1712,
             "allocations": 103
           },
           {
-            "ns": 1791,
+            "ns": 1767,
             "bytes": 1712,
             "allocations": 103
           }
@@ -4117,59 +4245,59 @@
     {
       "id": "gui/filetree/BenchmarkFileTreeRangeSelection/files=1000",
       "description": "Retrieve a range spanning a 1000-file tree.",
-      "before": 1656442,
-      "after": 17631,
+      "before": 1666900,
+      "after": 17321,
       "samples": {
         "before": [
           {
-            "ns": 1664368,
+            "ns": 1674436,
             "bytes": 25480,
             "allocations": 1009
           },
           {
-            "ns": 1653402,
+            "ns": 1666900,
             "bytes": 25480,
             "allocations": 1009
           },
           {
-            "ns": 1656442,
+            "ns": 1697665,
             "bytes": 25480,
             "allocations": 1009
           },
           {
-            "ns": 1657650,
+            "ns": 1612881,
             "bytes": 25480,
             "allocations": 1009
           },
           {
-            "ns": 1656078,
+            "ns": 1621233,
             "bytes": 25480,
             "allocations": 1009
           }
         ],
         "after": [
           {
-            "ns": 18087,
+            "ns": 17338,
             "bytes": 16208,
             "allocations": 1003
           },
           {
-            "ns": 17546,
+            "ns": 17258,
             "bytes": 16208,
             "allocations": 1003
           },
           {
-            "ns": 17772,
+            "ns": 17321,
             "bytes": 16208,
             "allocations": 1003
           },
           {
-            "ns": 17617,
+            "ns": 17300,
             "bytes": 16208,
             "allocations": 1003
           },
           {
-            "ns": 17631,
+            "ns": 17524,
             "bytes": 16208,
             "allocations": 1003
           }
@@ -4179,59 +4307,59 @@
     {
       "id": "gui/filetree/BenchmarkFileTreeRangeSelection/files=10000",
       "description": "Retrieve a range spanning a 10000-file tree.",
-      "before": 160722412,
-      "after": 195428,
+      "before": 159739074,
+      "after": 188407,
       "samples": {
         "before": [
           {
-            "ns": 161596421,
+            "ns": 159294962,
             "bytes": 390344,
             "allocations": 10016
           },
           {
-            "ns": 160600374,
+            "ns": 159739074,
             "bytes": 390344,
             "allocations": 10016
           },
           {
-            "ns": 160323201,
+            "ns": 159732596,
             "bytes": 390344,
             "allocations": 10016
           },
           {
-            "ns": 160722412,
+            "ns": 160287284,
             "bytes": 390344,
             "allocations": 10016
           },
           {
-            "ns": 161060554,
+            "ns": 161666969,
             "bytes": 390344,
             "allocations": 10016
           }
         ],
         "after": [
           {
-            "ns": 195428,
+            "ns": 190850,
             "bytes": 161936,
             "allocations": 10003
           },
           {
-            "ns": 194972,
+            "ns": 188407,
             "bytes": 161936,
             "allocations": 10003
           },
           {
-            "ns": 193135,
+            "ns": 188364,
             "bytes": 161936,
             "allocations": 10003
           },
           {
-            "ns": 195867,
+            "ns": 187933,
             "bytes": 161936,
             "allocations": 10003
           },
           {
-            "ns": 196011,
+            "ns": 190075,
             "bytes": 161936,
             "allocations": 10003
           }
@@ -4241,61 +4369,61 @@
     {
       "id": "gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=100",
       "description": "Refresh a tree after removing a 100-file directory; fixture setup excluded.",
-      "before": 1000889,
-      "after": 81363,
+      "before": 991173,
+      "after": 50501,
       "samples": {
         "before": [
           {
-            "ns": 1000889,
+            "ns": 982652,
             "bytes": 933864,
             "allocations": 31655
           },
           {
-            "ns": 995458,
+            "ns": 998372,
             "bytes": 933864,
             "allocations": 31655
           },
           {
-            "ns": 999388,
+            "ns": 991173,
             "bytes": 933864,
             "allocations": 31655
           },
           {
-            "ns": 1004117,
+            "ns": 1011537,
             "bytes": 933864,
             "allocations": 31655
           },
           {
-            "ns": 1004050,
+            "ns": 989888,
             "bytes": 933864,
             "allocations": 31655
           }
         ],
         "after": [
           {
-            "ns": 80980,
-            "bytes": 78600,
-            "allocations": 2349
+            "ns": 50180,
+            "bytes": 49728,
+            "allocations": 1547
           },
           {
-            "ns": 81363,
-            "bytes": 78600,
-            "allocations": 2349
+            "ns": 50717,
+            "bytes": 49728,
+            "allocations": 1547
           },
           {
-            "ns": 82067,
-            "bytes": 78600,
-            "allocations": 2349
+            "ns": 50501,
+            "bytes": 49728,
+            "allocations": 1547
           },
           {
-            "ns": 81715,
-            "bytes": 78600,
-            "allocations": 2349
+            "ns": 50052,
+            "bytes": 49728,
+            "allocations": 1547
           },
           {
-            "ns": 80592,
-            "bytes": 78600,
-            "allocations": 2349
+            "ns": 50564,
+            "bytes": 49728,
+            "allocations": 1547
           }
         ]
       }
@@ -4303,61 +4431,61 @@
     {
       "id": "gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=1000",
       "description": "Refresh a tree after removing a 1000-file directory; fixture setup excluded.",
-      "before": 103076497,
-      "after": 857837,
+      "before": 101885024,
+      "after": 509468,
       "samples": {
         "before": [
           {
-            "ns": 104416624,
+            "ns": 102145986,
             "bytes": 88554136,
             "allocations": 3016069
           },
           {
-            "ns": 103336394,
+            "ns": 101726476,
             "bytes": 88554136,
             "allocations": 3016069
           },
           {
-            "ns": 102967532,
+            "ns": 101885024,
             "bytes": 88554136,
             "allocations": 3016069
           },
           {
-            "ns": 103076497,
+            "ns": 101898728,
             "bytes": 88554136,
             "allocations": 3016069
           },
           {
-            "ns": 102737555,
+            "ns": 101598797,
             "bytes": 88554136,
             "allocations": 3016069
           }
         ],
         "after": [
           {
-            "ns": 858459,
-            "bytes": 851264,
-            "allocations": 23065
+            "ns": 504700,
+            "bytes": 563193,
+            "allocations": 15063
           },
           {
-            "ns": 852111,
-            "bytes": 851264,
-            "allocations": 23065
+            "ns": 517780,
+            "bytes": 563193,
+            "allocations": 15063
           },
           {
-            "ns": 857837,
-            "bytes": 851264,
-            "allocations": 23065
+            "ns": 511224,
+            "bytes": 563193,
+            "allocations": 15063
           },
           {
-            "ns": 869528,
-            "bytes": 851264,
-            "allocations": 23065
+            "ns": 509468,
+            "bytes": 563193,
+            "allocations": 15063
           },
           {
-            "ns": 857789,
-            "bytes": 851264,
-            "allocations": 23065
+            "ns": 507966,
+            "bytes": 563193,
+            "allocations": 15063
           }
         ]
       }
@@ -4365,61 +4493,61 @@
     {
       "id": "gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=5000",
       "description": "Refresh a tree after removing a 5000-file directory; fixture setup excluded.",
-      "before": 2753142268,
-      "after": 4850649,
+      "before": 2717918700,
+      "after": 2769948,
       "samples": {
         "before": [
           {
-            "ns": 2748240511,
-            "bytes": 2202724984,
-            "allocations": 75080100
-          },
-          {
-            "ns": 2757491172,
-            "bytes": 2202724984,
-            "allocations": 75080100
-          },
-          {
-            "ns": 2770362624,
-            "bytes": 2202724984,
-            "allocations": 75080100
-          },
-          {
-            "ns": 2746265893,
+            "ns": 2713848382,
             "bytes": 2202725000,
             "allocations": 75080100
           },
           {
-            "ns": 2753142268,
+            "ns": 2717918700,
             "bytes": 2202724984,
+            "allocations": 75080100
+          },
+          {
+            "ns": 2712694541,
+            "bytes": 2202725000,
+            "allocations": 75080100
+          },
+          {
+            "ns": 2729384981,
+            "bytes": 2202724984,
+            "allocations": 75080100
+          },
+          {
+            "ns": 2725627821,
+            "bytes": 2202725000,
             "allocations": 75080100
           }
         ],
         "after": [
           {
-            "ns": 4972063,
-            "bytes": 4112658,
-            "allocations": 115108
+            "ns": 2769948,
+            "bytes": 2672586,
+            "allocations": 75106
           },
           {
-            "ns": 4850649,
-            "bytes": 4112661,
-            "allocations": 115108
+            "ns": 2803503,
+            "bytes": 2672586,
+            "allocations": 75106
           },
           {
-            "ns": 4903194,
-            "bytes": 4112659,
-            "allocations": 115108
+            "ns": 2597325,
+            "bytes": 2672585,
+            "allocations": 75106
           },
           {
-            "ns": 4773871,
-            "bytes": 4112659,
-            "allocations": 115108
+            "ns": 2710720,
+            "bytes": 2672586,
+            "allocations": 75106
           },
           {
-            "ns": 4804524,
-            "bytes": 4112659,
-            "allocations": 115108
+            "ns": 2771003,
+            "bytes": 2672584,
+            "allocations": 75106
           }
         ]
       }
@@ -4427,61 +4555,61 @@
     {
       "id": "gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=100",
       "description": "Restore selection after removing one file from 100 remaining files.",
-      "before": 7862,
-      "after": 7733,
+      "before": 7835,
+      "after": 1950,
       "samples": {
         "before": [
           {
-            "ns": 7856,
+            "ns": 7837,
             "bytes": 6560,
             "allocations": 308
           },
           {
-            "ns": 7905,
+            "ns": 7799,
             "bytes": 6560,
             "allocations": 308
           },
           {
-            "ns": 7956,
+            "ns": 7915,
             "bytes": 6560,
             "allocations": 308
           },
           {
-            "ns": 7862,
+            "ns": 7835,
             "bytes": 6560,
             "allocations": 308
           },
           {
-            "ns": 7859,
+            "ns": 7824,
             "bytes": 6560,
             "allocations": 308
           }
         ],
         "after": [
           {
-            "ns": 7803,
-            "bytes": 6560,
-            "allocations": 308
+            "ns": 1977,
+            "bytes": 1648,
+            "allocations": 103
           },
           {
-            "ns": 7716,
-            "bytes": 6560,
-            "allocations": 308
+            "ns": 1986,
+            "bytes": 1648,
+            "allocations": 103
           },
           {
-            "ns": 7701,
-            "bytes": 6560,
-            "allocations": 308
+            "ns": 1947,
+            "bytes": 1648,
+            "allocations": 103
           },
           {
-            "ns": 7733,
-            "bytes": 6560,
-            "allocations": 308
+            "ns": 1945,
+            "bytes": 1648,
+            "allocations": 103
           },
           {
-            "ns": 7807,
-            "bytes": 6560,
-            "allocations": 308
+            "ns": 1950,
+            "bytes": 1648,
+            "allocations": 103
           }
         ]
       }
@@ -4489,61 +4617,61 @@
     {
       "id": "gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=1000",
       "description": "Restore selection after removing one file from 1000 remaining files.",
-      "before": 78203,
-      "after": 76952,
+      "before": 77212,
+      "after": 19178,
       "samples": {
         "before": [
           {
-            "ns": 78212,
+            "ns": 77589,
             "bytes": 64160,
             "allocations": 3008
           },
           {
-            "ns": 78203,
+            "ns": 77212,
             "bytes": 64160,
             "allocations": 3008
           },
           {
-            "ns": 78179,
+            "ns": 78037,
             "bytes": 64160,
             "allocations": 3008
           },
           {
-            "ns": 77964,
+            "ns": 77174,
             "bytes": 64160,
             "allocations": 3008
           },
           {
-            "ns": 78352,
+            "ns": 77159,
             "bytes": 64160,
             "allocations": 3008
           }
         ],
         "after": [
           {
-            "ns": 76952,
-            "bytes": 64160,
-            "allocations": 3008
+            "ns": 19490,
+            "bytes": 16048,
+            "allocations": 1003
           },
           {
-            "ns": 76668,
-            "bytes": 64160,
-            "allocations": 3008
+            "ns": 19178,
+            "bytes": 16048,
+            "allocations": 1003
           },
           {
-            "ns": 76790,
-            "bytes": 64160,
-            "allocations": 3008
+            "ns": 19155,
+            "bytes": 16048,
+            "allocations": 1003
           },
           {
-            "ns": 77584,
-            "bytes": 64160,
-            "allocations": 3008
+            "ns": 19160,
+            "bytes": 16048,
+            "allocations": 1003
           },
           {
-            "ns": 77422,
-            "bytes": 64160,
-            "allocations": 3008
+            "ns": 19828,
+            "bytes": 16048,
+            "allocations": 1003
           }
         ]
       }
@@ -4551,61 +4679,61 @@
     {
       "id": "gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=5000",
       "description": "Restore selection after removing one file from 5000 remaining files.",
-      "before": 445426,
-      "after": 437620,
+      "before": 435609,
+      "after": 109077,
       "samples": {
         "before": [
           {
-            "ns": 450174,
+            "ns": 435609,
             "bytes": 320160,
             "allocations": 15008
           },
           {
-            "ns": 450405,
+            "ns": 434060,
             "bytes": 320160,
             "allocations": 15008
           },
           {
-            "ns": 441683,
+            "ns": 436302,
             "bytes": 320160,
             "allocations": 15008
           },
           {
-            "ns": 445426,
+            "ns": 436155,
             "bytes": 320160,
             "allocations": 15008
           },
           {
-            "ns": 444409,
+            "ns": 433565,
             "bytes": 320160,
             "allocations": 15008
           }
         ],
         "after": [
           {
-            "ns": 437620,
-            "bytes": 320160,
-            "allocations": 15008
+            "ns": 109077,
+            "bytes": 80048,
+            "allocations": 5003
           },
           {
-            "ns": 435712,
-            "bytes": 320160,
-            "allocations": 15008
+            "ns": 109121,
+            "bytes": 80048,
+            "allocations": 5003
           },
           {
-            "ns": 438115,
-            "bytes": 320160,
-            "allocations": 15008
+            "ns": 110552,
+            "bytes": 80048,
+            "allocations": 5003
           },
           {
-            "ns": 440163,
-            "bytes": 320160,
-            "allocations": 15008
+            "ns": 108590,
+            "bytes": 80048,
+            "allocations": 5003
           },
           {
-            "ns": 432687,
-            "bytes": 320160,
-            "allocations": 15008
+            "ns": 108780,
+            "bytes": 80048,
+            "allocations": 5003
           }
         ]
       }
@@ -4613,22 +4741,22 @@
     {
       "id": "gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=false",
       "description": "Restore selection among 100 files; selected file retained.",
-      "before": 153,
-      "after": 152.2,
+      "before": 152.2,
+      "after": 37.77,
       "samples": {
         "before": [
           {
-            "ns": 154.2,
+            "ns": 152.2,
             "bytes": 128,
             "allocations": 6
           },
           {
-            "ns": 152.6,
+            "ns": 154.4,
             "bytes": 128,
             "allocations": 6
           },
           {
-            "ns": 153,
+            "ns": 152.1,
             "bytes": 128,
             "allocations": 6
           },
@@ -4638,36 +4766,36 @@
             "allocations": 6
           },
           {
-            "ns": 155.4,
+            "ns": 152.2,
             "bytes": 128,
             "allocations": 6
           }
         ],
         "after": [
           {
-            "ns": 154.6,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 37.69,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 152.5,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 37.77,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 152.2,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 37.66,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 152,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 37.96,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 152.1,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 38.16,
+            "bytes": 32,
+            "allocations": 2
           }
         ]
       }
@@ -4675,61 +4803,61 @@
     {
       "id": "gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=true",
       "description": "Restore selection among 100 files; selected file removed.",
-      "before": 784400,
-      "after": 36543,
+      "before": 783145,
+      "after": 12330,
       "samples": {
         "before": [
           {
-            "ns": 786954,
+            "ns": 809045,
             "bytes": 656864,
             "allocations": 30804
           },
           {
-            "ns": 785181,
+            "ns": 783145,
             "bytes": 656864,
             "allocations": 30804
           },
           {
-            "ns": 784400,
+            "ns": 785316,
             "bytes": 656864,
             "allocations": 30804
           },
           {
-            "ns": 783925,
+            "ns": 775920,
             "bytes": 656864,
             "allocations": 30804
           },
           {
-            "ns": 783411,
+            "ns": 781360,
             "bytes": 656864,
             "allocations": 30804
           }
         ],
         "after": [
           {
-            "ns": 36412,
-            "bytes": 32752,
-            "allocations": 1312
+            "ns": 12516,
+            "bytes": 12688,
+            "allocations": 508
           },
           {
-            "ns": 36543,
-            "bytes": 32752,
-            "allocations": 1312
+            "ns": 12333,
+            "bytes": 12688,
+            "allocations": 508
           },
           {
-            "ns": 36469,
-            "bytes": 32752,
-            "allocations": 1312
+            "ns": 12304,
+            "bytes": 12688,
+            "allocations": 508
           },
           {
-            "ns": 36908,
-            "bytes": 32752,
-            "allocations": 1312
+            "ns": 12330,
+            "bytes": 12688,
+            "allocations": 508
           },
           {
-            "ns": 36598,
-            "bytes": 32752,
-            "allocations": 1312
+            "ns": 12298,
+            "bytes": 12688,
+            "allocations": 508
           }
         ]
       }
@@ -4737,17 +4865,27 @@
     {
       "id": "gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=false",
       "description": "Restore selection among 1000 files; selected file retained.",
-      "before": 159.9,
-      "after": 159.9,
+      "before": 159.2,
+      "after": 39.41,
       "samples": {
         "before": [
           {
-            "ns": 161.7,
+            "ns": 160,
             "bytes": 128,
             "allocations": 6
           },
           {
-            "ns": 159.4,
+            "ns": 159.1,
+            "bytes": 128,
+            "allocations": 6
+          },
+          {
+            "ns": 158.7,
+            "bytes": 128,
+            "allocations": 6
+          },
+          {
+            "ns": 159.3,
             "bytes": 128,
             "allocations": 6
           },
@@ -4755,43 +4893,33 @@
             "ns": 159.2,
             "bytes": 128,
             "allocations": 6
-          },
-          {
-            "ns": 164.3,
-            "bytes": 128,
-            "allocations": 6
-          },
-          {
-            "ns": 159.9,
-            "bytes": 128,
-            "allocations": 6
           }
         ],
         "after": [
           {
-            "ns": 159.4,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 39.41,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 159.9,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 39.29,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 160.1,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 40.12,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 164.8,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 40.13,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 159.6,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 39.24,
+            "bytes": 32,
+            "allocations": 2
           }
         ]
       }
@@ -4799,61 +4927,61 @@
     {
       "id": "gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=true",
       "description": "Restore selection among 1000 files; selected file removed.",
-      "before": 79990538,
-      "after": 376982,
+      "before": 80511845,
+      "after": 121506,
       "samples": {
         "before": [
           {
-            "ns": 79761117,
+            "ns": 79108411,
             "bytes": 64168064,
             "allocations": 3008004
           },
           {
-            "ns": 80752259,
+            "ns": 80511845,
             "bytes": 64168064,
             "allocations": 3008004
           },
           {
-            "ns": 80365609,
+            "ns": 80768358,
             "bytes": 64168064,
             "allocations": 3008004
           },
           {
-            "ns": 79816182,
+            "ns": 81062887,
             "bytes": 64168064,
             "allocations": 3008004
           },
           {
-            "ns": 79990538,
+            "ns": 80233534,
             "bytes": 64168064,
             "allocations": 3008004
           }
         ],
         "after": [
           {
-            "ns": 375926,
-            "bytes": 370520,
-            "allocations": 13014
+            "ns": 122462,
+            "bytes": 170456,
+            "allocations": 5010
           },
           {
-            "ns": 375155,
-            "bytes": 370520,
-            "allocations": 13014
+            "ns": 121311,
+            "bytes": 170456,
+            "allocations": 5010
           },
           {
-            "ns": 376982,
-            "bytes": 370520,
-            "allocations": 13014
+            "ns": 124021,
+            "bytes": 170456,
+            "allocations": 5010
           },
           {
-            "ns": 378614,
-            "bytes": 370520,
-            "allocations": 13014
+            "ns": 121506,
+            "bytes": 170456,
+            "allocations": 5010
           },
           {
-            "ns": 377039,
-            "bytes": 370520,
-            "allocations": 13014
+            "ns": 121106,
+            "bytes": 170456,
+            "allocations": 5010
           }
         ]
       }
@@ -4861,17 +4989,12 @@
     {
       "id": "gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=false",
       "description": "Restore selection among 5000 files; selected file retained.",
-      "before": 175.4,
-      "after": 175.6,
+      "before": 175,
+      "after": 43.76,
       "samples": {
         "before": [
           {
-            "ns": 175.4,
-            "bytes": 128,
-            "allocations": 6
-          },
-          {
-            "ns": 178.7,
+            "ns": 174.7,
             "bytes": 128,
             "allocations": 6
           },
@@ -4881,41 +5004,46 @@
             "allocations": 6
           },
           {
-            "ns": 175.8,
+            "ns": 175.6,
             "bytes": 128,
             "allocations": 6
           },
           {
-            "ns": 175.2,
+            "ns": 174.3,
+            "bytes": 128,
+            "allocations": 6
+          },
+          {
+            "ns": 175,
             "bytes": 128,
             "allocations": 6
           }
         ],
         "after": [
           {
-            "ns": 175.8,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 43.76,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 175.6,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 44.49,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 176.3,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 44.58,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 175.3,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 43.52,
+            "bytes": 32,
+            "allocations": 2
           },
           {
-            "ns": 174.6,
-            "bytes": 128,
-            "allocations": 6
+            "ns": 43.33,
+            "bytes": 32,
+            "allocations": 2
           }
         ]
       }
@@ -4923,61 +5051,61 @@
     {
       "id": "gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=true",
       "description": "Restore selection among 5000 files; selected file removed.",
-      "before": 2189812217,
-      "after": 2056388,
+      "before": 2175926766,
+      "after": 724158,
       "samples": {
         "before": [
           {
-            "ns": 2184665530,
+            "ns": 2177178068,
             "bytes": 1600840064,
             "allocations": 75040004
           },
           {
-            "ns": 2189670031,
+            "ns": 2175926766,
             "bytes": 1600840064,
             "allocations": 75040004
           },
           {
-            "ns": 2189812217,
+            "ns": 2189832134,
             "bytes": 1600840064,
             "allocations": 75040004
           },
           {
-            "ns": 2203260000,
+            "ns": 2164932374,
             "bytes": 1600840064,
             "allocations": 75040004
           },
           {
-            "ns": 2192822883,
+            "ns": 2172605456,
             "bytes": 1600840064,
             "allocations": 75040004
           }
         ],
         "after": [
           {
-            "ns": 2114376,
-            "bytes": 1753672,
-            "allocations": 65026
+            "ns": 724327,
+            "bytes": 753609,
+            "allocations": 25022
           },
           {
-            "ns": 2054872,
-            "bytes": 1753672,
-            "allocations": 65026
+            "ns": 725148,
+            "bytes": 753609,
+            "allocations": 25022
           },
           {
-            "ns": 2056243,
-            "bytes": 1753672,
-            "allocations": 65026
+            "ns": 724158,
+            "bytes": 753609,
+            "allocations": 25022
           },
           {
-            "ns": 2057056,
-            "bytes": 1753672,
-            "allocations": 65026
+            "ns": 718866,
+            "bytes": 753609,
+            "allocations": 25022
           },
           {
-            "ns": 2056388,
-            "bytes": 1753673,
-            "allocations": 65026
+            "ns": 713287,
+            "bytes": 753609,
+            "allocations": 25022
           }
         ]
       }
@@ -4985,523 +5113,560 @@
     {
       "id": "gui/presentation/graph/BenchmarkRenderCommitGraph",
       "description": "Render a graph of 50 commits generated with seed 1234.",
-      "before": 88643,
-      "after": 90590,
+      "before": 89464,
+      "after": 59411,
       "samples": {
         "before": [
           {
-            "ns": 88871,
-            "bytes": 131305,
-            "allocations": 1139
-          },
-          {
-            "ns": 88440,
+            "ns": 89938,
             "bytes": 131296,
             "allocations": 1139
           },
           {
-            "ns": 88643,
+            "ns": 89197,
             "bytes": 131296,
             "allocations": 1139
           },
           {
-            "ns": 89075,
+            "ns": 89161,
             "bytes": 131296,
             "allocations": 1139
           },
           {
-            "ns": 88565,
+            "ns": 89464,
+            "bytes": 131296,
+            "allocations": 1139
+          },
+          {
+            "ns": 89815,
             "bytes": 131296,
             "allocations": 1139
           }
         ],
         "after": [
           {
-            "ns": 88862,
-            "bytes": 131305,
-            "allocations": 1139
+            "ns": 58030,
+            "bytes": 109576,
+            "allocations": 585
           },
           {
-            "ns": 90614,
-            "bytes": 131296,
-            "allocations": 1139
+            "ns": 58931,
+            "bytes": 109576,
+            "allocations": 585
           },
           {
-            "ns": 90590,
-            "bytes": 131296,
-            "allocations": 1139
+            "ns": 59539,
+            "bytes": 109576,
+            "allocations": 585
           },
           {
-            "ns": 89443,
-            "bytes": 131296,
-            "allocations": 1139
+            "ns": 59411,
+            "bytes": 109576,
+            "allocations": 585
           },
           {
-            "ns": 91428,
-            "bytes": 131296,
-            "allocations": 1139
+            "ns": 59616,
+            "bytes": 109576,
+            "allocations": 585
+          }
+        ]
+      }
+    },
+    {
+      "id": "gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=box/selected=false",
+      "description": "Render 50 commits generated with seed 1234, using box symbols; no selected commit.",
+      "before": 89003,
+      "after": 59469,
+      "samples": {
+        "before": [
+          {
+            "ns": 88814,
+            "bytes": 131274,
+            "allocations": 1137
+          },
+          {
+            "ns": 95732,
+            "bytes": 131264,
+            "allocations": 1137
+          },
+          {
+            "ns": 94295,
+            "bytes": 131264,
+            "allocations": 1137
+          },
+          {
+            "ns": 87514,
+            "bytes": 131264,
+            "allocations": 1137
+          },
+          {
+            "ns": 89003,
+            "bytes": 131264,
+            "allocations": 1137
+          }
+        ],
+        "after": [
+          {
+            "ns": 59267,
+            "bytes": 109550,
+            "allocations": 583
+          },
+          {
+            "ns": 60885,
+            "bytes": 109544,
+            "allocations": 583
+          },
+          {
+            "ns": 59492,
+            "bytes": 109544,
+            "allocations": 583
+          },
+          {
+            "ns": 59414,
+            "bytes": 109544,
+            "allocations": 583
+          },
+          {
+            "ns": 59469,
+            "bytes": 109544,
+            "allocations": 583
+          }
+        ]
+      }
+    },
+    {
+      "id": "gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=box/selected=true",
+      "description": "Render 50 commits generated with seed 1234, using box symbols; select the middle commit.",
+      "before": 94336,
+      "after": 63695,
+      "samples": {
+        "before": [
+          {
+            "ns": 95963,
+            "bytes": 133216,
+            "allocations": 1312
+          },
+          {
+            "ns": 94336,
+            "bytes": 133216,
+            "allocations": 1312
+          },
+          {
+            "ns": 93913,
+            "bytes": 133216,
+            "allocations": 1312
+          },
+          {
+            "ns": 94530,
+            "bytes": 133216,
+            "allocations": 1312
+          },
+          {
+            "ns": 93998,
+            "bytes": 133216,
+            "allocations": 1312
+          }
+        ],
+        "after": [
+          {
+            "ns": 63603,
+            "bytes": 111496,
+            "allocations": 758
+          },
+          {
+            "ns": 63695,
+            "bytes": 111496,
+            "allocations": 758
+          },
+          {
+            "ns": 64649,
+            "bytes": 111496,
+            "allocations": 758
+          },
+          {
+            "ns": 62823,
+            "bytes": 111496,
+            "allocations": 758
+          },
+          {
+            "ns": 64110,
+            "bytes": 111496,
+            "allocations": 758
+          }
+        ]
+      }
+    },
+    {
+      "id": "gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=branch/selected=false",
+      "description": "Render 50 commits generated with seed 1234, using branch symbols; no selected commit.",
+      "before": 93754,
+      "after": 63738,
+      "samples": {
+        "before": [
+          {
+            "ns": 93504,
+            "bytes": 131271,
+            "allocations": 1137
+          },
+          {
+            "ns": 94100,
+            "bytes": 131264,
+            "allocations": 1137
+          },
+          {
+            "ns": 93497,
+            "bytes": 131264,
+            "allocations": 1137
+          },
+          {
+            "ns": 94781,
+            "bytes": 131264,
+            "allocations": 1137
+          },
+          {
+            "ns": 93754,
+            "bytes": 131264,
+            "allocations": 1137
+          }
+        ],
+        "after": [
+          {
+            "ns": 63815,
+            "bytes": 109549,
+            "allocations": 583
+          },
+          {
+            "ns": 63524,
+            "bytes": 109544,
+            "allocations": 583
+          },
+          {
+            "ns": 63440,
+            "bytes": 109544,
+            "allocations": 583
+          },
+          {
+            "ns": 63738,
+            "bytes": 109544,
+            "allocations": 583
+          },
+          {
+            "ns": 64071,
+            "bytes": 109544,
+            "allocations": 583
+          }
+        ]
+      }
+    },
+    {
+      "id": "gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=branch/selected=true",
+      "description": "Render 50 commits generated with seed 1234, using branch symbols; select the middle commit.",
+      "before": 98742,
+      "after": 68158,
+      "samples": {
+        "before": [
+          {
+            "ns": 98325,
+            "bytes": 133728,
+            "allocations": 1313
+          },
+          {
+            "ns": 98789,
+            "bytes": 133728,
+            "allocations": 1313
+          },
+          {
+            "ns": 98777,
+            "bytes": 133728,
+            "allocations": 1313
+          },
+          {
+            "ns": 98412,
+            "bytes": 133728,
+            "allocations": 1313
+          },
+          {
+            "ns": 98742,
+            "bytes": 133728,
+            "allocations": 1313
+          }
+        ],
+        "after": [
+          {
+            "ns": 67680,
+            "bytes": 112008,
+            "allocations": 759
+          },
+          {
+            "ns": 69759,
+            "bytes": 112008,
+            "allocations": 759
+          },
+          {
+            "ns": 68158,
+            "bytes": 112008,
+            "allocations": 759
+          },
+          {
+            "ns": 68087,
+            "bytes": 112008,
+            "allocations": 759
+          },
+          {
+            "ns": 68172,
+            "bytes": 112008,
+            "allocations": 759
+          }
+        ]
+      }
+    },
+    {
+      "id": "gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=box/selected=false",
+      "description": "Render 500 commits generated with seed 1234, using box symbols; no selected commit.",
+      "before": 6854619,
+      "after": 3444847,
+      "samples": {
+        "before": [
+          {
+            "ns": 6638857,
+            "bytes": 7404479,
+            "allocations": 31672
+          },
+          {
+            "ns": 6906914,
+            "bytes": 7403672,
+            "allocations": 31660
+          },
+          {
+            "ns": 6901990,
+            "bytes": 7403672,
+            "allocations": 31660
+          },
+          {
+            "ns": 6833167,
+            "bytes": 7403672,
+            "allocations": 31660
+          },
+          {
+            "ns": 6854619,
+            "bytes": 7403672,
+            "allocations": 31660
+          }
+        ],
+        "after": [
+          {
+            "ns": 3861764,
+            "bytes": 4684627,
+            "allocations": 6396
+          },
+          {
+            "ns": 3395880,
+            "bytes": 4684160,
+            "allocations": 6389
+          },
+          {
+            "ns": 3413271,
+            "bytes": 4684160,
+            "allocations": 6389
+          },
+          {
+            "ns": 3444847,
+            "bytes": 4684160,
+            "allocations": 6389
+          },
+          {
+            "ns": 3493386,
+            "bytes": 4684160,
+            "allocations": 6389
+          }
+        ]
+      }
+    },
+    {
+      "id": "gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=box/selected=true",
+      "description": "Render 500 commits generated with seed 1234, using box symbols; select the middle commit.",
+      "before": 6799547,
+      "after": 3469438,
+      "samples": {
+        "before": [
+          {
+            "ns": 6833506,
+            "bytes": 7404344,
+            "allocations": 32916
+          },
+          {
+            "ns": 6761347,
+            "bytes": 7404344,
+            "allocations": 32916
+          },
+          {
+            "ns": 6664636,
+            "bytes": 7404344,
+            "allocations": 32916
+          },
+          {
+            "ns": 6809196,
+            "bytes": 7404344,
+            "allocations": 32916
+          },
+          {
+            "ns": 6799547,
+            "bytes": 7404344,
+            "allocations": 32916
+          }
+        ],
+        "after": [
+          {
+            "ns": 3462217,
+            "bytes": 4684832,
+            "allocations": 7645
+          },
+          {
+            "ns": 3469438,
+            "bytes": 4684832,
+            "allocations": 7645
+          },
+          {
+            "ns": 3465215,
+            "bytes": 4684832,
+            "allocations": 7645
+          },
+          {
+            "ns": 3473939,
+            "bytes": 4684832,
+            "allocations": 7645
+          },
+          {
+            "ns": 3471621,
+            "bytes": 4684832,
+            "allocations": 7645
+          }
+        ]
+      }
+    },
+    {
+      "id": "gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=branch/selected=false",
+      "description": "Render 500 commits generated with seed 1234, using branch symbols; no selected commit.",
+      "before": 6915870,
+      "after": 3683672,
+      "samples": {
+        "before": [
+          {
+            "ns": 6784365,
+            "bytes": 7405487,
+            "allocations": 31678
+          },
+          {
+            "ns": 6915870,
+            "bytes": 7403672,
+            "allocations": 31660
+          },
+          {
+            "ns": 7007078,
+            "bytes": 7403672,
+            "allocations": 31660
+          },
+          {
+            "ns": 6928133,
+            "bytes": 7403672,
+            "allocations": 31660
+          },
+          {
+            "ns": 6748618,
+            "bytes": 7403672,
+            "allocations": 31660
+          }
+        ],
+        "after": [
+          {
+            "ns": 3660856,
+            "bytes": 4685039,
+            "allocations": 6397
+          },
+          {
+            "ns": 3714334,
+            "bytes": 4684160,
+            "allocations": 6389
+          },
+          {
+            "ns": 3683690,
+            "bytes": 4684160,
+            "allocations": 6389
+          },
+          {
+            "ns": 3675262,
+            "bytes": 4684160,
+            "allocations": 6389
+          },
+          {
+            "ns": 3683672,
+            "bytes": 4684160,
+            "allocations": 6389
+          }
+        ]
+      }
+    },
+    {
+      "id": "gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=branch/selected=true",
+      "description": "Render 500 commits generated with seed 1234, using branch symbols; select the middle commit.",
+      "before": 6868731,
+      "after": 3720479,
+      "samples": {
+        "before": [
+          {
+            "ns": 6795630,
+            "bytes": 7403952,
+            "allocations": 32888
+          },
+          {
+            "ns": 6907902,
+            "bytes": 7403954,
+            "allocations": 32888
+          },
+          {
+            "ns": 6797510,
+            "bytes": 7403953,
+            "allocations": 32888
+          },
+          {
+            "ns": 6885750,
+            "bytes": 7403955,
+            "allocations": 32888
+          },
+          {
+            "ns": 6868731,
+            "bytes": 7403954,
+            "allocations": 32888
+          }
+        ],
+        "after": [
+          {
+            "ns": 3720479,
+            "bytes": 4684432,
+            "allocations": 7617
+          },
+          {
+            "ns": 3721873,
+            "bytes": 4684432,
+            "allocations": 7617
+          },
+          {
+            "ns": 3712967,
+            "bytes": 4684432,
+            "allocations": 7617
+          },
+          {
+            "ns": 3714369,
+            "bytes": 4684432,
+            "allocations": 7617
+          },
+          {
+            "ns": 3774296,
+            "bytes": 4684432,
+            "allocations": 7617
           }
         ]
       }
     }
-  ],
-  "correctness": {
-    "revisions": {
-      "before": "c9c0db40bd47894e95c4fdaab0f3eadb40edb55c",
-      "after": "0e8210a56a1acb296af540f868c9597888f85510"
-    },
-    "benchmarkCases": 80,
-    "pairedObservations": 326,
-    "matchingObservations": 326,
-    "expectedWorkAssertions": 804344,
-    "sourceChecks": "The 11 canonical benchmark files are byte-identical in both checkouts; graph, streaming, and metadata fixture helpers are checked separately.",
-    "method": "Go AST instrumentation of the exact benchmark cases, executed with 1x instead of collecting timings. Observer calls are excluded from the saved timing measurements.",
-    "traces": {
-      "guiFlushFramesPerCase": 100,
-      "navigationStepsPerCase": 4,
-      "editorEditStates": [
-        "initial",
-        "inserted",
-        "backspaced"
-      ]
-    },
-    "observed": [
-      "Screen characters, widths, foreground/background colors, font and underline attributes, and links",
-      "View content, raw cell styles, metadata, writer position, and pending newline",
-      "Text content, wrapping, layout coordinates, and cursor/origin state",
-      "Search result coordinates and selected result",
-      "Selected paths, range bounds, tree structure, file ordering, and recovery index",
-      "Seeded commit-graph output"
-    ],
-    "cases": [
-      {
-        "id": "gocui/BenchmarkDrawSearchedView/lines=100",
-        "pairedObservations": 1,
-        "sha256": "9691e21993b8fa7eaebcce0589e8b0b3d48d8dcce6187070b39130b5e5b08e44"
-      },
-      {
-        "id": "gocui/BenchmarkDrawSearchedView/lines=1000",
-        "pairedObservations": 1,
-        "sha256": "9691e21993b8fa7eaebcce0589e8b0b3d48d8dcce6187070b39130b5e5b08e44"
-      },
-      {
-        "id": "gocui/BenchmarkDrawSearchedView/lines=10000",
-        "pairedObservations": 1,
-        "sha256": "9691e21993b8fa7eaebcce0589e8b0b3d48d8dcce6187070b39130b5e5b08e44"
-      },
-      {
-        "id": "gocui/BenchmarkEditorEditUnbrokenText/bytes=100000",
-        "pairedObservations": 3,
-        "sha256": "00db2dd8f7bb100018d3c4c0acc548836ca40e97735a8c70b97e4eac8ee2e2c9"
-      },
-      {
-        "id": "gocui/BenchmarkEditorEditUnbrokenText/bytes=1000000",
-        "pairedObservations": 3,
-        "sha256": "1010936f48866d3236e38d7c1ad3709c94cf5d3703f1cffa7bf9f4c9b95fbee9"
-      },
-      {
-        "id": "gocui/BenchmarkEditorEditUnbrokenText/bytes=4096",
-        "pairedObservations": 3,
-        "sha256": "356c61e1608f985d80d4c011ee163c41a06b4ea0295e7cbec54b15ec9b47f75b"
-      },
-      {
-        "id": "gocui/BenchmarkEditorInput/bytes=1024",
-        "pairedObservations": 1,
-        "sha256": "78a802e1051bbb790f630c5372f98dc7bd7ec4a23ef9dec7d6a670bdd24033e7"
-      },
-      {
-        "id": "gocui/BenchmarkEditorInput/bytes=256",
-        "pairedObservations": 1,
-        "sha256": "8ed6084c38d48a2a3d30d797991330b92053bb4cd1be5bd8f7942be9e72fe56e"
-      },
-      {
-        "id": "gocui/BenchmarkEditorInput/bytes=4096",
-        "pairedObservations": 1,
-        "sha256": "8d6815c65300e6544fb2240402587c5fd96f0cc27dcb618e0c1b3366e600fe11"
-      },
-      {
-        "id": "gocui/BenchmarkEditorParagraphInput/bytes=1024",
-        "pairedObservations": 1,
-        "sha256": "679e40111b92b3e6570757412cb221989752e1b76d2163354143012980fc939f"
-      },
-      {
-        "id": "gocui/BenchmarkEditorParagraphInput/bytes=256",
-        "pairedObservations": 1,
-        "sha256": "38733e5056489d311e2dd972187f95fb37faed92570efa2bb7db7a530f06ff97"
-      },
-      {
-        "id": "gocui/BenchmarkEditorParagraphInput/bytes=4096",
-        "pairedObservations": 1,
-        "sha256": "49eb0140a349bc4c0feac746f2b9156f986956c371c27fe903e6e57d9558b2fb"
-      },
-      {
-        "id": "gocui/BenchmarkEditorUnbrokenInput/bytes=1024",
-        "pairedObservations": 1,
-        "sha256": "4e6e9f9a3f663111056dcff4205756d7155a2ea85bd113fae8cf19e3b019bacb"
-      },
-      {
-        "id": "gocui/BenchmarkEditorUnbrokenInput/bytes=256",
-        "pairedObservations": 1,
-        "sha256": "5927b50a16222b63e737d4e1dd7b0945aa05caead19519895b41e191bc1855c1"
-      },
-      {
-        "id": "gocui/BenchmarkEditorUnbrokenInput/bytes=4096",
-        "pairedObservations": 1,
-        "sha256": "7333397596116b65b4affab316dc03903ff89603c7cf70d1d5522f57aa60cf78"
-      },
-      {
-        "id": "gocui/BenchmarkGuiFlush/160x48",
-        "pairedObservations": 100,
-        "sha256": "bee6185a9e898eb4dc0564f1f5e8bf86e7137a3d1a807c03642341f885862bab"
-      },
-      {
-        "id": "gocui/BenchmarkGuiFlush/80x24",
-        "pairedObservations": 100,
-        "sha256": "5359501519db9890ae66ce0c125fce5b5dfd3e8ce089613958b732a15ee3fe39"
-      },
-      {
-        "id": "gocui/BenchmarkNearestSearchPosition/matches=100",
-        "pairedObservations": 1,
-        "sha256": "4676504a0321b865a89a1713c982ef018a7f26afb4754c13fa597b2d148890e2"
-      },
-      {
-        "id": "gocui/BenchmarkNearestSearchPosition/matches=1000",
-        "pairedObservations": 1,
-        "sha256": "f36621f4d2b0003f30fa9738c43365aace2801876bfd9878f81cfa7ada29e7d0"
-      },
-      {
-        "id": "gocui/BenchmarkNearestSearchPosition/matches=10000",
-        "pairedObservations": 1,
-        "sha256": "55edbf9ae58e69649467f9804e413e97032ce40b284ad689f68a6879f70b2903"
-      },
-      {
-        "id": "gocui/BenchmarkNearestSearchPosition/matches=100000",
-        "pairedObservations": 1,
-        "sha256": "8fa41d2dde5339995826cd3c061d97e92aee0e31ac3f049bf9d4ad2dd657c823"
-      },
-      {
-        "id": "gocui/BenchmarkPasteText/bytes=1000",
-        "pairedObservations": 1,
-        "sha256": "d825d6e7335382e3c30c0b4c7f0fbed6035361be6aaa95bd16d45162df5aa9a2"
-      },
-      {
-        "id": "gocui/BenchmarkPasteText/bytes=10000",
-        "pairedObservations": 1,
-        "sha256": "65c5f9318ad406f13c93edf6da8bb809752c2fc1fe472998edf5312a56481beb"
-      },
-      {
-        "id": "gocui/BenchmarkPasteText/bytes=100000",
-        "pairedObservations": 1,
-        "sha256": "23f0de0bcb92ccbe887800c882b69b0e58931970047a71c8393662d5b2eed44d"
-      },
-      {
-        "id": "gocui/BenchmarkScrollSearchPosition/matches=100/up=false",
-        "pairedObservations": 1,
-        "sha256": "b12a1eedb4a8c2ecce61b53d4beb540557788a2a09a5e895a319cd7d6f06ee7d"
-      },
-      {
-        "id": "gocui/BenchmarkScrollSearchPosition/matches=100/up=true",
-        "pairedObservations": 1,
-        "sha256": "a6a218ccc304e5157e55d9ca337633862494dd19e0151b3c48dcf452c5502792"
-      },
-      {
-        "id": "gocui/BenchmarkScrollSearchPosition/matches=1000/up=false",
-        "pairedObservations": 1,
-        "sha256": "19a23921e8893c69e2cead4068231060d27cf1458ae86aa6f0e5592687bdcb2e"
-      },
-      {
-        "id": "gocui/BenchmarkScrollSearchPosition/matches=1000/up=true",
-        "pairedObservations": 1,
-        "sha256": "a6a218ccc304e5157e55d9ca337633862494dd19e0151b3c48dcf452c5502792"
-      },
-      {
-        "id": "gocui/BenchmarkScrollSearchPosition/matches=10000/up=false",
-        "pairedObservations": 1,
-        "sha256": "6032726b3d1ae5dd5e3608630adc84ffe6b69ce20c12043db6f72f37603f7f18"
-      },
-      {
-        "id": "gocui/BenchmarkScrollSearchPosition/matches=10000/up=true",
-        "pairedObservations": 1,
-        "sha256": "a6a218ccc304e5157e55d9ca337633862494dd19e0151b3c48dcf452c5502792"
-      },
-      {
-        "id": "gocui/BenchmarkScrollSearchPosition/matches=100000/up=false",
-        "pairedObservations": 1,
-        "sha256": "18e80ab2c71866b240895bc71afbb52b62b00dded519a8006c4b16bcbf1a3b2b"
-      },
-      {
-        "id": "gocui/BenchmarkScrollSearchPosition/matches=100000/up=true",
-        "pairedObservations": 1,
-        "sha256": "a6a218ccc304e5157e55d9ca337633862494dd19e0151b3c48dcf452c5502792"
-      },
-      {
-        "id": "gocui/BenchmarkSearchOrdinaryText/MATCH",
-        "pairedObservations": 1,
-        "sha256": "a0087599a05dff23da37a8b199745eb58a5e31e38b639e280ecadbce9371656d"
-      },
-      {
-        "id": "gocui/BenchmarkSearchOrdinaryText/match",
-        "pairedObservations": 1,
-        "sha256": "a97f097e72eab76e4093145858762711e2204a4c41ffedef74174e9bfeeb2736"
-      },
-      {
-        "id": "gocui/BenchmarkSearchOrdinaryText/missing",
-        "pairedObservations": 1,
-        "sha256": "a0087599a05dff23da37a8b199745eb58a5e31e38b639e280ecadbce9371656d"
-      },
-      {
-        "id": "gocui/BenchmarkSearchRepeatedPrefix/query=1",
-        "pairedObservations": 1,
-        "sha256": "80b1b733076340e4d65714269ed437f23a3d8ba6d46b7570dbc8f0a30bcfb1ec"
-      },
-      {
-        "id": "gocui/BenchmarkSearchRepeatedPrefix/query=128",
-        "pairedObservations": 1,
-        "sha256": "a4fb3c29b89f630c8ad51c89bece35838fa91b80c45d29857467721f5bdb33e6"
-      },
-      {
-        "id": "gocui/BenchmarkSearchRepeatedPrefix/query=32",
-        "pairedObservations": 1,
-        "sha256": "a4fb3c29b89f630c8ad51c89bece35838fa91b80c45d29857467721f5bdb33e6"
-      },
-      {
-        "id": "gocui/BenchmarkViewDraw/160x48/empty",
-        "pairedObservations": 1,
-        "sha256": "b364f349ea6a67e73746616023684a1070c36bb4d5f96bb39f78730fb6cc4277"
-      },
-      {
-        "id": "gocui/BenchmarkViewDraw/160x48/full",
-        "pairedObservations": 1,
-        "sha256": "ad927c155dce0355f364782edf6a9e75a18497a9f413aeb4fa2afa7079847725"
-      },
-      {
-        "id": "gocui/BenchmarkViewDraw/160x48/short",
-        "pairedObservations": 1,
-        "sha256": "61e604b0e8bf6bd279ba74ca950acd57e0fca9dfea402dc9f5c37cf2e209615b"
-      },
-      {
-        "id": "gocui/BenchmarkViewDraw/160x48/unicode",
-        "pairedObservations": 1,
-        "sha256": "5f5f1d7a281bc5d468dd2df79c3e400d1facd2640a22d491f302e3c0ba12497f"
-      },
-      {
-        "id": "gocui/BenchmarkViewDraw/80x24/empty",
-        "pairedObservations": 1,
-        "sha256": "2cf84c786f4669b27b888e0bbdc3ec2089ae53fb2345c3922404282feb2dadc6"
-      },
-      {
-        "id": "gocui/BenchmarkViewDraw/80x24/full",
-        "pairedObservations": 1,
-        "sha256": "507452374e72f7d6411ac76f2ef11220c01abb925d200706d8a6e403b4372008"
-      },
-      {
-        "id": "gocui/BenchmarkViewDraw/80x24/short",
-        "pairedObservations": 1,
-        "sha256": "f3c43bfce15735a1d3fdd417b7ad91ecdd8094d3ce721d5ebc446585b6898020"
-      },
-      {
-        "id": "gocui/BenchmarkViewDraw/80x24/unicode",
-        "pairedObservations": 1,
-        "sha256": "cb3800c6d43b948926e90fe085b62c85a26126639b3fbc57762afb3678aa3e39"
-      },
-      {
-        "id": "gocui/BenchmarkViewWrite/colored",
-        "pairedObservations": 1,
-        "sha256": "01200a1a8967ad6db6096c1add1103b7efedc9de11231f27201751190c49280c"
-      },
-      {
-        "id": "gocui/BenchmarkViewWrite/metadata",
-        "pairedObservations": 1,
-        "sha256": "3247e41d654a87bf331a20f5d39597292d7eca8b6475f703fe772320020a4e6d"
-      },
-      {
-        "id": "gocui/BenchmarkViewWrite/plain",
-        "pairedObservations": 1,
-        "sha256": "7101905eb16681c504e0f439fa6e58a94e56e2de6f4e09c05245e524f6f8a268"
-      },
-      {
-        "id": "gocui/BenchmarkViewWrite/unicode",
-        "pairedObservations": 1,
-        "sha256": "a1b4a61afba92cc92b0354595bbc855c4bdfb40f85f0a64e3cd67a5787b4756d"
-      },
-      {
-        "id": "gocui/BenchmarkViewWriteLongLine",
-        "pairedObservations": 1,
-        "sha256": "8943a1b4736821562f1e7f1c7fe5ade453fe43643eaa51a4d0285ae44945e464"
-      },
-      {
-        "id": "gocui/BenchmarkWriteToSearchedView",
-        "pairedObservations": 1,
-        "sha256": "82a65c9261c4b79c30850e4bf6b7cf37ca11abff44942756ded9f2ede71fa25d"
-      },
-      {
-        "id": "gui/BenchmarkCommitDescriptionInput/bytes=1024",
-        "pairedObservations": 1,
-        "sha256": "7140a0ce1764f0e58beefad68ad0739f5df983aa7c7c517615f9dec72c6f6190"
-      },
-      {
-        "id": "gui/BenchmarkCommitDescriptionInput/bytes=256",
-        "pairedObservations": 1,
-        "sha256": "07e5393527c91ef00a07521d68f02a4aa44048c2c7ec6f70b2bebc56f9d0ede8"
-      },
-      {
-        "id": "gui/BenchmarkCommitDescriptionInput/bytes=4096",
-        "pairedObservations": 1,
-        "sha256": "9692a70500ac91bf0ba63b25ea26e42ab64c68f45f513dfa1bf4d2fd6eca7bb3"
-      },
-      {
-        "id": "gui/context/BenchmarkFilteredListNavigation/items=100",
-        "pairedObservations": 8,
-        "sha256": "d3e3168cae22aac1169082dd62eac5fa53867bc40a886959a63f2a2015dff1a7"
-      },
-      {
-        "id": "gui/context/BenchmarkFilteredListNavigation/items=1000",
-        "pairedObservations": 8,
-        "sha256": "f1b6078908d8b490433e87865772de41bcd25cb2d59c2c9a0954515c577b9d8c"
-      },
-      {
-        "id": "gui/context/BenchmarkFilteredListNavigation/items=10000",
-        "pairedObservations": 8,
-        "sha256": "cacba202c44f6754f97eb3f7ecaeb29318480b30f0cc3fd2f7d935cba1429742"
-      },
-      {
-        "id": "gui/filetree/BenchmarkBuildCommitFileTree/files=100",
-        "pairedObservations": 1,
-        "sha256": "6bb1a2b6572848f5bcd5033b92b71c3adb712fedab9830654c51956e823ed9be"
-      },
-      {
-        "id": "gui/filetree/BenchmarkBuildCommitFileTree/files=1000",
-        "pairedObservations": 1,
-        "sha256": "5829d4600da19b1ade4ddf430f319df2e5f70ecf27ab0407ad232b88ab748ef6"
-      },
-      {
-        "id": "gui/filetree/BenchmarkBuildCommitFileTree/files=10000",
-        "pairedObservations": 1,
-        "sha256": "d536b3fe36b82228db02747edbf65a74753eb989ec6856be3307592309f114ab"
-      },
-      {
-        "id": "gui/filetree/BenchmarkFileTreeNavigation/files=100",
-        "pairedObservations": 8,
-        "sha256": "21cb3f1820d927ce5228e3149bd890daefa3d8c25e1f7f6fb0e048aa27ca1275"
-      },
-      {
-        "id": "gui/filetree/BenchmarkFileTreeNavigation/files=1000",
-        "pairedObservations": 8,
-        "sha256": "ab6a0695f5f59a3fb40a21d58235d9dd3267b66a1dd4235c544b3d801af4b58f"
-      },
-      {
-        "id": "gui/filetree/BenchmarkFileTreeNavigation/files=10000",
-        "pairedObservations": 8,
-        "sha256": "1dd7ef122c1e4487f2eded2bd86b7ea9f016c69e5c84f89d9b8b5c1ce11ae165"
-      },
-      {
-        "id": "gui/filetree/BenchmarkFileTreeRangeSelection/files=100",
-        "pairedObservations": 1,
-        "sha256": "b90c7e42c6bc6826ad2b10b800b12c7faaac147f30008022148a70ba40e648d9"
-      },
-      {
-        "id": "gui/filetree/BenchmarkFileTreeRangeSelection/files=1000",
-        "pairedObservations": 1,
-        "sha256": "96d6070a24eabed64a543df72242e5a8de5e9677aaca2d8ac9fb849de7f6d327"
-      },
-      {
-        "id": "gui/filetree/BenchmarkFileTreeRangeSelection/files=10000",
-        "pairedObservations": 1,
-        "sha256": "ef61d2b987d4733ba2ee5d2478325419d47f327f9ceff16bc961f3ce05b84c6f"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=100",
-        "pairedObservations": 1,
-        "sha256": "315140a15302e947c15629739b031f62baf69bf636b6ec61cc11039525926d52"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=1000",
-        "pairedObservations": 1,
-        "sha256": "fd8372fac22c0dd607e60a1a53ca25d3a42e875b7dc4b547b76abdd26d3cf850"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=5000",
-        "pairedObservations": 1,
-        "sha256": "ea57f175a656427bdcdad478a1a4b0fde020512b0acd1a3c9fc43afcb06e2f0d"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=100",
-        "pairedObservations": 1,
-        "sha256": "c23e265ecdab0ddb81185addded3ac00b2aaec7c7d64b621cf0a539d373e67a4"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=1000",
-        "pairedObservations": 1,
-        "sha256": "c23e265ecdab0ddb81185addded3ac00b2aaec7c7d64b621cf0a539d373e67a4"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=5000",
-        "pairedObservations": 1,
-        "sha256": "c23e265ecdab0ddb81185addded3ac00b2aaec7c7d64b621cf0a539d373e67a4"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=false",
-        "pairedObservations": 1,
-        "sha256": "c23e265ecdab0ddb81185addded3ac00b2aaec7c7d64b621cf0a539d373e67a4"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=true",
-        "pairedObservations": 1,
-        "sha256": "0b10a75515dc244ccb5cb974c8c6880ada1ffdb67ab74e2b6312a97a15dd8d69"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=false",
-        "pairedObservations": 1,
-        "sha256": "c23e265ecdab0ddb81185addded3ac00b2aaec7c7d64b621cf0a539d373e67a4"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=true",
-        "pairedObservations": 1,
-        "sha256": "480c3d198f89ade1c3529c383924da13cdb915b5e654c4f5a0c0cc5be43dd608"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=false",
-        "pairedObservations": 1,
-        "sha256": "c23e265ecdab0ddb81185addded3ac00b2aaec7c7d64b621cf0a539d373e67a4"
-      },
-      {
-        "id": "gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=true",
-        "pairedObservations": 1,
-        "sha256": "a43a0a82922b5bf20746706e21f6d7b26b1c161a1a8769bfb593d5c5f90a9dbb"
-      },
-      {
-        "id": "gui/presentation/graph/BenchmarkRenderCommitGraph",
-        "pairedObservations": 1,
-        "sha256": "282dcef1198071919943611e168d719b73b5010d95078d2cf083965aba38696f"
-      }
-    ],
-    "observerSources": [
-      {
-        "path": ".git/perf-comparison/instrument-equivalence.go",
-        "sha256": "18435440704366baa740c258c3ac4f0b081836bdffe39856ce258891972d12a5"
-      },
-      {
-        "path": ".git/perf-comparison/equivalence/gocui-helper.go",
-        "sha256": "76917cd1882428efddd9deca5bfef25b5f4b7e81e5666f8555b0918d1d250db7"
-      },
-      {
-        "path": ".git/perf-comparison/equivalence/gui-helper.go",
-        "sha256": "112a337013fc5bcfae7f7c8375264f60f660aa01f6f97e68770106acc0be639a"
-      },
-      {
-        "path": ".git/perf-comparison/equivalence/context-helper.go",
-        "sha256": "2edbdf1246cd91d9e71f892b9d318d395ba0a3dbe21cfdf5db0c16073fd3cdad"
-      },
-      {
-        "path": ".git/perf-comparison/equivalence/filetree-helper.go",
-        "sha256": "883b278abb597dc820c30f29839deea87735318d87152e85923f648a9157413e"
-      },
-      {
-        "path": ".git/perf-comparison/equivalence/graph-helper.go",
-        "sha256": "555bfec3f923f6d3c857330700686608119e16c0ff75c30d02cd146a56ac0de0"
-      }
-    ],
-    "artifacts": ".git/perf-comparison/equivalence",
-    "scope": "Equivalence of the benchmark fixtures and recorded traces, not a proof covering all application inputs."
-  }
+  ]
 }
