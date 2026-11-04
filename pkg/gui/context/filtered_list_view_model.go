@@ -15,6 +15,7 @@ func NewFilteredListViewModel[T HasID](getList func() []T, getFilterFields func(
 	}
 
 	listViewModel := newListViewModel(filteredList.GetFilteredList, filteredList.filteredLength)
+	listViewModel.getRange = filteredList.filteredRange
 
 	self.ListViewModel = listViewModel
 

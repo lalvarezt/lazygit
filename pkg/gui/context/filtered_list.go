@@ -60,6 +60,13 @@ func (self *FilteredList[T]) GetFilteredList() []T {
 	return utils.ValuesAtIndices(self.getList(), self.filteredIndices)
 }
 
+func (self *FilteredList[T]) filteredRange(start, end int) []T {
+	if self.filteredIndices == nil {
+		return self.getList()[start:end]
+	}
+	return utils.ValuesAtIndices(self.getList(), self.filteredIndices[start:end])
+}
+
 func (self *FilteredList[T]) filteredLength() int {
 	if self.filteredIndices == nil {
 		return len(self.getList())
