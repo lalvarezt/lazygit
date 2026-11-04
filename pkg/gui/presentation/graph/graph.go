@@ -7,7 +7,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/jesseduffield/generics/set"
 	"github.com/jesseduffield/lazygit/pkg/commands/models"
 	"github.com/jesseduffield/lazygit/pkg/gui/style"
 	"github.com/jesseduffield/lazygit/pkg/utils"
@@ -131,13 +130,13 @@ func getNextPipes(prevPipes []Pipe, commit *models.Commit, getStyle func(c *mode
 		}
 	}
 
-	// a taken spot is one where a current pipe is ending on
-	// Note: this set and similar ones below use int instead of int16 because
-	// that's much more efficient. We cast the int16 values we store in these
-	// sets to int on every access.
-	takenSpots := set.New[int]()
-	// a traversed spot is one where a current pipe is starting on, ending on, or passing through
-	traversedSpots := set.New[int]()
+	type columnState struct {
+		taken      bool
+		traversed  bool
+		continuing bool
+	}
+	// Columns cover the incoming pipes, a new commit column, and its parents.
+	columns := make([]columnState, int(maxPos)+2+len(commit.ParentPtrs()))
 
 	var toHash *string
 	if commit.IsFirstCommit() {
@@ -154,17 +153,16 @@ func getNextPipes(prevPipes []Pipe, commit *models.Commit, getStyle func(c *mode
 		style:    getStyle(commit),
 	})
 
-	traversedSpotsForContinuingPipes := set.New[int]()
 	for _, pipe := range currentPipes {
 		if !equalHashes(pipe.toHash, commit.HashPtr()) {
-			traversedSpotsForContinuingPipes.Add(int(pipe.toPos))
+			columns[pipe.toPos].continuing = true
 		}
 	}
 
 	getNextAvailablePosForContinuingPipe := func() int16 {
 		i := int16(0)
 		for {
-			if !traversedSpots.Includes(int(i)) {
+			if !columns[i].traversed {
 				return i
 			}
 			i++
@@ -176,7 +174,7 @@ func getNextPipes(prevPipes []Pipe, commit *models.Commit, getStyle func(c *mode
 		for {
 			// a newly created pipe is not allowed to end on a spot that's already taken,
 			// nor on a spot that's been traversed by a continuing pipe.
-			if !takenSpots.Includes(int(i)) && !traversedSpotsForContinuingPipes.Includes(int(i)) {
+			if !columns[i].taken && !columns[i].continuing {
 				return i
 			}
 			i++
@@ -189,9 +187,9 @@ func getNextPipes(prevPipes []Pipe, commit *models.Commit, getStyle func(c *mode
 			left, right = right, left
 		}
 		for i := left; i <= right; i++ {
-			traversedSpots.Add(int(i))
+			columns[i].traversed = true
 		}
-		takenSpots.Add(int(to))
+		columns[to].taken = true
 	}
 
 	for _, pipe := range currentPipes {
@@ -234,7 +232,7 @@ func getNextPipes(prevPipes []Pipe, commit *models.Commit, getStyle func(c *mode
 				style:    getStyle(commit),
 			})
 
-			takenSpots.Add(int(availablePos))
+			columns[availablePos].taken = true
 		}
 	}
 
@@ -243,7 +241,7 @@ func getNextPipes(prevPipes []Pipe, commit *models.Commit, getStyle func(c *mode
 			// continuing on, potentially moving left to fill in a blank spot
 			last := pipe.toPos
 			for i := pipe.toPos; i > pos; i-- {
-				if takenSpots.Includes(int(i)) || traversedSpots.Includes(int(i)) {
+				if columns[i].taken || columns[i].traversed {
 					break
 				}
 				last = i
