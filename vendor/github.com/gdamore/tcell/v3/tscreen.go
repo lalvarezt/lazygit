@@ -274,6 +274,7 @@ type tScreen struct {
 	running            bool
 	startTime          time.Time
 	wg                 sync.WaitGroup
+	readWg             sync.WaitGroup
 	eventWg            sync.WaitGroup
 	mouseFlags         MouseFlags
 	consoleMouse       consoleMouse
@@ -1440,7 +1441,9 @@ func (t *tScreen) inputLoop(stopQ chan struct{}) {
 		case <-stopQ:
 			return
 		default:
+			t.readWg.Add(1)
 			go func() {
+				defer t.readWg.Done()
 				n, e = t.tty.Read(chunk)
 				close(readDone)
 			}()
@@ -1802,6 +1805,9 @@ func (t *tScreen) disengageFinish() {
 	t.disableFocusReporting()
 
 	_ = t.tty.Stop()
+	// Stop wakes terminal readers that may still be returning after the
+	// input loop exits. They must finish before this terminal can restart.
+	t.readWg.Wait()
 }
 
 // Beep emits a beep to the terminal.

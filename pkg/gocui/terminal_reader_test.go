@@ -89,9 +89,6 @@ func TestSuspendWaitsForTerminalRead(t *testing.T) {
 		}
 	}
 	<-term.readReturned
-	/* EXPECTED:
 	assert.False(t, returnedBeforeRead)
-	ACTUAL: */
-	assert.True(t, returnedBeforeRead)
 	assert.NoError(t, screen.Resume())
 }
