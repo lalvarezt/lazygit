@@ -613,17 +613,14 @@ func (v *View) IsSearching() bool {
 
 func (v *View) nearestSearchPosition() int {
 	currentLineIndex := v.cy + v.oy
-	lastSearchPos := 0
-	for i, pos := range v.searcher.searchPositions {
-		if pos.Y == currentLineIndex {
-			return i
-		}
-		if pos.Y > currentLineIndex {
-			break
-		}
-		lastSearchPos = i
+	positions := v.searcher.searchPositions
+	index := sort.Search(len(positions), func(i int) bool {
+		return positions[i].Y >= currentLineIndex
+	})
+	if index < len(positions) && positions[index].Y == currentLineIndex {
+		return index
 	}
-	return lastSearchPos
+	return max(0, index-1)
 }
 
 func (v *View) SetNearestSearchPosition() {

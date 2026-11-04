@@ -35,3 +35,21 @@ func BenchmarkSearchOrdinaryText(b *testing.B) {
 		})
 	}
 }
+
+func BenchmarkNearestSearchPosition(b *testing.B) {
+	for _, count := range []int{100, 1000, 10000, 100000} {
+		b.Run(fmt.Sprintf("matches=%d", count), func(b *testing.B) {
+			v := NewView("search", 0, 0, 80, 24, OutputNormal)
+			v.searcher.searchPositions = make([]SearchPosition, count)
+			for i := range count {
+				v.searcher.searchPositions[i] = SearchPosition{XStart: i % 2, XEnd: i%2 + 1, Y: i / 2}
+			}
+			v.oy = count/2 - 1
+			b.ReportAllocs()
+			b.ResetTimer()
+			for b.Loop() {
+				v.nearestSearchPosition()
+			}
+		})
+	}
+}

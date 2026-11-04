@@ -79,6 +79,19 @@ func TestSearchPositionsWithOverlappingPrefixes(t *testing.T) {
 	}
 }
 
+func TestNearestSearchPosition(t *testing.T) {
+	v := NewView("search", 0, 0, 80, 24, OutputNormal)
+	assert.Zero(t, v.nearestSearchPosition())
+	v.searcher.searchPositions = []SearchPosition{{Y: 2}, {Y: 2}, {Y: 5}, {Y: 5}, {Y: 9}}
+	for _, test := range []struct{ line, want int }{
+		{0, 0}, {2, 0}, {3, 1}, {5, 2}, {8, 3}, {9, 4}, {10, 4},
+	} {
+		v.cy = 1
+		v.oy = test.line - v.cy
+		assert.Equal(t, test.want, v.nearestSearchPosition(), "line %d", test.line)
+	}
+}
+
 func TestSearchHighlights(t *testing.T) {
 	for _, test := range []struct {
 		name       string
