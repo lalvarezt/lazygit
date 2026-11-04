@@ -4,6 +4,7 @@ import "github.com/jesseduffield/generics/set"
 
 type CollapsedPaths struct {
 	collapsedPaths *set.Set[string]
+	revision       uint64
 }
 
 func NewCollapsedPaths() *CollapsedPaths {
@@ -17,7 +18,10 @@ func (self *CollapsedPaths) ExpandToPath(path string) {
 	splitPath := split(path)
 	for i := range splitPath {
 		dir := join(splitPath[0 : i+1])
-		self.collapsedPaths.Remove(dir)
+		if self.collapsedPaths.Includes(dir) {
+			self.collapsedPaths.Remove(dir)
+			self.revision++
+		}
 	}
 }
 
@@ -26,10 +30,14 @@ func (self *CollapsedPaths) IsCollapsed(path string) bool {
 }
 
 func (self *CollapsedPaths) Collapse(path string) {
-	self.collapsedPaths.Add(path)
+	if !self.collapsedPaths.Includes(path) {
+		self.collapsedPaths.Add(path)
+		self.revision++
+	}
 }
 
 func (self *CollapsedPaths) ToggleCollapsed(path string) {
+	self.revision++
 	if self.collapsedPaths.Includes(path) {
 		self.collapsedPaths.Remove(path)
 	} else {
@@ -39,5 +47,9 @@ func (self *CollapsedPaths) ToggleCollapsed(path string) {
 
 func (self *CollapsedPaths) ExpandAll() {
 	// Could be cleaner if Set had a Clear() method...
-	self.collapsedPaths.RemoveSlice(self.collapsedPaths.ToSlice())
+	paths := self.collapsedPaths.ToSlice()
+	if len(paths) > 0 {
+		self.collapsedPaths.RemoveSlice(paths)
+		self.revision++
+	}
 }

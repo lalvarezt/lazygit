@@ -3,6 +3,12 @@ package filetree
 type treeView[T any] struct {
 	tree           *Node[T]
 	collapsedPaths *CollapsedPaths
+
+	indexedTree      *Node[T]
+	indexedCollapsed *CollapsedPaths
+	indexedRevision  uint64
+	nodes            []*Node[T]
+	depths           []int
 }
 
 func newTreeView[T any]() treeView[T] {
@@ -10,15 +16,48 @@ func newTreeView[T any]() treeView[T] {
 }
 
 func (self *treeView[T]) getNode(index int) *Node[T] {
-	return self.tree.GetNodeAtIndex(index+1, self.collapsedPaths)
+	nodes := self.getNodes()
+	if index < 0 || index >= len(nodes) {
+		return nil
+	}
+	return nodes[index]
 }
 
 func (self *treeView[T]) getNodes() []*Node[T] {
-	return self.tree.Flatten(self.collapsedPaths)[1:]
+	if self.tree == nil {
+		return nil
+	}
+	if self.indexedTree == self.tree && self.indexedCollapsed == self.collapsedPaths && self.indexedRevision == self.collapsedPaths.revision {
+		return self.nodes
+	}
+
+	clear(self.nodes)
+	self.nodes = self.nodes[:0]
+	self.depths = self.depths[:0]
+	var visit func(*Node[T], int)
+	visit = func(node *Node[T], depth int) {
+		if depth >= 0 {
+			self.nodes = append(self.nodes, node)
+			self.depths = append(self.depths, depth)
+		}
+		if len(node.Children) > 0 && !self.collapsedPaths.IsCollapsed(node.path) {
+			for _, child := range node.Children {
+				visit(child, depth+1)
+			}
+		}
+	}
+	visit(self.tree, -1)
+	self.indexedTree = self.tree
+	self.indexedCollapsed = self.collapsedPaths
+	self.indexedRevision = self.collapsedPaths.revision
+	return self.nodes
 }
 
 func (self *treeView[T]) length() int {
-	return self.tree.Size(self.collapsedPaths) - 1
+	if self.tree == nil {
+		return -1
+	}
+	return len(self.getNodes())
 }
 
 func (self *treeView[T]) ExpandToPath(path string) {
@@ -26,8 +65,16 @@ func (self *treeView[T]) ExpandToPath(path string) {
 }
 
 func (self *treeView[T]) GetIndexForPath(path string) (int, bool) {
-	index, found := self.tree.GetIndexForPath(path, self.collapsedPaths)
-	return index - 1, found
+	if self.tree.path == path {
+		return -1, true
+	}
+	nodes := self.getNodes()
+	for index, node := range nodes {
+		if node.path == path {
+			return index, true
+		}
+	}
+	return len(nodes) - 1, false
 }
 
 func (self *treeView[T]) IsCollapsed(path string) bool {
@@ -47,5 +94,8 @@ func (self *treeView[T]) CollapsedPaths() *CollapsedPaths {
 }
 
 func (self *treeView[T]) GetVisualDepth(index int) int {
-	return self.tree.GetVisualDepthAtIndex(index+1, self.collapsedPaths)
+	if index < 0 || index >= len(self.getNodes()) {
+		return -1
+	}
+	return self.depths[index]
 }
