@@ -203,21 +203,23 @@ func (ei *escapeInterpreter) notifyColumnReset() {
 // screen, the corresponding number of soft-wraps are added to screenRow
 // so subsequent CUPs land on the right line.
 func (ei *escapeInterpreter) notifyCellsWritten(width int) {
-	if ei.screenColMax <= 0 {
+	if ei.screenColMax <= 0 || width <= 0 {
 		return
 	}
-	// One column at a time: matches ConPTY's "pending wrap" semantics
-	// where the cursor stays at col max+1 after writing the rightmost
-	// cell and only wraps on the next cell. Loops over individual
-	// columns rather than doing the math in one shot so wide cells on a
-	// row boundary still wrap cleanly.
-	for range width {
-		if ei.screenCol > ei.screenColMax {
-			ei.screenRow++
-			ei.screenCol = 1
-		}
-		ei.screenCol++
+	// ConPTY keeps the cursor at column max+1 after writing the rightmost
+	// cell. A following column starts the next row.
+	if ei.screenCol > ei.screenColMax {
+		ei.screenRow++
+		ei.screenCol = 1
 	}
+	firstRow := ei.screenColMax - ei.screenCol + 1
+	if width <= firstRow {
+		ei.screenCol += width
+		return
+	}
+	width -= firstRow
+	ei.screenRow += 1 + (width-1)/ei.screenColMax
+	ei.screenCol = 2 + (width-1)%ei.screenColMax
 }
 
 // emitCursorAdvance schedules a cursorDown instruction for the next time
