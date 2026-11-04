@@ -48,6 +48,33 @@ func TestSearchPositionsFollowStreamedContent(t *testing.T) {
 	assert.Equal(t, 2, total)
 }
 
+func TestSearchPositionsWithOverlappingPrefixes(t *testing.T) {
+	for _, test := range []struct {
+		name    string
+		content string
+		query   string
+		want    []SearchPosition
+	}{
+		{name: "overlaps", content: "aaaa", query: "aa", want: []SearchPosition{{XStart: 0, XEnd: 2}, {XStart: 1, XEnd: 3}, {XStart: 2, XEnd: 4}}},
+		{name: "fallback", content: "aaaabaaab", query: "aaab", want: []SearchPosition{{XStart: 1, XEnd: 5}, {XStart: 5, XEnd: 9}}},
+		{name: "nested prefixes", content: "abababaca", query: "ababaca", want: []SearchPosition{{XStart: 2, XEnd: 9}}},
+		{name: "wide cells", content: "界界界", query: "界界", want: []SearchPosition{{XStart: 0, XEnd: 4}, {XStart: 2, XEnd: 6}}},
+		{name: "combining marks", content: "ééé", query: "éé", want: []SearchPosition{{XStart: 0, XEnd: 2}, {XStart: 1, XEnd: 3}}},
+		{name: "lowercase", content: "Éé", query: "é", want: []SearchPosition{{XStart: 0, XEnd: 1}, {XStart: 1, XEnd: 2}}},
+		{name: "uppercase", content: "Éé", query: "É", want: []SearchPosition{{XStart: 0, XEnd: 1}}},
+		{name: "case mapping", content: "Kkk", query: "kk", want: []SearchPosition{{XStart: 0, XEnd: 2}, {XStart: 1, XEnd: 3}}},
+		{name: "line boundary", content: "ab\nba", query: "abba", want: []SearchPosition{}},
+		{name: "missing suffix", content: strings.Repeat("a", 1000), query: strings.Repeat("a", 31) + "b", want: []SearchPosition{}},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			v := NewView("search", 0, 0, 80, 24, OutputNormal)
+			v.SetContent(test.content)
+			v.UpdateSearchResults(test.query, nil)
+			assert.Equal(t, test.want, v.searcher.searchPositions)
+		})
+	}
+}
+
 func TestSearchHighlights(t *testing.T) {
 	for _, test := range []struct {
 		name       string

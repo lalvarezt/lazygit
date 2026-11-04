@@ -1762,44 +1762,8 @@ func (v *View) updateSearchPositions() {
 	v.searcher.positionsStale = false
 
 	if v.searcher.searchString != "" {
-		var normalizeRune func(s string) string
-		var normalizedSearchStr string
-		// if we have any uppercase characters we'll do a case-sensitive search
-		if containsUpcaseChar(v.searcher.searchString) {
-			normalizeRune = func(s string) string { return s }
-			normalizedSearchStr = v.searcher.searchString
-		} else {
-			normalizeRune = strings.ToLower
-			normalizedSearchStr = strings.ToLower(v.searcher.searchString)
-		}
-
-		searchStrGraphemes := stringToGraphemes(normalizedSearchStr)
-
+		search := newLineSearcher(v.searcher.searchString)
 		v.searcher.searchPositions = []SearchPosition{}
-
-		searchPositionsForLine := func(line []cell, y int) []SearchPosition {
-			var result []SearchPosition
-			searchStringWidth := uniseg.StringWidth(v.searcher.searchString)
-			x := 0
-			for startIdx, cell := range line {
-				found := true
-				for i, c := range searchStrGraphemes {
-					if len(line)-1 < startIdx+i {
-						found = false
-						break
-					}
-					if normalizeRune(line[startIdx+i].chr) != c {
-						found = false
-						break
-					}
-				}
-				if found {
-					result = append(result, SearchPosition{XStart: x, XEnd: x + searchStringWidth, Y: y})
-				}
-				x += cell.width
-			}
-			return result
-		}
 
 		if v.searcher.modelSearchResults != nil {
 			for _, result := range v.searcher.modelSearchResults {
@@ -1812,7 +1776,7 @@ func (v *View) updateSearchPositions() {
 				// If a view line exists for this line index:
 				if v.buf.lines[result.Y].cells != nil {
 					// search this view line for the search string
-					positions := searchPositionsForLine(v.buf.lines[result.Y].cells, result.Y)
+					positions := search.positions(v.buf.lines[result.Y].cells, result.Y)
 					if len(positions) > 0 {
 						// If we found any occurrences, add them
 						v.searcher.searchPositions = append(v.searcher.searchPositions, positions...)
@@ -1835,7 +1799,7 @@ func (v *View) updateSearchPositions() {
 		} else {
 			v.refreshViewLinesIfNeeded()
 			for y, line := range v.viewLines {
-				v.searcher.searchPositions = append(v.searcher.searchPositions, searchPositionsForLine(line.line, y)...)
+				v.searcher.searchPositions = append(v.searcher.searchPositions, search.positions(line.line, y)...)
 			}
 		}
 	}
