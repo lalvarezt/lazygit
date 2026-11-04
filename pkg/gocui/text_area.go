@@ -4,6 +4,7 @@ import (
 	"regexp"
 	"slices"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/rivo/uniseg"
 )
@@ -28,14 +29,25 @@ func (c *TextAreaCell) nextCursorXY() (int, int) {
 	return c.x + c.width, c.y
 }
 
-type TextArea struct {
+type textAreaLayout struct {
 	content       string
-	cells         []TextAreaCell
-	cursor        int // position in content, as an index into the byte array
-	overwrite     bool
-	clipboard     string
-	AutoWrap      bool
-	AutoWrapWidth int
+	width         int
+	ready         bool
+	revision      uint64
+	unchangedRows int
+}
+
+type TextArea struct {
+	content         string
+	layout          textAreaLayout
+	hasChanges      bool
+	changedFromByte int
+	cells           []TextAreaCell
+	cursor          int // position in content, as an index into the byte array
+	overwrite       bool
+	clipboard       string
+	AutoWrap        bool
+	AutoWrapWidth   int
 }
 
 func stringToTextAreaCells(str string) []TextAreaCell {
@@ -252,10 +264,67 @@ func (self *TextArea) updateCells() {
 		width = -1
 	}
 
-	self.cells, _ = contentToCells(self.content, width)
+	if self.layout.ready && self.layout.width == width && self.layout.content == self.content {
+		self.hasChanges = false
+		return
+	}
+	cut, start, row := self.unchangedPrefix(width)
+	suffix, _ := contentToCells(self.content[start:], width)
+	for i := range suffix {
+		c := &suffix[i]
+		c.contentIndex += start
+		c.y += row
+		// Completed lines survive later edits, so their graphemes must not
+		// retain whole-message strings from those edits.
+		if len(c.char) == 1 && c.char[0] < utf8.RuneSelf {
+			// Single-byte slice conversions share Go's static byte strings.
+			c.char = string([]byte{c.char[0]})
+		} else {
+			c.char = strings.Clone(c.char)
+		}
+	}
+	oldCells := self.cells
+	self.cells = append(self.cells[:cut], suffix...)
+	if len(oldCells) > len(self.cells) {
+		clear(oldCells[len(self.cells):])
+	}
+	self.layout.unchangedRows = row
+	self.layout.content, self.layout.width, self.layout.ready = self.content, width, true
+	self.hasChanges = false
+	self.layout.revision++
+}
+
+func (self *TextArea) unchangedPrefix(width int) (cells, bytes, rows int) {
+	if !self.layout.ready || self.layout.width != width || !self.hasChanges {
+		return 0, 0, 0
+	}
+
+	dirty := self.changedFromByte
+	oldTrailer, newTrailer := startOfTrailerBlock(self.layout.content), startOfTrailerBlock(self.content)
+	if oldTrailer != newTrailer {
+		// Trailer recognition depends on the final paragraph. Editing its
+		// separator can invalidate lines before the edit.
+		dirty = min(dirty, oldTrailer, newTrailer)
+	}
+	cellIndex, _ := slices.BinarySearchFunc(self.cells, dirty, func(c TextAreaCell, index int) int {
+		return c.contentIndex - index
+	})
+	for i := cellIndex - 1; i >= 0; i-- {
+		c := self.cells[i]
+		if c.char == "\n" && self.layout.content[c.contentIndex] == '\n' {
+			return i + 1, c.contentIndex + 1, c.y + 1
+		}
+	}
+	return 0, 0, 0
 }
 
 func (self *TextArea) replaceContent(start, end int, text string) {
+	if !self.hasChanges {
+		self.changedFromByte = start
+	} else {
+		self.changedFromByte = min(self.changedFromByte, start)
+	}
+	self.hasChanges = true
 	self.content = self.content[:start] + text + self.content[end:]
 }
 
@@ -665,6 +734,11 @@ func (self *TextArea) SetCursor2D(x int, y int) {
 }
 
 func (self *TextArea) Clear() {
+	self.layout.content = ""
+	self.layout.ready = false
+	self.hasChanges = false
+	self.layout.unchangedRows = 0
+	self.layout.revision++
 	self.content = ""
 	self.cells = nil
 	self.cursor = 0

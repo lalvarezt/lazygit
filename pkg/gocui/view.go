@@ -256,7 +256,8 @@ type View struct {
 	// (this is usually not the case)
 	KeybindOnEdit bool
 
-	TextArea *TextArea
+	TextArea         *TextArea
+	renderedTextArea textAreaRendering
 
 	// something like '1 of 20' for a list view
 	Footer string
@@ -1252,6 +1253,7 @@ func (v *View) write(p []byte) {
 		return
 	}
 
+	v.renderedTextArea.source = nil
 	v.markViewLinesDirty()
 	// write only ever touches lines from v.buf.wy onwards, so any cached wrapping
 	// below that stays valid.
@@ -1576,6 +1578,7 @@ func (v *View) Read(p []byte) (n int, err error) {
 
 // only use this if the calling function has a lock on writeMutex
 func (v *View) clear() {
+	v.renderedTextArea.source = nil
 	v.rewind()
 	v.buf.lines = nil
 	v.clearViewLines()
@@ -1649,6 +1652,7 @@ func (v *View) Rewind() {
 func (v *View) Reset() {
 	v.writeMutex.Lock()
 	defer v.writeMutex.Unlock()
+	v.renderedTextArea.source = nil
 
 	v.rewind()
 	v.buf.lines = nil
@@ -1688,6 +1692,7 @@ func (v *View) SwapInOffscreenRender() {
 	if v.offscreen == nil {
 		return
 	}
+	v.renderedTextArea.source = nil
 	v.buf = v.offscreen
 	v.offscreen = nil
 	v.markViewLinesDirty()
@@ -2555,35 +2560,56 @@ func (v *View) RenderTextArea() {
 	v.SetOrigin(newOriginX, newOriginY)
 }
 
+type (
+	textAreaRenderedLine struct{ cellStart, screenRow int }
+	textAreaRendering    struct {
+		source   *TextArea
+		revision uint64
+		editable bool
+		columns  int
+		lines    []textAreaRenderedLine
+	}
+)
+
+func (r textAreaRendering) prefix(area *TextArea, editable bool, columns, lastLine int) (rows, cells, screenRow int) {
+	if r.source != area || r.editable != editable || r.columns != columns {
+		return 0, 0, 1
+	}
+	if r.revision == area.layout.revision {
+		rows = lastLine
+	} else if r.revision+1 == area.layout.revision {
+		rows = min(area.layout.unchangedRows, lastLine)
+	}
+	if rows > 0 {
+		return rows, r.lines[rows].cellStart, r.lines[rows].screenRow
+	}
+	return 0, 0, 1
+}
+
 // renderTextAreaCells uses the graphemes already measured by the text area.
 // Control sequences and automatic hyperlinks need the normal writer.
 func (v *View) renderTextAreaCells() bool {
-	if v.AutoRenderHyperLinks {
+	if v.AutoRenderHyperLinks || strings.ContainsAny(v.TextArea.content, "\t\r\x1b") {
 		return false
 	}
-
 	textCells := v.TextArea.cells
 	pendingNewline := !v.Editable && len(textCells) > 0 && textCells[len(textCells)-1].char == "\n"
 	if pendingNewline {
 		textCells = textCells[:len(textCells)-1]
 	}
-	lineCount := 1
-	for _, c := range textCells {
-		if strings.ContainsAny(c.char, "\t\r\x1b") {
-			return false
-		}
-		if c.char == "\n" {
-			lineCount++
-		}
-	}
-
 	v.writeMutex.Lock()
 	defer v.writeMutex.Unlock()
+	cached := v.renderedTextArea
+	keep, start, screenRow := cached.prefix(v.TextArea, v.Editable, v.buf.ei.screenColMax, len(v.buf.lines)-1)
+	lines := v.buf.lines
 	v.clear()
-	v.firstDirtyLine = 0
+	v.firstDirtyLine = keep
 	v.searcher.positionsStale = true
-	v.buf.lines = make([]lineType, 0, lineCount)
-	content := make([]cell, 0, len(textCells))
+	clear(lines[keep:])
+	v.buf.lines = lines[:keep]
+	v.buf.ei.screenRow = screenRow
+	cached.lines = append(cached.lines[:keep], textAreaRenderedLine{cellStart: start, screenRow: screenRow})
+	content := make([]cell, 0, len(textCells)-start)
 	lineStart := 0
 	appendLine := func(complete bool) {
 		var lineCells []cell
@@ -2593,10 +2619,11 @@ func (v *View) renderTextAreaCells() bool {
 		v.buf.lines = append(v.buf.lines, lineType{cells: lineCells, metadataCollected: complete})
 		lineStart = len(content)
 	}
-	for _, c := range textCells {
+	for i, c := range textCells[start:] {
 		if c.char == "\n" {
 			appendLine(true)
 			v.buf.ei.notifyRowAdvance()
+			cached.lines = append(cached.lines, textAreaRenderedLine{cellStart: start + i + 1, screenRow: v.buf.ei.screenRow})
 		} else {
 			content = append(content, cell{chr: c.char, width: c.width})
 			v.buf.ei.notifyCellsWritten(c.width)
@@ -2606,6 +2633,13 @@ func (v *View) renderTextAreaCells() bool {
 	v.buf.wy = len(v.buf.lines) - 1
 	v.buf.wx = len(v.buf.lines[v.buf.wy].cells)
 	v.buf.pendingNewline = pendingNewline
+	v.renderedTextArea = textAreaRendering{
+		source:   v.TextArea,
+		revision: v.TextArea.layout.revision,
+		editable: v.Editable,
+		columns:  v.buf.ei.screenColMax,
+		lines:    cached.lines,
+	}
 	return true
 }
 
@@ -2679,6 +2713,7 @@ func (v *View) OverwriteLinesAndClearEverythingElse(lineCount int, y int, conten
 }
 
 func (v *View) setContentLineCount(lineCount int) {
+	v.renderedTextArea.source = nil
 	if lineCount > 0 {
 		v.buf.makeWriteable(0, lineCount-1)
 	}
