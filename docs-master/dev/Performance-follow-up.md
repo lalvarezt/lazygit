@@ -1,7 +1,18 @@
 # Performance follow-up, 4 November 2026
 
-This investigation starts at `4268a97ed`, after the six passes in
-[the earlier performance report](Performance-summary.html). Those passes cover
+The [current comparison](Performance-summary.html) uses `8e3ac7699` as its
+baseline, kept at `performance-baseline-crlf-20261104`. This separate baseline
+includes the shared CRLF correction. The branch retains its original commit
+hashes, with the CRLF demonstration and correction applied as tip fixups.
+
+The full run measured `d9f407637`. Revision `fdbe79416` preserves the original
+branch history and has the same Git tree; the data records this equivalence.
+The focused reports below retain their original measured source revisions.
+The remaining weakest cases are 100-file tree construction and ordinary text
+searches, taking about 32 µs and 440–626 µs respectively in this run.
+
+This investigation starts at `4268a97ed`, after the first six performance
+passes. Those passes cover
 view drawing, diff streaming, search highlighting, paste, editors, filtered lists,
 file-tree construction, selection recovery, rectangle fills, and batched screen
 writes.
