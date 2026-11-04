@@ -50,103 +50,10 @@ type TextArea struct {
 	AutoWrapWidth   int
 }
 
-func stringToTextAreaCells(str string) []TextAreaCell {
-	result := make([]TextAreaCell, 0, len(str))
-
-	contentIndex := 0
-	state := -1
-	for len(str) > 0 {
-		var c string
-		var w int
-		c, str, w, state = uniseg.FirstGraphemeClusterInString(str, state)
-		// only set char, width, and contentIndex; x and y will be set later
-		result = append(result, TextAreaCell{char: c, width: w, contentIndex: contentIndex})
-		contentIndex += len(c)
-	}
-	return result
-}
-
 // Returns the indices in content where soft line breaks occur due to auto-wrapping to the given width.
 func AutoWrapContent(content string, autoWrapWidth int) []int {
 	_, softLineBreakIndices := contentToCells(content, autoWrapWidth)
 	return softLineBreakIndices
-}
-
-func contentToCells(content string, autoWrapWidth int) ([]TextAreaCell, []int) {
-	estimatedNumberOfSoftLineBreaks := 0
-	if autoWrapWidth > 0 {
-		estimatedNumberOfSoftLineBreaks = len(content) / autoWrapWidth
-	}
-	softLineBreakIndices := make([]int, 0, estimatedNumberOfSoftLineBreaks)
-	result := make([]TextAreaCell, 0, len(content)+estimatedNumberOfSoftLineBreaks)
-	startOfLine := 0
-	currentLineWidth := 0
-	indexOfLastWhitespace := -1
-	var footNoteMatcher footNoteMatcher
-	var trailerMatcher trailerMatcher
-
-	cells := stringToTextAreaCells(content)
-	y := 0
-
-	appendCellsSinceLineStart := func(to int) {
-		x := 0
-		for i := startOfLine; i < to; i++ {
-			cells[i].x = x
-			cells[i].y = y
-			x += cells[i].width
-		}
-
-		result = append(result, cells[startOfLine:to]...)
-	}
-
-	// Commit message trailers ("Signed-off-by:" and the like) must not be
-	// auto-wrapped. They are only recognized in the last paragraph of the
-	// message, so that a trailer-looking line in the message body isn't treated
-	// as one; see startOfTrailerBlock.
-	trailerBlockStart := startOfTrailerBlock(content)
-
-	for currentPos, c := range cells {
-		if c.char == "\n" {
-			appendCellsSinceLineStart(currentPos + 1)
-			y++
-			startOfLine = currentPos + 1
-			indexOfLastWhitespace = -1
-			currentLineWidth = 0
-			footNoteMatcher.reset()
-			trailerMatcher.reset()
-		} else {
-			currentLineWidth += c.width
-			inTrailerBlock := c.contentIndex >= trailerBlockStart
-			if c.char == " " && !footNoteMatcher.isFootNote() &&
-				!(inTrailerBlock && trailerMatcher.isTrailer(content[c.contentIndex+len(c.char):])) {
-				indexOfLastWhitespace = currentPos + 1
-			} else if autoWrapWidth > 0 && currentLineWidth > autoWrapWidth && indexOfLastWhitespace >= 0 {
-				wrapAt := indexOfLastWhitespace
-				appendCellsSinceLineStart(wrapAt)
-				contentIndex := cells[wrapAt].contentIndex
-				y++
-				result = append(result, TextAreaCell{char: "\n", width: 1, contentIndex: contentIndex, x: 0, y: y})
-				softLineBreakIndices = append(softLineBreakIndices, contentIndex)
-				startOfLine = wrapAt
-				indexOfLastWhitespace = -1
-				currentLineWidth = 0
-				for _, c1 := range cells[startOfLine : currentPos+1] {
-					currentLineWidth += c1.width
-				}
-				footNoteMatcher.reset()
-				trailerMatcher.reset()
-			}
-
-			footNoteMatcher.addCharacter(c.char)
-			if inTrailerBlock {
-				trailerMatcher.addCharacter(c.char)
-			}
-		}
-	}
-
-	appendCellsSinceLineStart(len(cells))
-
-	return result, softLineBreakIndices
 }
 
 // startOfTrailerBlock returns the byte index into content at which the trailer
