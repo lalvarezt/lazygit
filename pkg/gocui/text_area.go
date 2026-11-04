@@ -4,7 +4,6 @@ import (
 	"regexp"
 	"slices"
 	"strings"
-	"unicode/utf8"
 
 	"github.com/rivo/uniseg"
 )
@@ -30,6 +29,9 @@ func (c *TextAreaCell) nextCursorXY() (int, int) {
 }
 
 type textAreaLayout struct {
+	checkpoints   []textAreaCheckpoint
+	pending       []TextAreaCell
+	trailerStart  int
 	content       string
 	width         int
 	ready         bool
@@ -165,64 +167,91 @@ func (self *trailerMatcher) reset() {
 	self.keyEndsWithColon = false
 }
 
+func (self *TextArea) checkpointBeforeEdit(width, trailerStart int) (textAreaCheckpoint, int) {
+	if !self.layout.ready || self.layout.width != width || !self.hasChanges || len(self.layout.checkpoints) == 0 {
+		return textAreaCheckpoint{graphemeState: -1}, -1
+	}
+	dirty := self.changedFromByte
+	if self.layout.trailerStart != trailerStart {
+		dirty = min(dirty, self.layout.trailerStart, trailerStart)
+	}
+	cellIndex, _ := slices.BinarySearchFunc(self.cells, dirty, func(c TextAreaCell, index int) int { return c.contentIndex - index })
+	// Grapheme parsing stores lookahead. Keep it inside unchanged text, even
+	// when an edit merges clusters. Soft breaks can share a source position.
+	safeByte, lastIndex, distinct := 0, dirty, 0
+	for i := cellIndex - 1; i >= 0 && distinct < 2; i-- {
+		if self.cells[i].contentIndex == lastIndex {
+			continue
+		}
+		safeByte, lastIndex = self.cells[i].contentIndex, self.cells[i].contentIndex
+		distinct++
+	}
+	if distinct < 2 {
+		safeByte = 0
+	}
+	index, found := slices.BinarySearchFunc(self.layout.checkpoints, safeByte, func(c textAreaCheckpoint, index int) int { return c.nextByte - index })
+	if !found {
+		index--
+	}
+	index = max(index, 0)
+	return self.layout.checkpoints[index], index
+}
+
 func (self *TextArea) updateCells() {
 	width := self.AutoWrapWidth
 	if !self.AutoWrap {
 		width = -1
 	}
-
 	if self.layout.ready && self.layout.width == width && self.layout.content == self.content {
 		self.hasChanges = false
 		return
 	}
-	cut, start, row := self.unchangedPrefix(width)
-	suffix, _ := contentToCells(self.content[start:], width)
-	for i := range suffix {
-		c := &suffix[i]
-		c.contentIndex += start
-		c.y += row
-		// Completed lines survive later edits, so their graphemes must not
-		// retain whole-message strings from those edits.
-		if len(c.char) == 1 && c.char[0] < utf8.RuneSelf {
-			// Single-byte slice conversions share Go's static byte strings.
-			c.char = string([]byte{c.char[0]})
-		} else {
-			c.char = strings.Clone(c.char)
-		}
+	trailerStart := startOfTrailerBlock(self.content)
+	checkpoint, index := self.checkpointBeforeEdit(width, trailerStart)
+	oldCells, oldCheckpoints := self.cells, self.layout.checkpoints
+	checkpoints := oldCheckpoints[:0]
+	if index >= 0 {
+		checkpoints = oldCheckpoints[:index+1]
+	} else {
+		checkpoints = append(checkpoints, checkpoint)
 	}
-	oldCells := self.cells
-	self.cells = append(self.cells[:cut], suffix...)
+	remainingBytes := len(self.content) - checkpoint.nextByte
+	remainingCells := checkpoint.pendingCells + remainingBytes
+	if width > 0 {
+		remainingCells += (checkpoint.lineWidth + remainingBytes) / width
+	}
+	p := textAreaParser{
+		content:           self.content,
+		width:             width,
+		trailerBlockStart: trailerStart,
+		nextByte:          checkpoint.nextByte,
+		graphemeState:     checkpoint.graphemeState,
+		row:               checkpoint.row,
+		lineWidth:         checkpoint.lineWidth,
+		lastWhitespace:    -1,
+		trailer:           checkpoint.trailer,
+		pending:           append(self.layout.pending[:0], oldCells[checkpoint.outputCells:checkpoint.outputCells+checkpoint.pendingCells]...),
+		result:            slices.Grow(oldCells[:checkpoint.outputCells], remainingCells),
+		checkpointing:     true,
+		checkpoints:       checkpoints,
+		ownedText:         true,
+	}
+	p.footnote.didFailToMatch = checkpoint.footnoteFailed
+	p.footnote.lineStr.WriteString(checkpoint.footnotePrefix)
+	p.parse()
+	self.cells = p.result
 	if len(oldCells) > len(self.cells) {
 		clear(oldCells[len(self.cells):])
 	}
-	self.layout.unchangedRows = row
+	if len(oldCheckpoints) > len(p.checkpoints) {
+		clear(oldCheckpoints[len(p.checkpoints):])
+	}
+	self.layout.pending, self.layout.checkpoints = p.pending, p.checkpoints
+	self.layout.unchangedRows = checkpoint.row
 	self.layout.content, self.layout.width, self.layout.ready = self.content, width, true
+	self.layout.trailerStart = trailerStart
 	self.hasChanges = false
 	self.layout.revision++
-}
-
-func (self *TextArea) unchangedPrefix(width int) (cells, bytes, rows int) {
-	if !self.layout.ready || self.layout.width != width || !self.hasChanges {
-		return 0, 0, 0
-	}
-
-	dirty := self.changedFromByte
-	oldTrailer, newTrailer := startOfTrailerBlock(self.layout.content), startOfTrailerBlock(self.content)
-	if oldTrailer != newTrailer {
-		// Trailer recognition depends on the final paragraph. Editing its
-		// separator can invalidate lines before the edit.
-		dirty = min(dirty, oldTrailer, newTrailer)
-	}
-	cellIndex, _ := slices.BinarySearchFunc(self.cells, dirty, func(c TextAreaCell, index int) int {
-		return c.contentIndex - index
-	})
-	for i := cellIndex - 1; i >= 0; i-- {
-		c := self.cells[i]
-		if c.char == "\n" && self.layout.content[c.contentIndex] == '\n' {
-			return i + 1, c.contentIndex + 1, c.y + 1
-		}
-	}
-	return 0, 0, 0
 }
 
 func (self *TextArea) replaceContent(start, end int, text string) {
@@ -641,6 +670,9 @@ func (self *TextArea) SetCursor2D(x int, y int) {
 }
 
 func (self *TextArea) Clear() {
+	self.layout.checkpoints = nil
+	self.layout.pending = nil
+	self.layout.trailerStart = 0
 	self.layout.content = ""
 	self.layout.ready = false
 	self.hasChanges = false

@@ -29,6 +29,36 @@ func TestTextAreaLayoutAcrossGraphemeBoundaries(t *testing.T) {
 	}
 }
 
+func TestTextAreaLayoutAfterParagraphReplacements(t *testing.T) {
+	rng := rand.New(rand.NewSource(7382))
+	initialContents := []string{
+		strings.Repeat("a paragraph with several different words ", 15),
+		"subject\n\n" + strings.Repeat("body words [1]: notes ", 15) + "\n\nSigned-off-by: Someone <name@example.com>\n",
+		strings.Repeat("界 é 👩‍💻 🇦🇧 words ", 15),
+	}
+	insertions := []string{"x", " ", "\n", "\n\n", "界", "é", "\u0301", "👩", "\u200d", "💻", "🇦", "\r", "\xff", "[1]: ", "Signed-off-by: "}
+	for _, width := range []int{5, 12, 72} {
+		for _, content := range initialContents {
+			area := &TextArea{AutoWrap: true, AutoWrapWidth: width}
+			area.TypeString(content)
+			for range 100 {
+				boundaries := make([]int, 0, len(area.content)+1)
+				for index := range area.content {
+					boundaries = append(boundaries, index)
+				}
+				boundaries = append(boundaries, len(area.content))
+				start := rng.Intn(len(boundaries))
+				end := min(start+rng.Intn(5), len(boundaries)-1)
+				text := insertions[rng.Intn(len(insertions))]
+				area.replaceContent(boundaries[start], boundaries[end], text)
+				area.cursor = boundaries[start] + len(text)
+				area.updateCells()
+				assertTextAreaLayout(t, area)
+			}
+		}
+	}
+}
+
 func assertTextAreaLayout(t *testing.T, area *TextArea) {
 	t.Helper()
 	width := -1
