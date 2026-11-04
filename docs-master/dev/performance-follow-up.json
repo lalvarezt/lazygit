@@ -1838,6 +1838,618 @@
           }
         ]
       }
+    },
+    {
+      "group": "Parser checkpoints (staged baseline)",
+      "benchmark": "BenchmarkEditorInput/bytes=256",
+      "before": {
+        "ns": 300555,
+        "bytes": 439487,
+        "allocations": 1650
+      },
+      "after": {
+        "ns": 190690,
+        "bytes": 223113,
+        "allocations": 536
+      },
+      "speedup": 1.576144527767581,
+      "samples": {
+        "before": [
+          {
+            "ns": 307213,
+            "bytes": 439498,
+            "allocations": 1650
+          },
+          {
+            "ns": 293725,
+            "bytes": 439487,
+            "allocations": 1650
+          },
+          {
+            "ns": 300555,
+            "bytes": 439477,
+            "allocations": 1650
+          }
+        ],
+        "after": [
+          {
+            "ns": 190690,
+            "bytes": 223113,
+            "allocations": 536
+          },
+          {
+            "ns": 183481,
+            "bytes": 223107,
+            "allocations": 536
+          },
+          {
+            "ns": 192570,
+            "bytes": 223114,
+            "allocations": 536
+          }
+        ]
+      }
+    },
+    {
+      "group": "Parser checkpoints (staged baseline)",
+      "benchmark": "BenchmarkEditorInput/bytes=1024",
+      "before": {
+        "ns": 2335006,
+        "bytes": 2198513,
+        "allocations": 6661
+      },
+      "after": {
+        "ns": 1528490,
+        "bytes": 1313368,
+        "allocations": 2084
+      },
+      "speedup": 1.527655398465152,
+      "samples": {
+        "before": [
+          {
+            "ns": 2335006,
+            "bytes": 2198513,
+            "allocations": 6661
+          },
+          {
+            "ns": 2353466,
+            "bytes": 2198513,
+            "allocations": 6661
+          },
+          {
+            "ns": 2290431,
+            "bytes": 2198500,
+            "allocations": 6661
+          }
+        ],
+        "after": [
+          {
+            "ns": 1436585,
+            "bytes": 1313368,
+            "allocations": 2084
+          },
+          {
+            "ns": 1528490,
+            "bytes": 1313388,
+            "allocations": 2084
+          },
+          {
+            "ns": 1541904,
+            "bytes": 1313359,
+            "allocations": 2084
+          }
+        ]
+      }
+    },
+    {
+      "group": "Parser checkpoints (staged baseline)",
+      "benchmark": "BenchmarkEditorInput/bytes=4096",
+      "before": {
+        "ns": 26210966,
+        "bytes": 15714352,
+        "allocations": 26627
+      },
+      "after": {
+        "ns": 15781486,
+        "bytes": 12169033,
+        "allocations": 8236
+      },
+      "speedup": 1.6608680576721355,
+      "samples": {
+        "before": [
+          {
+            "ns": 26210966,
+            "bytes": 15714208,
+            "allocations": 26626
+          },
+          {
+            "ns": 27118472,
+            "bytes": 15714376,
+            "allocations": 26627
+          },
+          {
+            "ns": 25570083,
+            "bytes": 15714352,
+            "allocations": 26627
+          }
+        ],
+        "after": [
+          {
+            "ns": 15882062,
+            "bytes": 12168966,
+            "allocations": 8236
+          },
+          {
+            "ns": 15781486,
+            "bytes": 12169033,
+            "allocations": 8236
+          },
+          {
+            "ns": 15624656,
+            "bytes": 12169089,
+            "allocations": 8237
+          }
+        ]
+      }
+    },
+    {
+      "group": "Parser checkpoints (staged baseline)",
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=256",
+      "before": {
+        "ns": 2367029,
+        "bytes": 5861532,
+        "allocations": 2636
+      },
+      "after": {
+        "ns": 528550,
+        "bytes": 799430,
+        "allocations": 529
+      },
+      "speedup": 4.478344527480844,
+      "samples": {
+        "before": [
+          {
+            "ns": 2313328,
+            "bytes": 5861532,
+            "allocations": 2636
+          },
+          {
+            "ns": 2367029,
+            "bytes": 5861597,
+            "allocations": 2636
+          },
+          {
+            "ns": 2381405,
+            "bytes": 5861522,
+            "allocations": 2636
+          }
+        ],
+        "after": [
+          {
+            "ns": 528550,
+            "bytes": 799430,
+            "allocations": 529
+          },
+          {
+            "ns": 521814,
+            "bytes": 799430,
+            "allocations": 529
+          },
+          {
+            "ns": 535813,
+            "bytes": 799432,
+            "allocations": 529
+          }
+        ]
+      }
+    },
+    {
+      "group": "Parser checkpoints (staged baseline)",
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=1024",
+      "before": {
+        "ns": 34780420,
+        "bytes": 85839369,
+        "allocations": 11445
+      },
+      "after": {
+        "ns": 2869365,
+        "bytes": 3834357,
+        "allocations": 2077
+      },
+      "speedup": 12.121295129758675,
+      "samples": {
+        "before": [
+          {
+            "ns": 34780420,
+            "bytes": 85839369,
+            "allocations": 11445
+          },
+          {
+            "ns": 34980368,
+            "bytes": 85839203,
+            "allocations": 11444
+          },
+          {
+            "ns": 32527241,
+            "bytes": 85839433,
+            "allocations": 11446
+          }
+        ],
+        "after": [
+          {
+            "ns": 2836721,
+            "bytes": 3834357,
+            "allocations": 2077
+          },
+          {
+            "ns": 2902904,
+            "bytes": 3834359,
+            "allocations": 2077
+          },
+          {
+            "ns": 2869365,
+            "bytes": 3834336,
+            "allocations": 2077
+          }
+        ]
+      }
+    },
+    {
+      "group": "Parser checkpoints (staged baseline)",
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=4096",
+      "before": {
+        "ns": 622604817,
+        "bytes": 1562674144,
+        "allocations": 50398
+      },
+      "after": {
+        "ns": 22384703,
+        "bytes": 22440992,
+        "allocations": 8228
+      },
+      "speedup": 27.81385203100528,
+      "samples": {
+        "before": [
+          {
+            "ns": 622604817,
+            "bytes": 1562674704,
+            "allocations": 50403
+          },
+          {
+            "ns": 608858459,
+            "bytes": 1562674144,
+            "allocations": 50398
+          },
+          {
+            "ns": 631098018,
+            "bytes": 1562674032,
+            "allocations": 50397
+          }
+        ],
+        "after": [
+          {
+            "ns": 22384703,
+            "bytes": 22440992,
+            "allocations": 8228
+          },
+          {
+            "ns": 22262060,
+            "bytes": 22440992,
+            "allocations": 8228
+          },
+          {
+            "ns": 22712688,
+            "bytes": 22440880,
+            "allocations": 8227
+          }
+        ]
+      }
+    },
+    {
+      "group": "Parser checkpoints (staged baseline)",
+      "benchmark": "BenchmarkPasteText/bytes=1000",
+      "before": {
+        "ns": 42482,
+        "bytes": 102849,
+        "allocations": 10
+      },
+      "after": {
+        "ns": 32564,
+        "bytes": 64081,
+        "allocations": 15
+      },
+      "speedup": 1.3045694632109077,
+      "samples": {
+        "before": [
+          {
+            "ns": 41977,
+            "bytes": 102850,
+            "allocations": 10
+          },
+          {
+            "ns": 42482,
+            "bytes": 102849,
+            "allocations": 10
+          },
+          {
+            "ns": 42826,
+            "bytes": 102848,
+            "allocations": 10
+          }
+        ],
+        "after": [
+          {
+            "ns": 31845,
+            "bytes": 64080,
+            "allocations": 15
+          },
+          {
+            "ns": 32616,
+            "bytes": 64081,
+            "allocations": 15
+          },
+          {
+            "ns": 32564,
+            "bytes": 64081,
+            "allocations": 15
+          }
+        ]
+      }
+    },
+    {
+      "group": "Parser checkpoints (staged baseline)",
+      "benchmark": "BenchmarkPasteText/bytes=10000",
+      "before": {
+        "ns": 390727,
+        "bytes": 989649,
+        "allocations": 10
+      },
+      "after": {
+        "ns": 305119,
+        "bytes": 597467,
+        "allocations": 18
+      },
+      "speedup": 1.2805724979434254,
+      "samples": {
+        "before": [
+          {
+            "ns": 390727,
+            "bytes": 989649,
+            "allocations": 10
+          },
+          {
+            "ns": 410587,
+            "bytes": 989649,
+            "allocations": 10
+          },
+          {
+            "ns": 385541,
+            "bytes": 989655,
+            "allocations": 10
+          }
+        ],
+        "after": [
+          {
+            "ns": 305119,
+            "bytes": 597467,
+            "allocations": 18
+          },
+          {
+            "ns": 300756,
+            "bytes": 597466,
+            "allocations": 18
+          },
+          {
+            "ns": 311267,
+            "bytes": 597467,
+            "allocations": 18
+          }
+        ]
+      }
+    },
+    {
+      "group": "Parser checkpoints (staged baseline)",
+      "benchmark": "BenchmarkPasteText/bytes=100000",
+      "before": {
+        "ns": 3161517,
+        "bytes": 9796971,
+        "allocations": 10
+      },
+      "after": {
+        "ns": 2823116,
+        "bytes": 6886884,
+        "allocations": 25
+      },
+      "speedup": 1.1198679048257316,
+      "samples": {
+        "before": [
+          {
+            "ns": 3080504,
+            "bytes": 9796975,
+            "allocations": 10
+          },
+          {
+            "ns": 3161517,
+            "bytes": 9796971,
+            "allocations": 10
+          },
+          {
+            "ns": 3556232,
+            "bytes": 9796957,
+            "allocations": 10
+          }
+        ],
+        "after": [
+          {
+            "ns": 2864379,
+            "bytes": 6886873,
+            "allocations": 25
+          },
+          {
+            "ns": 2797651,
+            "bytes": 6886884,
+            "allocations": 25
+          },
+          {
+            "ns": 2823116,
+            "bytes": 6886978,
+            "allocations": 25
+          }
+        ]
+      }
+    },
+    {
+      "group": "Paragraph input (before parser preparation)",
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=256",
+      "before": {
+        "ns": 2183199,
+        "bytes": 5777798,
+        "allocations": 1206
+      },
+      "after": {
+        "ns": 528550,
+        "bytes": 799430,
+        "allocations": 529
+      },
+      "speedup": 4.13054394097058,
+      "samples": {
+        "before": [
+          {
+            "ns": 2223846,
+            "bytes": 5777967,
+            "allocations": 1206
+          },
+          {
+            "ns": 2183199,
+            "bytes": 5777798,
+            "allocations": 1206
+          },
+          {
+            "ns": 2167237,
+            "bytes": 5777738,
+            "allocations": 1206
+          }
+        ],
+        "after": [
+          {
+            "ns": 528550,
+            "bytes": 799430,
+            "allocations": 529
+          },
+          {
+            "ns": 521814,
+            "bytes": 799430,
+            "allocations": 529
+          },
+          {
+            "ns": 535813,
+            "bytes": 799432,
+            "allocations": 529
+          }
+        ]
+      }
+    },
+    {
+      "group": "Paragraph input (before parser preparation)",
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=1024",
+      "before": {
+        "ns": 37076968,
+        "bytes": 105372009,
+        "allocations": 5396
+      },
+      "after": {
+        "ns": 2869365,
+        "bytes": 3834357,
+        "allocations": 2077
+      },
+      "speedup": 12.92166315543683,
+      "samples": {
+        "before": [
+          {
+            "ns": 33954498,
+            "bytes": 105371987,
+            "allocations": 5396
+          },
+          {
+            "ns": 37076968,
+            "bytes": 105372009,
+            "allocations": 5396
+          },
+          {
+            "ns": 37541769,
+            "bytes": 105372016,
+            "allocations": 5396
+          }
+        ],
+        "after": [
+          {
+            "ns": 2836721,
+            "bytes": 3834357,
+            "allocations": 2077
+          },
+          {
+            "ns": 2902904,
+            "bytes": 3834359,
+            "allocations": 2077
+          },
+          {
+            "ns": 2869365,
+            "bytes": 3834336,
+            "allocations": 2077
+          }
+        ]
+      }
+    },
+    {
+      "group": "Paragraph input (before parser preparation)",
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=4096",
+      "before": {
+        "ns": 713479038,
+        "bytes": 1948303568,
+        "allocations": 25908
+      },
+      "after": {
+        "ns": 22384703,
+        "bytes": 22440992,
+        "allocations": 8228
+      },
+      "speedup": 31.873509244237013,
+      "samples": {
+        "before": [
+          {
+            "ns": 725494839,
+            "bytes": 1948303568,
+            "allocations": 25908
+          },
+          {
+            "ns": 713479038,
+            "bytes": 1948302672,
+            "allocations": 25900
+          },
+          {
+            "ns": 707995229,
+            "bytes": 1948304688,
+            "allocations": 25918
+          }
+        ],
+        "after": [
+          {
+            "ns": 22384703,
+            "bytes": 22440992,
+            "allocations": 8228
+          },
+          {
+            "ns": 22262060,
+            "bytes": 22440992,
+            "allocations": 8228
+          },
+          {
+            "ns": 22712688,
+            "bytes": 22440880,
+            "allocations": 8227
+          }
+        ]
+      }
     }
   ]
 }

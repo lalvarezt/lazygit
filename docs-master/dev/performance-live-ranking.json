@@ -125,5 +125,46 @@
     "observationIntervalMs": 200,
     "terminalDifference": "Version footer only",
     "limits": "Single matched profile pair. Marker observation cannot establish a precise latency ratio."
+  },
+  "parserCheckpoints": {
+    "baseline": "09d853084 source compiled via Go overlay",
+    "implementation": "dc04d2880",
+    "before": {
+      "label": "before",
+      "inputBytes": 4111,
+      "profileSeconds": 12,
+      "terminal": "100x30",
+      "cpuSeconds": 1.44,
+      "markerObservedMs": 514,
+      "observationIntervalMs": 100
+    },
+    "after": {
+      "label": "after",
+      "inputBytes": 4111,
+      "profileSeconds": 12,
+      "terminal": "100x30",
+      "cpuSeconds": 0.18,
+      "markerObservedMs": 105,
+      "observationIntervalMs": 100
+    },
+    "terminalCapturesIdentical": true,
+    "additionalArrayBytes": {
+      "paragraph4090": 9408,
+      "newlineSeparated4090": 49968
+    },
+    "limits": "One matched CPU profile pair. Marker observations have 100 ms resolution."
+  },
+  "largeDiffRanking": {
+    "fixtureLines": 50000,
+    "fixtureBytes": 3150000,
+    "terminal": "160x48",
+    "workload": "Read to end, enter performance-match search, send 120 up keys",
+    "profileSeconds": 14,
+    "appCpuSeconds": 1.81,
+    "endMarkerObservedMs": 412,
+    "observationIntervalMs": 100,
+    "viewWriteCpuSeconds": 0.56,
+    "searchPositionsCpuSeconds": 0.1,
+    "limits": "Single ranking profile, not a before/after comparison."
   }
 }

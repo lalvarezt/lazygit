@@ -22,7 +22,7 @@ operation and cannot be combined into an application speedup.
 | Distant scroll down across 100,000 matches | 44.045 µs | 24.38 ns | 1,807× |
 | Distant scroll up across 100,000 matches | 35.958 µs | 25.45 ns | 1,413× |
 
-The [measurement data](performance-follow-up.json) contains all 36 comparisons,
+The [measurement data](performance-follow-up.json) contains all 48 comparisons,
 including the individual samples, allocation counts, smaller workloads, ordinary
 search text, and file-tree refresh costs.
 
@@ -129,6 +129,49 @@ Unicode, trailer changes, skipped renders, external writes, copied snapshots,
 terminal widths, and writer fallback. Build, unit tests, lint, full integration
 tests, and the gocui race checks pass.
 
+## Parser checkpoints for long paragraphs
+
+`09d853084` expresses the full wrapping algorithm as a streaming parser.
+`dc04d2880` resumes that parser at completed hard or soft line transitions. A
+checkpoint retains the partial word, grapheme lookahead, row position, and
+footnote and trailer state. Edits that join grapheme clusters resume before the
+saved lookahead. Final-paragraph changes still invalidate earlier trailer lines.
+
+| Workload | Before | After | Speedup |
+| --- | ---: | ---: | ---: |
+| 4 KB paragraph, before parser preparation | 713.479 ms | 22.385 ms | 31.9× |
+| 4 KB paragraph, prepared parser baseline | 622.605 ms | 22.385 ms | 27.8× |
+| 4 KB newline-separated input, prepared baseline | 26.211 ms | 15.781 ms | 1.7× |
+| 100 KB bulk paste, prepared baseline | 3.162 ms | 2.823 ms | 1.1× |
+
+The paragraph benchmark repeats `body text ` without explicit newlines and wraps
+at 72 columns. The nominal 4,096-byte benchmark contains 4,090 bytes of repeated
+text. The checkpoint and scratch arrays retain 9,408 bytes for that paragraph and
+49,968 bytes for the newline-separated fixture. Clearing the text releases both
+arrays. The rejected grapheme-cache prototype retained 451,008 bytes and
+246,592 bytes respectively in its additional arrays.
+
+A matched live paste uses 4,111 bytes in a single paragraph at 100 × 30 terminal
+size. Against the prepared-parser baseline, app CPU falls from 1.44 seconds to
+0.18 seconds over a 12-second profile. Terminal captures are identical. The final
+marker is observed at 514 ms before and 105 ms after, with 100 ms observation
+intervals. This is one profile pair and cannot establish a precise latency ratio.
+The baseline binary uses the source from `09d853084` through a Go build overlay.
+
+Tests cover 900 replacements inside paragraphs, in addition to editor-key
+sequences and Unicode boundaries. A temporary independent oracle compares these
+incremental layouts directly with the old parser. The streaming full parser also
+matches the old parser on 1,000 generated inputs. Build, unit tests, lint, full
+integration tests, and gocui race checks pass.
+
+Checkpoint placement currently follows line transitions. Long unbroken text
+remains a separate candidate for investigation.
+
+A separate ranking profile loads a 50,000-line diff, enters a search, and sends
+120 up keys. It records 1.81 app CPU seconds over 14 seconds, including 0.56 seconds
+in view writes and 0.10 seconds updating search positions. This is a ranking run,
+not a before-and-after comparison.
+
 Reproduce the committed benchmarks with:
 
 ```sh
@@ -136,4 +179,5 @@ go test ./pkg/gui/context -run='^$' -bench=BenchmarkFilteredListNavigation -benc
 go test ./pkg/gui/filetree -run='^$' -bench='BenchmarkFileTree(RangeSelection|Navigation)' -benchmem -benchtime=200ms -count=3
 go test ./pkg/gocui -run='^$' -bench='Benchmark(SearchRepeatedPrefix|SearchOrdinaryText|NearestSearchPosition|ScrollSearchPosition)' -benchmem -benchtime=150ms -count=3
 go test ./pkg/gocui ./pkg/gui -run='^$' -bench='Benchmark(EditorInput|CommitDescriptionInput)' -benchmem -benchtime=300ms -count=3
+go test ./pkg/gocui -run='^$' -bench='Benchmark(EditorParagraphInput|PasteText)' -benchmem -benchtime=150ms -count=3
 ```
