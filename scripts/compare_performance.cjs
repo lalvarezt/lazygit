@@ -3,6 +3,7 @@ const path = require('node:path');
 const os = require('node:os');
 const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
+const { renderComparison } = require('./render_performance.cjs');
 
 // The shared CRLF correction precedes the performance changes.
 const PERFORMANCE_BASE = '8e3ac76991f5ffe810bd9a18597cdb017c909020';
@@ -158,35 +159,55 @@ function measure() {
 }
 
 if (require.main === module) {
-  const data = process.argv[2] === "--render-only"
-    ? JSON.parse(fs.readFileSync(path.join(root, "docs-master/dev/performance-comparison.json"), "utf8"))
+  const dataPath = path.join(root, 'docs-master/dev/performance-comparison.json');
+  const data = process.argv[2] === '--render-only'
+    ? JSON.parse(fs.readFileSync(dataPath, 'utf8'))
     : measure();
-  const { revisions, settings, rows } = data;
-  const escape = text => String(text).replace(/[&<>"']/g, chr => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[chr]);
-  const time = ns => { const [unit, scale] = ns >= 1e9 ? ['s', 1e9] : ns >= 1e6 ? ['ms', 1e6] : ns >= 1e3 ? ['µs', 1e3] : ['ns', 1]; return `${Number((ns / scale).toPrecision(4))} ${unit}`; };
-  const cell = (row, side) => `<td data-ns="${row[side]}"><span>${time(row[side])}</span><div class="track" aria-hidden="true"><div class="bar ${side}" style="width:${100 * row[side] / Math.max(row.before, row.after)}%"></div></div></td>`;
-  const change = row => {
-    const ratio = row.before / row.after;
-    const delta = (row.after - row.before) / row.before;
-    const percentage = delta.toLocaleString('en-US', { style: 'percent', signDisplay: 'exceptZero', minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const tooltip = `${ratio.toLocaleString('en-US', { maximumFractionDigits: 2 })}× speedup (before / after)`;
-    return `<td data-change="${delta}" title="${tooltip}">${percentage}</td>`;
-  };
-  const html = `<!doctype html>
-  <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lazygit: baseline vs HEAD benchmarks</title><style>
-  :root{color-scheme:light dark;--text:var(--foreground,#1f2937);--muted-text:var(--muted-foreground,#475569);--surface:var(--background,#fff);--line:var(--border,#d8e0eb);--track:var(--secondary,#edf2f7);--before:var(--chart-1,#4263c7);--after:var(--chart-2,#087f6d)}
-  @media(prefers-color-scheme:dark){:root{--text:var(--foreground,#e5edf7);--muted-text:var(--muted-foreground,#acbacd);--surface:var(--background,#111827);--line:var(--border,#36455c);--track:var(--secondary,#263349);--before:var(--chart-1,#86a5ff);--after:var(--chart-2,#53cbb5)}}
-  body{margin:0;font:14px/1.5 var(--font-sans,system-ui,sans-serif);color:var(--text)}main{max-width:1200px;margin:auto}p{color:var(--muted-text);font-size:13px}code{font-family:var(--font-mono,monospace);overflow-wrap:anywhere}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%}th,td{padding:12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}thead th{background:var(--surface);position:sticky;top:0}tbody th{font-weight:400;min-width:230px;max-width:380px}td:nth-child(2){min-width:230px}td[data-ns]{min-width:100px;font-variant-numeric:tabular-nums;white-space:nowrap}.track{height:7px;background:var(--track);margin-top:8px;border-radius:3px;overflow:hidden}.bar{height:7px;min-width:1px}.before{background:var(--before)}.after{background:var(--after)}@media print{thead th{position:static}.scroll{overflow:visible}th,td{padding:6px}}
-  </style></head><body><main>
-<p>Before (baseline): <code>${revisions.before.slice(0, 12)}</code> · After (HEAD at run): <code>${revisions.after.slice(0, 12)}</code><br>Same benchmark sources and settings. Median of ${settings.samples} samples, ${settings.benchtime} per sample, GOMAXPROCS=${settings.GOMAXPROCS}, GOGC=${settings.GOGC}. ${escape(data.goVersion)} · ${escape(data.cpu)}. Lower time is better; bars use one scale per row. Negative change means faster; positive means slower.</p>
-${data.equivalentAfter ? `<p>Equivalent branch revision: <code>${escape(data.equivalentAfter.revision.slice(0, 12))}</code>. Its Git tree is identical to the measured after revision.</p>` : ''}
-<div class="scroll"><table><thead><tr><th>Test case ID</th><th>Description</th><th>Before</th><th>After</th><th>Change</th></tr></thead><tbody>
-${rows.map(row => `<tr><th scope="row"><code>${escape(row.id)}</code></th><td>${escape(row.description)}</td>${cell(row, 'before')}${cell(row, 'after')}${change(row)}</tr>`).join('\n')}
-  </tbody></table></div></main></body></html>
-  `;
-  fs.writeFileSync(path.join(root, 'docs-master/dev/performance-comparison.json'), JSON.stringify(data, null, 2) + '\n');
-  fs.writeFileSync(path.join(root, 'docs-master/dev/Performance-summary.html'), html.trim() + '\n');
-  console.log(`Wrote ${rows.length} matched cases to docs-master/dev/Performance-summary.html`);
+  const { revisions, settings } = data;
+  const imageDirectory = 'docs-master/dev/performance-comparisons';
+  const { table, images } = renderComparison(data, imageDirectory);
+  const summary = [
+    '## Performance',
+    '',
+    `Before (baseline): \`${revisions.before.slice(0, 12)}\` · After (measured revision): \`${revisions.after.slice(0, 12)}\`.`,
+    '',
+  ];
+  if (data.equivalentAfter) {
+    summary.push(`Equivalent branch revision: \`${data.equivalentAfter.revision.slice(0, 12)}\`. Its Git tree is identical to the measured after revision.`, '');
+  }
+  summary.push(
+    `Same benchmark sources and settings. Median of ${settings.samples} samples, ${settings.benchtime} per sample, GOMAXPROCS=${settings.GOMAXPROCS}, GOGC=${settings.GOGC}, GOMEMLIMIT=${settings.GOMEMLIMIT}.`,
+    '',
+    `\`${data.goVersion}\` · ${data.cpu}.`,
+    '',
+    'Each pair of bars uses its own scale. Negative change means faster; positive means slower.',
+    '',
+    '[Raw samples and fixture metadata](docs-master/dev/performance-comparison.json) · [Investigation notes](docs-master/dev/Performance-follow-up.md).',
+    '',
+    table,
+  );
+
+  const readmePath = path.join(root, 'README.md');
+  const readme = fs.readFileSync(readmePath, 'utf8');
+  const startMarker = '<!-- performance-summary:start -->';
+  const endMarker = '<!-- performance-summary:end -->';
+  const start = readme.indexOf(startMarker);
+  const end = readme.indexOf(endMarker, start + startMarker.length);
+  if (start < 0 || end < 0) throw new Error('README.md is missing performance summary placeholders');
+  const updated = readme.slice(0, start + startMarker.length) + '\n\n' + summary.join('\n') + '\n\n' + readme.slice(end);
+
+  fs.writeFileSync(dataPath, JSON.stringify(data, null, 2) + '\n');
+  const directory = path.join(root, imageDirectory);
+  fs.mkdirSync(directory, { recursive: true });
+  const generated = new Set(images.map(image => image.fileName));
+  for (const image of images) fs.writeFileSync(path.join(directory, image.fileName), image.svg);
+  for (const fileName of fs.readdirSync(directory)) {
+    if (/^[a-zA-Z0-9_-]+-[0-9a-f]{12}\.svg$/.test(fileName) && !generated.has(fileName)) {
+      fs.unlinkSync(path.join(directory, fileName));
+    }
+  }
+  fs.writeFileSync(readmePath, updated);
+  console.log(`Wrote ${images.length} timing SVGs to ${imageDirectory} and updated README.md`);
 }
 
 module.exports = { benchmarkSource };

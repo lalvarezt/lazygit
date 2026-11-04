@@ -1,6 +1,6 @@
 # Performance follow-up, 4 November 2026
 
-The [current comparison](Performance-summary.html) uses `8e3ac7699` as its
+The [current comparison](../../README.md#performance) uses `8e3ac7699` as its
 baseline, kept at `performance-baseline-crlf-20261104`. This separate baseline
 includes the shared CRLF correction. The branch retains its original commit
 hashes, with the CRLF demonstration and correction applied as tip fixups.
@@ -460,7 +460,7 @@ remaining weakest cases are 100-file tree construction at about 10% faster,
 and writing metadata and colored output at about 13–17% faster. Writing takes
 milliseconds per fixture, while the small tree build takes about 32 µs, so the
 writer remains the larger cost to investigate. The refreshed
-[summary](Performance-summary.html) and [data](performance-comparison.json)
+[summary](../../README.md#performance) and [data](performance-comparison.json)
 include the new query-lifetime and graph variants.
 
 ## Printable-ASCII writer batches

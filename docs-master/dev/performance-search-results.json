@@ -35,7 +35,7 @@
     "Initial buffer growth is excluded from warmed reuse timings.",
     "Capacity persists through smaller and missing queries, and content changes, until ClearSearch or an empty query.",
     "Clearing each iteration prevents reuse across search sessions.",
-    "Other weak areas in Performance-summary.html have not been changed in this pass."
+    "Other weak areas in the README performance summary have not been changed in this pass."
   ],
   "checks": [
     "just format",
