@@ -236,7 +236,7 @@
       "cpuSamplesSeconds": 2.69,
       "trailerSearchSamplePercent": 64.68,
       "controlScanSamplePercent": 13.75,
-      "nextCandidate": "Incremental trailer and control detection using the unchanged text prefix; design choice pending."
+      "nextCandidate": "Implemented as 9e2109e18 after the user selected both scans and a separate performance commit."
     },
     "trailerByteSearchPrototype": {
       "shipped": false,
@@ -443,5 +443,83 @@
       ]
     },
     "artifactDirectory": ".git/perf-investigation/resume-*"
+  },
+  "incrementalScanFollowUp": {
+    "baseline": "722c56cef",
+    "preparation": "40c04419c",
+    "implementation": "9e2109e18",
+    "benchmarkCommand": "go test ./pkg/gocui -run='^$' -bench='^(BenchmarkEditorInput|BenchmarkEditorParagraphInput|BenchmarkEditorUnbrokenInput|BenchmarkPasteText|BenchmarkEditorEditUnbrokenText)$' -benchmem -benchtime=300ms -count=3",
+    "baselineMethod": "Go overlay of text_area.go and view.go from 722c56cef; the added scan test file is excluded from the baseline compilation.",
+    "validation": {
+      "exhaustiveComparisons": 534912,
+      "initialStrings": 3906,
+      "deferredEditBatches": 6000,
+      "otherChecks": [
+        "Original-parser layout comparisons",
+        "Rendered content compared with the normal writer",
+        "just format",
+        "just build",
+        "just unit-test",
+        "just lint",
+        "just e2e",
+        "Full go test -race ./pkg/gocui"
+      ]
+    },
+    "additionalState": "One integer per text-area layout; no new arrays or retained text strings.",
+    "followUpProfile": {
+      "command": "go test ./pkg/gocui -run='^$' -bench='^BenchmarkEditorEditUnbrokenText$/bytes=1000000$' -benchtime=2s -cpuprofile=final.cpu -memprofile=final.mem",
+      "nsPerEditPair": 88274,
+      "bytesPerEditPair": 1007616,
+      "allocationsPerEditPair": 1,
+      "cpuSamplesSeconds": 10.6,
+      "dominantCosts": [
+        "runtime.scanObject",
+        "runtime.memmove",
+        "runtime.typePointers.next"
+      ],
+      "limits": [
+        "Single synthetic benchmark profile; CPU totals include concurrent background GC.",
+        "This is not a matched live app latency or CPU comparison."
+      ]
+    },
+    "artifacts": ".git/perf-investigation/incremental-scans-*"
+  },
+  "searchAllocationPrototypes": {
+    "source": "9e2109e18",
+    "shipped": false,
+    "directAppend": {
+      "description": "Append both model and view matches into a single result slice, preserving the existing lifetime.",
+      "command": "go test ./pkg/gocui -run='^$' -bench='^(BenchmarkSearchRepeatedPrefix|BenchmarkSearchOrdinaryText)$' -benchmem -benchtime=200ms -count=3",
+      "comparisonsIn": "performance-follow-up.json, Direct-append search prototype, not shipped"
+    },
+    "reusableResults": {
+      "description": "Retain the combined result buffer across query changes, release on ClearSearch or an empty query.",
+      "command": "go test ./pkg/gocui -run='^$' -bench='^(BenchmarkSearchRepeatedPrefix|BenchmarkSearchOrdinaryText|BenchmarkSearchQueryLifetime)$' -benchmem -benchtime=300ms -count=3",
+      "comparisonsIn": "performance-follow-up.json, Reusable search-result prototype, not shipped",
+      "changingFixture": "Preload 2,000 lines of 200 a characters, warm rendered layout and initial a search, then alternate aa, aaa, aaaa, a.",
+      "clearedFixture": "Same input and warm rendered layout; rebuild a search and clear it on every iteration.",
+      "retainedCapacityBytes": 11345904,
+      "fixtureMatchCount": 400000,
+      "validation": [
+        "Existing search tests pass.",
+        "Pointer identity confirms buffer reuse across a query change.",
+        "The missing query retains capacity until clear.",
+        "ClearSearch and an empty query both release capacity."
+      ]
+    },
+    "scannerVariants": {
+      "description": "Reading cells by address and replacing column-ring modulo arithmetic with a cyclic index were also measured. Neither gave a substantial additional improvement.",
+      "artifacts": [
+        ".git/perf-investigation/search-reuse-pointer-after.txt",
+        ".git/perf-investigation/search-reuse-ring-after.txt"
+      ]
+    },
+    "decision": "None of the timed comparisons reaches 5x. Keep all prototypes out of the application.",
+    "limits": [
+      "Synthetic warmed benchmarks, not live app measurements.",
+      "Buffer reuse excludes initial result-array growth from steady-state timings.",
+      "Clearing search prevents reuse across sessions."
+    ],
+    "artifacts": ".git/perf-investigation/search-*"
   }
 }

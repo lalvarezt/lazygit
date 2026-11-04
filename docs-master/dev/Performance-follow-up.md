@@ -22,9 +22,9 @@ operation and cannot be combined into an application speedup.
 | Distant scroll down across 100,000 matches | 44.045 µs | 24.38 ns | 1,807× |
 | Distant scroll up across 100,000 matches | 35.958 µs | 25.45 ns | 1,413× |
 
-The [measurement data](performance-follow-up.json) contains all 77 comparisons,
-including the individual samples, allocation counts, smaller workloads, ordinary
-search text, and file-tree refresh costs.
+The [measurement data](performance-follow-up.json) contains all 106 comparisons,
+including individual samples, allocation counts, smaller workloads, ordinary
+search text, file-tree refresh costs, and unshipped search prototypes.
 
 Filtered selections now copy only their requested rows. At 10,000 matches,
 navigation allocates 8 bytes instead of 81,920 bytes. Multi-selection uses the
@@ -304,15 +304,15 @@ A prototype replaces the reverse substring search for two newlines with repeated
 reverse byte searches. Across three samples per fixture, edit pairs improve by
 1.58× at 4 KB, 2.60× at 100 KB, and 2.62× at 1 MB. The prototype is not shipped
 because these whole-operation gains fall below the 5× target. Reusing the known
-unchanged prefix for trailer and control-character detection is the next editor
-candidate; its cache and invalidation design awaits the user's choice.
+unchanged prefix for trailer and control-character detection led to the
+incremental scan change below.
 
 Independent profiles identify allocation costs in two other paths. Searching
 2,000 lines of 200 `a` characters for `a` allocates about 76.3 MB per rebuild,
 including temporary per-line results copied into the combined result list.
 Writing 2,000 colored diff lines allocates about 11.7 MB, mostly while growing
 cell arrays. These are repeated synthetic workloads, not live latency results.
-No speedup from changing either allocation path has been measured.
+The search allocation experiments below measure two ways to reduce that cost.
 
 Building a tree of 10,000 commit files takes about 3.13 ms in one profiled
 benchmark run. CPU cost is spread across path splitting and joining, sorting,
@@ -324,6 +324,67 @@ The `remainingHotspotRanking` section of the
 [profiling data](performance-live-ranking.json) records the commands, source
 revision, profile summaries, and limits. Raw logs, overlays, and profiles remain
 locally under `.git/perf-investigation/resume-*`.
+
+## Incremental trailer and control scans
+
+`40c04419c` separates blank-line detection from trailing-newline handling.
+`9e2109e18` then uses the earliest edit to bound trailer searches and preserves
+the first control character when it precedes that edit. Searches include
+overlapping separators and trailing blank lines that become interior text.
+The renderer uses the cached control position to select its writer.
+
+| Edit pair in existing unbroken text | Before | After | Speedup |
+| --- | ---: | ---: | ---: |
+| 4,096 bytes | 17.88 µs | 7.97 µs | 2.24× |
+| 100,000 bytes | 258.32 µs | 12.82 µs | 20.15× |
+| 1,000,000 bytes | 2.540 ms | 92.85 µs | 27.35× |
+
+Each pair inserts one character and backspaces it, updating layout and view
+after each key. Initial text creation is outside the timer. Full 4 KB typing
+improves by 3.40× for newline-separated input, 2.44× for a spaced paragraph,
+and 1.97× for unbroken text. Bulk paste stays near its baseline. All fifteen
+comparisons have three samples and use `722c56cef` through a Go overlay as
+the baseline. The [scan charts](Performance-editor-scans.html) distinguish edit
+pairs from full input sequences.
+
+The cache adds one integer to the existing layout, with no additional arrays
+or retained strings. Allocation for the larger edit pairs remains one growing
+content string per pair. A fresh 1 MB edit profile is dominated by copying and
+garbage collection; it is a synthetic benchmark profile, not a matched live
+application measurement.
+
+Independent full scans agree through 534,912 exhaustive replacements across
+3,906 short strings and 6,000 generated batches of deferred edits. Tests compare
+rendered content with the normal writer as controls are inserted and removed,
+and after clears and width changes. The original-parser oracle, build, unit
+tests, lint, full integration suite, and full gocui race suite pass. The user
+chose to land this as a separate performance commit after the helper preparation.
+
+## Search allocation experiments
+
+Appending matches directly into the combined result list removes temporary
+per-line arrays in both the model and view search paths. It improves the
+400,000-match fixture by 1.35× and ordinary matching text by 1.08×. This prototype
+preserves the existing result-buffer lifetime and is not shipped.
+
+The user then chose to measure retaining that combined buffer while searching,
+releasing it on `ClearSearch` or an empty query. With rendered layout and the
+initial search warmed, repeated many-match queries improve from 13.00 ms to
+2.96 ms, or 4.39×. Alternating `a`, `aa`, `aaa`, and `aaaa` queries improves
+from 13.75 ms to 3.56 ms, or 3.86×. Clearing search on every iteration leaves
+less capacity to reuse and improves from 13.26 ms to 8.70 ms, or 1.52×.
+
+The fixture retains 11,345,904 bytes of result capacity for 400,000 matches.
+Tests verify reuse across a query change, retention through a missing query,
+and release on both clear paths. Existing search tests pass. Two scanner
+variants, reading cells by address and replacing column-ring modulo operations
+with a cyclic index, give no substantial additional improvement.
+
+All timed comparisons have three samples. The baseline is `9e2109e18`, and the
+prototype runs through a Go overlay. The allocation reduction is substantial,
+but none of these timing results meets the 5× target, so these prototypes remain
+outside the application. Their samples and limits are preserved in the
+measurement and profiling data. No new live application speedup is claimed.
 
 Reproduce the committed benchmarks with:
 
