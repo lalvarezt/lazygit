@@ -1,0 +1,110 @@
+{
+  "head": "5b094f878",
+  "optimizedBinary": true,
+  "workloads": [
+    {
+      "name": "Commit navigation",
+      "inputs": "400 down keys at approximately 40 ms intervals",
+      "terminal": "160x48",
+      "profileSeconds": 18,
+      "appCpuSeconds": 3.55,
+      "graphCpuSeconds": 0.04,
+      "git": [
+        {
+          "command": "show --no-ext-diff",
+          "count": 397,
+          "elapsedSeconds": 1.6898539999999993
+        },
+        {
+          "command": "log HEAD",
+          "count": 1,
+          "elapsedSeconds": 0.069697
+        },
+        {
+          "command": "status --untracked-files=all",
+          "count": 2,
+          "elapsedSeconds": 0.010974000000000001
+        },
+        {
+          "command": "for-each-ref --format=%(objectname) %(refname)",
+          "count": 10,
+          "elapsedSeconds": 0.008321
+        },
+        {
+          "command": "rev-list refs/heads/experiments",
+          "count": 1,
+          "elapsedSeconds": 0.00145
+        },
+        {
+          "command": "rev-list HEAD",
+          "count": 1,
+          "elapsedSeconds": 0.001399
+        },
+        {
+          "command": "for-each-ref --sort=-committerdate",
+          "count": 1,
+          "elapsedSeconds": 0.001226
+        },
+        {
+          "command": "config --local",
+          "count": 1,
+          "elapsedSeconds": 0.000878
+        },
+        {
+          "command": "branch --show-current",
+          "count": 1,
+          "elapsedSeconds": 0.000686
+        },
+        {
+          "command": "log -g",
+          "count": 1,
+          "elapsedSeconds": 0.000632
+        }
+      ]
+    },
+    {
+      "name": "File navigation",
+      "inputs": "400 down keys, 10,000 untracked files in 100 directories",
+      "terminal": "160x48",
+      "profileSeconds": 18,
+      "appCpuSeconds": 1.17,
+      "git": [
+        {
+          "command": "diff --no-ext-diff",
+          "count": 400,
+          "elapsedSeconds": 0.3873369999999999
+        },
+        {
+          "command": "status --untracked-files=all",
+          "count": 2,
+          "elapsedSeconds": 0.024559
+        },
+        {
+          "command": "for-each-ref --format=%(objectname) %(refname)",
+          "count": 9,
+          "elapsedSeconds": 0.0065179999999999995
+        }
+      ]
+    },
+    {
+      "name": "Commit editor paste",
+      "bytes": 4067,
+      "graphemeDescription": "75 lines with a wide and combining character, then a marker",
+      "observedCompletionMs": 610,
+      "observationIntervalMs": 200,
+      "profileSeconds": 12,
+      "terminal": "100x30",
+      "appCpuSeconds": 1.21,
+      "gcCpuSeconds": 0.61,
+      "editorHandlerCpuSeconds": 0.4,
+      "layoutCpuSeconds": 0.24,
+      "viewRebuildCpuSeconds": 0.16
+    }
+  ],
+  "limits": [
+    "Single profiles, not repeated latency studies",
+    "Go CPU sampling excludes Git child processes and terminal emulator CPU",
+    "Git numbers are summed subprocess elapsed time, not CPU and not necessarily disjoint",
+    "Marker observation has 200 ms resolution"
+  ]
+}

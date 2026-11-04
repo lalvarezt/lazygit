@@ -59,6 +59,38 @@ Reusing text-layout storage reduced the 4 KB editor-input benchmark from roughly
 benchmark from roughly 306 µs to 122 µs. Editor CPU profiling still shows full
 text layout, view reconstruction, and garbage collection as substantial costs.
 
+## Live profiling to rank the next change
+
+An optimized binary at `5b094f878` ran against an isolated shared clone of this
+repository. Automatic fetching and update checks were disabled. Go CPU profiles
+covered the app process; Git Trace2 recorded subprocess elapsed time separately.
+Each workload was profiled once. These are ranking observations, not matched
+before-and-after comparisons or repeated latency measurements.
+
+| Workload | Input and terminal | Profile duration | App CPU |
+| --- | --- | ---: | ---: |
+| Commit navigation | 400 down keys at roughly 40 ms intervals, 160 × 48 | 18 s | 3.55 s |
+| File navigation | 400 down keys, 10,000 untracked files in 100 directories, 160 × 48 | 18 s | 1.17 s |
+| Commit-description paste | 4,067 bytes with wide and combining characters, 100 × 30 | 12 s | 1.21 s |
+
+Commit navigation spent about 0.04 CPU seconds rendering graph rows. Its 397
+`git show` commands totalled 1.69 seconds of subprocess elapsed time. File
+navigation issued 400 diffs totalling 0.39 seconds. Git elapsed totals can overlap
+and do not measure Git CPU time.
+
+The editor's final marker was visible by the 610 ms observation, with observations
+200 ms apart. Its profile recorded 0.61 CPU seconds in background garbage
+collection and 0.40 seconds in the editor handler. Within that handler, layout
+used 0.24 seconds and view reconstruction used 0.16 seconds. Inclusive samples
+must not be added to their parent totals. The editor remains the next candidate
+for incremental layout and rendering; graph work accounts for little CPU in the
+live navigation workload.
+
+The [live ranking data](performance-live-ranking.json) preserves the workload
+descriptions and Git command totals. Raw profiles and terminal captures remain
+locally under `.git/perf-investigation/`. The dedicated tmux profiling pane is
+`%71` in the `lazygit-perf` session; the app has exited.
+
 Reproduce the committed benchmarks with:
 
 ```sh
