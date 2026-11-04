@@ -22,7 +22,7 @@ operation and cannot be combined into an application speedup.
 | Distant scroll down across 100,000 matches | 44.045 µs | 24.38 ns | 1,807× |
 | Distant scroll up across 100,000 matches | 35.958 µs | 25.45 ns | 1,413× |
 
-The [measurement data](performance-follow-up.json) contains all 30 comparisons,
+The [measurement data](performance-follow-up.json) contains all 36 comparisons,
 including the individual samples, allocation counts, smaller workloads, ordinary
 search text, and file-tree refresh costs.
 
@@ -82,14 +82,52 @@ The editor's final marker was visible by the 610 ms observation, with observatio
 200 ms apart. Its profile recorded 0.61 CPU seconds in background garbage
 collection and 0.40 seconds in the editor handler. Within that handler, layout
 used 0.24 seconds and view reconstruction used 0.16 seconds. Inclusive samples
-must not be added to their parent totals. The editor remains the next candidate
-for incremental layout and rendering; graph work accounts for little CPU in the
-live navigation workload.
+must not be added to their parent totals. This ranking led to the incremental
+editor change below; graph work accounts for little CPU in the live navigation
+workload.
 
 The [live ranking data](performance-live-ranking.json) preserves the workload
 descriptions and Git command totals. Raw profiles and terminal captures remain
 locally under `.git/perf-investigation/`. The dedicated tmux profiling pane is
 `%71` in the `lazygit-perf` session; the app has exited.
+
+## Incremental editor results
+
+[View the benchmark and live CPU charts](Performance-editor.html).
+
+`d0f205ca2` preserves completed hard lines when text changes and reuses their
+rendered rows. Changes to the final paragraph invalidate trailer lines when
+needed. Each key still runs its editor handler. Tabs, control sequences, and
+automatic hyperlinks keep the normal writer. Graphemes own their text, so retained
+lines cannot retain whole previous message strings. Buffer writes, resets, swaps,
+and relevant configuration changes invalidate the rendering cache.
+
+| Typing workload | Before | After | Speedup |
+| --- | ---: | ---: | ---: |
+| Shared editor, 256 bytes | 2.271 ms | 0.260 ms | 8.7× |
+| Shared editor, 1,024 bytes | 34.801 ms | 2.094 ms | 16.6× |
+| Shared editor, 4,096 bytes | 592.204 ms | 24.256 ms | 24.4× |
+| Commit description, 256 bytes | 2.575 ms | 0.268 ms | 9.6× |
+| Commit description, 1,024 bytes | 39.842 ms | 2.066 ms | 19.3× |
+| Commit description, 4,096 bytes | 662.229 ms | 24.157 ms | 27.4× |
+
+These medians use the existing newline-separated typing benchmarks. At 4 KB,
+cumulative allocation falls from 1.57 GB to 13.95 MB. Editing within one long hard
+line still rebuilds that line. All six typing comparisons and their samples are
+included in the measurement data.
+
+The same 4,067-byte live paste workload used 0.15 app CPU seconds after the change,
+down from 1.21 seconds before. Background garbage collection fell from 0.61 CPU
+seconds to 0.05 seconds. The final marker appeared at the first observation,
+205 ms after paste, compared with the 610 ms observation before. The 200 ms
+observation interval cannot establish a precise latency ratio. Terminal captures
+match apart from the version footer. This is one matched profile pair.
+
+Differential tests compare layout with the full parser through 1,000 editor
+actions and compare rendered content with the normal writer. They cover wrapping,
+Unicode, trailer changes, skipped renders, external writes, copied snapshots,
+terminal widths, and writer fallback. Build, unit tests, lint, full integration
+tests, and the gocui race checks pass.
 
 Reproduce the committed benchmarks with:
 
@@ -97,4 +135,5 @@ Reproduce the committed benchmarks with:
 go test ./pkg/gui/context -run='^$' -bench=BenchmarkFilteredListNavigation -benchmem -benchtime=200ms -count=3
 go test ./pkg/gui/filetree -run='^$' -bench='BenchmarkFileTree(RangeSelection|Navigation)' -benchmem -benchtime=200ms -count=3
 go test ./pkg/gocui -run='^$' -bench='Benchmark(SearchRepeatedPrefix|SearchOrdinaryText|NearestSearchPosition|ScrollSearchPosition)' -benchmem -benchtime=150ms -count=3
+go test ./pkg/gocui ./pkg/gui -run='^$' -bench='Benchmark(EditorInput|CommitDescriptionInput)' -benchmem -benchtime=300ms -count=3
 ```

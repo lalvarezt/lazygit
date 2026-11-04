@@ -1532,6 +1532,312 @@
           }
         ]
       }
+    },
+    {
+      "group": "Incremental editor",
+      "benchmark": "BenchmarkEditorInput/bytes=256",
+      "before": {
+        "ns": 2271090,
+        "bytes": 6055501,
+        "allocations": 1433
+      },
+      "after": {
+        "ns": 259556,
+        "bytes": 331881,
+        "allocations": 1025
+      },
+      "speedup": 8.749903681671778,
+      "samples": {
+        "before": [
+          {
+            "ns": 2271090,
+            "bytes": 6055542,
+            "allocations": 1433
+          },
+          {
+            "ns": 2314801,
+            "bytes": 6055501,
+            "allocations": 1433
+          },
+          {
+            "ns": 2261586,
+            "bytes": 6055472,
+            "allocations": 1433
+          }
+        ],
+        "after": [
+          {
+            "ns": 263604,
+            "bytes": 331890,
+            "allocations": 1025
+          },
+          {
+            "ns": 252952,
+            "bytes": 331881,
+            "allocations": 1025
+          },
+          {
+            "ns": 259556,
+            "bytes": 331876,
+            "allocations": 1025
+          }
+        ]
+      }
+    },
+    {
+      "group": "Incremental editor",
+      "benchmark": "BenchmarkEditorInput/bytes=1024",
+      "before": {
+        "ns": 34801271,
+        "bytes": 101856289,
+        "allocations": 6056
+      },
+      "after": {
+        "ns": 2094108,
+        "bytes": 1759469,
+        "allocations": 4111
+      },
+      "speedup": 16.618661024168762,
+      "samples": {
+        "before": [
+          {
+            "ns": 34316603,
+            "bytes": 101856280,
+            "allocations": 6056
+          },
+          {
+            "ns": 36020037,
+            "bytes": 101856289,
+            "allocations": 6056
+          },
+          {
+            "ns": 34801271,
+            "bytes": 101856323,
+            "allocations": 6056
+          }
+        ],
+        "after": [
+          {
+            "ns": 2094108,
+            "bytes": 1759492,
+            "allocations": 4111
+          },
+          {
+            "ns": 2059962,
+            "bytes": 1759462,
+            "allocations": 4111
+          },
+          {
+            "ns": 2105653,
+            "bytes": 1759469,
+            "allocations": 4111
+          }
+        ]
+      }
+    },
+    {
+      "group": "Incremental editor",
+      "benchmark": "BenchmarkEditorInput/bytes=4096",
+      "before": {
+        "ns": 592204305,
+        "bytes": 1573966080,
+        "allocations": 24517
+      },
+      "after": {
+        "ns": 24255595,
+        "bytes": 13953904,
+        "allocations": 16401
+      },
+      "speedup": 24.415162975800015,
+      "samples": {
+        "before": [
+          {
+            "ns": 577214794,
+            "bytes": 1573965296,
+            "allocations": 24510
+          },
+          {
+            "ns": 592204305,
+            "bytes": 1573966080,
+            "allocations": 24517
+          },
+          {
+            "ns": 632272778,
+            "bytes": 1573968656,
+            "allocations": 24540
+          }
+        ],
+        "after": [
+          {
+            "ns": 24255595,
+            "bytes": 13953904,
+            "allocations": 16401
+          },
+          {
+            "ns": 24961340,
+            "bytes": 13953816,
+            "allocations": 16400
+          },
+          {
+            "ns": 23836555,
+            "bytes": 13954013,
+            "allocations": 16402
+          }
+        ]
+      }
+    },
+    {
+      "group": "Incremental editor",
+      "benchmark": "BenchmarkCommitDescriptionInput/bytes=256",
+      "before": {
+        "ns": 2575032,
+        "bytes": 6055466,
+        "allocations": 1433
+      },
+      "after": {
+        "ns": 267573,
+        "bytes": 331875,
+        "allocations": 1025
+      },
+      "speedup": 9.623661580204281,
+      "samples": {
+        "before": [
+          {
+            "ns": 2575032,
+            "bytes": 6055635,
+            "allocations": 1433
+          },
+          {
+            "ns": 2398632,
+            "bytes": 6055466,
+            "allocations": 1433
+          },
+          {
+            "ns": 2619189,
+            "bytes": 6055464,
+            "allocations": 1433
+          }
+        ],
+        "after": [
+          {
+            "ns": 267573,
+            "bytes": 331889,
+            "allocations": 1025
+          },
+          {
+            "ns": 276077,
+            "bytes": 331875,
+            "allocations": 1025
+          },
+          {
+            "ns": 256323,
+            "bytes": 331874,
+            "allocations": 1025
+          }
+        ]
+      }
+    },
+    {
+      "group": "Incremental editor",
+      "benchmark": "BenchmarkCommitDescriptionInput/bytes=1024",
+      "before": {
+        "ns": 39842198,
+        "bytes": 101856270,
+        "allocations": 6056
+      },
+      "after": {
+        "ns": 2066488,
+        "bytes": 1759462,
+        "allocations": 4111
+      },
+      "speedup": 19.28014970326467,
+      "samples": {
+        "before": [
+          {
+            "ns": 39842198,
+            "bytes": 101856252,
+            "allocations": 6055
+          },
+          {
+            "ns": 40090807,
+            "bytes": 101856270,
+            "allocations": 6056
+          },
+          {
+            "ns": 38950202,
+            "bytes": 101857155,
+            "allocations": 6058
+          }
+        ],
+        "after": [
+          {
+            "ns": 2082139,
+            "bytes": 1759456,
+            "allocations": 4111
+          },
+          {
+            "ns": 2031545,
+            "bytes": 1759466,
+            "allocations": 4111
+          },
+          {
+            "ns": 2066488,
+            "bytes": 1759462,
+            "allocations": 4111
+          }
+        ]
+      }
+    },
+    {
+      "group": "Incremental editor",
+      "benchmark": "BenchmarkCommitDescriptionInput/bytes=4096",
+      "before": {
+        "ns": 662229330,
+        "bytes": 1573966416,
+        "allocations": 24520
+      },
+      "after": {
+        "ns": 24156576,
+        "bytes": 13953700,
+        "allocations": 16399
+      },
+      "speedup": 27.414039555937066,
+      "samples": {
+        "before": [
+          {
+            "ns": 676393667,
+            "bytes": 1573966976,
+            "allocations": 24525
+          },
+          {
+            "ns": 637538687,
+            "bytes": 1573966416,
+            "allocations": 24520
+          },
+          {
+            "ns": 662229330,
+            "bytes": 1573965072,
+            "allocations": 24508
+          }
+        ],
+        "after": [
+          {
+            "ns": 23679181,
+            "bytes": 13953712,
+            "allocations": 16399
+          },
+          {
+            "ns": 24156576,
+            "bytes": 13953700,
+            "allocations": 16399
+          },
+          {
+            "ns": 24498230,
+            "bytes": 13953700,
+            "allocations": 16399
+          }
+        ]
+      }
     }
   ]
 }

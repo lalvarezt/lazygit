@@ -106,5 +106,24 @@
     "Go CPU sampling excludes Git child processes and terminal emulator CPU",
     "Git numbers are summed subprocess elapsed time, not CPU and not necessarily disjoint",
     "Marker observation has 200 ms resolution"
-  ]
+  ],
+  "incrementalEditorFollowUp": {
+    "implementation": "d0f205ca2",
+    "sameInputBytes": 4067,
+    "profileSeconds": 12,
+    "terminal": "100x30",
+    "before": {
+      "appCpuSeconds": 1.21,
+      "gcCpuSeconds": 0.61,
+      "markerObservedMs": 610
+    },
+    "after": {
+      "appCpuSeconds": 0.15,
+      "gcCpuSeconds": 0.05,
+      "markerObservedMs": 205
+    },
+    "observationIntervalMs": 200,
+    "terminalDifference": "Version footer only",
+    "limits": "Single matched profile pair. Marker observation cannot establish a precise latency ratio."
+  }
 }
