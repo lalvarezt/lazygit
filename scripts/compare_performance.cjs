@@ -4,8 +4,8 @@ const os = require('node:os');
 const crypto = require('node:crypto');
 const { execFileSync } = require('node:child_process');
 
-// Update this commit when the fork is synced with upstream.
-const FORK_BASE = 'c9c0db40bd47894e95c4fdaab0f3eadb40edb55c';
+// The shared CRLF correction precedes the performance changes.
+const PERFORMANCE_BASE = '8e3ac76991f5ffe810bd9a18597cdb017c909020';
 
 const root = path.resolve(__dirname, '..');
 function benchmarkSource(file, text) {
@@ -30,7 +30,7 @@ function benchmarkSource(file, text) {
 
 function measure() {
   const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
-  const refs = { before: process.argv[2] || FORK_BASE, after: process.argv[3] || 'HEAD' };
+  const refs = { before: process.argv[2] || PERFORMANCE_BASE, after: process.argv[3] || 'HEAD' };
   const revisions = Object.fromEntries(Object.entries(refs).map(([side, ref]) => [side, git('rev-parse', `${ref}^{commit}`)]));
   const workspace = path.join(git('rev-parse', '--absolute-git-dir'), 'perf-comparison');
   const settings = { samples: 5, benchtime: '200ms', GOMAXPROCS: '1', GOGC: '100', GOMEMLIMIT: 'off' };
@@ -173,12 +173,12 @@ if (require.main === module) {
     return `<td data-change="${delta}" title="${tooltip}">${percentage}</td>`;
   };
   const html = `<!doctype html>
-  <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lazygit: upstream vs HEAD benchmarks</title><style>
+  <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lazygit: baseline vs HEAD benchmarks</title><style>
   :root{color-scheme:light dark;--text:var(--foreground,#1f2937);--muted-text:var(--muted-foreground,#475569);--surface:var(--background,#fff);--line:var(--border,#d8e0eb);--track:var(--secondary,#edf2f7);--before:var(--chart-1,#4263c7);--after:var(--chart-2,#087f6d)}
   @media(prefers-color-scheme:dark){:root{--text:var(--foreground,#e5edf7);--muted-text:var(--muted-foreground,#acbacd);--surface:var(--background,#111827);--line:var(--border,#36455c);--track:var(--secondary,#263349);--before:var(--chart-1,#86a5ff);--after:var(--chart-2,#53cbb5)}}
   body{margin:0;font:14px/1.5 var(--font-sans,system-ui,sans-serif);color:var(--text)}main{max-width:1200px;margin:auto}p{color:var(--muted-text);font-size:13px}code{font-family:var(--font-mono,monospace);overflow-wrap:anywhere}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%}th,td{padding:12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}thead th{background:var(--surface);position:sticky;top:0}tbody th{font-weight:400;min-width:230px;max-width:380px}td:nth-child(2){min-width:230px}td[data-ns]{min-width:100px;font-variant-numeric:tabular-nums;white-space:nowrap}.track{height:7px;background:var(--track);margin-top:8px;border-radius:3px;overflow:hidden}.bar{height:7px;min-width:1px}.before{background:var(--before)}.after{background:var(--after)}@media print{thead th{position:static}.scroll{overflow:visible}th,td{padding:6px}}
   </style></head><body><main>
-<p>Before (fork base): <code>${revisions.before.slice(0, 12)}</code> · After (HEAD at run): <code>${revisions.after.slice(0, 12)}</code><br>Same benchmark sources and settings. Median of ${settings.samples} samples, ${settings.benchtime} per sample, GOMAXPROCS=${settings.GOMAXPROCS}, GOGC=${settings.GOGC}. ${escape(data.goVersion)} · ${escape(data.cpu)}. Lower time is better; bars use one scale per row. Negative change means faster; positive means slower.</p>
+<p>Before (baseline): <code>${revisions.before.slice(0, 12)}</code> · After (HEAD at run): <code>${revisions.after.slice(0, 12)}</code><br>Same benchmark sources and settings. Median of ${settings.samples} samples, ${settings.benchtime} per sample, GOMAXPROCS=${settings.GOMAXPROCS}, GOGC=${settings.GOGC}. ${escape(data.goVersion)} · ${escape(data.cpu)}. Lower time is better; bars use one scale per row. Negative change means faster; positive means slower.</p>
 <div class="scroll"><table><thead><tr><th>Test case ID</th><th>Description</th><th>Before</th><th>After</th><th>Change</th></tr></thead><tbody>
 ${rows.map(row => `<tr><th scope="row"><code>${escape(row.id)}</code></th><td>${escape(row.description)}</td>${cell(row, 'before')}${cell(row, 'after')}${change(row)}</tr>`).join('\n')}
   </tbody></table></div></main></body></html>
