@@ -22,7 +22,7 @@ operation and cannot be combined into an application speedup.
 | Distant scroll down across 100,000 matches | 44.045 µs | 24.38 ns | 1,807× |
 | Distant scroll up across 100,000 matches | 35.958 µs | 25.45 ns | 1,413× |
 
-The [measurement data](performance-follow-up.json) contains all 48 comparisons,
+The [measurement data](performance-follow-up.json) contains all 57 comparisons,
 including the individual samples, allocation counts, smaller workloads, ordinary
 search text, and file-tree refresh costs.
 
@@ -164,13 +164,62 @@ incremental layouts directly with the old parser. The streaming full parser also
 matches the old parser on 1,000 generated inputs. Build, unit tests, lint, full
 integration tests, and gocui race checks pass.
 
-Checkpoint placement currently follows line transitions. Long unbroken text
-remains a separate candidate for investigation.
+These initial checkpoints follow line transitions. The subsequent unbroken-text
+measurements below cover the remaining case.
 
 A separate ranking profile loads a 50,000-line diff, enters a search, and sends
 120 up keys. It records 1.81 app CPU seconds over 14 seconds, including 0.56 seconds
 in view writes and 0.10 seconds updating search positions. This is a ranking run,
 not a before-and-after comparison.
+
+## Unbroken input and editor row ownership
+
+Long text without whitespace has no line transition at which to resume parsing.
+It also makes the renderer allocate the same growing row on every key. Row reuse
+keeps private cell storage between edits; `CopyContent` marks shared rows so an
+edit copies their cells before writing. Existing snapshots retain both their
+buffer contents and their wrapped view contents.
+
+Periodic parser checkpoints then bound the graphemes parsed again within an
+unbroken word. They are spaced at least 128 bytes apart where no breakable
+whitespace remains. URL-style trailers can depend on text ahead of the parser,
+so checkpoints are omitted while that lookahead-dependent match is active.
+
+Median results for exactly 4,096 ASCII characters, with layout and view updates
+on every key:
+
+| Stage | Input time | Cumulative allocation |
+| --- | ---: | ---: |
+| Before row reuse | 370.9 ms | 629.7 MB |
+| Reuse private rows | 226.5 ms | 11.3 MB |
+| Add periodic checkpoints | 48.5 ms | 11.3 MB |
+
+The combined speedup is 7.7×; cumulative allocation falls by 55.7×. Each stage
+has three samples. The baseline sources come from `86869877d`, compiled through
+a Go overlay; the row-reuse stage adds `40e373369`, and periodic checkpoints are
+in `386cf4fd3`. These results concern the complete input sequence, not one key.
+The final spaced-paragraph and newline-separated 4 KB benchmarks take 17.6 ms
+and 14.7 ms respectively. The 100 KB bulk-paste benchmark remains near 3 ms.
+The [unbroken-input chart](Performance-editor-unbroken.html) shows the staged
+benchmark and matched live CPU results.
+
+The 4,096-byte unbroken fixture retains 2,664 bytes of checkpoint descriptors and
+204,768 bytes of pending-line scratch storage. The scratch storage already
+exists in the checkpoint parser; periodic checkpoints add restart descriptors.
+Clearing the text releases both arrays.
+
+A matched live paste of 4,116 bytes in a 100 × 30 terminal reduces sampled app
+CPU from 0.91 seconds to 0.24 seconds over a 12-second profile. Terminal captures
+are identical. The final marker is observed at 410 ms before and 104 ms after,
+with observations 100 ms apart. This single profile pair supports a CPU
+reduction, not a precise completion-latency ratio.
+
+Tests cover 3,200 replacements across ordinary and unbroken Unicode text,
+footnotes, and trailers, plus targeted changes to trailer URL schemes. A
+temporary independent oracle compares the incremental layouts with the original
+parser. Build, unit tests, lint, integration tests, and editor race checks pass.
+A broader race run exposed a baseline terminal suspend/resume race; that issue
+is being handled separately from the editor changes.
 
 Reproduce the committed benchmarks with:
 
@@ -179,5 +228,5 @@ go test ./pkg/gui/context -run='^$' -bench=BenchmarkFilteredListNavigation -benc
 go test ./pkg/gui/filetree -run='^$' -bench='BenchmarkFileTree(RangeSelection|Navigation)' -benchmem -benchtime=200ms -count=3
 go test ./pkg/gocui -run='^$' -bench='Benchmark(SearchRepeatedPrefix|SearchOrdinaryText|NearestSearchPosition|ScrollSearchPosition)' -benchmem -benchtime=150ms -count=3
 go test ./pkg/gocui ./pkg/gui -run='^$' -bench='Benchmark(EditorInput|CommitDescriptionInput)' -benchmem -benchtime=300ms -count=3
-go test ./pkg/gocui -run='^$' -bench='Benchmark(EditorParagraphInput|PasteText)' -benchmem -benchtime=150ms -count=3
+go test ./pkg/gocui -run='^$' -bench='Benchmark(EditorParagraphInput|EditorUnbrokenInput|PasteText)' -benchmem -benchtime=150ms -count=3
 ```

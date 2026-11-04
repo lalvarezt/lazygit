@@ -2450,6 +2450,465 @@
           }
         ]
       }
+    },
+    {
+      "group": "Unbroken editor row reuse",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=256",
+      "before": {
+        "ns": 1591272,
+        "bytes": 2604801,
+        "allocations": 537
+      },
+      "after": {
+        "ns": 936694,
+        "bytes": 143512,
+        "allocations": 290
+      },
+      "speedup": 1.6988173298857472,
+      "samples": {
+        "before": [
+          {
+            "ns": 1595708,
+            "bytes": 2604995,
+            "allocations": 537
+          },
+          {
+            "ns": 1558811,
+            "bytes": 2604792,
+            "allocations": 537
+          },
+          {
+            "ns": 1591272,
+            "bytes": 2604801,
+            "allocations": 537
+          }
+        ],
+        "after": [
+          {
+            "ns": 939194,
+            "bytes": 143537,
+            "allocations": 290
+          },
+          {
+            "ns": 936694,
+            "bytes": 143512,
+            "allocations": 290
+          },
+          {
+            "ns": 919716,
+            "bytes": 143509,
+            "allocations": 290
+          }
+        ]
+      }
+    },
+    {
+      "group": "Unbroken editor row reuse",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=1024",
+      "before": {
+        "ns": 23398233,
+        "bytes": 41312848,
+        "allocations": 2079
+      },
+      "after": {
+        "ns": 14458133,
+        "bytes": 975016,
+        "allocations": 1064
+      },
+      "speedup": 1.6183440144035195,
+      "samples": {
+        "before": [
+          {
+            "ns": 23022395,
+            "bytes": 41312848,
+            "allocations": 2079
+          },
+          {
+            "ns": 23398233,
+            "bytes": 41312848,
+            "allocations": 2079
+          },
+          {
+            "ns": 23805905,
+            "bytes": 41312752,
+            "allocations": 2078
+          }
+        ],
+        "after": [
+          {
+            "ns": 14554849,
+            "bytes": 975025,
+            "allocations": 1064
+          },
+          {
+            "ns": 14205850,
+            "bytes": 975006,
+            "allocations": 1064
+          },
+          {
+            "ns": 14458133,
+            "bytes": 975016,
+            "allocations": 1064
+          }
+        ]
+      }
+    },
+    {
+      "group": "Unbroken editor row reuse",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=4096",
+      "before": {
+        "ns": 370916096,
+        "bytes": 629730288,
+        "allocations": 8253
+      },
+      "after": {
+        "ns": 226508907,
+        "bytes": 11305232,
+        "allocations": 4149
+      },
+      "speedup": 1.6375342626151121,
+      "samples": {
+        "before": [
+          {
+            "ns": 376885852,
+            "bytes": 629730288,
+            "allocations": 8253
+          },
+          {
+            "ns": 366741792,
+            "bytes": 629730640,
+            "allocations": 8257
+          },
+          {
+            "ns": 370916096,
+            "bytes": 629729728,
+            "allocations": 8248
+          }
+        ],
+        "after": [
+          {
+            "ns": 232017160,
+            "bytes": 11305232,
+            "allocations": 4149
+          },
+          {
+            "ns": 222906250,
+            "bytes": 11305120,
+            "allocations": 4148
+          },
+          {
+            "ns": 226508907,
+            "bytes": 11305248,
+            "allocations": 4150
+          }
+        ]
+      }
+    },
+    {
+      "group": "Unbroken editor periodic checkpoints",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=256",
+      "before": {
+        "ns": 936694,
+        "bytes": 143512,
+        "allocations": 290
+      },
+      "after": {
+        "ns": 562238,
+        "bytes": 143940,
+        "allocations": 292
+      },
+      "speedup": 1.6660097681053219,
+      "samples": {
+        "before": [
+          {
+            "ns": 939194,
+            "bytes": 143537,
+            "allocations": 290
+          },
+          {
+            "ns": 936694,
+            "bytes": 143512,
+            "allocations": 290
+          },
+          {
+            "ns": 919716,
+            "bytes": 143509,
+            "allocations": 290
+          }
+        ],
+        "after": [
+          {
+            "ns": 563575,
+            "bytes": 143940,
+            "allocations": 292
+          },
+          {
+            "ns": 561057,
+            "bytes": 143941,
+            "allocations": 292
+          },
+          {
+            "ns": 562238,
+            "bytes": 143940,
+            "allocations": 292
+          }
+        ]
+      }
+    },
+    {
+      "group": "Unbroken editor periodic checkpoints",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=1024",
+      "before": {
+        "ns": 14458133,
+        "bytes": 975016,
+        "allocations": 1064
+      },
+      "after": {
+        "ns": 4173080,
+        "bytes": 977361,
+        "allocations": 1068
+      },
+      "speedup": 3.4646191781609748,
+      "samples": {
+        "before": [
+          {
+            "ns": 14554849,
+            "bytes": 975025,
+            "allocations": 1064
+          },
+          {
+            "ns": 14205850,
+            "bytes": 975006,
+            "allocations": 1064
+          },
+          {
+            "ns": 14458133,
+            "bytes": 975016,
+            "allocations": 1064
+          }
+        ],
+        "after": [
+          {
+            "ns": 4595465,
+            "bytes": 977360,
+            "allocations": 1068
+          },
+          {
+            "ns": 4173080,
+            "bytes": 977361,
+            "allocations": 1068
+          },
+          {
+            "ns": 4163427,
+            "bytes": 977371,
+            "allocations": 1068
+          }
+        ]
+      }
+    },
+    {
+      "group": "Unbroken editor periodic checkpoints",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=4096",
+      "before": {
+        "ns": 226508907,
+        "bytes": 11305232,
+        "allocations": 4149
+      },
+      "after": {
+        "ns": 48465586,
+        "bytes": 11310160,
+        "allocations": 4153
+      },
+      "speedup": 4.673602976759633,
+      "samples": {
+        "before": [
+          {
+            "ns": 232017160,
+            "bytes": 11305232,
+            "allocations": 4149
+          },
+          {
+            "ns": 222906250,
+            "bytes": 11305120,
+            "allocations": 4148
+          },
+          {
+            "ns": 226508907,
+            "bytes": 11305248,
+            "allocations": 4150
+          }
+        ],
+        "after": [
+          {
+            "ns": 52139707,
+            "bytes": 11310160,
+            "allocations": 4153
+          },
+          {
+            "ns": 48465586,
+            "bytes": 11310160,
+            "allocations": 4153
+          },
+          {
+            "ns": 47850854,
+            "bytes": 11310188,
+            "allocations": 4153
+          }
+        ]
+      }
+    },
+    {
+      "group": "Unbroken editor (combined)",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=256",
+      "before": {
+        "ns": 1591272,
+        "bytes": 2604801,
+        "allocations": 537
+      },
+      "after": {
+        "ns": 562238,
+        "bytes": 143940,
+        "allocations": 292
+      },
+      "speedup": 2.830246265816256,
+      "samples": {
+        "before": [
+          {
+            "ns": 1595708,
+            "bytes": 2604995,
+            "allocations": 537
+          },
+          {
+            "ns": 1558811,
+            "bytes": 2604792,
+            "allocations": 537
+          },
+          {
+            "ns": 1591272,
+            "bytes": 2604801,
+            "allocations": 537
+          }
+        ],
+        "after": [
+          {
+            "ns": 563575,
+            "bytes": 143940,
+            "allocations": 292
+          },
+          {
+            "ns": 561057,
+            "bytes": 143941,
+            "allocations": 292
+          },
+          {
+            "ns": 562238,
+            "bytes": 143940,
+            "allocations": 292
+          }
+        ]
+      }
+    },
+    {
+      "group": "Unbroken editor (combined)",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=1024",
+      "before": {
+        "ns": 23398233,
+        "bytes": 41312848,
+        "allocations": 2079
+      },
+      "after": {
+        "ns": 4173080,
+        "bytes": 977361,
+        "allocations": 1068
+      },
+      "speedup": 5.606945709164454,
+      "samples": {
+        "before": [
+          {
+            "ns": 23022395,
+            "bytes": 41312848,
+            "allocations": 2079
+          },
+          {
+            "ns": 23398233,
+            "bytes": 41312848,
+            "allocations": 2079
+          },
+          {
+            "ns": 23805905,
+            "bytes": 41312752,
+            "allocations": 2078
+          }
+        ],
+        "after": [
+          {
+            "ns": 4595465,
+            "bytes": 977360,
+            "allocations": 1068
+          },
+          {
+            "ns": 4173080,
+            "bytes": 977361,
+            "allocations": 1068
+          },
+          {
+            "ns": 4163427,
+            "bytes": 977371,
+            "allocations": 1068
+          }
+        ]
+      }
+    },
+    {
+      "group": "Unbroken editor (combined)",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=4096",
+      "before": {
+        "ns": 370916096,
+        "bytes": 629730288,
+        "allocations": 8253
+      },
+      "after": {
+        "ns": 48465586,
+        "bytes": 11310160,
+        "allocations": 4153
+      },
+      "speedup": 7.653185004303879,
+      "samples": {
+        "before": [
+          {
+            "ns": 376885852,
+            "bytes": 629730288,
+            "allocations": 8253
+          },
+          {
+            "ns": 366741792,
+            "bytes": 629730640,
+            "allocations": 8257
+          },
+          {
+            "ns": 370916096,
+            "bytes": 629729728,
+            "allocations": 8248
+          }
+        ],
+        "after": [
+          {
+            "ns": 52139707,
+            "bytes": 11310160,
+            "allocations": 4153
+          },
+          {
+            "ns": 48465586,
+            "bytes": 11310160,
+            "allocations": 4153
+          },
+          {
+            "ns": 47850854,
+            "bytes": 11310188,
+            "allocations": 4153
+          }
+        ]
+      }
     }
   ]
 }

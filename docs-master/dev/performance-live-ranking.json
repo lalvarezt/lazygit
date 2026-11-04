@@ -166,5 +166,29 @@
     "viewWriteCpuSeconds": 0.56,
     "searchPositionsCpuSeconds": 0.1,
     "limits": "Single ranking profile, not a before/after comparison."
+  },
+  "unbrokenEditor": {
+    "baseline": "86869877d editor and parser sources compiled via Go overlay",
+    "implementation": "40e373369 and 386cf4fd3",
+    "before": {
+      "inputBytes": 4116,
+      "profileSeconds": 12,
+      "terminal": "100x30",
+      "cpuSeconds": 0.91,
+      "markerObservedMs": 410,
+      "observationIntervalMs": 100
+    },
+    "after": {
+      "inputBytes": 4116,
+      "profileSeconds": 12,
+      "terminal": "100x30",
+      "cpuSeconds": 0.24,
+      "markerObservedMs": 104,
+      "observationIntervalMs": 100
+    },
+    "terminalCapturesIdentical": true,
+    "checkpointCapacityBytes": 2664,
+    "pendingScratchCapacityBytes": 204768,
+    "limits": "One matched CPU profile pair. Marker observations have 100 ms resolution. Scratch storage already exists in the checkpoint parser; periodic checkpoints add restart descriptors."
   }
 }
