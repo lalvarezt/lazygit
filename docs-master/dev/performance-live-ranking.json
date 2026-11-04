@@ -521,5 +521,25 @@
       "Clearing search prevents reuse across sessions."
     ],
     "artifacts": ".git/perf-investigation/search-*"
+  },
+  "writerCapacityProbe": {
+    "source": "22eb6ebd1",
+    "shipped": false,
+    "description": "Benchmark-only pre-sizing of the line array and exact cell capacity for each of 2,000 repeated lines. A sample line parsed before timing provides the capacity; all destination allocation remains timed.",
+    "command": "go test ./pkg/gocui -run='^$' -bench='^BenchmarkViewWrite$' -benchmem -benchtime=200ms -count=3",
+    "comparedFixtures": [
+      "plain",
+      "colored",
+      "unicode",
+      "metadata"
+    ],
+    "comparisonsIn": "performance-follow-up.json, Pre-sized writer fixture probe, not shipped",
+    "limits": [
+      "Uses exact fixture knowledge that a general writer does not have.",
+      "Unchanged production decoder; this tests the effect of avoiding destination growth, not a deployable preallocation strategy.",
+      "No live app speedup or cross-platform timing claim."
+    ],
+    "result": "All four comparisons remain below 5x; no application change.",
+    "artifacts": ".git/perf-investigation/writer-presized-*"
   }
 }

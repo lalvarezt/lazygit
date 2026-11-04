@@ -22,9 +22,9 @@ operation and cannot be combined into an application speedup.
 | Distant scroll down across 100,000 matches | 44.045 µs | 24.38 ns | 1,807× |
 | Distant scroll up across 100,000 matches | 35.958 µs | 25.45 ns | 1,413× |
 
-The [measurement data](performance-follow-up.json) contains all 106 comparisons,
+The [measurement data](performance-follow-up.json) contains all 110 comparisons,
 including individual samples, allocation counts, smaller workloads, ordinary
-search text, file-tree refresh costs, and unshipped search prototypes.
+search text, file-tree refresh costs, and unshipped prototypes.
 
 Filtered selections now copy only their requested rows. At 10,000 matches,
 navigation allocates 8 bytes instead of 81,920 bytes. Multi-selection uses the
@@ -385,6 +385,20 @@ prototype runs through a Go overlay. The allocation reduction is substantial,
 but none of these timing results meets the 5× target, so these prototypes remain
 outside the application. Their samples and limits are preserved in the
 measurement and profiling data. No new live application speedup is claimed.
+
+## Writer capacity probe
+
+A benchmark-only probe pre-sizes all 2,000 destination lines and their cell
+arrays to the exact size of the repeated fixture. A sample line provides that
+size before timing; destination allocation remains inside the timed loop.
+The production decoder is unchanged.
+
+The probe improves plain text by 1.89×, colored text by 1.75×, Unicode by 2.06×,
+and metadata-bearing text by 1.68×. Each comparison has three samples against
+`22eb6ebd1`. Even with exact fixture knowledge, avoiding array growth alone
+does not meet the 5× target. No preallocation strategy is added to the writer.
+The samples are included in the measurement data, with the fixture and limits
+under `writerCapacityProbe` in the profiling data.
 
 Reproduce the committed benchmarks with:
 

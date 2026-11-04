@@ -5408,6 +5408,210 @@
           }
         ]
       }
+    },
+    {
+      "group": "Pre-sized writer fixture probe, not shipped",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "before": {
+        "ns": 9501552,
+        "bytes": 21935507,
+        "allocations": 14019
+      },
+      "after": {
+        "ns": 5037262,
+        "bytes": 8439415,
+        "allocations": 2006
+      },
+      "speedup": 1.8862532860113292,
+      "samples": {
+        "before": [
+          {
+            "ns": 9788813,
+            "bytes": 21938086,
+            "allocations": 14023
+          },
+          {
+            "ns": 9501552,
+            "bytes": 21935507,
+            "allocations": 14019
+          },
+          {
+            "ns": 9048723,
+            "bytes": 21935258,
+            "allocations": 14019
+          }
+        ],
+        "after": [
+          {
+            "ns": 5006676,
+            "bytes": 8439930,
+            "allocations": 2007
+          },
+          {
+            "ns": 5037262,
+            "bytes": 8439114,
+            "allocations": 2006
+          },
+          {
+            "ns": 5157494,
+            "bytes": 8439415,
+            "allocations": 2006
+          }
+        ]
+      }
+    },
+    {
+      "group": "Pre-sized writer fixture probe, not shipped",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "before": {
+        "ns": 6902341,
+        "bytes": 11727302,
+        "allocations": 30019
+      },
+      "after": {
+        "ns": 3949911,
+        "bytes": 4887119,
+        "allocations": 20006
+      },
+      "speedup": 1.7474674745836045,
+      "samples": {
+        "before": [
+          {
+            "ns": 6849129,
+            "bytes": 11727302,
+            "allocations": 30019
+          },
+          {
+            "ns": 6992293,
+            "bytes": 11727314,
+            "allocations": 30019
+          },
+          {
+            "ns": 6902341,
+            "bytes": 11727294,
+            "allocations": 30019
+          }
+        ],
+        "after": [
+          {
+            "ns": 3949911,
+            "bytes": 4887109,
+            "allocations": 20006
+          },
+          {
+            "ns": 3922427,
+            "bytes": 4887119,
+            "allocations": 20006
+          },
+          {
+            "ns": 4149381,
+            "bytes": 4887126,
+            "allocations": 20006
+          }
+        ]
+      }
+    },
+    {
+      "group": "Pre-sized writer fixture probe, not shipped",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "before": {
+        "ns": 5978373,
+        "bytes": 11268678,
+        "allocations": 24019
+      },
+      "after": {
+        "ns": 2905969,
+        "bytes": 4428441,
+        "allocations": 14006
+      },
+      "speedup": 2.0572734946587525,
+      "samples": {
+        "before": [
+          {
+            "ns": 6099025,
+            "bytes": 11268696,
+            "allocations": 24019
+          },
+          {
+            "ns": 5944101,
+            "bytes": 11268678,
+            "allocations": 24019
+          },
+          {
+            "ns": 5978373,
+            "bytes": 11268666,
+            "allocations": 24019
+          }
+        ],
+        "after": [
+          {
+            "ns": 2830737,
+            "bytes": 4428452,
+            "allocations": 14006
+          },
+          {
+            "ns": 3010964,
+            "bytes": 4428441,
+            "allocations": 14006
+          },
+          {
+            "ns": 2905969,
+            "bytes": 4428441,
+            "allocations": 14006
+          }
+        ]
+      }
+    },
+    {
+      "group": "Pre-sized writer fixture probe, not shipped",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "before": {
+        "ns": 4534098,
+        "bytes": 5903237,
+        "allocations": 18018
+      },
+      "after": {
+        "ns": 2692507,
+        "bytes": 2391127,
+        "allocations": 10005
+      },
+      "speedup": 1.6839688810465487,
+      "samples": {
+        "before": [
+          {
+            "ns": 4534098,
+            "bytes": 5903232,
+            "allocations": 18018
+          },
+          {
+            "ns": 4547961,
+            "bytes": 5903237,
+            "allocations": 18018
+          },
+          {
+            "ns": 4477254,
+            "bytes": 5903249,
+            "allocations": 18018
+          }
+        ],
+        "after": [
+          {
+            "ns": 2662201,
+            "bytes": 2391145,
+            "allocations": 10005
+          },
+          {
+            "ns": 2927658,
+            "bytes": 2391114,
+            "allocations": 10005
+          },
+          {
+            "ns": 2692507,
+            "bytes": 2391127,
+            "allocations": 10005
+          }
+        ]
+      }
     }
   ]
 }
