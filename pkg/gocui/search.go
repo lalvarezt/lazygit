@@ -10,6 +10,8 @@ type lineSearcher struct {
 	normalize func(string) string
 	graphemes []string
 	width     int
+	prefix    []int
+	starts    []int
 }
 
 func newLineSearcher(query string) lineSearcher {
@@ -17,26 +19,45 @@ func newLineSearcher(query string) lineSearcher {
 	if containsUpcaseChar(query) {
 		normalize = func(s string) string { return s }
 	}
-	return lineSearcher{
+	s := lineSearcher{
 		normalize: normalize,
 		graphemes: stringToGraphemes(normalize(query)),
 		width:     uniseg.StringWidth(query),
 	}
+	s.prefix = make([]int, len(s.graphemes))
+	s.starts = make([]int, len(s.graphemes))
+	for i, matched := 1, 0; i < len(s.graphemes); i++ {
+		for matched > 0 && s.graphemes[i] != s.graphemes[matched] {
+			matched = s.prefix[matched-1]
+		}
+		if s.graphemes[i] == s.graphemes[matched] {
+			matched++
+		}
+		s.prefix[i] = matched
+	}
+	return s
 }
 
 func (s lineSearcher) positions(line []cell, y int) []SearchPosition {
 	var result []SearchPosition
+	if len(line) < len(s.graphemes) {
+		return result
+	}
 	x := 0
-	for startIdx, cell := range line {
-		found := true
-		for i, c := range s.graphemes {
-			if len(line)-1 < startIdx+i || s.normalize(line[startIdx+i].chr) != c {
-				found = false
-				break
-			}
+	matched := 0
+	for i, cell := range line {
+		s.starts[i%len(s.graphemes)] = x
+		chr := s.normalize(cell.chr)
+		for matched > 0 && chr != s.graphemes[matched] {
+			matched = s.prefix[matched-1]
 		}
-		if found {
-			result = append(result, SearchPosition{XStart: x, XEnd: x + s.width, Y: y})
+		if chr == s.graphemes[matched] {
+			matched++
+		}
+		if matched == len(s.graphemes) {
+			start := s.starts[(i-matched+1)%len(s.graphemes)]
+			result = append(result, SearchPosition{XStart: start, XEnd: start + s.width, Y: y})
+			matched = s.prefix[matched-1]
 		}
 		x += cell.width
 	}
