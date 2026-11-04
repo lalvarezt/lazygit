@@ -611,12 +611,16 @@ func (v *View) IsSearching() bool {
 	return v.searcher.searchString != ""
 }
 
+func (v *View) firstSearchPositionAtLine(line int) int {
+	return sort.Search(len(v.searcher.searchPositions), func(i int) bool {
+		return v.searcher.searchPositions[i].Y >= line
+	})
+}
+
 func (v *View) nearestSearchPosition() int {
 	currentLineIndex := v.cy + v.oy
 	positions := v.searcher.searchPositions
-	index := sort.Search(len(positions), func(i int) bool {
-		return positions[i].Y >= currentLineIndex
-	})
+	index := v.firstSearchPositionAtLine(currentLineIndex)
 	if index < len(positions) && positions[index].Y == currentLineIndex {
 		return index
 	}
