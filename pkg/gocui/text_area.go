@@ -255,6 +255,10 @@ func (self *TextArea) updateCells() {
 	self.cells, _ = contentToCells(self.content, width)
 }
 
+func (self *TextArea) replaceContent(start, end int, text string) {
+	self.content = self.content[:start] + text + self.content[end:]
+}
+
 func (self *TextArea) typeCharacter(ch string) {
 	widthToDelete := 0
 	if self.overwrite && !self.atEnd() {
@@ -262,7 +266,7 @@ func (self *TextArea) typeCharacter(ch string) {
 		widthToDelete = len(s)
 	}
 
-	self.content = self.content[:self.cursor] + ch + self.content[self.cursor+widthToDelete:]
+	self.replaceContent(self.cursor, self.cursor+widthToDelete, ch)
 	self.cursor += len(ch)
 }
 
@@ -281,7 +285,7 @@ func (self *TextArea) BackSpaceChar() {
 
 	oldCursor := self.cursor
 	self.cursor -= widthToDelete
-	self.content = self.content[:self.cursor] + self.content[oldCursor:]
+	self.replaceContent(self.cursor, oldCursor, "")
 
 	self.updateCells()
 }
@@ -293,7 +297,7 @@ func (self *TextArea) DeleteChar() {
 
 	s, _, _, _ := uniseg.FirstGraphemeClusterInString(self.content[self.cursor:], -1)
 	widthToDelete := len(s)
-	self.content = self.content[:self.cursor] + self.content[self.cursor+widthToDelete:]
+	self.replaceContent(self.cursor, self.cursor+widthToDelete, "")
 	self.updateCells()
 }
 
@@ -413,7 +417,7 @@ func (self *TextArea) DeleteToStartOfLine() {
 			return
 		}
 
-		self.content = self.content[:self.cursor-1] + self.content[self.cursor:]
+		self.replaceContent(self.cursor-1, self.cursor, "")
 		self.cursor--
 		self.updateCells()
 		return
@@ -431,7 +435,7 @@ func (self *TextArea) DeleteToStartOfLine() {
 	// deleting the newline character
 	newlineIndex := self.closestNewlineOnLeft()
 	self.clipboard = self.content[newlineIndex+1 : self.cursor]
-	self.content = self.content[:newlineIndex+1] + self.content[self.cursor:]
+	self.replaceContent(newlineIndex+1, self.cursor, "")
 	self.updateCells()
 	self.cursor = newlineIndex + 1
 }
@@ -443,7 +447,7 @@ func (self *TextArea) DeleteToEndOfLine() {
 
 	// if we're at the end of the line, delete just the newline character
 	if self.atLineEnd() {
-		self.content = self.content[:self.cursor] + self.content[self.cursor+1:]
+		self.replaceContent(self.cursor, self.cursor+1, "")
 		self.updateCells()
 		return
 	}
@@ -458,7 +462,7 @@ func (self *TextArea) DeleteToEndOfLine() {
 
 	lineEndIndex := self.closestNewlineOnRight()
 	self.clipboard = self.content[self.cursor:lineEndIndex]
-	self.content = self.content[:self.cursor] + self.content[lineEndIndex:]
+	self.replaceContent(self.cursor, lineEndIndex, "")
 	self.updateCells()
 }
 
@@ -562,7 +566,7 @@ func (self *TextArea) BackSpaceWord() {
 	if clipboard != "\n" {
 		self.clipboard = clipboard
 	}
-	self.content = self.content[:newCursor] + self.content[self.cursor:]
+	self.replaceContent(newCursor, self.cursor, "")
 	self.cursor = newCursor
 	self.updateCells()
 }
@@ -577,7 +581,7 @@ func (self *TextArea) ForwardDeleteWord() {
 	if clipboard != "\n" {
 		self.clipboard = clipboard
 	}
-	self.content = self.content[:self.cursor] + self.content[newCursor:]
+	self.replaceContent(self.cursor, newCursor, "")
 	self.updateCells()
 }
 
