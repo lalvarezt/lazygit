@@ -1,6 +1,8 @@
 package gocui
 
 import (
+	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -113,4 +115,52 @@ func TestEditedTextAreaPreservesCopiedContent(t *testing.T) {
 	v.RenderTextArea()
 	assert.Equal(t, want, copy.Buffer())
 	assertEditorMatchesWriter(t, v)
+}
+
+func TestEditedTextAreaPreservesMultipleSnapshots(t *testing.T) {
+	for i, text := range []string{
+		strings.Repeat("abcdefgh", 40),
+		strings.Repeat("界é👩‍💻", 40),
+		"first\n" + strings.Repeat("body text ", 40) + "\nlast",
+	} {
+		t.Run(fmt.Sprintf("case%d", i), func(t *testing.T) {
+			v := NewView("editor", 0, 0, 20, 5, OutputNormal)
+			v.Wrap = true
+			v.TextArea.AutoWrap = true
+			v.TextArea.AutoWrapWidth = 72
+			v.TextArea.TypeString(text)
+			v.RenderTextArea()
+			type snapshot struct {
+				view       *View
+				buffer     string
+				viewBuffer string
+			}
+			var snapshots []snapshot
+			for step := range 18 {
+				if step%3 == 0 {
+					v.ViewLinesHeight()
+					copy := NewView(fmt.Sprintf("copy%d", step), 0, 0, 20, 5, OutputNormal)
+					copy.Wrap = true
+					copy.CopyContent(v)
+					snapshots = append(snapshots, snapshot{copy, copy.Buffer(), copy.ViewBuffer()})
+				}
+				switch step % 3 {
+				case 0:
+					v.TextArea.TypeString("界x")
+				case 1:
+					v.TextArea.SetCursor2D(3, step%4)
+					v.TextArea.DeleteToEndOfLine()
+					v.TextArea.TypeString("replacement")
+				case 2:
+					v.TextArea.TypeString("\nnew row\n")
+				}
+				v.RenderTextArea()
+				assertEditorMatchesWriter(t, v)
+				for _, snapshot := range snapshots {
+					assert.Equal(t, snapshot.buffer, snapshot.view.Buffer())
+					assert.Equal(t, snapshot.viewBuffer, snapshot.view.ViewBuffer())
+				}
+			}
+		})
+	}
 }

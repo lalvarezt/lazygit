@@ -1628,11 +1628,13 @@ func (v *View) CopyContent(from *View) {
 	// live (its streaming task keeps appending rows, and refreshViewLinesIfNeeded
 	// fills each row's wrapping cache in place via &lines[i]), so sharing the
 	// backing arrays would race those writes against this view's own rendering.
-	// This is a shallow clone -- the per-row cell data is immutable once written
-	// and stays shared, so the cost is proportional to the number of rows, not
-	// their contents.
+	// Shared per-row cell arrays stay immutable, so this shallow clone costs
+	// proportionally to the number of rows, not their contents.
 	v.buf.lines = slices.Clone(from.buf.lines)
 	v.viewLines = slices.Clone(from.viewLines)
+	if from.renderedTextArea.source != nil {
+		from.renderedTextArea.sharedRows = len(from.buf.lines)
+	}
 	v.SetOriginX(from.ox)
 	v.SetOriginY(from.oy)
 	v.cx = from.cx
@@ -2568,22 +2570,27 @@ type (
 		editable bool
 		columns  int
 		lines    []textAreaRenderedLine
+		// CopyContent shares the cell arrays of this prefix of rows. An edit
+		// must copy a shared row before writing to its cells.
+		sharedRows int
 	}
 )
 
-func (r textAreaRendering) prefix(area *TextArea, editable bool, columns, lastLine int) (rows, cells, screenRow int) {
+func (r textAreaRendering) prefix(area *TextArea, editable bool, columns, lastLine int) (rows, cells, screenRow, unchangedCells int) {
 	if r.source != area || r.editable != editable || r.columns != columns {
-		return 0, 0, 1
+		return 0, 0, 1, 0
 	}
 	if r.revision == area.layout.revision {
 		rows = lastLine
+		unchangedCells = len(area.cells)
 	} else if r.revision+1 == area.layout.revision {
 		rows = min(area.layout.unchangedRows, lastLine)
+		unchangedCells = area.layout.unchangedCells
 	}
 	if rows > 0 {
-		return rows, r.lines[rows].cellStart, r.lines[rows].screenRow
+		return rows, r.lines[rows].cellStart, r.lines[rows].screenRow, unchangedCells
 	}
-	return 0, 0, 1
+	return 0, 0, 1, unchangedCells
 }
 
 // renderTextAreaCells uses the graphemes already measured by the text area.
@@ -2600,8 +2607,18 @@ func (v *View) renderTextAreaCells() bool {
 	v.writeMutex.Lock()
 	defer v.writeMutex.Unlock()
 	cached := v.renderedTextArea
-	keep, start, screenRow := cached.prefix(v.TextArea, v.Editable, v.buf.ei.screenColMax, len(v.buf.lines)-1)
+	keep, start, screenRow, unchangedCells := cached.prefix(v.TextArea, v.Editable, v.buf.ei.screenColMax, len(v.buf.lines)-1)
 	lines := v.buf.lines
+	var content []cell
+	prefix := 0
+	if cached.source == v.TextArea && keep < len(lines) {
+		prefix = min(max(unchangedCells-start, 0), len(lines[keep].cells), len(textCells)-start)
+		content = lines[keep].cells[:prefix]
+		if keep < cached.sharedRows {
+			content = slices.Clone(content)
+		}
+	}
+	content = slices.Grow(content, len(textCells)-start-prefix)
 	v.clear()
 	v.firstDirtyLine = keep
 	v.searcher.positionsStale = true
@@ -2609,21 +2626,27 @@ func (v *View) renderTextAreaCells() bool {
 	v.buf.lines = lines[:keep]
 	v.buf.ei.screenRow = screenRow
 	cached.lines = append(cached.lines[:keep], textAreaRenderedLine{cellStart: start, screenRow: screenRow})
-	content := make([]cell, 0, len(textCells)-start)
+	if prefix > 0 {
+		last := textCells[start+prefix-1]
+		v.buf.ei.notifyCellsWritten(last.x + last.width)
+	}
 	lineStart := 0
 	appendLine := func(complete bool) {
 		var lineCells []cell
 		if lineStart < len(content) {
-			lineCells = content[lineStart:len(content):len(content)]
+			lineCells = content[lineStart:]
+			if complete {
+				lineCells = lineCells[:len(lineCells):len(lineCells)]
+			}
 		}
 		v.buf.lines = append(v.buf.lines, lineType{cells: lineCells, metadataCollected: complete})
 		lineStart = len(content)
 	}
-	for i, c := range textCells[start:] {
+	for i, c := range textCells[start+prefix:] {
 		if c.char == "\n" {
 			appendLine(true)
 			v.buf.ei.notifyRowAdvance()
-			cached.lines = append(cached.lines, textAreaRenderedLine{cellStart: start + i + 1, screenRow: v.buf.ei.screenRow})
+			cached.lines = append(cached.lines, textAreaRenderedLine{cellStart: start + prefix + i + 1, screenRow: v.buf.ei.screenRow})
 		} else {
 			content = append(content, cell{chr: c.char, width: c.width})
 			v.buf.ei.notifyCellsWritten(c.width)
@@ -2634,11 +2657,12 @@ func (v *View) renderTextAreaCells() bool {
 	v.buf.wx = len(v.buf.lines[v.buf.wy].cells)
 	v.buf.pendingNewline = pendingNewline
 	v.renderedTextArea = textAreaRendering{
-		source:   v.TextArea,
-		revision: v.TextArea.layout.revision,
-		editable: v.Editable,
-		columns:  v.buf.ei.screenColMax,
-		lines:    cached.lines,
+		source:     v.TextArea,
+		revision:   v.TextArea.layout.revision,
+		editable:   v.Editable,
+		columns:    v.buf.ei.screenColMax,
+		lines:      cached.lines,
+		sharedRows: min(cached.sharedRows, keep),
 	}
 	return true
 }

@@ -29,14 +29,15 @@ func (c *TextAreaCell) nextCursorXY() (int, int) {
 }
 
 type textAreaLayout struct {
-	checkpoints   []textAreaCheckpoint
-	pending       []TextAreaCell
-	trailerStart  int
-	content       string
-	width         int
-	ready         bool
-	revision      uint64
-	unchangedRows int
+	checkpoints    []textAreaCheckpoint
+	pending        []TextAreaCell
+	trailerStart   int
+	content        string
+	width          int
+	ready          bool
+	revision       uint64
+	unchangedRows  int
+	unchangedCells int
 }
 
 type TextArea struct {
@@ -248,6 +249,7 @@ func (self *TextArea) updateCells() {
 	}
 	self.layout.pending, self.layout.checkpoints = p.pending, p.checkpoints
 	self.layout.unchangedRows = checkpoint.row
+	self.layout.unchangedCells = checkpoint.outputCells + checkpoint.pendingCells
 	self.layout.content, self.layout.width, self.layout.ready = self.content, width, true
 	self.layout.trailerStart = trailerStart
 	self.hasChanges = false
@@ -677,6 +679,7 @@ func (self *TextArea) Clear() {
 	self.layout.ready = false
 	self.hasChanges = false
 	self.layout.unchangedRows = 0
+	self.layout.unchangedCells = 0
 	self.layout.revision++
 	self.content = ""
 	self.cells = nil
