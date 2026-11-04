@@ -109,6 +109,7 @@ function measure() {
     BenchmarkSearchOrdinaryText: p => `Search 2,000 ordinary diff lines for "${p[0]}"; rendered layout warmed.`,
     BenchmarkSearchLargeDiff: p => `Search ${value(p, 'lines')} diff lines with wide and combining characters for "${value(p, 'query')}"; rendered layout and initial query warmed.`,
     BenchmarkViewWriteLargeDiff: p => `Stream 50,000 ${p[0]} diff lines into a new view, including parsing and allocation.`,
+    BenchmarkSearchQueryLifetime: p => `Alternate aa, aaa, aaaa, and a queries across 2,000 lines of 200 a characters; ${value(p, 'clear') === 'true' ? 'clear search after each query' : 'keep search active'}; rendered layout and initial a query warmed.`,
     BenchmarkNearestSearchPosition: p => `Find the nearest result near the end of ${value(p, 'matches')} search matches.`,
     BenchmarkScrollSearchPosition: p => `Select a visible result after a distant scroll ${value(p, 'up') === 'true' ? 'up' : 'down'} across ${value(p, 'matches')} matches; reset each iteration.`,
     BenchmarkRenderCommitGraph: () => 'Render a graph of 50 commits generated with seed 1234.',
