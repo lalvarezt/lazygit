@@ -1186,24 +1186,19 @@ func (b *viewBuffer) makeWriteable(x, y int) {
 // writeCells copies []cell to (b.wx, b.wy), and advances b.wx accordingly.
 // !!! caller MUST ensure that specified location (x, y) is writeable by calling makeWriteable
 func (b *viewBuffer) writeCells(cells []cell) {
-	var newLen int
-	// use maximum len available
-	line := b.lines[b.wy].cells[:cap(b.lines[b.wy].cells)]
-	maxCopy := len(line) - b.wx
-	if maxCopy < len(cells) {
-		copy(line[b.wx:], cells[:maxCopy])
-		line = append(line, cells[maxCopy:]...)
-		newLen = len(line)
-	} else { // maxCopy >= len(cells)
-		copy(line[b.wx:], cells)
-		newLen = b.wx + len(cells)
-		if newLen < len(b.lines[b.wy].cells) {
-			newLen = len(b.lines[b.wy].cells)
-		}
+	copy(b.cellsToWrite(len(cells)), cells)
+}
+
+func (b *viewBuffer) cellsToWrite(count int) []cell {
+	line := &b.lines[b.wy]
+	start := b.wx
+	end := start + count
+	if end > len(line.cells) {
+		line.cells = slices.Grow(line.cells, end-len(line.cells))[:end]
 	}
-	b.lines[b.wy].cells = line[:newLen]
-	b.lines[b.wy].metadataCollected = false
-	b.wx += len(cells)
+	line.metadataCollected = false
+	b.wx = end
+	return line.cells[start:end]
 }
 
 // seekWrite moves the write cursor to (x, y). Writing there starts the line over,
