@@ -2,10 +2,32 @@ package gocui
 
 import (
 	"math/rand"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
+
+func TestTextAreaLayoutAcrossGraphemeBoundaries(t *testing.T) {
+	for _, width := range []int{5, 72} {
+		area := &TextArea{AutoWrap: true, AutoWrapWidth: width}
+		area.TypeString(strings.Repeat("words in a paragraph ", 10))
+		for _, text := range []string{
+			"e", "\u0301", "\u0308", " ",
+			"👩", "\u200d", "💻", " ",
+			"🇦", "🇧", "🇨", "🇩", "🇪", " ",
+			"👍", "🏻", " ", "☀", "\ufe0f", " ",
+			"\r", "\n", "\xff", "\n\n", "Signed-off-by: Person", "\n", "\n", "body",
+		} {
+			area.TypeString(text)
+			assertTextAreaLayout(t, area)
+		}
+		for range 20 {
+			area.BackSpaceChar()
+			assertTextAreaLayout(t, area)
+		}
+	}
+}
 
 func assertTextAreaLayout(t *testing.T, area *TextArea) {
 	t.Helper()
