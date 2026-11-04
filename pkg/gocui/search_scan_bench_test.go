@@ -53,3 +53,30 @@ func BenchmarkNearestSearchPosition(b *testing.B) {
 		})
 	}
 }
+
+func BenchmarkScrollSearchPosition(b *testing.B) {
+	for _, count := range []int{100, 1000, 10000, 100000} {
+		for _, up := range []bool{false, true} {
+			b.Run(fmt.Sprintf("matches=%d/up=%t", count, up), func(b *testing.B) {
+				v := NewView("search", 0, 0, 80, 24, OutputNormal)
+				v.searcher.searchPositions = make([]SearchPosition, count)
+				for i := range count {
+					v.searcher.searchPositions[i] = SearchPosition{Y: i}
+				}
+				b.ReportAllocs()
+				b.ResetTimer()
+				for b.Loop() {
+					if up {
+						v.oy = 0
+						v.searcher.currentSearchIndex = count - 1
+						v.selectVisibleSearchResultAfterScrollUp()
+					} else {
+						v.oy = count - 10
+						v.searcher.currentSearchIndex = 0
+						v.selectVisibleSearchResultAfterScrollDown()
+					}
+				}
+			})
+		}
+	}
+}

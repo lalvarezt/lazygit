@@ -2694,14 +2694,7 @@ func (v *View) selectVisibleSearchResultAfterScrollUp() {
 	if !v.Highlight && len(v.searcher.searchPositions) != 0 {
 		windowBottom := v.oy + v.InnerHeight()
 		if v.searcher.searchPositions[v.searcher.currentSearchIndex].Y >= windowBottom {
-			newSearchIndex := v.searcher.currentSearchIndex
-			for newSearchIndex > 0 &&
-				v.searcher.searchPositions[newSearchIndex-1].Y >= v.oy {
-				newSearchIndex--
-				if v.searcher.searchPositions[newSearchIndex].Y < windowBottom {
-					break
-				}
-			}
+			newSearchIndex := max(v.firstSearchPositionAtLine(v.oy), v.firstSearchPositionAtLine(windowBottom)-1)
 			if v.searcher.currentSearchIndex != newSearchIndex {
 				v.searcher.currentSearchIndex = newSearchIndex
 				v.renderSearchStatus(newSearchIndex, len(v.searcher.searchPositions))
@@ -2718,15 +2711,8 @@ func (v *View) selectVisibleSearchResultAfterScrollDown() {
 
 	if !v.Highlight && len(v.searcher.searchPositions) != 0 {
 		if v.searcher.searchPositions[v.searcher.currentSearchIndex].Y < v.oy {
-			newSearchIndex := v.searcher.currentSearchIndex
 			windowBottom := v.oy + v.InnerHeight()
-			for newSearchIndex+1 < len(v.searcher.searchPositions) &&
-				v.searcher.searchPositions[newSearchIndex+1].Y < windowBottom {
-				newSearchIndex++
-				if v.searcher.searchPositions[newSearchIndex].Y >= v.oy {
-					break
-				}
-			}
+			newSearchIndex := min(v.firstSearchPositionAtLine(v.oy), v.firstSearchPositionAtLine(windowBottom)-1)
 			if v.searcher.currentSearchIndex != newSearchIndex {
 				v.searcher.currentSearchIndex = newSearchIndex
 				v.renderSearchStatus(newSearchIndex, len(v.searcher.searchPositions))

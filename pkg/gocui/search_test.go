@@ -92,6 +92,51 @@ func TestNearestSearchPosition(t *testing.T) {
 	}
 }
 
+func TestSearchSelectionAfterScrolling(t *testing.T) {
+	for _, test := range []struct {
+		name      string
+		up        bool
+		origin    int
+		current   int
+		want      int
+		highlight bool
+	}{
+		{name: "down to first visible", origin: 10, current: 0, want: 1},
+		{name: "up to last visible", up: true, origin: 10, current: 6, want: 3},
+		{name: "down into gap", origin: 25, current: 0, want: 3},
+		{name: "up into gap", up: true, origin: 25, current: 6, want: 4},
+		{name: "down past last result", origin: 100, current: 0, want: 6},
+		{name: "up before first result", up: true, origin: 0, current: 6, want: 3},
+		{name: "down stays visible", origin: 10, current: 2, want: 2},
+		{name: "up stays visible", up: true, origin: 10, current: 2, want: 2},
+		{name: "down stays nearest above gap", origin: 25, current: 3, want: 3},
+		{name: "up stays nearest below gap", up: true, origin: 25, current: 4, want: 4},
+		{name: "highlighted down", origin: 10, current: 0, want: 0, highlight: true},
+		{name: "highlighted up", up: true, origin: 10, current: 6, want: 6, highlight: true},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			v := NewView("search", 0, 0, 80, 24, OutputNormal)
+			v.searcher.searchPositions = []SearchPosition{{Y: 0}, {Y: 10}, {Y: 20}, {Y: 20}, {Y: 50}, {Y: 50}, {Y: 80}}
+			v.searcher.currentSearchIndex = test.current
+			v.oy = test.origin
+			v.Highlight = test.highlight
+			notifications := 0
+			v.setRenderSearchStatus(func(_ *View, selected, total int) {
+				notifications++
+				assert.Equal(t, test.want, selected)
+				assert.Equal(t, 7, total)
+			})
+			if test.up {
+				v.selectVisibleSearchResultAfterScrollUp()
+			} else {
+				v.selectVisibleSearchResultAfterScrollDown()
+			}
+			assert.Equal(t, test.want, v.searcher.currentSearchIndex)
+			assert.Equal(t, test.want != test.current, notifications == 1)
+		})
+	}
+}
+
 func TestSearchHighlights(t *testing.T) {
 	for _, test := range []struct {
 		name       string
