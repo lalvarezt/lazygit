@@ -2909,6 +2909,261 @@
           }
         ]
       }
+    },
+    {
+      "group": "Editor after cursor accounting",
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=4096",
+      "before": {
+        "ns": 50255430,
+        "bytes": 11310272,
+        "allocations": 4154
+      },
+      "after": {
+        "ns": 44294068,
+        "bytes": 11310288,
+        "allocations": 4155
+      },
+      "speedup": 1.1345860127365137,
+      "samples": {
+        "before": [
+          {
+            "ns": 57655406,
+            "bytes": 11312104,
+            "allocations": 4156
+          },
+          {
+            "ns": 50255430,
+            "bytes": 11310272,
+            "allocations": 4154
+          },
+          {
+            "ns": 47946114,
+            "bytes": 11310228,
+            "allocations": 4154
+          }
+        ],
+        "after": [
+          {
+            "ns": 47011822,
+            "bytes": 11310288,
+            "allocations": 4155
+          },
+          {
+            "ns": 44294068,
+            "bytes": 11311610,
+            "allocations": 4155
+          },
+          {
+            "ns": 42823549,
+            "bytes": 11310244,
+            "allocations": 4153
+          }
+        ]
+      }
+    },
+    {
+      "group": "Screen cursor accounting",
+      "benchmark": "BenchmarkNotifyCellsWritten/columns=1",
+      "before": {
+        "ns": 0.806,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 0.8854,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 0.9103230178450419,
+      "samples": {
+        "before": [
+          {
+            "ns": 0.8037,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 0.8609,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 0.806,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 0.8965,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 0.8808,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 0.8854,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Screen cursor accounting",
+      "benchmark": "BenchmarkNotifyCellsWritten/columns=80",
+      "before": {
+        "ns": 60.83,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 0.9133,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 66.60462060659148,
+      "samples": {
+        "before": [
+          {
+            "ns": 60.83,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 60.39,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 75.1,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 0.9794,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 0.9133,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 0.8862,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Screen cursor accounting",
+      "benchmark": "BenchmarkNotifyCellsWritten/columns=4096",
+      "before": {
+        "ns": 4357,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 2.067,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 2107.8858248669567,
+      "samples": {
+        "before": [
+          {
+            "ns": 4390,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4357,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4300,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 2.047,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 2.067,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 2.196,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "group": "Screen cursor accounting",
+      "benchmark": "BenchmarkNotifyCellsWritten/columns=100000",
+      "before": {
+        "ns": 56745,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "after": {
+        "ns": 2.124,
+        "bytes": 0,
+        "allocations": 0
+      },
+      "speedup": 26716.101694915254,
+      "samples": {
+        "before": [
+          {
+            "ns": 56745,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 52801,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 69971,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 2.12,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 2.284,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 2.124,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
     }
   ]
 }

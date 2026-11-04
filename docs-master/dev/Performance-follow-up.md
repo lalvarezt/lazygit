@@ -22,7 +22,7 @@ operation and cannot be combined into an application speedup.
 | Distant scroll down across 100,000 matches | 44.045 µs | 24.38 ns | 1,807× |
 | Distant scroll up across 100,000 matches | 35.958 µs | 25.45 ns | 1,413× |
 
-The [measurement data](performance-follow-up.json) contains all 57 comparisons,
+The [measurement data](performance-follow-up.json) contains all 62 comparisons,
 including the individual samples, allocation counts, smaller workloads, ordinary
 search text, and file-tree refresh costs.
 
@@ -226,6 +226,33 @@ stopping the terminal. The full gocui race suite and repeated suspend/resume
 checks now pass. The Windows test target and Plan 9 tcell package compile; the
 gocui Plan 9 target has pre-existing unsupported Unix syscall references.
 
+## Screen cursor accounting
+
+Replaying an unchanged editor prefix also updates the terminal's screen cursor.
+The column loop now counts complete rows arithmetically while preserving the
+pending wrap at the rightmost column. The change is in `15c65f224`.
+
+| Columns written | Before | After |
+| --- | ---: | ---: |
+| 1 | 0.806 ns | 0.885 ns |
+| 80 | 60.83 ns | 0.913 ns |
+| 4,096 | 4,357 ns | 2.067 ns |
+| 100,000 | 56,745 ns | 2.124 ns |
+
+The 4,096-column operation improves by about 2,100×. This ratio applies to cursor
+accounting: the matched full 4 KB unbroken-input benchmark improves from
+50.3 ms to 44.3 ms, about 1.13×. Allocation is unchanged. All results have three
+samples. The [unbroken-input chart](Performance-editor-unbroken.html) includes
+this narrower comparison.
+
+An independent temporary oracle compares 137,286 cursor states with the original
+column loop. Focused tests cover pending wraps, multi-row writes, disabled
+tracking, and empty writes. Build, unit tests, lint, integration tests, and the
+full gocui race suite pass.
+
+A separate reverse-byte-search prototype for trailer boundaries gives 2.8–4.9×
+across four fixtures. It is not included in this change.
+
 Reproduce the committed benchmarks with:
 
 ```sh
@@ -234,4 +261,5 @@ go test ./pkg/gui/filetree -run='^$' -bench='BenchmarkFileTree(RangeSelection|Na
 go test ./pkg/gocui -run='^$' -bench='Benchmark(SearchRepeatedPrefix|SearchOrdinaryText|NearestSearchPosition|ScrollSearchPosition)' -benchmem -benchtime=150ms -count=3
 go test ./pkg/gocui ./pkg/gui -run='^$' -bench='Benchmark(EditorInput|CommitDescriptionInput)' -benchmem -benchtime=300ms -count=3
 go test ./pkg/gocui -run='^$' -bench='Benchmark(EditorParagraphInput|EditorUnbrokenInput|PasteText)' -benchmem -benchtime=150ms -count=3
+go test ./pkg/gocui -run='^$' -bench=BenchmarkNotifyCellsWritten -benchmem -benchtime=150ms -count=3
 ```
