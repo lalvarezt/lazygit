@@ -294,9 +294,10 @@ func renderPipeSet(
 	}
 	isMerge := startCount > 1
 
-	cells := lo.Map(lo.Range(int(maxPos)+1), func(i int, _ int) *Cell {
-		return &Cell{cellType: CONNECTION, style: &style.FgDefault}
-	})
+	cells := make([]Cell, int(maxPos)+1)
+	for i := range cells {
+		cells[i] = Cell{cellType: CONNECTION, style: &style.FgDefault}
+	}
 
 	renderPipe := func(pipe *Pipe, style *style.TextStyle, overrideRightStyle bool) {
 		left := pipe.left()
@@ -392,7 +393,7 @@ func renderPipeSet(
 	if symbolSet == BranchDrawingSymbols {
 		for _, pipe := range selectedPipes {
 			for i := pipe.left() + 1; i < pipe.right(); i++ {
-				cell := cells[i]
+				cell := &cells[i]
 				if cell.up == straightLine && cell.down == straightLine && cell.style != &highlightStyle {
 					cell.horizontalOnTop = true
 					cell.style = &highlightStyle
@@ -411,8 +412,8 @@ func renderPipeSet(
 	// using a string builder here for the sake of performance
 	writer := &strings.Builder{}
 	writer.Grow(len(cells) * 2)
-	for _, cell := range cells {
-		cell.render(writer, symbolSet)
+	for i := range cells {
+		cells[i].render(writer, symbolSet)
 	}
 	return writer.String()
 }
