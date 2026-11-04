@@ -452,6 +452,39 @@ writer remains the larger cost to investigate. The refreshed
 [summary](Performance-summary.html) and [data](performance-comparison.json)
 include the new query-lifetime and graph variants.
 
+## Printable-ASCII writer batches
+
+`a9abf0957` shares destination-cell reservation between cell copying and direct
+producers. `309851b54` batches printable ASCII into those reserved cells when
+the escape interpreter is idle. Escapes, controls, and Unicode retain the
+grapheme decoder, including the last ASCII byte before Unicode that could
+extend its grapheme. Short initial reservations leave room for following cells
+on mixed-text lines.
+
+Against `afa2c8215`, the 2,000-line fixtures improve by 3.70× for plain text,
+1.67× for colored text, 1.54× for mixed Unicode, and 1.59× for metadata. All four
+allocate fewer bytes. The searched-view write improves by 2.87× and the long
+line by 5.18×. These are fresh-view synthetic benchmarks with five samples per
+case, not measured live latency.
+
+Cell capacity stays the same or falls for all five measured line fixtures.
+A temporary differential harness compares 2,400 snapshots from 300 deterministic
+mixed-input streams against the pre-batch writer. Cells, styles, hyperlinks,
+metadata, text as written, and cursor state match. Tests also compare normal
+writes with small chunks containing Unicode, ANSI, metadata, carriage returns,
+tabs, cursor motion, and soft wrapping. Their interior CRLF pairs keep the same
+newline boundaries because CRLF storage has a separate consistency issue.
+
+An editor smoke check showed a small paragraph-input timing difference. A
+longer seven-sample recheck shows overlapping timings and no material slowdown;
+no editor speedup is claimed. Build, unit tests, lint, the gocui race suite, and
+the file, diff, main-view, and search integration groups pass.
+
+The [writer batch report](Performance-writer-batches.html) and
+[its data](performance-writer-batches.json) preserve the samples, source
+revisions, commands, retained-capacity measurements, and limits. The initial
+exact-capacity prototype increased mixed-Unicode allocation; it is not shipped.
+
 ## Writer capacity probe
 
 A benchmark-only probe pre-sizes all 2,000 destination lines and their cell

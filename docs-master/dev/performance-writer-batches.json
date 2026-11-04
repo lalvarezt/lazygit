@@ -1,0 +1,1293 @@
+{
+  "date": "2026-11-04",
+  "revisions": {
+    "before": "afa2c8215429fdcc69b37656267864334ec059cc",
+    "reservationRefactor": "a9abf0957faa5fd480e0572e2aa6323f2ce66cb8",
+    "after": "309851b541140c2f40bb124c50348cadd2bc8158"
+  },
+  "settings": {
+    "samples": 5,
+    "benchtime": "200ms",
+    "GOMAXPROCS": "1",
+    "GOGC": "100",
+    "GOMEMLIMIT": "off"
+  },
+  "editorChecks": {
+    "samples": 3,
+    "benchtime": "150ms",
+    "paragraph1024Recheck": {
+      "samples": 7,
+      "benchtime": "300ms",
+      "before": {
+        "nsPerOp": 1759531,
+        "bytesPerOp": 1119766,
+        "allocsPerOp": 1098,
+        "samples": [
+          {
+            "nsPerOp": 1745045,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1752072,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1771518,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1759531,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1769548,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1764761,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1747439,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 1745657,
+        "bytesPerOp": 1119766,
+        "allocsPerOp": 1098,
+        "samples": [
+          {
+            "nsPerOp": 1745722,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1745657,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1738273,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1755004,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1749408,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1744545,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1720240,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          }
+        ]
+      }
+    },
+    "limit": "Small editor timing changes overlap the spread of the longer recheck; no editor speedup is claimed."
+  },
+  "goVersion": "go version go1.27.3 linux/amd64",
+  "cpu": "13th Gen Intel(R) Core(TM) i7-1370P",
+  "commands": [
+    "go test ./pkg/gocui -run='^$' -bench='Benchmark(ViewWrite|ViewWriteLongLine|WriteToSearchedView)$' -benchmem -benchtime=200ms -count=5",
+    "go test ./pkg/gocui -run='^$' -bench='Benchmark(EditorInput|EditorParagraphInput|EditorUnbrokenInput)$' -benchmem -benchtime=150ms -count=3"
+  ],
+  "baselineMethod": "Existing benchmark sources are unchanged. Writer fixture baseline runs at the before revision. Other writer and editor baselines use a Go overlay replacing view.go with that revision. No other application files differ.",
+  "retainedCellCapacity": {
+    "method": "Write one fixture line into a fresh 100x40 view. Record rendered cell count, capacity, and capacity multiplied by unsafe.Sizeof(cell{}).",
+    "before": {
+      "colored": [
+        28,
+        37,
+        2664
+      ],
+      "long line": [
+        13000,
+        14791,
+        1064952
+      ],
+      "metadata": [
+        14,
+        17,
+        1224
+      ],
+      "plain": [
+        49,
+        74,
+        5328
+      ],
+      "unicode": [
+        26,
+        37,
+        2664
+      ]
+    },
+    "after": {
+      "colored": [
+        28,
+        37,
+        2664
+      ],
+      "long line": [
+        13000,
+        13084,
+        942048
+      ],
+      "metadata": [
+        14,
+        17,
+        1224
+      ],
+      "plain": [
+        49,
+        67,
+        4824
+      ],
+      "unicode": [
+        26,
+        37,
+        2664
+      ]
+    }
+  },
+  "differentialValidation": {
+    "streams": 300,
+    "writes": 2400,
+    "firstMismatch": -1,
+    "seed": 996,
+    "method": "A temporary test overlay records cells, colors, hyperlinks, metadata, text as written, write positions, screen positions, and parser state after each write in identical mixed-input streams. Compare canonical snapshots against the pre-batch writer."
+  },
+  "rejectedInitialReservation": {
+    "reason": "Exact initial run capacity made mixed Unicode lines allocate about 30% more bytes. Round short initial reservations before following graphemes arrive.",
+    "samples": {
+      "BenchmarkViewWrite/plain": [
+        {
+          "nsPerOp": 2940686,
+          "bytesPerOp": 9135216,
+          "allocsPerOp": 2019
+        },
+        {
+          "nsPerOp": 2591916,
+          "bytesPerOp": 9135216,
+          "allocsPerOp": 2019
+        },
+        {
+          "nsPerOp": 2812516,
+          "bytesPerOp": 9135216,
+          "allocsPerOp": 2019
+        },
+        {
+          "nsPerOp": 3038599,
+          "bytesPerOp": 9135216,
+          "allocsPerOp": 2019
+        },
+        {
+          "nsPerOp": 2821563,
+          "bytesPerOp": 9135216,
+          "allocsPerOp": 2019
+        }
+      ],
+      "BenchmarkViewWrite/colored": [
+        {
+          "nsPerOp": 3640537,
+          "bytesPerOp": 7631221,
+          "allocsPerOp": 22019
+        },
+        {
+          "nsPerOp": 3675730,
+          "bytesPerOp": 7631221,
+          "allocsPerOp": 22019
+        },
+        {
+          "nsPerOp": 3621724,
+          "bytesPerOp": 7631221,
+          "allocsPerOp": 22019
+        },
+        {
+          "nsPerOp": 3763653,
+          "bytesPerOp": 7631221,
+          "allocsPerOp": 22019
+        },
+        {
+          "nsPerOp": 3720054,
+          "bytesPerOp": 7631221,
+          "allocsPerOp": 22019
+        }
+      ],
+      "BenchmarkViewWrite/unicode": [
+        {
+          "nsPerOp": 5031032,
+          "bytesPerOp": 14596566,
+          "allocsPerOp": 18019
+        },
+        {
+          "nsPerOp": 5243744,
+          "bytesPerOp": 14596562,
+          "allocsPerOp": 18019
+        },
+        {
+          "nsPerOp": 4780935,
+          "bytesPerOp": 14596564,
+          "allocsPerOp": 18019
+        },
+        {
+          "nsPerOp": 4920973,
+          "bytesPerOp": 14596568,
+          "allocsPerOp": 18019
+        },
+        {
+          "nsPerOp": 4624563,
+          "bytesPerOp": 14596568,
+          "allocsPerOp": 18019
+        }
+      ],
+      "BenchmarkViewWrite/metadata": [
+        {
+          "nsPerOp": 2804257,
+          "bytesPerOp": 3087200,
+          "allocsPerOp": 10018
+        },
+        {
+          "nsPerOp": 2794795,
+          "bytesPerOp": 3087200,
+          "allocsPerOp": 10018
+        },
+        {
+          "nsPerOp": 2738320,
+          "bytesPerOp": 3087200,
+          "allocsPerOp": 10018
+        },
+        {
+          "nsPerOp": 2845006,
+          "bytesPerOp": 3087200,
+          "allocsPerOp": 10018
+        },
+        {
+          "nsPerOp": 2869804,
+          "bytesPerOp": 3087200,
+          "allocsPerOp": 10018
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Synthetic fresh-view benchmarks, not live application latency.",
+    "Printable ASCII batches require an idle escape interpreter and at least two bytes.",
+    "The last ASCII byte before a non-ASCII byte stays with the grapheme decoder.",
+    "Capacity measurements describe these fixtures, not every possible input.",
+    "The separately discovered CRLF stored-text inconsistency is outside the ASCII change."
+  ],
+  "checks": [
+    "just format",
+    "just build",
+    "just unit-test with NO_COLOR unset",
+    "just lint",
+    "go test -race ./pkg/gocui",
+    "just e2e file diff main_view filter_and_search",
+    "Small-chunk equivalence tests pass before and after batching."
+  ],
+  "rows": [
+    {
+      "name": "BenchmarkViewWrite/plain",
+      "group": "writer",
+      "before": {
+        "nsPerOp": 10017193,
+        "bytesPerOp": 21935216,
+        "allocsPerOp": 14019,
+        "samples": [
+          {
+            "nsPerOp": 10156301,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          },
+          {
+            "nsPerOp": 10151775,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          },
+          {
+            "nsPerOp": 10017193,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          },
+          {
+            "nsPerOp": 9736016,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          },
+          {
+            "nsPerOp": 9601605,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          }
+        ]
+      },
+      "reservationRefactor": {
+        "nsPerOp": 10038446,
+        "bytesPerOp": 21935216,
+        "allocsPerOp": 14019,
+        "samples": [
+          {
+            "nsPerOp": 10038446,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          },
+          {
+            "nsPerOp": 10428464,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          },
+          {
+            "nsPerOp": 9630517,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          },
+          {
+            "nsPerOp": 10025640,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          },
+          {
+            "nsPerOp": 10053626,
+            "bytesPerOp": 21935216,
+            "allocsPerOp": 14019
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 2710623,
+        "bytesPerOp": 10671216,
+        "allocsPerOp": 2019,
+        "samples": [
+          {
+            "nsPerOp": 2885779,
+            "bytesPerOp": 10671216,
+            "allocsPerOp": 2019
+          },
+          {
+            "nsPerOp": 2691993,
+            "bytesPerOp": 10671216,
+            "allocsPerOp": 2019
+          },
+          {
+            "nsPerOp": 2897543,
+            "bytesPerOp": 10671216,
+            "allocsPerOp": 2019
+          },
+          {
+            "nsPerOp": 2710623,
+            "bytesPerOp": 10671216,
+            "allocsPerOp": 2019
+          },
+          {
+            "nsPerOp": 2705021,
+            "bytesPerOp": 10671216,
+            "allocsPerOp": 2019
+          }
+        ]
+      },
+      "speedup": 3.695531617639192
+    },
+    {
+      "name": "BenchmarkViewWrite/colored",
+      "group": "writer",
+      "before": {
+        "nsPerOp": 7046043,
+        "bytesPerOp": 11727224,
+        "allocsPerOp": 30019,
+        "samples": [
+          {
+            "nsPerOp": 7161549,
+            "bytesPerOp": 11727224,
+            "allocsPerOp": 30019
+          },
+          {
+            "nsPerOp": 7046043,
+            "bytesPerOp": 11727224,
+            "allocsPerOp": 30019
+          },
+          {
+            "nsPerOp": 7206750,
+            "bytesPerOp": 11727227,
+            "allocsPerOp": 30019
+          },
+          {
+            "nsPerOp": 6933574,
+            "bytesPerOp": 11727226,
+            "allocsPerOp": 30019
+          },
+          {
+            "nsPerOp": 6999499,
+            "bytesPerOp": 11727224,
+            "allocsPerOp": 30019
+          }
+        ]
+      },
+      "reservationRefactor": {
+        "nsPerOp": 7154250,
+        "bytesPerOp": 11727224,
+        "allocsPerOp": 30019,
+        "samples": [
+          {
+            "nsPerOp": 7154250,
+            "bytesPerOp": 11727228,
+            "allocsPerOp": 30019
+          },
+          {
+            "nsPerOp": 7116619,
+            "bytesPerOp": 11727224,
+            "allocsPerOp": 30019
+          },
+          {
+            "nsPerOp": 7132875,
+            "bytesPerOp": 11727226,
+            "allocsPerOp": 30019
+          },
+          {
+            "nsPerOp": 7450318,
+            "bytesPerOp": 11727224,
+            "allocsPerOp": 30019
+          },
+          {
+            "nsPerOp": 7477296,
+            "bytesPerOp": 11727223,
+            "allocsPerOp": 30019
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 4220174,
+        "bytesPerOp": 9423221,
+        "allocsPerOp": 22019,
+        "samples": [
+          {
+            "nsPerOp": 4220174,
+            "bytesPerOp": 9423222,
+            "allocsPerOp": 22019
+          },
+          {
+            "nsPerOp": 4104916,
+            "bytesPerOp": 9423222,
+            "allocsPerOp": 22019
+          },
+          {
+            "nsPerOp": 4188126,
+            "bytesPerOp": 9423220,
+            "allocsPerOp": 22019
+          },
+          {
+            "nsPerOp": 4345485,
+            "bytesPerOp": 9423221,
+            "allocsPerOp": 22019
+          },
+          {
+            "nsPerOp": 4394808,
+            "bytesPerOp": 9423219,
+            "allocsPerOp": 22019
+          }
+        ]
+      },
+      "speedup": 1.669609594296349
+    },
+    {
+      "name": "BenchmarkViewWrite/unicode",
+      "group": "writer",
+      "before": {
+        "nsPerOp": 5923533,
+        "bytesPerOp": 11268566,
+        "allocsPerOp": 24019,
+        "samples": [
+          {
+            "nsPerOp": 6152814,
+            "bytesPerOp": 11268567,
+            "allocsPerOp": 24019
+          },
+          {
+            "nsPerOp": 6221766,
+            "bytesPerOp": 11268564,
+            "allocsPerOp": 24019
+          },
+          {
+            "nsPerOp": 5885875,
+            "bytesPerOp": 11268565,
+            "allocsPerOp": 24019
+          },
+          {
+            "nsPerOp": 5785449,
+            "bytesPerOp": 11268566,
+            "allocsPerOp": 24019
+          },
+          {
+            "nsPerOp": 5923533,
+            "bytesPerOp": 11268567,
+            "allocsPerOp": 24019
+          }
+        ]
+      },
+      "reservationRefactor": {
+        "nsPerOp": 6053816,
+        "bytesPerOp": 11268566,
+        "allocsPerOp": 24019,
+        "samples": [
+          {
+            "nsPerOp": 5805881,
+            "bytesPerOp": 11268566,
+            "allocsPerOp": 24019
+          },
+          {
+            "nsPerOp": 6113394,
+            "bytesPerOp": 11268567,
+            "allocsPerOp": 24019
+          },
+          {
+            "nsPerOp": 6054863,
+            "bytesPerOp": 11268568,
+            "allocsPerOp": 24019
+          },
+          {
+            "nsPerOp": 6053816,
+            "bytesPerOp": 11268566,
+            "allocsPerOp": 24019
+          },
+          {
+            "nsPerOp": 6018536,
+            "bytesPerOp": 11268566,
+            "allocsPerOp": 24019
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 3855658,
+        "bytesPerOp": 8964558,
+        "allocsPerOp": 16019,
+        "samples": [
+          {
+            "nsPerOp": 3889433,
+            "bytesPerOp": 8964558,
+            "allocsPerOp": 16019
+          },
+          {
+            "nsPerOp": 3579008,
+            "bytesPerOp": 8964559,
+            "allocsPerOp": 16019
+          },
+          {
+            "nsPerOp": 3855658,
+            "bytesPerOp": 8964557,
+            "allocsPerOp": 16019
+          },
+          {
+            "nsPerOp": 3872724,
+            "bytesPerOp": 8964556,
+            "allocsPerOp": 16019
+          },
+          {
+            "nsPerOp": 3693856,
+            "bytesPerOp": 8964559,
+            "allocsPerOp": 16019
+          }
+        ]
+      },
+      "speedup": 1.5363222049258518
+    },
+    {
+      "name": "BenchmarkViewWrite/metadata",
+      "group": "writer",
+      "before": {
+        "nsPerOp": 4647065,
+        "bytesPerOp": 5903200,
+        "allocsPerOp": 18018,
+        "samples": [
+          {
+            "nsPerOp": 4647065,
+            "bytesPerOp": 5903200,
+            "allocsPerOp": 18018
+          },
+          {
+            "nsPerOp": 4702426,
+            "bytesPerOp": 5903200,
+            "allocsPerOp": 18018
+          },
+          {
+            "nsPerOp": 4765610,
+            "bytesPerOp": 5903202,
+            "allocsPerOp": 18018
+          },
+          {
+            "nsPerOp": 4640054,
+            "bytesPerOp": 5903200,
+            "allocsPerOp": 18018
+          },
+          {
+            "nsPerOp": 4612323,
+            "bytesPerOp": 5903201,
+            "allocsPerOp": 18018
+          }
+        ]
+      },
+      "reservationRefactor": {
+        "nsPerOp": 4749736,
+        "bytesPerOp": 5903200,
+        "allocsPerOp": 18018,
+        "samples": [
+          {
+            "nsPerOp": 4743920,
+            "bytesPerOp": 5903200,
+            "allocsPerOp": 18018
+          },
+          {
+            "nsPerOp": 4751298,
+            "bytesPerOp": 5903200,
+            "allocsPerOp": 18018
+          },
+          {
+            "nsPerOp": 4790025,
+            "bytesPerOp": 5903200,
+            "allocsPerOp": 18018
+          },
+          {
+            "nsPerOp": 4749736,
+            "bytesPerOp": 5903200,
+            "allocsPerOp": 18018
+          },
+          {
+            "nsPerOp": 4727395,
+            "bytesPerOp": 5903200,
+            "allocsPerOp": 18018
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 2919304,
+        "bytesPerOp": 3599200,
+        "allocsPerOp": 10018,
+        "samples": [
+          {
+            "nsPerOp": 2947250,
+            "bytesPerOp": 3599200,
+            "allocsPerOp": 10018
+          },
+          {
+            "nsPerOp": 2885238,
+            "bytesPerOp": 3599200,
+            "allocsPerOp": 10018
+          },
+          {
+            "nsPerOp": 2915610,
+            "bytesPerOp": 3599200,
+            "allocsPerOp": 10018
+          },
+          {
+            "nsPerOp": 2919304,
+            "bytesPerOp": 3599200,
+            "allocsPerOp": 10018
+          },
+          {
+            "nsPerOp": 2965694,
+            "bytesPerOp": 3599200,
+            "allocsPerOp": 10018
+          }
+        ]
+      },
+      "speedup": 1.5918400413249185
+    },
+    {
+      "name": "BenchmarkWriteToSearchedView",
+      "group": "other",
+      "before": {
+        "nsPerOp": 10936192,
+        "bytesPerOp": 22443885,
+        "allocsPerOp": 17802,
+        "samples": [
+          {
+            "nsPerOp": 11358270,
+            "bytesPerOp": 22443885,
+            "allocsPerOp": 17802
+          },
+          {
+            "nsPerOp": 10478778,
+            "bytesPerOp": 22443908,
+            "allocsPerOp": 17802
+          },
+          {
+            "nsPerOp": 11166816,
+            "bytesPerOp": 22443782,
+            "allocsPerOp": 17801
+          },
+          {
+            "nsPerOp": 10714678,
+            "bytesPerOp": 22443913,
+            "allocsPerOp": 17803
+          },
+          {
+            "nsPerOp": 10936192,
+            "bytesPerOp": 22443856,
+            "allocsPerOp": 17802
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 3812153,
+        "bytesPerOp": 11179572,
+        "allocsPerOp": 5798,
+        "samples": [
+          {
+            "nsPerOp": 3936950,
+            "bytesPerOp": 11179572,
+            "allocsPerOp": 5798
+          },
+          {
+            "nsPerOp": 3773264,
+            "bytesPerOp": 11179560,
+            "allocsPerOp": 5797
+          },
+          {
+            "nsPerOp": 3812153,
+            "bytesPerOp": 11179591,
+            "allocsPerOp": 5798
+          },
+          {
+            "nsPerOp": 3801837,
+            "bytesPerOp": 11179566,
+            "allocsPerOp": 5798
+          },
+          {
+            "nsPerOp": 3880780,
+            "bytesPerOp": 11179586,
+            "allocsPerOp": 5798
+          }
+        ]
+      },
+      "speedup": 2.868770482192084
+    },
+    {
+      "name": "BenchmarkViewWriteLongLine",
+      "group": "other",
+      "before": {
+        "nsPerOp": 1136547,
+        "bytesPerOp": 4460064,
+        "allocsPerOp": 26,
+        "samples": [
+          {
+            "nsPerOp": 1136547,
+            "bytesPerOp": 4460064,
+            "allocsPerOp": 26
+          },
+          {
+            "nsPerOp": 1159956,
+            "bytesPerOp": 4460064,
+            "allocsPerOp": 26
+          },
+          {
+            "nsPerOp": 1132047,
+            "bytesPerOp": 4460064,
+            "allocsPerOp": 26
+          },
+          {
+            "nsPerOp": 1134529,
+            "bytesPerOp": 4460064,
+            "allocsPerOp": 26
+          },
+          {
+            "nsPerOp": 1139812,
+            "bytesPerOp": 4460064,
+            "allocsPerOp": 26
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 219372,
+        "bytesPerOp": 943520,
+        "allocsPerOp": 7,
+        "samples": [
+          {
+            "nsPerOp": 214447,
+            "bytesPerOp": 943520,
+            "allocsPerOp": 7
+          },
+          {
+            "nsPerOp": 220409,
+            "bytesPerOp": 943520,
+            "allocsPerOp": 7
+          },
+          {
+            "nsPerOp": 219372,
+            "bytesPerOp": 943520,
+            "allocsPerOp": 7
+          },
+          {
+            "nsPerOp": 219526,
+            "bytesPerOp": 943520,
+            "allocsPerOp": 7
+          },
+          {
+            "nsPerOp": 216812,
+            "bytesPerOp": 943520,
+            "allocsPerOp": 7
+          }
+        ]
+      },
+      "speedup": 5.180911875717959
+    },
+    {
+      "name": "BenchmarkEditorInput/bytes=256",
+      "group": "editor",
+      "before": {
+        "nsPerOp": 149567,
+        "bytesPerOp": 152208,
+        "allocsPerOp": 333,
+        "samples": [
+          {
+            "nsPerOp": 148023,
+            "bytesPerOp": 152208,
+            "allocsPerOp": 333
+          },
+          {
+            "nsPerOp": 151212,
+            "bytesPerOp": 152208,
+            "allocsPerOp": 333
+          },
+          {
+            "nsPerOp": 149567,
+            "bytesPerOp": 152208,
+            "allocsPerOp": 333
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 149143,
+        "bytesPerOp": 152208,
+        "allocsPerOp": 333,
+        "samples": [
+          {
+            "nsPerOp": 145498,
+            "bytesPerOp": 152208,
+            "allocsPerOp": 333
+          },
+          {
+            "nsPerOp": 150544,
+            "bytesPerOp": 152208,
+            "allocsPerOp": 333
+          },
+          {
+            "nsPerOp": 149143,
+            "bytesPerOp": 152208,
+            "allocsPerOp": 333
+          }
+        ]
+      },
+      "speedup": 1.0028429091543016
+    },
+    {
+      "name": "BenchmarkEditorInput/bytes=1024",
+      "group": "editor",
+      "before": {
+        "nsPerOp": 685155,
+        "bytesPerOp": 1030550,
+        "allocsPerOp": 1265,
+        "samples": [
+          {
+            "nsPerOp": 684052,
+            "bytesPerOp": 1030550,
+            "allocsPerOp": 1265
+          },
+          {
+            "nsPerOp": 685155,
+            "bytesPerOp": 1030550,
+            "allocsPerOp": 1265
+          },
+          {
+            "nsPerOp": 694444,
+            "bytesPerOp": 1030550,
+            "allocsPerOp": 1265
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 682570,
+        "bytesPerOp": 1030550,
+        "allocsPerOp": 1265,
+        "samples": [
+          {
+            "nsPerOp": 696938,
+            "bytesPerOp": 1030550,
+            "allocsPerOp": 1265
+          },
+          {
+            "nsPerOp": 682570,
+            "bytesPerOp": 1030550,
+            "allocsPerOp": 1265
+          },
+          {
+            "nsPerOp": 680478,
+            "bytesPerOp": 1030550,
+            "allocsPerOp": 1265
+          }
+        ]
+      },
+      "speedup": 1.0037871573611499
+    },
+    {
+      "name": "BenchmarkEditorInput/bytes=4096",
+      "group": "editor",
+      "before": {
+        "nsPerOp": 4311105,
+        "bytesPerOp": 11041054,
+        "allocsPerOp": 4959,
+        "samples": [
+          {
+            "nsPerOp": 4071682,
+            "bytesPerOp": 11041055,
+            "allocsPerOp": 4959
+          },
+          {
+            "nsPerOp": 4311105,
+            "bytesPerOp": 11041054,
+            "allocsPerOp": 4959
+          },
+          {
+            "nsPerOp": 4315574,
+            "bytesPerOp": 11041054,
+            "allocsPerOp": 4959
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 3985512,
+        "bytesPerOp": 11041056,
+        "allocsPerOp": 4959,
+        "samples": [
+          {
+            "nsPerOp": 3985512,
+            "bytesPerOp": 11041056,
+            "allocsPerOp": 4959
+          },
+          {
+            "nsPerOp": 3922190,
+            "bytesPerOp": 11041056,
+            "allocsPerOp": 4959
+          },
+          {
+            "nsPerOp": 4210620,
+            "bytesPerOp": 11041055,
+            "allocsPerOp": 4959
+          }
+        ]
+      },
+      "speedup": 1.0816941461975274
+    },
+    {
+      "name": "BenchmarkEditorParagraphInput/bytes=256",
+      "group": "editor",
+      "before": {
+        "nsPerOp": 385877,
+        "bytesPerOp": 161680,
+        "allocsPerOp": 287,
+        "samples": [
+          {
+            "nsPerOp": 391380,
+            "bytesPerOp": 161680,
+            "allocsPerOp": 287
+          },
+          {
+            "nsPerOp": 385615,
+            "bytesPerOp": 161680,
+            "allocsPerOp": 287
+          },
+          {
+            "nsPerOp": 385877,
+            "bytesPerOp": 161680,
+            "allocsPerOp": 287
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 382726,
+        "bytesPerOp": 161680,
+        "allocsPerOp": 287,
+        "samples": [
+          {
+            "nsPerOp": 385960,
+            "bytesPerOp": 161680,
+            "allocsPerOp": 287
+          },
+          {
+            "nsPerOp": 382726,
+            "bytesPerOp": 161680,
+            "allocsPerOp": 287
+          },
+          {
+            "nsPerOp": 381867,
+            "bytesPerOp": 161680,
+            "allocsPerOp": 287
+          }
+        ]
+      },
+      "speedup": 1.008233044005372
+    },
+    {
+      "name": "BenchmarkEditorParagraphInput/bytes=1024",
+      "group": "editor",
+      "before": {
+        "nsPerOp": 1743263,
+        "bytesPerOp": 1119766,
+        "allocsPerOp": 1098,
+        "samples": [
+          {
+            "nsPerOp": 1736056,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1798941,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1743263,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 1763151,
+        "bytesPerOp": 1119766,
+        "allocsPerOp": 1098,
+        "samples": [
+          {
+            "nsPerOp": 1798164,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1763151,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          },
+          {
+            "nsPerOp": 1747681,
+            "bytesPerOp": 1119766,
+            "allocsPerOp": 1098
+          }
+        ]
+      },
+      "speedup": 0.9887201946968808
+    },
+    {
+      "name": "BenchmarkEditorParagraphInput/bytes=4096",
+      "group": "editor",
+      "before": {
+        "nsPerOp": 8358310,
+        "bytesPerOp": 11446688,
+        "allocsPerOp": 4310,
+        "samples": [
+          {
+            "nsPerOp": 8284332,
+            "bytesPerOp": 11446688,
+            "allocsPerOp": 4310
+          },
+          {
+            "nsPerOp": 8358310,
+            "bytesPerOp": 11446688,
+            "allocsPerOp": 4310
+          },
+          {
+            "nsPerOp": 8366908,
+            "bytesPerOp": 11446688,
+            "allocsPerOp": 4310
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 8364099,
+        "bytesPerOp": 11446688,
+        "allocsPerOp": 4310,
+        "samples": [
+          {
+            "nsPerOp": 9090356,
+            "bytesPerOp": 11446688,
+            "allocsPerOp": 4310
+          },
+          {
+            "nsPerOp": 8275600,
+            "bytesPerOp": 11446688,
+            "allocsPerOp": 4310
+          },
+          {
+            "nsPerOp": 8364099,
+            "bytesPerOp": 11446688,
+            "allocsPerOp": 4310
+          }
+        ]
+      },
+      "speedup": 0.9993078752415532
+    },
+    {
+      "name": "BenchmarkEditorUnbrokenInput/bytes=256",
+      "group": "editor",
+      "before": {
+        "nsPerOp": 624905,
+        "bytesPerOp": 111840,
+        "allocsPerOp": 283,
+        "samples": [
+          {
+            "nsPerOp": 628867,
+            "bytesPerOp": 111840,
+            "allocsPerOp": 283
+          },
+          {
+            "nsPerOp": 609146,
+            "bytesPerOp": 111840,
+            "allocsPerOp": 283
+          },
+          {
+            "nsPerOp": 624905,
+            "bytesPerOp": 111840,
+            "allocsPerOp": 283
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 618331,
+        "bytesPerOp": 111840,
+        "allocsPerOp": 283,
+        "samples": [
+          {
+            "nsPerOp": 618476,
+            "bytesPerOp": 111840,
+            "allocsPerOp": 283
+          },
+          {
+            "nsPerOp": 612083,
+            "bytesPerOp": 111840,
+            "allocsPerOp": 283
+          },
+          {
+            "nsPerOp": 618331,
+            "bytesPerOp": 111840,
+            "allocsPerOp": 283
+          }
+        ]
+      },
+      "speedup": 1.010631846050093
+    },
+    {
+      "name": "BenchmarkEditorUnbrokenInput/bytes=1024",
+      "group": "editor",
+      "before": {
+        "nsPerOp": 2694733,
+        "bytesPerOp": 855141,
+        "allocsPerOp": 1057,
+        "samples": [
+          {
+            "nsPerOp": 2746732,
+            "bytesPerOp": 855141,
+            "allocsPerOp": 1057
+          },
+          {
+            "nsPerOp": 2682187,
+            "bytesPerOp": 855141,
+            "allocsPerOp": 1057
+          },
+          {
+            "nsPerOp": 2694733,
+            "bytesPerOp": 855141,
+            "allocsPerOp": 1057
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 2663788,
+        "bytesPerOp": 855141,
+        "allocsPerOp": 1057,
+        "samples": [
+          {
+            "nsPerOp": 2663788,
+            "bytesPerOp": 855141,
+            "allocsPerOp": 1057
+          },
+          {
+            "nsPerOp": 2659516,
+            "bytesPerOp": 855141,
+            "allocsPerOp": 1057
+          },
+          {
+            "nsPerOp": 2680742,
+            "bytesPerOp": 855141,
+            "allocsPerOp": 1057
+          }
+        ]
+      },
+      "speedup": 1.0116169154602392
+    },
+    {
+      "name": "BenchmarkEditorUnbrokenInput/bytes=4096",
+      "group": "editor",
+      "before": {
+        "nsPerOp": 12196583,
+        "bytesPerOp": 10630896,
+        "allocsPerOp": 4138,
+        "samples": [
+          {
+            "nsPerOp": 12196583,
+            "bytesPerOp": 10630896,
+            "allocsPerOp": 4138
+          },
+          {
+            "nsPerOp": 12490444,
+            "bytesPerOp": 10630896,
+            "allocsPerOp": 4138
+          },
+          {
+            "nsPerOp": 12155968,
+            "bytesPerOp": 10630896,
+            "allocsPerOp": 4138
+          }
+        ]
+      },
+      "after": {
+        "nsPerOp": 12160477,
+        "bytesPerOp": 10630896,
+        "allocsPerOp": 4138,
+        "samples": [
+          {
+            "nsPerOp": 11984202,
+            "bytesPerOp": 10630896,
+            "allocsPerOp": 4138
+          },
+          {
+            "nsPerOp": 12564431,
+            "bytesPerOp": 10630896,
+            "allocsPerOp": 4138
+          },
+          {
+            "nsPerOp": 12160477,
+            "bytesPerOp": 10630896,
+            "allocsPerOp": 4138
+          }
+        ]
+      },
+      "speedup": 1.0029691269511878
+    }
+  ]
+}
