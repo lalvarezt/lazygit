@@ -1029,7 +1029,13 @@ func (v *View) setCharacter(x, y int, ch string, width int, fgColor, bgColor Att
 		ch = " "
 	}
 
-	tcellSetCell(v.x0+x+1, v.y0+y+1, ch, fgColor, bgColor, v.outMode)
+	screenX, screenY := v.x0+x+1, v.y0+y+1
+	style := getTcellStyle(oldStyle{fg: fgColor, bg: bgColor, outputMode: v.outMode})
+	_, paintedWidth := Screen.Put(screenX, screenY, ch, style)
+	if paintedWidth < width {
+		style = getTcellStyle(oldStyle{fg: v.FgColor, bg: v.BgColor, outputMode: v.outMode})
+		Screen.FillArea(screenX+paintedWidth, screenY, width-paintedWidth, 1, ' ', style)
+	}
 }
 
 // SetCursor sets the cursor position of the view at the given point,
