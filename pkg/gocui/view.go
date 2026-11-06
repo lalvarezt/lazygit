@@ -1407,13 +1407,14 @@ func (b *viewBuffer) writeASCII(p []byte) int {
 	}
 
 	b.noteAsWritten(p[:count])
-	if count < 256 && cap(b.lines[b.wy].cells) == 0 {
-		// Small initial runs leave room for the rest of a mixed-text line.
+	end := b.wx + count
+	if end < 256 && cap(b.lines[b.wy].cells) < end {
+		// Short runs leave room for the rest of a mixed-text line.
 		capacity := 1
-		for capacity < count {
+		for capacity < end {
 			capacity *= 2
 		}
-		b.lines[b.wy].cells = slices.Grow(b.lines[b.wy].cells, capacity)
+		b.lines[b.wy].cells = slices.Grow(b.lines[b.wy].cells, capacity-len(b.lines[b.wy].cells))
 	}
 	c := cell{
 		fgColor:   b.ei.curFgColor,
