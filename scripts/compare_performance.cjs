@@ -93,6 +93,7 @@ function measure() {
     BenchmarkViewWrite: p => `Write 2,000 ${p[0]} lines into a new view.`,
     BenchmarkViewWriteLongLine: () => 'Write one 13,001-byte line into a new view.',
     BenchmarkViewWriteGitColoredDiff: () => 'Stream 50,000 mixed Unicode lines with separately colored Git prefixes into a new view.',
+    BenchmarkEscapeSpecialChars: p => `Escape control characters in a ${p[0] === 'ordinary' ? 'plain filename' : 'filename containing tabs and newlines'}.`,
     BenchmarkWriteToSearchedView: () => 'Write 2,000 lines into a searched view and read search status.',
     BenchmarkEditorInput: p => `Type ${Math.floor(value(p, 'bytes') / 10) * 10} bytes with hard newlines, updating layout and view per key.`,
     BenchmarkEditorParagraphInput: p => `Type ${Math.floor(value(p, 'bytes') / 10) * 10} bytes of a spaced paragraph, wrapping at 72 columns.`,
