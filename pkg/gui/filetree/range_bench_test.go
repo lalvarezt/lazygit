@@ -42,6 +42,7 @@ func BenchmarkFileTreeNavigation(b *testing.B) {
 			b.ReportAllocs()
 			b.ResetTimer()
 			for b.Loop() {
+				view.SetSelectedLineIdx(count / 2)
 				view.MoveSelectedLine(1)
 				view.GetSelected()
 				view.Len()
