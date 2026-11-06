@@ -23,8 +23,10 @@ function benchmarkSource(file, text) {
   ]) {
     if (file !== target) continue;
     const step = `for b.Loop() {\n\t\t\t\t${variable}.MoveSelectedLine(1)`;
+    const resetStep = `for b.Loop() {\n\t\t\t\t${variable}.SetSelectedLineIdx(count / 2)\n\t\t\t\t${variable}.MoveSelectedLine(1)`;
+    if (text.includes(resetStep)) continue;
     if (!text.includes(step)) throw new Error(`The navigation benchmark changed: ${file}`);
-    text = text.replace(step, `for b.Loop() {\n\t\t\t\t${variable}.SetSelectedLineIdx(count / 2)\n\t\t\t\t${variable}.MoveSelectedLine(1)`);
+    text = text.replace(step, resetStep);
   }
   return text;
 }
