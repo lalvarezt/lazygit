@@ -92,6 +92,7 @@ function measure() {
     BenchmarkDrawSearchedView: p => `Redraw an 80 × 24 searched viewport within ${value(p, 'lines')} lines.`,
     BenchmarkViewWrite: p => `Write 2,000 ${p[0]} lines into a new view.`,
     BenchmarkViewWriteLongLine: () => 'Write one 13,001-byte line into a new view.',
+    BenchmarkViewWriteGitColoredDiff: () => 'Stream 50,000 mixed Unicode lines with separately colored Git prefixes into a new view.',
     BenchmarkWriteToSearchedView: () => 'Write 2,000 lines into a searched view and read search status.',
     BenchmarkEditorInput: p => `Type ${Math.floor(value(p, 'bytes') / 10) * 10} bytes with hard newlines, updating layout and view per key.`,
     BenchmarkEditorParagraphInput: p => `Type ${Math.floor(value(p, 'bytes') / 10) * 10} bytes of a spaced paragraph, wrapping at 72 columns.`,
