@@ -107,6 +107,8 @@ function measure() {
     BenchmarkRefreshAfterDirectoryRemoval: p => `Refresh a tree after removing a ${value(p, 'files')}-file directory; fixture setup excluded.`,
     BenchmarkSearchRepeatedPrefix: p => `Search 2,000 lines of 200 a characters for ${value(p, 'query') === '1' ? 'a' : `a ${value(p, 'query')}-character query ending in b`}; rendered layout warmed.`,
     BenchmarkSearchOrdinaryText: p => `Search 2,000 ordinary diff lines for "${p[0]}"; rendered layout warmed.`,
+    BenchmarkSearchLargeDiff: p => `Search ${value(p, 'lines')} diff lines with wide and combining characters for "${value(p, 'query')}"; rendered layout and initial query warmed.`,
+    BenchmarkViewWriteLargeDiff: p => `Stream 50,000 ${p[0]} diff lines into a new view, including parsing and allocation.`,
     BenchmarkNearestSearchPosition: p => `Find the nearest result near the end of ${value(p, 'matches')} search matches.`,
     BenchmarkScrollSearchPosition: p => `Select a visible result after a distant scroll ${value(p, 'up') === 'true' ? 'up' : 'down'} across ${value(p, 'matches')} matches; reset each iteration.`,
     BenchmarkRenderCommitGraph: () => 'Render a graph of 50 commits generated with seed 1234.',
