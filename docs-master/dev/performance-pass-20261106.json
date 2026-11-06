@@ -1,0 +1,3169 @@
+{
+  "date": "2026-11-06",
+  "baseline": {
+    "revision": "678afcf13dd4418e9f42a9cd461cfca3579ad7b0",
+    "ref": "performance-baseline-20261106"
+  },
+  "implementation": {
+    "revision": "e1f5c5141f0dd62674bb8c8864c54da9a8731d17",
+    "searchFixup": "ad80404e56f76db2ffcc1c321a991c14744ff9a2",
+    "writerFixup": "490114843d47d90c67d7db41a6be2d2ffa5a2cad"
+  },
+  "platform": "linux/x64",
+  "cpu": "13th Gen Intel(R) Core(TM) i7-1370P",
+  "goVersion": "go version go1.27.3 linux/amd64",
+  "settings": {
+    "samples": 5,
+    "benchtime": "200ms",
+    "GOMAXPROCS": 1,
+    "GOGC": 100,
+    "GOMEMLIMIT": "off",
+    "compilation": "optimized",
+    "order": "Five paired rounds, alternating before/after order; no concurrent local profiling or tests.",
+    "controls": {
+      "samples": 3,
+      "benchtime": "150ms"
+    }
+  },
+  "fixtures": {
+    "largeSearch": {
+      "lines": 50000,
+      "variants": [
+        "ordinary ASCII with wide and combining characters",
+        "mixed-case identifiers with wide and combining characters"
+      ],
+      "queries": [
+        "a",
+        "performance-match",
+        "missing",
+        "MATCH"
+      ],
+      "setup": "Rendered layout and initial query warmed before timing."
+    },
+    "largeWriter": {
+      "lines": 50000,
+      "variants": [
+        "colored ANSI and tabs",
+        "OSC 1717 metadata"
+      ],
+      "setup": "New view, parsing, and destination allocation included in each operation."
+    }
+  },
+  "method": "Identical final benchmark sources run against current application files and a Go overlay of search.go and view.go from the pinned baseline.",
+  "harness": [
+    {
+      "path": "pkg/gocui/search_large_bench_test.go",
+      "sha256": "d0f44b21dc0bf50a4c98fa586352095c1f70dfcfc8a15d71310a4f0893e2e441"
+    },
+    {
+      "path": "pkg/gocui/search_scan_bench_test.go",
+      "sha256": "e800ed19072d905227854bfe431cf52fb01bf5310c416a6f50aa6e40670d71ed"
+    },
+    {
+      "path": "pkg/gocui/view_write_bench_test.go",
+      "sha256": "7a395caa6f0e0e03bba10ac700f5c90299986743d804e79888c3bf74d49604e0"
+    },
+    {
+      "path": "pkg/gocui/view_write_large_bench_test.go",
+      "sha256": "1242570f13cec46a952e0e83608025072b61cdec77eec6015707a4c68bebedec"
+    },
+    {
+      "path": "pkg/gocui/search_test.go",
+      "sha256": "48edc76cb84686c9bc4324fb20dcb0ba8e6f369f5678147266dc9314b96326db"
+    },
+    {
+      "path": "pkg/gocui/edit_bench_test.go",
+      "sha256": "09c40d86269f1b40101ffa9ffd250b36b65bf6927ee196ed809852013236e7d0"
+    },
+    {
+      "path": "pkg/gocui/text_area_bench_test.go",
+      "sha256": "133fd1a36a17a3d1bdf5777811d87bfa423108621cc967c78747c8ced30e00cf"
+    },
+    {
+      "path": "pkg/gocui/view_bench_test.go",
+      "sha256": "b5a88f2017dfb8a1f6c6f763cbfab6e931d8766eeb8dc8286b43310c64a66a7f"
+    }
+  ],
+  "rows": [
+    {
+      "benchmark": "BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=a",
+      "before": 21601283,
+      "after": 16423833,
+      "speedup": 1.315240053889978,
+      "timeReductionPercent": 23.968252256127563,
+      "beforeBytes": 32,
+      "afterBytes": 32,
+      "beforeAllocations": 3,
+      "afterAllocations": 3,
+      "samples": {
+        "before": [
+          {
+            "ns": 21348582,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 21336808,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 21757031,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 21601283,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 21649401,
+            "bytes": 32,
+            "allocations": 3
+          }
+        ],
+        "after": [
+          {
+            "ns": 16247192,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 16392277,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 16423833,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 16493635,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 16567866,
+            "bytes": 32,
+            "allocations": 3
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=performance-match",
+      "before": 25756001,
+      "after": 19517448,
+      "speedup": 1.319639791021859,
+      "timeReductionPercent": 24.221745448759687,
+      "beforeBytes": 1248,
+      "afterBytes": 1248,
+      "beforeAllocations": 6,
+      "afterAllocations": 6,
+      "samples": {
+        "before": [
+          {
+            "ns": 25235154,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 25211422,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 28076959,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 26210889,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 25756001,
+            "bytes": 1248,
+            "allocations": 6
+          }
+        ],
+        "after": [
+          {
+            "ns": 19504966,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 19370013,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 19517448,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 21736418,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 20342347,
+            "bytes": 1248,
+            "allocations": 6
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=missing",
+      "before": 23960299,
+      "after": 18038571,
+      "speedup": 1.3282814364840763,
+      "timeReductionPercent": 24.71475001209292,
+      "beforeBytes": 320,
+      "afterBytes": 320,
+      "beforeAllocations": 4,
+      "afterAllocations": 4,
+      "samples": {
+        "before": [
+          {
+            "ns": 23116685,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 23960299,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 23670861,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 25573392,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 24030275,
+            "bytes": 320,
+            "allocations": 4
+          }
+        ],
+        "after": [
+          {
+            "ns": 17847557,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 18038571,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 18097568,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 17450180,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 18173091,
+            "bytes": 320,
+            "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=MATCH",
+      "before": 18303106,
+      "after": 14155429,
+      "speedup": 1.2930096290264321,
+      "timeReductionPercent": 22.66105545146272,
+      "beforeBytes": 288,
+      "afterBytes": 288,
+      "beforeAllocations": 4,
+      "afterAllocations": 4,
+      "samples": {
+        "before": [
+          {
+            "ns": 18005424,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 18380466,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 18940395,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 18303106,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 17922154,
+            "bytes": 288,
+            "allocations": 4
+          }
+        ],
+        "after": [
+          {
+            "ns": 13894959,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 14410725,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 13831997,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 14155429,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 14219291,
+            "bytes": 288,
+            "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=a",
+      "before": 27036258,
+      "after": 16948769,
+      "speedup": 1.5951753192222986,
+      "timeReductionPercent": 37.31096588884453,
+      "beforeBytes": 2800032,
+      "afterBytes": 32,
+      "beforeAllocations": 350003,
+      "afterAllocations": 3,
+      "samples": {
+        "before": [
+          {
+            "ns": 26963418,
+            "bytes": 2800032,
+            "allocations": 350003
+          },
+          {
+            "ns": 27061832,
+            "bytes": 2800032,
+            "allocations": 350003
+          },
+          {
+            "ns": 26769339,
+            "bytes": 2800032,
+            "allocations": 350003
+          },
+          {
+            "ns": 27285407,
+            "bytes": 2800032,
+            "allocations": 350003
+          },
+          {
+            "ns": 27036258,
+            "bytes": 2800032,
+            "allocations": 350003
+          }
+        ],
+        "after": [
+          {
+            "ns": 17710475,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 18148864,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 16948769,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 16298078,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 16849396,
+            "bytes": 32,
+            "allocations": 3
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=performance-match",
+      "before": 29727005,
+      "after": 20405639,
+      "speedup": 1.456803435560141,
+      "timeReductionPercent": 31.356559465038607,
+      "beforeBytes": 2801248,
+      "afterBytes": 1248,
+      "beforeAllocations": 350006,
+      "afterAllocations": 6,
+      "samples": {
+        "before": [
+          {
+            "ns": 30282979,
+            "bytes": 2801248,
+            "allocations": 350006
+          },
+          {
+            "ns": 29727005,
+            "bytes": 2801248,
+            "allocations": 350006
+          },
+          {
+            "ns": 29203126,
+            "bytes": 2801248,
+            "allocations": 350006
+          },
+          {
+            "ns": 29465735,
+            "bytes": 2801248,
+            "allocations": 350006
+          },
+          {
+            "ns": 30417795,
+            "bytes": 2801248,
+            "allocations": 350006
+          }
+        ],
+        "after": [
+          {
+            "ns": 20405639,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 19411280,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 23337280,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 19255931,
+            "bytes": 1248,
+            "allocations": 6
+          },
+          {
+            "ns": 21663778,
+            "bytes": 1248,
+            "allocations": 6
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=missing",
+      "before": 27646147,
+      "after": 17376494,
+      "speedup": 1.5910083472534793,
+      "timeReductionPercent": 37.14677853662573,
+      "beforeBytes": 2800320,
+      "afterBytes": 320,
+      "beforeAllocations": 350004,
+      "afterAllocations": 4,
+      "samples": {
+        "before": [
+          {
+            "ns": 26848705,
+            "bytes": 2800320,
+            "allocations": 350004
+          },
+          {
+            "ns": 27870554,
+            "bytes": 2800320,
+            "allocations": 350004
+          },
+          {
+            "ns": 27616482,
+            "bytes": 2800320,
+            "allocations": 350004
+          },
+          {
+            "ns": 28127640,
+            "bytes": 2800320,
+            "allocations": 350004
+          },
+          {
+            "ns": 27646147,
+            "bytes": 2800322,
+            "allocations": 350004
+          }
+        ],
+        "after": [
+          {
+            "ns": 17176887,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 17817750,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 17515199,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 17376494,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 17197445,
+            "bytes": 320,
+            "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=MATCH",
+      "before": 18298348,
+      "after": 14747884,
+      "speedup": 1.2407439602860995,
+      "timeReductionPercent": 19.40319421184907,
+      "beforeBytes": 288,
+      "afterBytes": 288,
+      "beforeAllocations": 4,
+      "afterAllocations": 4,
+      "samples": {
+        "before": [
+          {
+            "ns": 18319947,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 17941014,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 18298348,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 22539422,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 18202270,
+            "bytes": 288,
+            "allocations": 4
+          }
+        ],
+        "after": [
+          {
+            "ns": 14448671,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 14997494,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 14747884,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 14593378,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 14844564,
+            "bytes": 288,
+            "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchRepeatedPrefix/query=1",
+      "before": 2964866,
+      "after": 2477421,
+      "speedup": 1.1967550125715412,
+      "timeReductionPercent": 16.44070929343856,
+      "beforeBytes": 32,
+      "afterBytes": 32,
+      "beforeAllocations": 3,
+      "afterAllocations": 3,
+      "samples": {
+        "before": [
+          {
+            "ns": 2901608,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 2964866,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 2959216,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 2965919,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 2974188,
+            "bytes": 32,
+            "allocations": 3
+          }
+        ],
+        "after": [
+          {
+            "ns": 2477421,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 2494812,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 2461706,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 2470562,
+            "bytes": 32,
+            "allocations": 3
+          },
+          {
+            "ns": 2570814,
+            "bytes": 32,
+            "allocations": 3
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchRepeatedPrefix/query=32",
+      "before": 4397972,
+      "after": 3938247,
+      "speedup": 1.1167334095601418,
+      "timeReductionPercent": 10.453113389534995,
+      "beforeBytes": 1472,
+      "afterBytes": 1472,
+      "beforeAllocations": 6,
+      "afterAllocations": 6,
+      "samples": {
+        "before": [
+          {
+            "ns": 4397972,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 4397830,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 4384802,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 4453001,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 4496830,
+            "bytes": 1472,
+            "allocations": 6
+          }
+        ],
+        "after": [
+          {
+            "ns": 3994200,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 3938247,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 3861783,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 3920577,
+            "bytes": 1472,
+            "allocations": 6
+          },
+          {
+            "ns": 4021405,
+            "bytes": 1472,
+            "allocations": 6
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchRepeatedPrefix/query=128",
+      "before": 3878819,
+      "after": 3294126,
+      "speedup": 1.1774956392074862,
+      "timeReductionPercent": 15.073995460989542,
+      "beforeBytes": 6464,
+      "afterBytes": 6464,
+      "beforeAllocations": 8,
+      "afterAllocations": 8,
+      "samples": {
+        "before": [
+          {
+            "ns": 3863857,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 3878819,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 3876395,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 3931311,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 3923504,
+            "bytes": 6464,
+            "allocations": 8
+          }
+        ],
+        "after": [
+          {
+            "ns": 3274081,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 3342323,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 3239548,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 3294126,
+            "bytes": 6464,
+            "allocations": 8
+          },
+          {
+            "ns": 3351400,
+            "bytes": 6464,
+            "allocations": 8
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchOrdinaryText/match",
+      "before": 605042,
+      "after": 412384,
+      "speedup": 1.4671810739504927,
+      "timeReductionPercent": 31.842086995613528,
+      "beforeBytes": 288,
+      "afterBytes": 288,
+      "beforeAllocations": 4,
+      "afterAllocations": 4,
+      "samples": {
+        "before": [
+          {
+            "ns": 601640,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 605042,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 601369,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 611299,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 615005,
+            "bytes": 288,
+            "allocations": 4
+          }
+        ],
+        "after": [
+          {
+            "ns": 403485,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 412384,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 399482,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 435736,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 417372,
+            "bytes": 288,
+            "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchOrdinaryText/missing",
+      "before": 567458,
+      "after": 384952,
+      "speedup": 1.4741006670961574,
+      "timeReductionPercent": 32.16202785051933,
+      "beforeBytes": 320,
+      "afterBytes": 320,
+      "beforeAllocations": 4,
+      "afterAllocations": 4,
+      "samples": {
+        "before": [
+          {
+            "ns": 563154,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 552730,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 567458,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 585504,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 567881,
+            "bytes": 320,
+            "allocations": 4
+          }
+        ],
+        "after": [
+          {
+            "ns": 390125,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 382208,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 393687,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 377025,
+            "bytes": 320,
+            "allocations": 4
+          },
+          {
+            "ns": 384952,
+            "bytes": 320,
+            "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchOrdinaryText/MATCH",
+      "before": 435090,
+      "after": 271300,
+      "speedup": 1.6037228160707704,
+      "timeReductionPercent": 37.645084924958056,
+      "beforeBytes": 288,
+      "afterBytes": 288,
+      "beforeAllocations": 4,
+      "afterAllocations": 4,
+      "samples": {
+        "before": [
+          {
+            "ns": 428102,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 445495,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 428944,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 435090,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 462375,
+            "bytes": 288,
+            "allocations": 4
+          }
+        ],
+        "after": [
+          {
+            "ns": 271300,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 265902,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 271423,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 268424,
+            "bytes": 288,
+            "allocations": 4
+          },
+          {
+            "ns": 272733,
+            "bytes": 288,
+            "allocations": 4
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchQueryLifetime/clear=false",
+      "before": 3423297,
+      "after": 2966828,
+      "speedup": 1.1538575879693733,
+      "timeReductionPercent": 13.33419215452238,
+      "beforeBytes": 84,
+      "afterBytes": 84,
+      "beforeAllocations": 3,
+      "afterAllocations": 3,
+      "samples": {
+        "before": [
+          {
+            "ns": 3392080,
+            "bytes": 83,
+            "allocations": 3
+          },
+          {
+            "ns": 3436330,
+            "bytes": 84,
+            "allocations": 3
+          },
+          {
+            "ns": 3384535,
+            "bytes": 83,
+            "allocations": 3
+          },
+          {
+            "ns": 3423297,
+            "bytes": 84,
+            "allocations": 3
+          },
+          {
+            "ns": 3430030,
+            "bytes": 84,
+            "allocations": 3
+          }
+        ],
+        "after": [
+          {
+            "ns": 2959900,
+            "bytes": 84,
+            "allocations": 3
+          },
+          {
+            "ns": 2960253,
+            "bytes": 84,
+            "allocations": 3
+          },
+          {
+            "ns": 2966828,
+            "bytes": 84,
+            "allocations": 3
+          },
+          {
+            "ns": 3127679,
+            "bytes": 84,
+            "allocations": 3
+          },
+          {
+            "ns": 3058439,
+            "bytes": 84,
+            "allocations": 3
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkSearchQueryLifetime/clear=true",
+      "before": 11928347,
+      "after": 11450128,
+      "speedup": 1.041765384631508,
+      "timeReductionPercent": 4.0090969855253205,
+      "beforeBytes": 55035783,
+      "afterBytes": 55122249,
+      "beforeAllocations": 37,
+      "afterAllocations": 37,
+      "samples": {
+        "before": [
+          {
+            "ns": 11564649,
+            "bytes": 55035783,
+            "allocations": 37
+          },
+          {
+            "ns": 11717574,
+            "bytes": 55047688,
+            "allocations": 37
+          },
+          {
+            "ns": 12268005,
+            "bytes": 55035783,
+            "allocations": 37
+          },
+          {
+            "ns": 11933789,
+            "bytes": 55023524,
+            "allocations": 37
+          },
+          {
+            "ns": 11928347,
+            "bytes": 54984444,
+            "allocations": 37
+          }
+        ],
+        "after": [
+          {
+            "ns": 11058399,
+            "bytes": 55122249,
+            "allocations": 37
+          },
+          {
+            "ns": 11545871,
+            "bytes": 55141095,
+            "allocations": 37
+          },
+          {
+            "ns": 11450128,
+            "bytes": 55112450,
+            "allocations": 37
+          },
+          {
+            "ns": 11554763,
+            "bytes": 55150160,
+            "allocations": 37
+          },
+          {
+            "ns": 11153226,
+            "bytes": 55122249,
+            "allocations": 37
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkWriteToSearchedView",
+      "before": 3827333,
+      "after": 3717390,
+      "speedup": 1.0295753203188258,
+      "timeReductionPercent": 2.872574714559721,
+      "beforeBytes": 11179570,
+      "afterBytes": 11179567,
+      "beforeAllocations": 5798,
+      "afterAllocations": 5798,
+      "samples": {
+        "before": [
+          {
+            "ns": 3827333,
+            "bytes": 11179569,
+            "allocations": 5798
+          },
+          {
+            "ns": 3735469,
+            "bytes": 11179574,
+            "allocations": 5798
+          },
+          {
+            "ns": 3847839,
+            "bytes": 11179580,
+            "allocations": 5798
+          },
+          {
+            "ns": 3835218,
+            "bytes": 11179570,
+            "allocations": 5798
+          },
+          {
+            "ns": 3815206,
+            "bytes": 11179565,
+            "allocations": 5798
+          }
+        ],
+        "after": [
+          {
+            "ns": 3667329,
+            "bytes": 11179562,
+            "allocations": 5797
+          },
+          {
+            "ns": 3717390,
+            "bytes": 11179574,
+            "allocations": 5798
+          },
+          {
+            "ns": 3797216,
+            "bytes": 11179565,
+            "allocations": 5797
+          },
+          {
+            "ns": 3637200,
+            "bytes": 11179567,
+            "allocations": 5798
+          },
+          {
+            "ns": 3764930,
+            "bytes": 11179570,
+            "allocations": 5798
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewWrite/plain",
+      "before": 2831952,
+      "after": 2834769,
+      "speedup": 0.9990062682356129,
+      "timeReductionPercent": -0.09947202494957541,
+      "beforeBytes": 10671216,
+      "afterBytes": 10671216,
+      "beforeAllocations": 2019,
+      "afterAllocations": 2019,
+      "samples": {
+        "before": [
+          {
+            "ns": 2816573,
+            "bytes": 10671216,
+            "allocations": 2019
+          },
+          {
+            "ns": 3057204,
+            "bytes": 10671216,
+            "allocations": 2019
+          },
+          {
+            "ns": 2905219,
+            "bytes": 10671216,
+            "allocations": 2019
+          },
+          {
+            "ns": 2831952,
+            "bytes": 10671216,
+            "allocations": 2019
+          },
+          {
+            "ns": 2770367,
+            "bytes": 10671216,
+            "allocations": 2019
+          }
+        ],
+        "after": [
+          {
+            "ns": 2790523,
+            "bytes": 10671216,
+            "allocations": 2019
+          },
+          {
+            "ns": 2834769,
+            "bytes": 10671216,
+            "allocations": 2019
+          },
+          {
+            "ns": 2957317,
+            "bytes": 10671216,
+            "allocations": 2019
+          },
+          {
+            "ns": 2677950,
+            "bytes": 10671216,
+            "allocations": 2019
+          },
+          {
+            "ns": 2862527,
+            "bytes": 10671216,
+            "allocations": 2019
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewWrite/colored",
+      "before": 4375140,
+      "after": 4057034,
+      "speedup": 1.0784085122283915,
+      "timeReductionPercent": 7.270761621342404,
+      "beforeBytes": 9423222,
+      "afterBytes": 9423222,
+      "beforeAllocations": 22019,
+      "afterAllocations": 22019,
+      "samples": {
+        "before": [
+          {
+            "ns": 4547017,
+            "bytes": 9423222,
+            "allocations": 22019
+          },
+          {
+            "ns": 4283363,
+            "bytes": 9423220,
+            "allocations": 22019
+          },
+          {
+            "ns": 4185245,
+            "bytes": 9423222,
+            "allocations": 22019
+          },
+          {
+            "ns": 4384863,
+            "bytes": 9423222,
+            "allocations": 22019
+          },
+          {
+            "ns": 4375140,
+            "bytes": 9423221,
+            "allocations": 22019
+          }
+        ],
+        "after": [
+          {
+            "ns": 4045364,
+            "bytes": 9423221,
+            "allocations": 22019
+          },
+          {
+            "ns": 4028763,
+            "bytes": 9423220,
+            "allocations": 22019
+          },
+          {
+            "ns": 4057034,
+            "bytes": 9423223,
+            "allocations": 22019
+          },
+          {
+            "ns": 4129868,
+            "bytes": 9423222,
+            "allocations": 22019
+          },
+          {
+            "ns": 4290031,
+            "bytes": 9423222,
+            "allocations": 22019
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "before": 3707288,
+      "after": 3680418,
+      "speedup": 1.0073008011589988,
+      "timeReductionPercent": 0.7247885786051691,
+      "beforeBytes": 8964560,
+      "afterBytes": 8964561,
+      "beforeAllocations": 16019,
+      "afterAllocations": 16019,
+      "samples": {
+        "before": [
+          {
+            "ns": 3868391,
+            "bytes": 8964558,
+            "allocations": 16019
+          },
+          {
+            "ns": 3570106,
+            "bytes": 8964562,
+            "allocations": 16019
+          },
+          {
+            "ns": 3677253,
+            "bytes": 8964560,
+            "allocations": 16019
+          },
+          {
+            "ns": 3930856,
+            "bytes": 8964560,
+            "allocations": 16019
+          },
+          {
+            "ns": 3707288,
+            "bytes": 8964562,
+            "allocations": 16019
+          }
+        ],
+        "after": [
+          {
+            "ns": 3680326,
+            "bytes": 8964561,
+            "allocations": 16019
+          },
+          {
+            "ns": 3506922,
+            "bytes": 8964562,
+            "allocations": 16019
+          },
+          {
+            "ns": 3680418,
+            "bytes": 8964562,
+            "allocations": 16019
+          },
+          {
+            "ns": 3762691,
+            "bytes": 8964559,
+            "allocations": 16019
+          },
+          {
+            "ns": 3741545,
+            "bytes": 8964559,
+            "allocations": 16019
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "before": 3042274,
+      "after": 2499382,
+      "speedup": 1.2172104944342241,
+      "timeReductionPercent": 17.84494098822131,
+      "beforeBytes": 3599200,
+      "afterBytes": 3599200,
+      "beforeAllocations": 10018,
+      "afterAllocations": 10018,
+      "samples": {
+        "before": [
+          {
+            "ns": 3125180,
+            "bytes": 3599200,
+            "allocations": 10018
+          },
+          {
+            "ns": 2971180,
+            "bytes": 3599200,
+            "allocations": 10018
+          },
+          {
+            "ns": 2908588,
+            "bytes": 3599200,
+            "allocations": 10018
+          },
+          {
+            "ns": 3042274,
+            "bytes": 3599200,
+            "allocations": 10018
+          },
+          {
+            "ns": 3065166,
+            "bytes": 3599200,
+            "allocations": 10018
+          }
+        ],
+        "after": [
+          {
+            "ns": 2497112,
+            "bytes": 3599200,
+            "allocations": 10018
+          },
+          {
+            "ns": 2453229,
+            "bytes": 3599200,
+            "allocations": 10018
+          },
+          {
+            "ns": 2655714,
+            "bytes": 3599200,
+            "allocations": 10018
+          },
+          {
+            "ns": 2499382,
+            "bytes": 3599200,
+            "allocations": 10018
+          },
+          {
+            "ns": 2569054,
+            "bytes": 3599200,
+            "allocations": 10018
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewWriteLongLine",
+      "before": 219954,
+      "after": 211694,
+      "speedup": 1.039018583427022,
+      "timeReductionPercent": 3.755330660047101,
+      "beforeBytes": 943520,
+      "afterBytes": 943520,
+      "beforeAllocations": 7,
+      "afterAllocations": 7,
+      "samples": {
+        "before": [
+          {
+            "ns": 219954,
+            "bytes": 943520,
+            "allocations": 7
+          },
+          {
+            "ns": 212429,
+            "bytes": 943520,
+            "allocations": 7
+          },
+          {
+            "ns": 217193,
+            "bytes": 943520,
+            "allocations": 7
+          },
+          {
+            "ns": 222475,
+            "bytes": 943520,
+            "allocations": 7
+          },
+          {
+            "ns": 225396,
+            "bytes": 943520,
+            "allocations": 7
+          }
+        ],
+        "after": [
+          {
+            "ns": 211694,
+            "bytes": 943520,
+            "allocations": 7
+          },
+          {
+            "ns": 210285,
+            "bytes": 943520,
+            "allocations": 7
+          },
+          {
+            "ns": 212028,
+            "bytes": 943520,
+            "allocations": 7
+          },
+          {
+            "ns": 214190,
+            "bytes": 943520,
+            "allocations": 7
+          },
+          {
+            "ns": 211554,
+            "bytes": 943520,
+            "allocations": 7
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewWriteLargeDiff/colored",
+      "before": 140224036,
+      "after": 137976374,
+      "speedup": 1.0162901947256564,
+      "timeReductionPercent": 1.6029077924985697,
+      "beforeBytes": 247562624,
+      "afterBytes": 247562624,
+      "beforeAllocations": 550032,
+      "afterAllocations": 550032,
+      "samples": {
+        "before": [
+          {
+            "ns": 139001574,
+            "bytes": 247562640,
+            "allocations": 550032
+          },
+          {
+            "ns": 139812763,
+            "bytes": 247562624,
+            "allocations": 550032
+          },
+          {
+            "ns": 140655531,
+            "bytes": 247562632,
+            "allocations": 550032
+          },
+          {
+            "ns": 140224036,
+            "bytes": 247562624,
+            "allocations": 550032
+          },
+          {
+            "ns": 152762078,
+            "bytes": 247562624,
+            "allocations": 550032
+          }
+        ],
+        "after": [
+          {
+            "ns": 145138837,
+            "bytes": 247562624,
+            "allocations": 550032
+          },
+          {
+            "ns": 137976374,
+            "bytes": 247562624,
+            "allocations": 550032
+          },
+          {
+            "ns": 139604541,
+            "bytes": 247562632,
+            "allocations": 550032
+          },
+          {
+            "ns": 137752621,
+            "bytes": 247562616,
+            "allocations": 550032
+          },
+          {
+            "ns": 133718756,
+            "bytes": 247562616,
+            "allocations": 550032
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewWriteLargeDiff/metadata",
+      "before": 84180264,
+      "after": 71828480,
+      "speedup": 1.171962207748236,
+      "timeReductionPercent": 14.673016468563224,
+      "beforeBytes": 101962592,
+      "afterBytes": 101962592,
+      "beforeAllocations": 250031,
+      "afterAllocations": 250031,
+      "samples": {
+        "before": [
+          {
+            "ns": 83067091,
+            "bytes": 101962592,
+            "allocations": 250031
+          },
+          {
+            "ns": 84180264,
+            "bytes": 101962592,
+            "allocations": 250031
+          },
+          {
+            "ns": 86707226,
+            "bytes": 101962597,
+            "allocations": 250031
+          },
+          {
+            "ns": 82433072,
+            "bytes": 101962592,
+            "allocations": 250031
+          },
+          {
+            "ns": 89782474,
+            "bytes": 101962597,
+            "allocations": 250031
+          }
+        ],
+        "after": [
+          {
+            "ns": 72362537,
+            "bytes": 101962592,
+            "allocations": 250031
+          },
+          {
+            "ns": 71828480,
+            "bytes": 101962597,
+            "allocations": 250031
+          },
+          {
+            "ns": 68621357,
+            "bytes": 101962592,
+            "allocations": 250031
+          },
+          {
+            "ns": 72706329,
+            "bytes": 101962592,
+            "allocations": 250031
+          },
+          {
+            "ns": 69202524,
+            "bytes": 101962602,
+            "allocations": 250031
+          }
+        ]
+      }
+    }
+  ],
+  "controls": [
+    {
+      "benchmark": "BenchmarkEditorInput/bytes=256",
+      "before": 150306,
+      "after": 152556,
+      "speedup": 0.9852513175489657,
+      "timeReductionPercent": -1.4969462296914295,
+      "beforeBytes": 152208,
+      "afterBytes": 152208,
+      "beforeAllocations": 333,
+      "afterAllocations": 333,
+      "samples": {
+        "before": [
+          {
+            "ns": 149341,
+            "bytes": 152208,
+            "allocations": 333
+          },
+          {
+            "ns": 150306,
+            "bytes": 152208,
+            "allocations": 333
+          },
+          {
+            "ns": 150494,
+            "bytes": 152208,
+            "allocations": 333
+          }
+        ],
+        "after": [
+          {
+            "ns": 151803,
+            "bytes": 152208,
+            "allocations": 333
+          },
+          {
+            "ns": 153198,
+            "bytes": 152208,
+            "allocations": 333
+          },
+          {
+            "ns": 152556,
+            "bytes": 152208,
+            "allocations": 333
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkEditorInput/bytes=1024",
+      "before": 687792,
+      "after": 701698,
+      "speedup": 0.9801823576524373,
+      "timeReductionPercent": -2.0218321818224116,
+      "beforeBytes": 1030550,
+      "afterBytes": 1030550,
+      "beforeAllocations": 1265,
+      "afterAllocations": 1265,
+      "samples": {
+        "before": [
+          {
+            "ns": 692387,
+            "bytes": 1030550,
+            "allocations": 1265
+          },
+          {
+            "ns": 687792,
+            "bytes": 1030550,
+            "allocations": 1265
+          },
+          {
+            "ns": 687422,
+            "bytes": 1030550,
+            "allocations": 1265
+          }
+        ],
+        "after": [
+          {
+            "ns": 701698,
+            "bytes": 1030550,
+            "allocations": 1265
+          },
+          {
+            "ns": 698707,
+            "bytes": 1030550,
+            "allocations": 1265
+          },
+          {
+            "ns": 704472,
+            "bytes": 1030550,
+            "allocations": 1265
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkEditorInput/bytes=4096",
+      "before": 4171583,
+      "after": 4357923,
+      "speedup": 0.9572410985692037,
+      "timeReductionPercent": -4.466889427826319,
+      "beforeBytes": 11041056,
+      "afterBytes": 11041054,
+      "beforeAllocations": 4959,
+      "afterAllocations": 4959,
+      "samples": {
+        "before": [
+          {
+            "ns": 4171583,
+            "bytes": 11041055,
+            "allocations": 4959
+          },
+          {
+            "ns": 4126363,
+            "bytes": 11041056,
+            "allocations": 4959
+          },
+          {
+            "ns": 4291179,
+            "bytes": 11041056,
+            "allocations": 4959
+          }
+        ],
+        "after": [
+          {
+            "ns": 4260546,
+            "bytes": 11041055,
+            "allocations": 4959
+          },
+          {
+            "ns": 4357923,
+            "bytes": 11041054,
+            "allocations": 4959
+          },
+          {
+            "ns": 4404991,
+            "bytes": 11041054,
+            "allocations": 4959
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=256",
+      "before": 393047,
+      "after": 399248,
+      "speedup": 0.984468300404761,
+      "timeReductionPercent": -1.5776739168598157,
+      "beforeBytes": 161680,
+      "afterBytes": 161680,
+      "beforeAllocations": 287,
+      "afterAllocations": 287,
+      "samples": {
+        "before": [
+          {
+            "ns": 404023,
+            "bytes": 161680,
+            "allocations": 287
+          },
+          {
+            "ns": 393047,
+            "bytes": 161680,
+            "allocations": 287
+          },
+          {
+            "ns": 392376,
+            "bytes": 161680,
+            "allocations": 287
+          }
+        ],
+        "after": [
+          {
+            "ns": 400446,
+            "bytes": 161680,
+            "allocations": 287
+          },
+          {
+            "ns": 399248,
+            "bytes": 161680,
+            "allocations": 287
+          },
+          {
+            "ns": 397713,
+            "bytes": 161680,
+            "allocations": 287
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=1024",
+      "before": 1769412,
+      "after": 1776747,
+      "speedup": 0.9958716688419904,
+      "timeReductionPercent": -0.414544492746743,
+      "beforeBytes": 1119766,
+      "afterBytes": 1119766,
+      "beforeAllocations": 1098,
+      "afterAllocations": 1098,
+      "samples": {
+        "before": [
+          {
+            "ns": 1768320,
+            "bytes": 1119766,
+            "allocations": 1098
+          },
+          {
+            "ns": 1771363,
+            "bytes": 1119766,
+            "allocations": 1098
+          },
+          {
+            "ns": 1769412,
+            "bytes": 1119766,
+            "allocations": 1098
+          }
+        ],
+        "after": [
+          {
+            "ns": 1781854,
+            "bytes": 1119766,
+            "allocations": 1098
+          },
+          {
+            "ns": 1776747,
+            "bytes": 1119766,
+            "allocations": 1098
+          },
+          {
+            "ns": 1772347,
+            "bytes": 1119766,
+            "allocations": 1098
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkEditorParagraphInput/bytes=4096",
+      "before": 8465269,
+      "after": 8404056,
+      "speedup": 1.007283744896512,
+      "timeReductionPercent": 0.7231075586611602,
+      "beforeBytes": 11446688,
+      "afterBytes": 11446688,
+      "beforeAllocations": 4310,
+      "afterAllocations": 4310,
+      "samples": {
+        "before": [
+          {
+            "ns": 8657866,
+            "bytes": 11446688,
+            "allocations": 4310
+          },
+          {
+            "ns": 8443824,
+            "bytes": 11446688,
+            "allocations": 4310
+          },
+          {
+            "ns": 8465269,
+            "bytes": 11446688,
+            "allocations": 4310
+          }
+        ],
+        "after": [
+          {
+            "ns": 8582268,
+            "bytes": 11446688,
+            "allocations": 4310
+          },
+          {
+            "ns": 8384199,
+            "bytes": 11446688,
+            "allocations": 4310
+          },
+          {
+            "ns": 8404056,
+            "bytes": 11446688,
+            "allocations": 4310
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=256",
+      "before": 636110,
+      "after": 651482,
+      "speedup": 0.9764045668184232,
+      "timeReductionPercent": -2.4165631730361103,
+      "beforeBytes": 111840,
+      "afterBytes": 111840,
+      "beforeAllocations": 283,
+      "afterAllocations": 283,
+      "samples": {
+        "before": [
+          {
+            "ns": 636110,
+            "bytes": 111840,
+            "allocations": 283
+          },
+          {
+            "ns": 639206,
+            "bytes": 111840,
+            "allocations": 283
+          },
+          {
+            "ns": 632956,
+            "bytes": 111840,
+            "allocations": 283
+          }
+        ],
+        "after": [
+          {
+            "ns": 651482,
+            "bytes": 111840,
+            "allocations": 283
+          },
+          {
+            "ns": 642219,
+            "bytes": 111840,
+            "allocations": 283
+          },
+          {
+            "ns": 679180,
+            "bytes": 111840,
+            "allocations": 283
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=1024",
+      "before": 2710949,
+      "after": 3004453,
+      "speedup": 0.902310337355918,
+      "timeReductionPercent": -10.826614591421675,
+      "beforeBytes": 855141,
+      "afterBytes": 855141,
+      "beforeAllocations": 1057,
+      "afterAllocations": 1057,
+      "samples": {
+        "before": [
+          {
+            "ns": 2710672,
+            "bytes": 855141,
+            "allocations": 1057
+          },
+          {
+            "ns": 2720455,
+            "bytes": 855141,
+            "allocations": 1057
+          },
+          {
+            "ns": 2710949,
+            "bytes": 855141,
+            "allocations": 1057
+          }
+        ],
+        "after": [
+          {
+            "ns": 2874487,
+            "bytes": 855141,
+            "allocations": 1057
+          },
+          {
+            "ns": 3155844,
+            "bytes": 855141,
+            "allocations": 1057
+          },
+          {
+            "ns": 3004453,
+            "bytes": 855141,
+            "allocations": 1057
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkEditorUnbrokenInput/bytes=4096",
+      "before": 12372775,
+      "after": 12880822,
+      "speedup": 0.9605578743344175,
+      "timeReductionPercent": -4.106168583846388,
+      "beforeBytes": 10630896,
+      "afterBytes": 10630896,
+      "beforeAllocations": 4138,
+      "afterAllocations": 4138,
+      "samples": {
+        "before": [
+          {
+            "ns": 12584201,
+            "bytes": 10630896,
+            "allocations": 4138
+          },
+          {
+            "ns": 12372775,
+            "bytes": 10630896,
+            "allocations": 4138
+          },
+          {
+            "ns": 12291046,
+            "bytes": 10630896,
+            "allocations": 4138
+          }
+        ],
+        "after": [
+          {
+            "ns": 14044728,
+            "bytes": 10630896,
+            "allocations": 4138
+          },
+          {
+            "ns": 12582572,
+            "bytes": 10630896,
+            "allocations": 4138
+          },
+          {
+            "ns": 12880822,
+            "bytes": 10630896,
+            "allocations": 4138
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkPasteText/bytes=1000",
+      "before": 29430,
+      "after": 29865,
+      "speedup": 0.9854344550477148,
+      "timeReductionPercent": -1.4780835881753314,
+      "beforeBytes": 60672,
+      "afterBytes": 60672,
+      "beforeAllocations": 9,
+      "afterAllocations": 9,
+      "samples": {
+        "before": [
+          {
+            "ns": 29430,
+            "bytes": 60672,
+            "allocations": 9
+          },
+          {
+            "ns": 29401,
+            "bytes": 60672,
+            "allocations": 9
+          },
+          {
+            "ns": 29583,
+            "bytes": 60672,
+            "allocations": 9
+          }
+        ],
+        "after": [
+          {
+            "ns": 32453,
+            "bytes": 60672,
+            "allocations": 9
+          },
+          {
+            "ns": 29865,
+            "bytes": 60672,
+            "allocations": 9
+          },
+          {
+            "ns": 29836,
+            "bytes": 60672,
+            "allocations": 9
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkPasteText/bytes=10000",
+      "before": 299641,
+      "after": 309271,
+      "speedup": 0.9688622599597118,
+      "timeReductionPercent": -3.2138459022630412,
+      "beforeBytes": 594048,
+      "afterBytes": 594048,
+      "beforeAllocations": 12,
+      "afterAllocations": 12,
+      "samples": {
+        "before": [
+          {
+            "ns": 305197,
+            "bytes": 594048,
+            "allocations": 12
+          },
+          {
+            "ns": 298426,
+            "bytes": 594048,
+            "allocations": 12
+          },
+          {
+            "ns": 299641,
+            "bytes": 594048,
+            "allocations": 12
+          }
+        ],
+        "after": [
+          {
+            "ns": 307030,
+            "bytes": 594048,
+            "allocations": 12
+          },
+          {
+            "ns": 321958,
+            "bytes": 594048,
+            "allocations": 12
+          },
+          {
+            "ns": 309271,
+            "bytes": 594048,
+            "allocations": 12
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkPasteText/bytes=100000",
+      "before": 3261797,
+      "after": 3429398,
+      "speedup": 0.9511281571867716,
+      "timeReductionPercent": -5.138302598230362,
+      "beforeBytes": 6883456,
+      "afterBytes": 6883456,
+      "beforeAllocations": 19,
+      "afterAllocations": 19,
+      "samples": {
+        "before": [
+          {
+            "ns": 3479229,
+            "bytes": 6883456,
+            "allocations": 19
+          },
+          {
+            "ns": 3217542,
+            "bytes": 6883456,
+            "allocations": 19
+          },
+          {
+            "ns": 3261797,
+            "bytes": 6883456,
+            "allocations": 19
+          }
+        ],
+        "after": [
+          {
+            "ns": 3490272,
+            "bytes": 6883456,
+            "allocations": 19
+          },
+          {
+            "ns": 3364741,
+            "bytes": 6883456,
+            "allocations": 19
+          },
+          {
+            "ns": 3429398,
+            "bytes": 6883456,
+            "allocations": 19
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewDraw/80x24/full",
+      "before": 39913,
+      "after": 40177,
+      "speedup": 0.9934290763372079,
+      "timeReductionPercent": -0.6614386290181143,
+      "beforeBytes": 0,
+      "afterBytes": 0,
+      "beforeAllocations": 0,
+      "afterAllocations": 0,
+      "samples": {
+        "before": [
+          {
+            "ns": 39765,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 39944,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 39913,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 40060,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 40177,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 40181,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewDraw/80x24/short",
+      "before": 4768,
+      "after": 4770,
+      "speedup": 0.99958071278826,
+      "timeReductionPercent": -0.04194630872483222,
+      "beforeBytes": 0,
+      "afterBytes": 0,
+      "beforeAllocations": 0,
+      "afterAllocations": 0,
+      "samples": {
+        "before": [
+          {
+            "ns": 4758,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4768,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4835,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 4780,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4770,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4767,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewDraw/80x24/empty",
+      "before": 4779,
+      "after": 4811,
+      "speedup": 0.9933485761795885,
+      "timeReductionPercent": -0.6695961498221386,
+      "beforeBytes": 0,
+      "afterBytes": 0,
+      "beforeAllocations": 0,
+      "afterAllocations": 0,
+      "samples": {
+        "before": [
+          {
+            "ns": 4850,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4779,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4773,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 4811,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4837,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4778,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewDraw/80x24/unicode",
+      "before": 30488,
+      "after": 30766,
+      "speedup": 0.9909640512253787,
+      "timeReductionPercent": -0.9118341642613487,
+      "beforeBytes": 0,
+      "afterBytes": 0,
+      "beforeAllocations": 0,
+      "afterAllocations": 0,
+      "samples": {
+        "before": [
+          {
+            "ns": 29873,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 30832,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 30488,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 29879,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 30766,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 30958,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewDraw/160x48/full",
+      "before": 170031,
+      "after": 169816,
+      "speedup": 1.0012660762236774,
+      "timeReductionPercent": 0.12644753015626564,
+      "beforeBytes": 0,
+      "afterBytes": 0,
+      "beforeAllocations": 0,
+      "afterAllocations": 0,
+      "samples": {
+        "before": [
+          {
+            "ns": 177336,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 170031,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 169907,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 176844,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 169816,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 169628,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewDraw/160x48/short",
+      "before": 16689,
+      "after": 16995,
+      "speedup": 0.9819947043248014,
+      "timeReductionPercent": -1.8335430523099046,
+      "beforeBytes": 0,
+      "afterBytes": 0,
+      "beforeAllocations": 0,
+      "afterAllocations": 0,
+      "samples": {
+        "before": [
+          {
+            "ns": 16652,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16831,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16689,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 16694,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16995,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 17056,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewDraw/160x48/empty",
+      "before": 16515,
+      "after": 16955,
+      "speedup": 0.9740489531111767,
+      "timeReductionPercent": -2.6642446260974872,
+      "beforeBytes": 0,
+      "afterBytes": 0,
+      "beforeAllocations": 0,
+      "afterAllocations": 0,
+      "samples": {
+        "before": [
+          {
+            "ns": 17018,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16515,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16323,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 16955,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16632,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16988,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkViewDraw/160x48/unicode",
+      "before": 134135,
+      "after": 129064,
+      "speedup": 1.039290584516209,
+      "timeReductionPercent": 3.780519625750177,
+      "beforeBytes": 0,
+      "afterBytes": 0,
+      "beforeAllocations": 0,
+      "afterAllocations": 0,
+      "samples": {
+        "before": [
+          {
+            "ns": 135069,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 134135,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 128675,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "after": [
+          {
+            "ns": 131715,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 127516,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 129064,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkGuiFlush/80x24",
+      "before": 207851,
+      "after": 206336,
+      "speedup": 1.0073423929900744,
+      "timeReductionPercent": 0.7288875203872005,
+      "beforeBytes": 90281,
+      "afterBytes": 90283,
+      "beforeAllocations": 3098,
+      "afterAllocations": 3098,
+      "samples": {
+        "before": [
+          {
+            "ns": 201478,
+            "bytes": 90279,
+            "allocations": 3098
+          },
+          {
+            "ns": 207851,
+            "bytes": 90281,
+            "allocations": 3098
+          },
+          {
+            "ns": 209572,
+            "bytes": 90282,
+            "allocations": 3098
+          }
+        ],
+        "after": [
+          {
+            "ns": 198844,
+            "bytes": 90284,
+            "allocations": 3098
+          },
+          {
+            "ns": 206336,
+            "bytes": 90283,
+            "allocations": 3098
+          },
+          {
+            "ns": 207779,
+            "bytes": 90283,
+            "allocations": 3098
+          }
+        ]
+      }
+    },
+    {
+      "benchmark": "BenchmarkGuiFlush/160x48",
+      "before": 549486,
+      "after": 551460,
+      "speedup": 0.9964204112718964,
+      "timeReductionPercent": -0.3592448215241153,
+      "beforeBytes": 185412,
+      "afterBytes": 185422,
+      "beforeAllocations": 6274,
+      "afterAllocations": 6275,
+      "samples": {
+        "before": [
+          {
+            "ns": 549486,
+            "bytes": 185429,
+            "allocations": 6275
+          },
+          {
+            "ns": 547792,
+            "bytes": 185412,
+            "allocations": 6274
+          },
+          {
+            "ns": 560183,
+            "bytes": 185394,
+            "allocations": 6274
+          }
+        ],
+        "after": [
+          {
+            "ns": 551460,
+            "bytes": 185429,
+            "allocations": 6275
+          },
+          {
+            "ns": 551137,
+            "bytes": 185421,
+            "allocations": 6275
+          },
+          {
+            "ns": 557222,
+            "bytes": 185422,
+            "allocations": 6275
+          }
+        ]
+      }
+    }
+  ],
+  "validation": [
+    "100000 differential search cases, including custom cell widths",
+    "10000 differential writer streams with arbitrary write boundaries",
+    "just build",
+    "just unit-test",
+    "just lint",
+    "just e2e",
+    "go test -race ./pkg/gocui -short",
+    "Both affected branch tips pass build, unit tests, and lint."
+  ],
+  "limits": [
+    "Synthetic operation timings, not whole-application or Git/terminal latency measurements.",
+    "Single Linux machine and one CPU; results do not establish cross-platform gains.",
+    "Search excludes initial result growth and layout construction; writer includes new destination allocations."
+  ],
+  "rawArtifacts": ".git/perf-pass-20261106/",
+  "controlRecheck": {
+    "reason": "The initial three-sample editor controls were ordered before then after and showed a possible short-input slowdown.",
+    "settings": {
+      "samples": 7,
+      "benchtime": "300ms",
+      "order": "Alternating paired before/after order"
+    },
+    "rows": [
+      {
+        "benchmark": "BenchmarkEditorInput/bytes=1024",
+        "before": 675195,
+        "after": 688355,
+        "samples": {
+          "before": [
+            {
+              "ns": 654202,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 665188,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 675195,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 669662,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 693174,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 684925,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 682947,
+              "bytes": 1030550,
+              "allocations": 1265
+            }
+          ],
+          "after": [
+            {
+              "ns": 680938,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 678669,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 676964,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 693475,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 688355,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 694021,
+              "bytes": 1030550,
+              "allocations": 1265
+            },
+            {
+              "ns": 693741,
+              "bytes": 1030550,
+              "allocations": 1265
+            }
+          ]
+        }
+      },
+      {
+        "benchmark": "BenchmarkEditorInput/bytes=4096",
+        "before": 3963580,
+        "after": 4035392,
+        "samples": {
+          "before": [
+            {
+              "ns": 4116715,
+              "bytes": 11041054,
+              "allocations": 4959
+            },
+            {
+              "ns": 3930847,
+              "bytes": 11041056,
+              "allocations": 4959
+            },
+            {
+              "ns": 3923932,
+              "bytes": 11041057,
+              "allocations": 4959
+            },
+            {
+              "ns": 3954634,
+              "bytes": 11041056,
+              "allocations": 4959
+            },
+            {
+              "ns": 3986069,
+              "bytes": 11041056,
+              "allocations": 4959
+            },
+            {
+              "ns": 4030171,
+              "bytes": 11041056,
+              "allocations": 4959
+            },
+            {
+              "ns": 3963580,
+              "bytes": 11041056,
+              "allocations": 4959
+            }
+          ],
+          "after": [
+            {
+              "ns": 4035392,
+              "bytes": 11041055,
+              "allocations": 4959
+            },
+            {
+              "ns": 3965440,
+              "bytes": 11041055,
+              "allocations": 4959
+            },
+            {
+              "ns": 4076669,
+              "bytes": 11041055,
+              "allocations": 4959
+            },
+            {
+              "ns": 4020082,
+              "bytes": 11041055,
+              "allocations": 4959
+            },
+            {
+              "ns": 4016061,
+              "bytes": 11041055,
+              "allocations": 4959
+            },
+            {
+              "ns": 4066674,
+              "bytes": 11041055,
+              "allocations": 4959
+            },
+            {
+              "ns": 4139265,
+              "bytes": 11041055,
+              "allocations": 4959
+            }
+          ]
+        }
+      },
+      {
+        "benchmark": "BenchmarkEditorUnbrokenInput/bytes=1024",
+        "before": 2703463,
+        "after": 2717591,
+        "samples": {
+          "before": [
+            {
+              "ns": 2646906,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2653665,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2633570,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2703463,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2743455,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2730545,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2716416,
+              "bytes": 855141,
+              "allocations": 1057
+            }
+          ],
+          "after": [
+            {
+              "ns": 2717749,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2688137,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2714163,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2717591,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2705698,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2752624,
+              "bytes": 855141,
+              "allocations": 1057
+            },
+            {
+              "ns": 2763271,
+              "bytes": 855141,
+              "allocations": 1057
+            }
+          ]
+        }
+      },
+      {
+        "benchmark": "BenchmarkEditorUnbrokenInput/bytes=4096",
+        "before": 12414236,
+        "after": 12581153,
+        "samples": {
+          "before": [
+            {
+              "ns": 11984529,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12414236,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12303370,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12574448,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12395654,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12419685,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12849733,
+              "bytes": 10630896,
+              "allocations": 4138
+            }
+          ],
+          "after": [
+            {
+              "ns": 12581153,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12478461,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12514970,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12490866,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12821854,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12920353,
+              "bytes": 10630896,
+              "allocations": 4138
+            },
+            {
+              "ns": 12828535,
+              "bytes": 10630896,
+              "allocations": 4138
+            }
+          ]
+        }
+      },
+      {
+        "benchmark": "BenchmarkPasteText/bytes=100000",
+        "before": 2658429,
+        "after": 2665907,
+        "samples": {
+          "before": [
+            {
+              "ns": 2594278,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2602965,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2714348,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2695364,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2634629,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2658429,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2899032,
+              "bytes": 6883456,
+              "allocations": 19
+            }
+          ],
+          "after": [
+            {
+              "ns": 2665907,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2642559,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2658607,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2732752,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2669085,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2631870,
+              "bytes": 6883456,
+              "allocations": 19
+            },
+            {
+              "ns": 2758268,
+              "bytes": 6883456,
+              "allocations": 19
+            }
+          ]
+        }
+      }
+    ],
+    "conclusion": "Seven paired repeats have overlapping timing ranges and median changes under 2%; no material editor or paste slowdown was observed in these fixtures."
+  },
+  "rejectedPrototype": {
+    "description": "Track a candidate match column instead of keeping the position ring.",
+    "outcome": "Little timing benefit, with a slowdown in one query-lifetime case; not shipped."
+  }
+}
