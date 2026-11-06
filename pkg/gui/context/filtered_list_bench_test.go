@@ -19,6 +19,7 @@ func BenchmarkFilteredListNavigation(b *testing.B) {
 			b.ReportAllocs()
 			b.ResetTimer()
 			for b.Loop() {
+				list.SetSelectedLineIdx(count / 2)
 				list.MoveSelectedLine(1)
 				list.GetSelected()
 				list.Len()
