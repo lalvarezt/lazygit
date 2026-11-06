@@ -1,0 +1,4028 @@
+{
+  "date": "2026-11-06",
+  "baseline": "cc17f93a8e131138a4c434fd6c6aec51164f3923",
+  "after": "c31b799a467b3d84b93052e59697310dc36597dd",
+  "changes": [
+    {
+      "commit": "9f1880ed6",
+      "purpose": "Extend short cell reservations past separately colored Git prefixes; amend! of 9852cb37d."
+    },
+    {
+      "commit": "0b4fd190b",
+      "purpose": "Reuse the control-character replacement table across filenames."
+    }
+  ],
+  "environment": {
+    "os": "linux",
+    "arch": "x64",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-1370P",
+    "availableParallelism": 20,
+    "go": "go version go1.27.3 linux/amd64"
+  },
+  "fixture": {
+    "commits": [
+      {
+        "subject": "NAV small base",
+        "hash": "300434e5a5c7386f4e17a7a1a498c34a6b469bde"
+      },
+      {
+        "subject": "NAV big diff A 50000 lines",
+        "hash": "932823dd000685f56523f6837a4654fc95c5312d"
+      },
+      {
+        "subject": "NAV small middle",
+        "hash": "72f890f3546283fb0d22030251c2772eef1bde93"
+      },
+      {
+        "subject": "NAV many files 10000",
+        "hash": "60b859d42e49fc56bf122b6ccd5bd4e0ddd29eee"
+      },
+      {
+        "subject": "NAV big diff B 50000 lines",
+        "hash": "9fa17aefb41656c21b349ffd5677f2a86c800368"
+      },
+      {
+        "subject": "NAV small top",
+        "hash": "81062216241bfac5e1a1042af2ff22029f2efa0f"
+      }
+    ],
+    "files": 10000,
+    "bigDiffAddedLines": 50000,
+    "terminal": {
+      "width": 160,
+      "height": 48
+    },
+    "workingTree": "anchor.txt has both staged and unstaged changes for split-pane switching."
+  },
+  "method": {
+    "rounds": 3,
+    "actionsPerRound": 27,
+    "extraActions": 27,
+    "clock": "tcell key-event timestamp to Screen.Show completion; settled also waits for task-manager idle.",
+    "build": "Optimized Go builds with identical JSONL instrumentation and Git Trace2 capture.",
+    "scope": "Local synthetic repository, warm Git objects, built-in renderer, no external pager, 160 x 48 terminal. Terminal delivery before tcell timestamps and physical presentation are outside the probe.",
+    "profile": "15 seconds covering the same 81 navigation actions and idle remainder; sampled app CPU before 10.98 s, after 7.47 s.",
+    "interpretation": "First paint can show preserved content during a same-diff refresh. Settled includes the reload. Small differences among submillisecond focus operations are noise."
+  },
+  "summary": {
+    "before": [
+      {
+        "name": "select big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 43.238912,
+          "min": 34.26816,
+          "max": 52.50816
+        },
+        "settledMs": {
+          "median": 43.264512,
+          "min": 41.144832,
+          "max": 52.567552
+        },
+        "inputQueueMs": {
+          "median": 0.00768,
+          "min": 0.00768,
+          "max": 0.022272
+        }
+      },
+      {
+        "name": "focus main, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 2.129664,
+          "min": 2.049536,
+          "max": 3.270656
+        },
+        "settledMs": {
+          "median": 2.14912,
+          "min": 2.070016,
+          "max": 3.322112
+        },
+        "inputQueueMs": {
+          "median": 0.006656,
+          "min": 0.005376,
+          "max": 0.013824
+        }
+      },
+      {
+        "name": "jump to end, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 321.488128,
+          "min": 318.109696,
+          "max": 374.119424
+        },
+        "settledMs": {
+          "median": 321.507072,
+          "min": 318.12992,
+          "max": 374.139136
+        },
+        "inputQueueMs": {
+          "median": 0.017152,
+          "min": 0.008192,
+          "max": 0.053504
+        }
+      },
+      {
+        "name": "main to commits, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 1.142016,
+          "min": 0.80512,
+          "max": 1.25056
+        },
+        "settledMs": {
+          "median": 324.131584,
+          "min": 323.6992,
+          "max": 364.282112
+        },
+        "inputQueueMs": {
+          "median": 0.009216,
+          "min": 0.00768,
+          "max": 0.015104
+        }
+      },
+      {
+        "name": "commits to files, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 9.12256,
+          "min": 8.42496,
+          "max": 9.690624
+        },
+        "settledMs": {
+          "median": 9.26592,
+          "min": 8.5952,
+          "max": 9.889024
+        },
+        "inputQueueMs": {
+          "median": 0.008704,
+          "min": 0.006656,
+          "max": 0.0128
+        }
+      },
+      {
+        "name": "focus unstaged diff",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.733184,
+          "min": 0.713728,
+          "max": 0.814592
+        },
+        "settledMs": {
+          "median": 0.756736,
+          "min": 0.736512,
+          "max": 0.848384
+        },
+        "inputQueueMs": {
+          "median": 0.008448,
+          "min": 0.005632,
+          "max": 0.00896
+        }
+      },
+      {
+        "name": "unstaged to staged pane",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.616192,
+          "min": 0.598272,
+          "max": 0.863744
+        },
+        "settledMs": {
+          "median": 0.630272,
+          "min": 0.615168,
+          "max": 0.896768
+        },
+        "inputQueueMs": {
+          "median": 0.006144,
+          "min": 0.003584,
+          "max": 0.007936
+        }
+      },
+      {
+        "name": "staged to unstaged pane",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.730112,
+          "min": 0.64384,
+          "max": 0.893952
+        },
+        "settledMs": {
+          "median": 0.75648,
+          "min": 0.659968,
+          "max": 0.926208
+        },
+        "inputQueueMs": {
+          "median": 0.007424,
+          "min": 0.0064,
+          "max": 0.012544
+        }
+      },
+      {
+        "name": "diff pane to files",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.854016,
+          "min": 0.738304,
+          "max": 0.98048
+        },
+        "settledMs": {
+          "median": 4.96128,
+          "min": 4.601856,
+          "max": 5.553664
+        },
+        "inputQueueMs": {
+          "median": 0.008704,
+          "min": 0.007424,
+          "max": 0.009984
+        }
+      },
+      {
+        "name": "files to commits, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 47.69408,
+          "min": 42.038016,
+          "max": 49.165312
+        },
+        "settledMs": {
+          "median": 47.737344,
+          "min": 42.066176,
+          "max": 49.212928
+        },
+        "inputQueueMs": {
+          "median": 0.005888,
+          "min": 0.00512,
+          "max": 0.010496
+        }
+      },
+      {
+        "name": "select many-file commit",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 77.919488,
+          "min": 75.931904,
+          "max": 80.908544
+        },
+        "settledMs": {
+          "median": 213.289728,
+          "min": 211.939584,
+          "max": 224.550656
+        },
+        "inputQueueMs": {
+          "median": 0.009216,
+          "min": 0.007936,
+          "max": 0.031232
+        }
+      },
+      {
+        "name": "enter 10000-file list",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 146.797312,
+          "min": 138.856192,
+          "max": 156.873216
+        },
+        "settledMs": {
+          "median": 149.011712,
+          "min": 141.664,
+          "max": 159.428352
+        },
+        "inputQueueMs": {
+          "median": 0.007168,
+          "min": 0.007168,
+          "max": 0.008192
+        }
+      },
+      {
+        "name": "move within 10000-file list",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.968192,
+          "min": 0.923904,
+          "max": 1.02784
+        },
+        "settledMs": {
+          "median": 9.311232,
+          "min": 8.38912,
+          "max": 11.93216
+        },
+        "inputQueueMs": {
+          "median": 0.023552,
+          "min": 0.009728,
+          "max": 0.052992
+        }
+      },
+      {
+        "name": "focus main, many-file commit",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 1.425152,
+          "min": 1.239296,
+          "max": 1.60256
+        },
+        "settledMs": {
+          "median": 1.436416,
+          "min": 1.252864,
+          "max": 1.620736
+        },
+        "inputQueueMs": {
+          "median": 0.023552,
+          "min": 0.013056,
+          "max": 0.029952
+        }
+      },
+      {
+        "name": "main to commit files",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.942336,
+          "min": 0.837376,
+          "max": 0.988672
+        },
+        "settledMs": {
+          "median": 7.777024,
+          "min": 6.785024,
+          "max": 9.330944
+        },
+        "inputQueueMs": {
+          "median": 0.007168,
+          "min": 0.005888,
+          "max": 0.007424
+        }
+      },
+      {
+        "name": "commit files to commits",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 76.29952,
+          "min": 71.036416,
+          "max": 82.710784
+        },
+        "settledMs": {
+          "median": 209.453312,
+          "min": 208.594432,
+          "max": 214.170624
+        },
+        "inputQueueMs": {
+          "median": 0.023552,
+          "min": 0.006656,
+          "max": 0.061184
+        }
+      },
+      {
+        "name": "select small middle",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 3.909376,
+          "min": 3.840512,
+          "max": 4.187648
+        },
+        "settledMs": {
+          "median": 4.1408,
+          "min": 4.055808,
+          "max": 4.510976
+        },
+        "inputQueueMs": {
+          "median": 0.032512,
+          "min": 0.0128,
+          "max": 0.033024
+        }
+      },
+      {
+        "name": "select big diff A",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 20.60928,
+          "min": 18.92736,
+          "max": 25.990912
+        },
+        "settledMs": {
+          "median": 26.044416,
+          "min": 24.40832,
+          "max": 27.489024
+        },
+        "inputQueueMs": {
+          "median": 0.009984,
+          "min": 0.007936,
+          "max": 0.013056
+        }
+      },
+      {
+        "name": "focus main, big diff A",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 2.0928,
+          "min": 2.091776,
+          "max": 2.137344
+        },
+        "settledMs": {
+          "median": 2.11968,
+          "min": 2.116096,
+          "max": 2.16576
+        },
+        "inputQueueMs": {
+          "median": 0.012288,
+          "min": 0.011776,
+          "max": 0.048128
+        }
+      },
+      {
+        "name": "jump to end, big diff A",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 326.286848,
+          "min": 298.548736,
+          "max": 356.046848
+        },
+        "settledMs": {
+          "median": 326.302976,
+          "min": 298.586624,
+          "max": 356.062976
+        },
+        "inputQueueMs": {
+          "median": 0.024064,
+          "min": 0.024064,
+          "max": 0.043264
+        }
+      },
+      {
+        "name": "main to commits, big diff A",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.904704,
+          "min": 0.8512,
+          "max": 1.1392
+        },
+        "settledMs": {
+          "median": 352.38016,
+          "min": 288.119296,
+          "max": 379.25248
+        },
+        "inputQueueMs": {
+          "median": 0.008448,
+          "min": 0.007168,
+          "max": 0.009472
+        }
+      },
+      {
+        "name": "big diff to small commit",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 3.914752,
+          "min": 3.825664,
+          "max": 3.943168
+        },
+        "settledMs": {
+          "median": 4.192512,
+          "min": 4.108288,
+          "max": 4.273152
+        },
+        "inputQueueMs": {
+          "median": 0.009984,
+          "min": 0.007936,
+          "max": 0.01024
+        }
+      },
+      {
+        "name": "commits to files, small diff",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 5.367552,
+          "min": 4.758272,
+          "max": 5.823488
+        },
+        "settledMs": {
+          "median": 5.591808,
+          "min": 4.960256,
+          "max": 6.01344
+        },
+        "inputQueueMs": {
+          "median": 0.00768,
+          "min": 0.006912,
+          "max": 0.00896
+        }
+      },
+      {
+        "name": "files to commits, small diff",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 3.61984,
+          "min": 3.5392,
+          "max": 3.804416
+        },
+        "settledMs": {
+          "median": 3.865344,
+          "min": 3.843072,
+          "max": 4.030464
+        },
+        "inputQueueMs": {
+          "median": 0.009216,
+          "min": 0.005376,
+          "max": 0.0384
+        }
+      },
+      {
+        "name": "select many-file commit upwards",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 71.7504,
+          "min": 70.645248,
+          "max": 75.03232
+        },
+        "settledMs": {
+          "median": 204.543744,
+          "min": 198.585088,
+          "max": 211.744512
+        },
+        "inputQueueMs": {
+          "median": 0.01024,
+          "min": 0.005632,
+          "max": 0.032256
+        }
+      },
+      {
+        "name": "many-file commit to big diff",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 35.529984,
+          "min": 34.0672,
+          "max": 42.129152
+        },
+        "settledMs": {
+          "median": 43.087104,
+          "min": 42.16576,
+          "max": 43.849472
+        },
+        "inputQueueMs": {
+          "median": 0.012544,
+          "min": 0.009216,
+          "max": 0.032768
+        }
+      },
+      {
+        "name": "big diff to small top",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 4.119552,
+          "min": 3.763712,
+          "max": 4.187392
+        },
+        "settledMs": {
+          "median": 4.451584,
+          "min": 4.068608,
+          "max": 4.539136
+        },
+        "inputQueueMs": {
+          "median": 0.033024,
+          "min": 0.008704,
+          "max": 0.048896
+        }
+      }
+    ],
+    "after": [
+      {
+        "name": "select big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 37.345536,
+          "min": 36.247296,
+          "max": 58.1696
+        },
+        "settledMs": {
+          "median": 42.54208,
+          "min": 40.1792,
+          "max": 58.215936
+        },
+        "inputQueueMs": {
+          "median": 0.018176,
+          "min": 0.006912,
+          "max": 0.030208
+        }
+      },
+      {
+        "name": "focus main, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 2.065664,
+          "min": 1.808128,
+          "max": 3.122176
+        },
+        "settledMs": {
+          "median": 2.087168,
+          "min": 1.826304,
+          "max": 3.16288
+        },
+        "inputQueueMs": {
+          "median": 0.04608,
+          "min": 0.034304,
+          "max": 0.049408
+        }
+      },
+      {
+        "name": "jump to end, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 224.539648,
+          "min": 222.633984,
+          "max": 283.760384
+        },
+        "settledMs": {
+          "median": 224.559104,
+          "min": 222.648576,
+          "max": 283.77344
+        },
+        "inputQueueMs": {
+          "median": 0.0064,
+          "min": 0.006144,
+          "max": 0.022784
+        }
+      },
+      {
+        "name": "main to commits, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.823552,
+          "min": 0.805888,
+          "max": 0.836864
+        },
+        "settledMs": {
+          "median": 289.683968,
+          "min": 256.795904,
+          "max": 301.608704
+        },
+        "inputQueueMs": {
+          "median": 0.012544,
+          "min": 0.007168,
+          "max": 0.017664
+        }
+      },
+      {
+        "name": "commits to files, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 9.801216,
+          "min": 9.02912,
+          "max": 16.841984
+        },
+        "settledMs": {
+          "median": 10.02624,
+          "min": 9.206528,
+          "max": 17.019392
+        },
+        "inputQueueMs": {
+          "median": 0.007936,
+          "min": 0.00768,
+          "max": 0.012544
+        }
+      },
+      {
+        "name": "focus unstaged diff",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.798976,
+          "min": 0.589568,
+          "max": 0.855808
+        },
+        "settledMs": {
+          "median": 0.832,
+          "min": 0.601344,
+          "max": 0.885248
+        },
+        "inputQueueMs": {
+          "median": 0.008704,
+          "min": 0.004864,
+          "max": 0.011264
+        }
+      },
+      {
+        "name": "unstaged to staged pane",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.794624,
+          "min": 0.64512,
+          "max": 0.807424
+        },
+        "settledMs": {
+          "median": 0.82816,
+          "min": 0.656384,
+          "max": 0.836352
+        },
+        "inputQueueMs": {
+          "median": 0.009472,
+          "min": 0.006144,
+          "max": 0.01792
+        }
+      },
+      {
+        "name": "staged to unstaged pane",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.837632,
+          "min": 0.749824,
+          "max": 0.910336
+        },
+        "settledMs": {
+          "median": 0.865024,
+          "min": 0.774656,
+          "max": 0.948736
+        },
+        "inputQueueMs": {
+          "median": 0.007936,
+          "min": 0.006144,
+          "max": 0.046592
+        }
+      },
+      {
+        "name": "diff pane to files",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.806912,
+          "min": 0.653824,
+          "max": 0.941312
+        },
+        "settledMs": {
+          "median": 5.177344,
+          "min": 4.70016,
+          "max": 5.435392
+        },
+        "inputQueueMs": {
+          "median": 0.009216,
+          "min": 0.007168,
+          "max": 0.01152
+        }
+      },
+      {
+        "name": "files to commits, big diff B",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 42.143232,
+          "min": 34.530816,
+          "max": 43.548928
+        },
+        "settledMs": {
+          "median": 42.162688,
+          "min": 38.228224,
+          "max": 43.5776
+        },
+        "inputQueueMs": {
+          "median": 0.006656,
+          "min": 0.00512,
+          "max": 0.022016
+        }
+      },
+      {
+        "name": "select many-file commit",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 75.11168,
+          "min": 69.645824,
+          "max": 75.517184
+        },
+        "settledMs": {
+          "median": 192.243456,
+          "min": 188.014336,
+          "max": 210.47552
+        },
+        "inputQueueMs": {
+          "median": 0.009984,
+          "min": 0.005632,
+          "max": 0.030976
+        }
+      },
+      {
+        "name": "enter 10000-file list",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 125.462784,
+          "min": 115.955712,
+          "max": 128.710912
+        },
+        "settledMs": {
+          "median": 128.628224,
+          "min": 117.905664,
+          "max": 128.753408
+        },
+        "inputQueueMs": {
+          "median": 0.024064,
+          "min": 0.005888,
+          "max": 0.02944
+        }
+      },
+      {
+        "name": "move within 10000-file list",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.923392,
+          "min": 0.868352,
+          "max": 0.955648
+        },
+        "settledMs": {
+          "median": 8.851456,
+          "min": 8.228352,
+          "max": 9.753088
+        },
+        "inputQueueMs": {
+          "median": 0.009472,
+          "min": 0.006912,
+          "max": 0.026112
+        }
+      },
+      {
+        "name": "focus main, many-file commit",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 1.495808,
+          "min": 1.176064,
+          "max": 1.503744
+        },
+        "settledMs": {
+          "median": 1.517312,
+          "min": 1.191936,
+          "max": 1.522944
+        },
+        "inputQueueMs": {
+          "median": 0.0192,
+          "min": 0.004864,
+          "max": 0.034304
+        }
+      },
+      {
+        "name": "main to commit files",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 1.204224,
+          "min": 1.132544,
+          "max": 1.481728
+        },
+        "settledMs": {
+          "median": 8.182272,
+          "min": 7.192576,
+          "max": 11.247104
+        },
+        "inputQueueMs": {
+          "median": 0.011008,
+          "min": 0.007936,
+          "max": 0.025344
+        }
+      },
+      {
+        "name": "commit files to commits",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 67.328,
+          "min": 65.541888,
+          "max": 72.740864
+        },
+        "settledMs": {
+          "median": 191.5648,
+          "min": 184.468736,
+          "max": 202.405888
+        },
+        "inputQueueMs": {
+          "median": 0.0064,
+          "min": 0.005376,
+          "max": 0.014848
+        }
+      },
+      {
+        "name": "select small middle",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 3.686656,
+          "min": 3.493376,
+          "max": 3.865344
+        },
+        "settledMs": {
+          "median": 4.028928,
+          "min": 3.728128,
+          "max": 4.118016
+        },
+        "inputQueueMs": {
+          "median": 0.005888,
+          "min": 0.005632,
+          "max": 0.014336
+        }
+      },
+      {
+        "name": "select big diff A",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 21.954816,
+          "min": 16.301056,
+          "max": 25.254656
+        },
+        "settledMs": {
+          "median": 21.974272,
+          "min": 21.600256,
+          "max": 25.3056
+        },
+        "inputQueueMs": {
+          "median": 0.028416,
+          "min": 0.027904,
+          "max": 0.04864
+        }
+      },
+      {
+        "name": "focus main, big diff A",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 2.112256,
+          "min": 2.042368,
+          "max": 2.286848
+        },
+        "settledMs": {
+          "median": 2.135296,
+          "min": 2.064896,
+          "max": 2.305536
+        },
+        "inputQueueMs": {
+          "median": 0.036096,
+          "min": 0.019968,
+          "max": 0.070144
+        }
+      },
+      {
+        "name": "jump to end, big diff A",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 231.383808,
+          "min": 227.84896,
+          "max": 232.429824
+        },
+        "settledMs": {
+          "median": 231.984128,
+          "min": 227.873024,
+          "max": 232.44928
+        },
+        "inputQueueMs": {
+          "median": 0.037632,
+          "min": 0.03712,
+          "max": 0.038144
+        }
+      },
+      {
+        "name": "main to commits, big diff A",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 0.798976,
+          "min": 0.739328,
+          "max": 0.80768
+        },
+        "settledMs": {
+          "median": 245.977344,
+          "min": 236.92544,
+          "max": 255.93728
+        },
+        "inputQueueMs": {
+          "median": 0.007936,
+          "min": 0.006656,
+          "max": 0.054784
+        }
+      },
+      {
+        "name": "big diff to small commit",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 3.86816,
+          "min": 3.305728,
+          "max": 3.944704
+        },
+        "settledMs": {
+          "median": 4.11392,
+          "min": 3.54944,
+          "max": 4.255232
+        },
+        "inputQueueMs": {
+          "median": 0.014848,
+          "min": 0.011776,
+          "max": 0.023552
+        }
+      },
+      {
+        "name": "commits to files, small diff",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 4.912384,
+          "min": 4.687104,
+          "max": 5.62048
+        },
+        "settledMs": {
+          "median": 5.114368,
+          "min": 4.84608,
+          "max": 5.79712
+        },
+        "inputQueueMs": {
+          "median": 0.005888,
+          "min": 0.005888,
+          "max": 0.01664
+        }
+      },
+      {
+        "name": "files to commits, small diff",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 3.688448,
+          "min": 3.602944,
+          "max": 3.963904
+        },
+        "settledMs": {
+          "median": 3.939584,
+          "min": 3.891968,
+          "max": 4.275968
+        },
+        "inputQueueMs": {
+          "median": 0.007936,
+          "min": 0.0064,
+          "max": 0.031232
+        }
+      },
+      {
+        "name": "select many-file commit upwards",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 71.214848,
+          "min": 70.814976,
+          "max": 72.09984
+        },
+        "settledMs": {
+          "median": 208.276736,
+          "min": 201.716224,
+          "max": 208.83968
+        },
+        "inputQueueMs": {
+          "median": 0.011008,
+          "min": 0.008704,
+          "max": 0.042752
+        }
+      },
+      {
+        "name": "many-file commit to big diff",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 41.048832,
+          "min": 37.825024,
+          "max": 41.565696
+        },
+        "settledMs": {
+          "median": 41.606144,
+          "min": 41.07136,
+          "max": 41.632256
+        },
+        "inputQueueMs": {
+          "median": 0.01024,
+          "min": 0.005888,
+          "max": 0.02432
+        }
+      },
+      {
+        "name": "big diff to small top",
+        "samples": 3,
+        "firstPaintMs": {
+          "median": 3.778304,
+          "min": 3.560704,
+          "max": 3.846144
+        },
+        "settledMs": {
+          "median": 4.101376,
+          "min": 3.754752,
+          "max": 4.111872
+        },
+        "inputQueueMs": {
+          "median": 0.028928,
+          "min": 0.009728,
+          "max": 0.059904
+        }
+      }
+    ],
+    "extraBefore": [
+      {
+        "name": "select big diff B",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 49.581824,
+          "min": 49.581824,
+          "max": 49.581824
+        },
+        "settledMs": {
+          "median": 58.6688,
+          "min": 58.6688,
+          "max": 58.6688
+        },
+        "inputQueueMs": {
+          "median": 0.027136,
+          "min": 0.027136,
+          "max": 0.027136
+        }
+      },
+      {
+        "name": "focus main, big diff B",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 2.31424,
+          "min": 2.31424,
+          "max": 2.31424
+        },
+        "settledMs": {
+          "median": 2.336,
+          "min": 2.336,
+          "max": 2.336
+        },
+        "inputQueueMs": {
+          "median": 0.01152,
+          "min": 0.01152,
+          "max": 0.01152
+        }
+      },
+      {
+        "name": "load all 50000 diff lines",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 377.685248,
+          "min": 377.685248,
+          "max": 377.685248
+        },
+        "settledMs": {
+          "median": 377.704448,
+          "min": 377.704448,
+          "max": 377.704448
+        },
+        "inputQueueMs": {
+          "median": 0.007168,
+          "min": 0.007168,
+          "max": 0.007168
+        }
+      },
+      {
+        "name": "move up in loaded 50000-line diff",
+        "samples": 10,
+        "firstPaintMs": {
+          "median": 0.75328,
+          "min": 0.570624,
+          "max": 0.89344
+        },
+        "settledMs": {
+          "median": 0.7774719999999999,
+          "min": 0.58624,
+          "max": 0.923648
+        },
+        "inputQueueMs": {
+          "median": 0.010368,
+          "min": 0.004864,
+          "max": 0.018688
+        }
+      },
+      {
+        "name": "jump to top of loaded diff",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 1.09824,
+          "min": 1.09824,
+          "max": 1.09824
+        },
+        "settledMs": {
+          "median": 1.13024,
+          "min": 1.13024,
+          "max": 1.13024
+        },
+        "inputQueueMs": {
+          "median": 0.009216,
+          "min": 0.009216,
+          "max": 0.009216
+        }
+      },
+      {
+        "name": "return to commits",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 1.179904,
+          "min": 1.179904,
+          "max": 1.179904
+        },
+        "settledMs": {
+          "median": 36.645632,
+          "min": 36.645632,
+          "max": 36.645632
+        },
+        "inputQueueMs": {
+          "median": 0.011008,
+          "min": 0.011008,
+          "max": 0.011008
+        }
+      },
+      {
+        "name": "select 10000-file commit",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 70.574336,
+          "min": 70.574336,
+          "max": 70.574336
+        },
+        "settledMs": {
+          "median": 205.346816,
+          "min": 205.346816,
+          "max": 205.346816
+        },
+        "inputQueueMs": {
+          "median": 0.00512,
+          "min": 0.00512,
+          "max": 0.00512
+        }
+      },
+      {
+        "name": "open 10000-file list",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 142.618624,
+          "min": 142.618624,
+          "max": 142.618624
+        },
+        "settledMs": {
+          "median": 145.030144,
+          "min": 145.030144,
+          "max": 145.030144
+        },
+        "inputQueueMs": {
+          "median": 0.00768,
+          "min": 0.00768,
+          "max": 0.00768
+        }
+      },
+      {
+        "name": "jump to last file",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 4.285696,
+          "min": 4.285696,
+          "max": 4.285696
+        },
+        "settledMs": {
+          "median": 4.585216,
+          "min": 4.585216,
+          "max": 4.585216
+        },
+        "inputQueueMs": {
+          "median": 0.007936,
+          "min": 0.007936,
+          "max": 0.007936
+        }
+      },
+      {
+        "name": "move up near last file",
+        "samples": 5,
+        "firstPaintMs": {
+          "median": 3.824896,
+          "min": 3.085568,
+          "max": 4.164864
+        },
+        "settledMs": {
+          "median": 4.118016,
+          "min": 3.289856,
+          "max": 4.410112
+        },
+        "inputQueueMs": {
+          "median": 0.04224,
+          "min": 0.011008,
+          "max": 0.052224
+        }
+      },
+      {
+        "name": "jump to first file",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 86.454528,
+          "min": 86.454528,
+          "max": 86.454528
+        },
+        "settledMs": {
+          "median": 88.848384,
+          "min": 88.848384,
+          "max": 88.848384
+        },
+        "inputQueueMs": {
+          "median": 0.006656,
+          "min": 0.006656,
+          "max": 0.006656
+        }
+      },
+      {
+        "name": "file list to commits",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 81.018112,
+          "min": 81.018112,
+          "max": 81.018112
+        },
+        "settledMs": {
+          "median": 210.601472,
+          "min": 210.601472,
+          "max": 210.601472
+        },
+        "inputQueueMs": {
+          "median": 0.029696,
+          "min": 0.029696,
+          "max": 0.029696
+        }
+      },
+      {
+        "name": "select big diff B upwards",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 36.48256,
+          "min": 36.48256,
+          "max": 36.48256
+        },
+        "settledMs": {
+          "median": 41.522432,
+          "min": 41.522432,
+          "max": 41.522432
+        },
+        "inputQueueMs": {
+          "median": 0.008448,
+          "min": 0.008448,
+          "max": 0.008448
+        }
+      },
+      {
+        "name": "select small top",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 3.819776,
+          "min": 3.819776,
+          "max": 3.819776
+        },
+        "settledMs": {
+          "median": 4.055552,
+          "min": 4.055552,
+          "max": 4.055552
+        },
+        "inputQueueMs": {
+          "median": 0.009984,
+          "min": 0.009984,
+          "max": 0.009984
+        }
+      }
+    ],
+    "extraAfter": [
+      {
+        "name": "select big diff B",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 56.38272,
+          "min": 56.38272,
+          "max": 56.38272
+        },
+        "settledMs": {
+          "median": 56.432128,
+          "min": 56.432128,
+          "max": 56.432128
+        },
+        "inputQueueMs": {
+          "median": 0.018432,
+          "min": 0.018432,
+          "max": 0.018432
+        }
+      },
+      {
+        "name": "focus main, big diff B",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 2.33216,
+          "min": 2.33216,
+          "max": 2.33216
+        },
+        "settledMs": {
+          "median": 2.355712,
+          "min": 2.355712,
+          "max": 2.355712
+        },
+        "inputQueueMs": {
+          "median": 0.038144,
+          "min": 0.038144,
+          "max": 0.038144
+        }
+      },
+      {
+        "name": "load all 50000 diff lines",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 218.1504,
+          "min": 218.1504,
+          "max": 218.1504
+        },
+        "settledMs": {
+          "median": 218.169344,
+          "min": 218.169344,
+          "max": 218.169344
+        },
+        "inputQueueMs": {
+          "median": 0.004096,
+          "min": 0.004096,
+          "max": 0.004096
+        }
+      },
+      {
+        "name": "move up in loaded 50000-line diff",
+        "samples": 10,
+        "firstPaintMs": {
+          "median": 0.579712,
+          "min": 0.51072,
+          "max": 0.674816
+        },
+        "settledMs": {
+          "median": 0.595968,
+          "min": 0.5312,
+          "max": 0.691968
+        },
+        "inputQueueMs": {
+          "median": 0.004736,
+          "min": 0.002816,
+          "max": 0.093952
+        }
+      },
+      {
+        "name": "jump to top of loaded diff",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 0.699904,
+          "min": 0.699904,
+          "max": 0.699904
+        },
+        "settledMs": {
+          "median": 0.718848,
+          "min": 0.718848,
+          "max": 0.718848
+        },
+        "inputQueueMs": {
+          "median": 0.005632,
+          "min": 0.005632,
+          "max": 0.005632
+        }
+      },
+      {
+        "name": "return to commits",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 0.841728,
+          "min": 0.841728,
+          "max": 0.841728
+        },
+        "settledMs": {
+          "median": 38.557696,
+          "min": 38.557696,
+          "max": 38.557696
+        },
+        "inputQueueMs": {
+          "median": 0.009728,
+          "min": 0.009728,
+          "max": 0.009728
+        }
+      },
+      {
+        "name": "select 10000-file commit",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 66.926592,
+          "min": 66.926592,
+          "max": 66.926592
+        },
+        "settledMs": {
+          "median": 192.258816,
+          "min": 192.258816,
+          "max": 192.258816
+        },
+        "inputQueueMs": {
+          "median": 0.031488,
+          "min": 0.031488,
+          "max": 0.031488
+        }
+      },
+      {
+        "name": "open 10000-file list",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 129.070336,
+          "min": 129.070336,
+          "max": 129.070336
+        },
+        "settledMs": {
+          "median": 133.069568,
+          "min": 133.069568,
+          "max": 133.069568
+        },
+        "inputQueueMs": {
+          "median": 0.028672,
+          "min": 0.028672,
+          "max": 0.028672
+        }
+      },
+      {
+        "name": "jump to last file",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 3.166208,
+          "min": 3.166208,
+          "max": 3.166208
+        },
+        "settledMs": {
+          "median": 3.37152,
+          "min": 3.37152,
+          "max": 3.37152
+        },
+        "inputQueueMs": {
+          "median": 0.009472,
+          "min": 0.009472,
+          "max": 0.009472
+        }
+      },
+      {
+        "name": "move up near last file",
+        "samples": 5,
+        "firstPaintMs": {
+          "median": 3.725568,
+          "min": 3.342848,
+          "max": 4.275968
+        },
+        "settledMs": {
+          "median": 4.00384,
+          "min": 3.598336,
+          "max": 4.588544
+        },
+        "inputQueueMs": {
+          "median": 0.006912,
+          "min": 0.005632,
+          "max": 0.03968
+        }
+      },
+      {
+        "name": "jump to first file",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 84.613376,
+          "min": 84.613376,
+          "max": 84.613376
+        },
+        "settledMs": {
+          "median": 88.574208,
+          "min": 88.574208,
+          "max": 88.574208
+        },
+        "inputQueueMs": {
+          "median": 0.004608,
+          "min": 0.004608,
+          "max": 0.004608
+        }
+      },
+      {
+        "name": "file list to commits",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 76.09088,
+          "min": 76.09088,
+          "max": 76.09088
+        },
+        "settledMs": {
+          "median": 208.110848,
+          "min": 208.110848,
+          "max": 208.110848
+        },
+        "inputQueueMs": {
+          "median": 0.020992,
+          "min": 0.020992,
+          "max": 0.020992
+        }
+      },
+      {
+        "name": "select big diff B upwards",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 39.56224,
+          "min": 39.56224,
+          "max": 39.56224
+        },
+        "settledMs": {
+          "median": 39.586816,
+          "min": 39.586816,
+          "max": 39.586816
+        },
+        "inputQueueMs": {
+          "median": 0.011008,
+          "min": 0.011008,
+          "max": 0.011008
+        }
+      },
+      {
+        "name": "select small top",
+        "samples": 1,
+        "firstPaintMs": {
+          "median": 3.22048,
+          "min": 3.22048,
+          "max": 3.22048
+        },
+        "settledMs": {
+          "median": 3.456768,
+          "min": 3.456768,
+          "max": 3.456768
+        },
+        "inputQueueMs": {
+          "median": 0.017152,
+          "min": 0.017152,
+          "max": 0.017152
+        }
+      }
+    ]
+  },
+  "samples": {
+    "before": [
+      {
+        "round": 1,
+        "name": "select big diff B",
+        "key": "j",
+        "firstPaintMs": 52.50816,
+        "settledMs": 52.567552,
+        "inputQueueMs": 0.022272,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "focus main, big diff B",
+        "key": "0",
+        "firstPaintMs": 3.270656,
+        "settledMs": 3.322112,
+        "inputQueueMs": 0.013824,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "jump to end, big diff B",
+        "key": "End",
+        "firstPaintMs": 374.119424,
+        "settledMs": 374.139136,
+        "inputQueueMs": 0.017152,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "main to commits, big diff B",
+        "key": "Escape",
+        "firstPaintMs": 1.142016,
+        "settledMs": 364.282112,
+        "inputQueueMs": 0.009216,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "commits to files, big diff B",
+        "key": "2",
+        "firstPaintMs": 9.12256,
+        "settledMs": 9.26592,
+        "inputQueueMs": 0.0128,
+        "focus": "files"
+      },
+      {
+        "round": 1,
+        "name": "focus unstaged diff",
+        "key": "0",
+        "firstPaintMs": 0.733184,
+        "settledMs": 0.756736,
+        "inputQueueMs": 0.00896,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "unstaged to staged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.616192,
+        "settledMs": 0.630272,
+        "inputQueueMs": 0.006144,
+        "focus": "secondary"
+      },
+      {
+        "round": 1,
+        "name": "staged to unstaged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.64384,
+        "settledMs": 0.659968,
+        "inputQueueMs": 0.007424,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "diff pane to files",
+        "key": "Escape",
+        "firstPaintMs": 0.738304,
+        "settledMs": 4.601856,
+        "inputQueueMs": 0.009984,
+        "focus": "files"
+      },
+      {
+        "round": 1,
+        "name": "files to commits, big diff B",
+        "key": "4",
+        "firstPaintMs": 42.038016,
+        "settledMs": 42.066176,
+        "inputQueueMs": 0.005888,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select many-file commit",
+        "key": "j",
+        "firstPaintMs": 80.908544,
+        "settledMs": 224.550656,
+        "inputQueueMs": 0.031232,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "enter 10000-file list",
+        "key": "Enter",
+        "firstPaintMs": 138.856192,
+        "settledMs": 141.664,
+        "inputQueueMs": 0.007168,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move within 10000-file list",
+        "key": "j",
+        "firstPaintMs": 1.02784,
+        "settledMs": 8.38912,
+        "inputQueueMs": 0.052992,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "focus main, many-file commit",
+        "key": "0",
+        "firstPaintMs": 1.425152,
+        "settledMs": 1.436416,
+        "inputQueueMs": 0.029952,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "main to commit files",
+        "key": "Escape",
+        "firstPaintMs": 0.988672,
+        "settledMs": 7.777024,
+        "inputQueueMs": 0.005888,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "commit files to commits",
+        "key": "Escape",
+        "firstPaintMs": 71.036416,
+        "settledMs": 208.594432,
+        "inputQueueMs": 0.061184,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select small middle",
+        "key": "j",
+        "firstPaintMs": 4.187648,
+        "settledMs": 4.510976,
+        "inputQueueMs": 0.033024,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select big diff A",
+        "key": "j",
+        "firstPaintMs": 25.990912,
+        "settledMs": 26.044416,
+        "inputQueueMs": 0.007936,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "focus main, big diff A",
+        "key": "0",
+        "firstPaintMs": 2.137344,
+        "settledMs": 2.16576,
+        "inputQueueMs": 0.048128,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "jump to end, big diff A",
+        "key": "End",
+        "firstPaintMs": 298.548736,
+        "settledMs": 298.586624,
+        "inputQueueMs": 0.043264,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "main to commits, big diff A",
+        "key": "Escape",
+        "firstPaintMs": 0.904704,
+        "settledMs": 288.119296,
+        "inputQueueMs": 0.008448,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "big diff to small commit",
+        "key": "k",
+        "firstPaintMs": 3.825664,
+        "settledMs": 4.108288,
+        "inputQueueMs": 0.007936,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "commits to files, small diff",
+        "key": "2",
+        "firstPaintMs": 4.758272,
+        "settledMs": 4.960256,
+        "inputQueueMs": 0.00768,
+        "focus": "files"
+      },
+      {
+        "round": 1,
+        "name": "files to commits, small diff",
+        "key": "4",
+        "firstPaintMs": 3.61984,
+        "settledMs": 3.865344,
+        "inputQueueMs": 0.0384,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select many-file commit upwards",
+        "key": "k",
+        "firstPaintMs": 70.645248,
+        "settledMs": 204.543744,
+        "inputQueueMs": 0.032256,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "many-file commit to big diff",
+        "key": "k",
+        "firstPaintMs": 35.529984,
+        "settledMs": 43.087104,
+        "inputQueueMs": 0.012544,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "big diff to small top",
+        "key": "k",
+        "firstPaintMs": 4.119552,
+        "settledMs": 4.451584,
+        "inputQueueMs": 0.048896,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select big diff B",
+        "key": "j",
+        "firstPaintMs": 34.26816,
+        "settledMs": 41.144832,
+        "inputQueueMs": 0.00768,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "focus main, big diff B",
+        "key": "0",
+        "firstPaintMs": 2.049536,
+        "settledMs": 2.070016,
+        "inputQueueMs": 0.006656,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "jump to end, big diff B",
+        "key": "End",
+        "firstPaintMs": 318.109696,
+        "settledMs": 318.12992,
+        "inputQueueMs": 0.008192,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "main to commits, big diff B",
+        "key": "Escape",
+        "firstPaintMs": 1.25056,
+        "settledMs": 323.6992,
+        "inputQueueMs": 0.015104,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "commits to files, big diff B",
+        "key": "2",
+        "firstPaintMs": 8.42496,
+        "settledMs": 8.5952,
+        "inputQueueMs": 0.008704,
+        "focus": "files"
+      },
+      {
+        "round": 2,
+        "name": "focus unstaged diff",
+        "key": "0",
+        "firstPaintMs": 0.713728,
+        "settledMs": 0.736512,
+        "inputQueueMs": 0.005632,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "unstaged to staged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.598272,
+        "settledMs": 0.615168,
+        "inputQueueMs": 0.003584,
+        "focus": "secondary"
+      },
+      {
+        "round": 2,
+        "name": "staged to unstaged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.730112,
+        "settledMs": 0.75648,
+        "inputQueueMs": 0.012544,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "diff pane to files",
+        "key": "Escape",
+        "firstPaintMs": 0.854016,
+        "settledMs": 4.96128,
+        "inputQueueMs": 0.007424,
+        "focus": "files"
+      },
+      {
+        "round": 2,
+        "name": "files to commits, big diff B",
+        "key": "4",
+        "firstPaintMs": 49.165312,
+        "settledMs": 49.212928,
+        "inputQueueMs": 0.010496,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select many-file commit",
+        "key": "j",
+        "firstPaintMs": 75.931904,
+        "settledMs": 213.289728,
+        "inputQueueMs": 0.007936,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "enter 10000-file list",
+        "key": "Enter",
+        "firstPaintMs": 156.873216,
+        "settledMs": 159.428352,
+        "inputQueueMs": 0.008192,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 2,
+        "name": "move within 10000-file list",
+        "key": "j",
+        "firstPaintMs": 0.923904,
+        "settledMs": 11.93216,
+        "inputQueueMs": 0.009728,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 2,
+        "name": "focus main, many-file commit",
+        "key": "0",
+        "firstPaintMs": 1.60256,
+        "settledMs": 1.620736,
+        "inputQueueMs": 0.013056,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "main to commit files",
+        "key": "Escape",
+        "firstPaintMs": 0.837376,
+        "settledMs": 9.330944,
+        "inputQueueMs": 0.007424,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 2,
+        "name": "commit files to commits",
+        "key": "Escape",
+        "firstPaintMs": 82.710784,
+        "settledMs": 209.453312,
+        "inputQueueMs": 0.023552,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select small middle",
+        "key": "j",
+        "firstPaintMs": 3.909376,
+        "settledMs": 4.1408,
+        "inputQueueMs": 0.032512,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select big diff A",
+        "key": "j",
+        "firstPaintMs": 20.60928,
+        "settledMs": 27.489024,
+        "inputQueueMs": 0.013056,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "focus main, big diff A",
+        "key": "0",
+        "firstPaintMs": 2.0928,
+        "settledMs": 2.116096,
+        "inputQueueMs": 0.012288,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "jump to end, big diff A",
+        "key": "End",
+        "firstPaintMs": 356.046848,
+        "settledMs": 356.062976,
+        "inputQueueMs": 0.024064,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "main to commits, big diff A",
+        "key": "Escape",
+        "firstPaintMs": 0.8512,
+        "settledMs": 352.38016,
+        "inputQueueMs": 0.007168,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "big diff to small commit",
+        "key": "k",
+        "firstPaintMs": 3.914752,
+        "settledMs": 4.192512,
+        "inputQueueMs": 0.01024,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "commits to files, small diff",
+        "key": "2",
+        "firstPaintMs": 5.823488,
+        "settledMs": 6.01344,
+        "inputQueueMs": 0.006912,
+        "focus": "files"
+      },
+      {
+        "round": 2,
+        "name": "files to commits, small diff",
+        "key": "4",
+        "firstPaintMs": 3.5392,
+        "settledMs": 3.843072,
+        "inputQueueMs": 0.005376,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select many-file commit upwards",
+        "key": "k",
+        "firstPaintMs": 75.03232,
+        "settledMs": 211.744512,
+        "inputQueueMs": 0.01024,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "many-file commit to big diff",
+        "key": "k",
+        "firstPaintMs": 34.0672,
+        "settledMs": 43.849472,
+        "inputQueueMs": 0.009216,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "big diff to small top",
+        "key": "k",
+        "firstPaintMs": 4.187392,
+        "settledMs": 4.539136,
+        "inputQueueMs": 0.033024,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select big diff B",
+        "key": "j",
+        "firstPaintMs": 43.238912,
+        "settledMs": 43.264512,
+        "inputQueueMs": 0.00768,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "focus main, big diff B",
+        "key": "0",
+        "firstPaintMs": 2.129664,
+        "settledMs": 2.14912,
+        "inputQueueMs": 0.005376,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "jump to end, big diff B",
+        "key": "End",
+        "firstPaintMs": 321.488128,
+        "settledMs": 321.507072,
+        "inputQueueMs": 0.053504,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "main to commits, big diff B",
+        "key": "Escape",
+        "firstPaintMs": 0.80512,
+        "settledMs": 324.131584,
+        "inputQueueMs": 0.00768,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "commits to files, big diff B",
+        "key": "2",
+        "firstPaintMs": 9.690624,
+        "settledMs": 9.889024,
+        "inputQueueMs": 0.006656,
+        "focus": "files"
+      },
+      {
+        "round": 3,
+        "name": "focus unstaged diff",
+        "key": "0",
+        "firstPaintMs": 0.814592,
+        "settledMs": 0.848384,
+        "inputQueueMs": 0.008448,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "unstaged to staged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.863744,
+        "settledMs": 0.896768,
+        "inputQueueMs": 0.007936,
+        "focus": "secondary"
+      },
+      {
+        "round": 3,
+        "name": "staged to unstaged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.893952,
+        "settledMs": 0.926208,
+        "inputQueueMs": 0.0064,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "diff pane to files",
+        "key": "Escape",
+        "firstPaintMs": 0.98048,
+        "settledMs": 5.553664,
+        "inputQueueMs": 0.008704,
+        "focus": "files"
+      },
+      {
+        "round": 3,
+        "name": "files to commits, big diff B",
+        "key": "4",
+        "firstPaintMs": 47.69408,
+        "settledMs": 47.737344,
+        "inputQueueMs": 0.00512,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select many-file commit",
+        "key": "j",
+        "firstPaintMs": 77.919488,
+        "settledMs": 211.939584,
+        "inputQueueMs": 0.009216,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "enter 10000-file list",
+        "key": "Enter",
+        "firstPaintMs": 146.797312,
+        "settledMs": 149.011712,
+        "inputQueueMs": 0.007168,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 3,
+        "name": "move within 10000-file list",
+        "key": "j",
+        "firstPaintMs": 0.968192,
+        "settledMs": 9.311232,
+        "inputQueueMs": 0.023552,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 3,
+        "name": "focus main, many-file commit",
+        "key": "0",
+        "firstPaintMs": 1.239296,
+        "settledMs": 1.252864,
+        "inputQueueMs": 0.023552,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "main to commit files",
+        "key": "Escape",
+        "firstPaintMs": 0.942336,
+        "settledMs": 6.785024,
+        "inputQueueMs": 0.007168,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 3,
+        "name": "commit files to commits",
+        "key": "Escape",
+        "firstPaintMs": 76.29952,
+        "settledMs": 214.170624,
+        "inputQueueMs": 0.006656,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select small middle",
+        "key": "j",
+        "firstPaintMs": 3.840512,
+        "settledMs": 4.055808,
+        "inputQueueMs": 0.0128,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select big diff A",
+        "key": "j",
+        "firstPaintMs": 18.92736,
+        "settledMs": 24.40832,
+        "inputQueueMs": 0.009984,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "focus main, big diff A",
+        "key": "0",
+        "firstPaintMs": 2.091776,
+        "settledMs": 2.11968,
+        "inputQueueMs": 0.011776,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "jump to end, big diff A",
+        "key": "End",
+        "firstPaintMs": 326.286848,
+        "settledMs": 326.302976,
+        "inputQueueMs": 0.024064,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "main to commits, big diff A",
+        "key": "Escape",
+        "firstPaintMs": 1.1392,
+        "settledMs": 379.25248,
+        "inputQueueMs": 0.009472,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "big diff to small commit",
+        "key": "k",
+        "firstPaintMs": 3.943168,
+        "settledMs": 4.273152,
+        "inputQueueMs": 0.009984,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "commits to files, small diff",
+        "key": "2",
+        "firstPaintMs": 5.367552,
+        "settledMs": 5.591808,
+        "inputQueueMs": 0.00896,
+        "focus": "files"
+      },
+      {
+        "round": 3,
+        "name": "files to commits, small diff",
+        "key": "4",
+        "firstPaintMs": 3.804416,
+        "settledMs": 4.030464,
+        "inputQueueMs": 0.009216,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select many-file commit upwards",
+        "key": "k",
+        "firstPaintMs": 71.7504,
+        "settledMs": 198.585088,
+        "inputQueueMs": 0.005632,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "many-file commit to big diff",
+        "key": "k",
+        "firstPaintMs": 42.129152,
+        "settledMs": 42.16576,
+        "inputQueueMs": 0.032768,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "big diff to small top",
+        "key": "k",
+        "firstPaintMs": 3.763712,
+        "settledMs": 4.068608,
+        "inputQueueMs": 0.008704,
+        "focus": "commits"
+      }
+    ],
+    "after": [
+      {
+        "round": 1,
+        "name": "select big diff B",
+        "key": "j",
+        "firstPaintMs": 58.1696,
+        "settledMs": 58.215936,
+        "inputQueueMs": 0.018176,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "focus main, big diff B",
+        "key": "0",
+        "firstPaintMs": 3.122176,
+        "settledMs": 3.16288,
+        "inputQueueMs": 0.049408,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "jump to end, big diff B",
+        "key": "End",
+        "firstPaintMs": 283.760384,
+        "settledMs": 283.77344,
+        "inputQueueMs": 0.022784,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "main to commits, big diff B",
+        "key": "Escape",
+        "firstPaintMs": 0.836864,
+        "settledMs": 301.608704,
+        "inputQueueMs": 0.017664,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "commits to files, big diff B",
+        "key": "2",
+        "firstPaintMs": 9.02912,
+        "settledMs": 9.206528,
+        "inputQueueMs": 0.00768,
+        "focus": "files"
+      },
+      {
+        "round": 1,
+        "name": "focus unstaged diff",
+        "key": "0",
+        "firstPaintMs": 0.589568,
+        "settledMs": 0.601344,
+        "inputQueueMs": 0.004864,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "unstaged to staged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.64512,
+        "settledMs": 0.656384,
+        "inputQueueMs": 0.01792,
+        "focus": "secondary"
+      },
+      {
+        "round": 1,
+        "name": "staged to unstaged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.837632,
+        "settledMs": 0.865024,
+        "inputQueueMs": 0.046592,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "diff pane to files",
+        "key": "Escape",
+        "firstPaintMs": 0.941312,
+        "settledMs": 5.435392,
+        "inputQueueMs": 0.007168,
+        "focus": "files"
+      },
+      {
+        "round": 1,
+        "name": "files to commits, big diff B",
+        "key": "4",
+        "firstPaintMs": 43.548928,
+        "settledMs": 43.5776,
+        "inputQueueMs": 0.00512,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select many-file commit",
+        "key": "j",
+        "firstPaintMs": 75.517184,
+        "settledMs": 210.47552,
+        "inputQueueMs": 0.005632,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "enter 10000-file list",
+        "key": "Enter",
+        "firstPaintMs": 128.710912,
+        "settledMs": 128.753408,
+        "inputQueueMs": 0.024064,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move within 10000-file list",
+        "key": "j",
+        "firstPaintMs": 0.923392,
+        "settledMs": 9.753088,
+        "inputQueueMs": 0.009472,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "focus main, many-file commit",
+        "key": "0",
+        "firstPaintMs": 1.503744,
+        "settledMs": 1.522944,
+        "inputQueueMs": 0.004864,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "main to commit files",
+        "key": "Escape",
+        "firstPaintMs": 1.481728,
+        "settledMs": 7.192576,
+        "inputQueueMs": 0.011008,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "commit files to commits",
+        "key": "Escape",
+        "firstPaintMs": 72.740864,
+        "settledMs": 191.5648,
+        "inputQueueMs": 0.0064,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select small middle",
+        "key": "j",
+        "firstPaintMs": 3.493376,
+        "settledMs": 3.728128,
+        "inputQueueMs": 0.014336,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select big diff A",
+        "key": "j",
+        "firstPaintMs": 16.301056,
+        "settledMs": 21.600256,
+        "inputQueueMs": 0.04864,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "focus main, big diff A",
+        "key": "0",
+        "firstPaintMs": 2.286848,
+        "settledMs": 2.305536,
+        "inputQueueMs": 0.019968,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "jump to end, big diff A",
+        "key": "End",
+        "firstPaintMs": 232.429824,
+        "settledMs": 232.44928,
+        "inputQueueMs": 0.03712,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "main to commits, big diff A",
+        "key": "Escape",
+        "firstPaintMs": 0.798976,
+        "settledMs": 236.92544,
+        "inputQueueMs": 0.007936,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "big diff to small commit",
+        "key": "k",
+        "firstPaintMs": 3.305728,
+        "settledMs": 3.54944,
+        "inputQueueMs": 0.023552,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "commits to files, small diff",
+        "key": "2",
+        "firstPaintMs": 5.62048,
+        "settledMs": 5.79712,
+        "inputQueueMs": 0.005888,
+        "focus": "files"
+      },
+      {
+        "round": 1,
+        "name": "files to commits, small diff",
+        "key": "4",
+        "firstPaintMs": 3.602944,
+        "settledMs": 3.891968,
+        "inputQueueMs": 0.007936,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select many-file commit upwards",
+        "key": "k",
+        "firstPaintMs": 72.09984,
+        "settledMs": 208.83968,
+        "inputQueueMs": 0.042752,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "many-file commit to big diff",
+        "key": "k",
+        "firstPaintMs": 37.825024,
+        "settledMs": 41.632256,
+        "inputQueueMs": 0.01024,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "big diff to small top",
+        "key": "k",
+        "firstPaintMs": 3.846144,
+        "settledMs": 4.111872,
+        "inputQueueMs": 0.028928,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select big diff B",
+        "key": "j",
+        "firstPaintMs": 36.247296,
+        "settledMs": 40.1792,
+        "inputQueueMs": 0.030208,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "focus main, big diff B",
+        "key": "0",
+        "firstPaintMs": 1.808128,
+        "settledMs": 1.826304,
+        "inputQueueMs": 0.04608,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "jump to end, big diff B",
+        "key": "End",
+        "firstPaintMs": 222.633984,
+        "settledMs": 222.648576,
+        "inputQueueMs": 0.0064,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "main to commits, big diff B",
+        "key": "Escape",
+        "firstPaintMs": 0.805888,
+        "settledMs": 256.795904,
+        "inputQueueMs": 0.012544,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "commits to files, big diff B",
+        "key": "2",
+        "firstPaintMs": 16.841984,
+        "settledMs": 17.019392,
+        "inputQueueMs": 0.007936,
+        "focus": "files"
+      },
+      {
+        "round": 2,
+        "name": "focus unstaged diff",
+        "key": "0",
+        "firstPaintMs": 0.798976,
+        "settledMs": 0.832,
+        "inputQueueMs": 0.011264,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "unstaged to staged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.794624,
+        "settledMs": 0.82816,
+        "inputQueueMs": 0.006144,
+        "focus": "secondary"
+      },
+      {
+        "round": 2,
+        "name": "staged to unstaged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.749824,
+        "settledMs": 0.774656,
+        "inputQueueMs": 0.006144,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "diff pane to files",
+        "key": "Escape",
+        "firstPaintMs": 0.653824,
+        "settledMs": 4.70016,
+        "inputQueueMs": 0.009216,
+        "focus": "files"
+      },
+      {
+        "round": 2,
+        "name": "files to commits, big diff B",
+        "key": "4",
+        "firstPaintMs": 34.530816,
+        "settledMs": 38.228224,
+        "inputQueueMs": 0.006656,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select many-file commit",
+        "key": "j",
+        "firstPaintMs": 75.11168,
+        "settledMs": 188.014336,
+        "inputQueueMs": 0.009984,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "enter 10000-file list",
+        "key": "Enter",
+        "firstPaintMs": 115.955712,
+        "settledMs": 117.905664,
+        "inputQueueMs": 0.02944,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 2,
+        "name": "move within 10000-file list",
+        "key": "j",
+        "firstPaintMs": 0.868352,
+        "settledMs": 8.228352,
+        "inputQueueMs": 0.006912,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 2,
+        "name": "focus main, many-file commit",
+        "key": "0",
+        "firstPaintMs": 1.176064,
+        "settledMs": 1.191936,
+        "inputQueueMs": 0.0192,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "main to commit files",
+        "key": "Escape",
+        "firstPaintMs": 1.204224,
+        "settledMs": 8.182272,
+        "inputQueueMs": 0.007936,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 2,
+        "name": "commit files to commits",
+        "key": "Escape",
+        "firstPaintMs": 65.541888,
+        "settledMs": 184.468736,
+        "inputQueueMs": 0.005376,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select small middle",
+        "key": "j",
+        "firstPaintMs": 3.686656,
+        "settledMs": 4.028928,
+        "inputQueueMs": 0.005888,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select big diff A",
+        "key": "j",
+        "firstPaintMs": 25.254656,
+        "settledMs": 25.3056,
+        "inputQueueMs": 0.028416,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "focus main, big diff A",
+        "key": "0",
+        "firstPaintMs": 2.042368,
+        "settledMs": 2.064896,
+        "inputQueueMs": 0.070144,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "jump to end, big diff A",
+        "key": "End",
+        "firstPaintMs": 231.383808,
+        "settledMs": 231.984128,
+        "inputQueueMs": 0.037632,
+        "focus": "main"
+      },
+      {
+        "round": 2,
+        "name": "main to commits, big diff A",
+        "key": "Escape",
+        "firstPaintMs": 0.739328,
+        "settledMs": 255.93728,
+        "inputQueueMs": 0.006656,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "big diff to small commit",
+        "key": "k",
+        "firstPaintMs": 3.944704,
+        "settledMs": 4.255232,
+        "inputQueueMs": 0.011776,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "commits to files, small diff",
+        "key": "2",
+        "firstPaintMs": 4.912384,
+        "settledMs": 5.114368,
+        "inputQueueMs": 0.01664,
+        "focus": "files"
+      },
+      {
+        "round": 2,
+        "name": "files to commits, small diff",
+        "key": "4",
+        "firstPaintMs": 3.963904,
+        "settledMs": 4.275968,
+        "inputQueueMs": 0.031232,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "select many-file commit upwards",
+        "key": "k",
+        "firstPaintMs": 70.814976,
+        "settledMs": 201.716224,
+        "inputQueueMs": 0.011008,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "many-file commit to big diff",
+        "key": "k",
+        "firstPaintMs": 41.565696,
+        "settledMs": 41.606144,
+        "inputQueueMs": 0.005888,
+        "focus": "commits"
+      },
+      {
+        "round": 2,
+        "name": "big diff to small top",
+        "key": "k",
+        "firstPaintMs": 3.778304,
+        "settledMs": 4.101376,
+        "inputQueueMs": 0.009728,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select big diff B",
+        "key": "j",
+        "firstPaintMs": 37.345536,
+        "settledMs": 42.54208,
+        "inputQueueMs": 0.006912,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "focus main, big diff B",
+        "key": "0",
+        "firstPaintMs": 2.065664,
+        "settledMs": 2.087168,
+        "inputQueueMs": 0.034304,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "jump to end, big diff B",
+        "key": "End",
+        "firstPaintMs": 224.539648,
+        "settledMs": 224.559104,
+        "inputQueueMs": 0.006144,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "main to commits, big diff B",
+        "key": "Escape",
+        "firstPaintMs": 0.823552,
+        "settledMs": 289.683968,
+        "inputQueueMs": 0.007168,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "commits to files, big diff B",
+        "key": "2",
+        "firstPaintMs": 9.801216,
+        "settledMs": 10.02624,
+        "inputQueueMs": 0.012544,
+        "focus": "files"
+      },
+      {
+        "round": 3,
+        "name": "focus unstaged diff",
+        "key": "0",
+        "firstPaintMs": 0.855808,
+        "settledMs": 0.885248,
+        "inputQueueMs": 0.008704,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "unstaged to staged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.807424,
+        "settledMs": 0.836352,
+        "inputQueueMs": 0.009472,
+        "focus": "secondary"
+      },
+      {
+        "round": 3,
+        "name": "staged to unstaged pane",
+        "key": "Tab",
+        "firstPaintMs": 0.910336,
+        "settledMs": 0.948736,
+        "inputQueueMs": 0.007936,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "diff pane to files",
+        "key": "Escape",
+        "firstPaintMs": 0.806912,
+        "settledMs": 5.177344,
+        "inputQueueMs": 0.01152,
+        "focus": "files"
+      },
+      {
+        "round": 3,
+        "name": "files to commits, big diff B",
+        "key": "4",
+        "firstPaintMs": 42.143232,
+        "settledMs": 42.162688,
+        "inputQueueMs": 0.022016,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select many-file commit",
+        "key": "j",
+        "firstPaintMs": 69.645824,
+        "settledMs": 192.243456,
+        "inputQueueMs": 0.030976,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "enter 10000-file list",
+        "key": "Enter",
+        "firstPaintMs": 125.462784,
+        "settledMs": 128.628224,
+        "inputQueueMs": 0.005888,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 3,
+        "name": "move within 10000-file list",
+        "key": "j",
+        "firstPaintMs": 0.955648,
+        "settledMs": 8.851456,
+        "inputQueueMs": 0.026112,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 3,
+        "name": "focus main, many-file commit",
+        "key": "0",
+        "firstPaintMs": 1.495808,
+        "settledMs": 1.517312,
+        "inputQueueMs": 0.034304,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "main to commit files",
+        "key": "Escape",
+        "firstPaintMs": 1.132544,
+        "settledMs": 11.247104,
+        "inputQueueMs": 0.025344,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 3,
+        "name": "commit files to commits",
+        "key": "Escape",
+        "firstPaintMs": 67.328,
+        "settledMs": 202.405888,
+        "inputQueueMs": 0.014848,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select small middle",
+        "key": "j",
+        "firstPaintMs": 3.865344,
+        "settledMs": 4.118016,
+        "inputQueueMs": 0.005632,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select big diff A",
+        "key": "j",
+        "firstPaintMs": 21.954816,
+        "settledMs": 21.974272,
+        "inputQueueMs": 0.027904,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "focus main, big diff A",
+        "key": "0",
+        "firstPaintMs": 2.112256,
+        "settledMs": 2.135296,
+        "inputQueueMs": 0.036096,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "jump to end, big diff A",
+        "key": "End",
+        "firstPaintMs": 227.84896,
+        "settledMs": 227.873024,
+        "inputQueueMs": 0.038144,
+        "focus": "main"
+      },
+      {
+        "round": 3,
+        "name": "main to commits, big diff A",
+        "key": "Escape",
+        "firstPaintMs": 0.80768,
+        "settledMs": 245.977344,
+        "inputQueueMs": 0.054784,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "big diff to small commit",
+        "key": "k",
+        "firstPaintMs": 3.86816,
+        "settledMs": 4.11392,
+        "inputQueueMs": 0.014848,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "commits to files, small diff",
+        "key": "2",
+        "firstPaintMs": 4.687104,
+        "settledMs": 4.84608,
+        "inputQueueMs": 0.005888,
+        "focus": "files"
+      },
+      {
+        "round": 3,
+        "name": "files to commits, small diff",
+        "key": "4",
+        "firstPaintMs": 3.688448,
+        "settledMs": 3.939584,
+        "inputQueueMs": 0.0064,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "select many-file commit upwards",
+        "key": "k",
+        "firstPaintMs": 71.214848,
+        "settledMs": 208.276736,
+        "inputQueueMs": 0.008704,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "many-file commit to big diff",
+        "key": "k",
+        "firstPaintMs": 41.048832,
+        "settledMs": 41.07136,
+        "inputQueueMs": 0.02432,
+        "focus": "commits"
+      },
+      {
+        "round": 3,
+        "name": "big diff to small top",
+        "key": "k",
+        "firstPaintMs": 3.560704,
+        "settledMs": 3.754752,
+        "inputQueueMs": 0.059904,
+        "focus": "commits"
+      }
+    ],
+    "extraBefore": [
+      {
+        "round": 1,
+        "name": "select big diff B",
+        "key": "j",
+        "firstPaintMs": 49.581824,
+        "settledMs": 58.6688,
+        "inputQueueMs": 0.027136,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "focus main, big diff B",
+        "key": "0",
+        "firstPaintMs": 2.31424,
+        "settledMs": 2.336,
+        "inputQueueMs": 0.01152,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "load all 50000 diff lines",
+        "key": "End",
+        "firstPaintMs": 377.685248,
+        "settledMs": 377.704448,
+        "inputQueueMs": 0.007168,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.570624,
+        "settledMs": 0.58624,
+        "inputQueueMs": 0.013312,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.886272,
+        "settledMs": 0.919552,
+        "inputQueueMs": 0.018688,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.738304,
+        "settledMs": 0.76544,
+        "inputQueueMs": 0.00512,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.771072,
+        "settledMs": 0.795136,
+        "inputQueueMs": 0.007936,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.804352,
+        "settledMs": 0.828672,
+        "inputQueueMs": 0.004864,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.740352,
+        "settledMs": 0.764928,
+        "inputQueueMs": 0.005888,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.752896,
+        "settledMs": 0.779776,
+        "inputQueueMs": 0.00512,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.753664,
+        "settledMs": 0.775168,
+        "inputQueueMs": 0.013568,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.68992,
+        "settledMs": 0.703232,
+        "inputQueueMs": 0.014848,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.89344,
+        "settledMs": 0.923648,
+        "inputQueueMs": 0.0128,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "jump to top of loaded diff",
+        "key": "Home",
+        "firstPaintMs": 1.09824,
+        "settledMs": 1.13024,
+        "inputQueueMs": 0.009216,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "return to commits",
+        "key": "Escape",
+        "firstPaintMs": 1.179904,
+        "settledMs": 36.645632,
+        "inputQueueMs": 0.011008,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select 10000-file commit",
+        "key": "j",
+        "firstPaintMs": 70.574336,
+        "settledMs": 205.346816,
+        "inputQueueMs": 0.00512,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "open 10000-file list",
+        "key": "Enter",
+        "firstPaintMs": 142.618624,
+        "settledMs": 145.030144,
+        "inputQueueMs": 0.00768,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "jump to last file",
+        "key": "End",
+        "firstPaintMs": 4.285696,
+        "settledMs": 4.585216,
+        "inputQueueMs": 0.007936,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 3.858944,
+        "settledMs": 4.128256,
+        "inputQueueMs": 0.03968,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 3.207168,
+        "settledMs": 3.395584,
+        "inputQueueMs": 0.04224,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 4.164864,
+        "settledMs": 4.410112,
+        "inputQueueMs": 0.011008,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 3.824896,
+        "settledMs": 4.118016,
+        "inputQueueMs": 0.052224,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 3.085568,
+        "settledMs": 3.289856,
+        "inputQueueMs": 0.046592,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "jump to first file",
+        "key": "Home",
+        "firstPaintMs": 86.454528,
+        "settledMs": 88.848384,
+        "inputQueueMs": 0.006656,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "file list to commits",
+        "key": "Escape",
+        "firstPaintMs": 81.018112,
+        "settledMs": 210.601472,
+        "inputQueueMs": 0.029696,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select big diff B upwards",
+        "key": "k",
+        "firstPaintMs": 36.48256,
+        "settledMs": 41.522432,
+        "inputQueueMs": 0.008448,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select small top",
+        "key": "k",
+        "firstPaintMs": 3.819776,
+        "settledMs": 4.055552,
+        "inputQueueMs": 0.009984,
+        "focus": "commits"
+      }
+    ],
+    "extraAfter": [
+      {
+        "round": 1,
+        "name": "select big diff B",
+        "key": "j",
+        "firstPaintMs": 56.38272,
+        "settledMs": 56.432128,
+        "inputQueueMs": 0.018432,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "focus main, big diff B",
+        "key": "0",
+        "firstPaintMs": 2.33216,
+        "settledMs": 2.355712,
+        "inputQueueMs": 0.038144,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "load all 50000 diff lines",
+        "key": "End",
+        "firstPaintMs": 218.1504,
+        "settledMs": 218.169344,
+        "inputQueueMs": 0.004096,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.601088,
+        "settledMs": 0.618496,
+        "inputQueueMs": 0.00768,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.51072,
+        "settledMs": 0.532736,
+        "inputQueueMs": 0.005632,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.654592,
+        "settledMs": 0.669696,
+        "inputQueueMs": 0.093952,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.557312,
+        "settledMs": 0.574464,
+        "inputQueueMs": 0.003328,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.576768,
+        "settledMs": 0.59264,
+        "inputQueueMs": 0.002816,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.553472,
+        "settledMs": 0.567296,
+        "inputQueueMs": 0.003328,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.514304,
+        "settledMs": 0.5312,
+        "inputQueueMs": 0.003584,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.582656,
+        "settledMs": 0.599296,
+        "inputQueueMs": 0.004096,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.628736,
+        "settledMs": 0.645632,
+        "inputQueueMs": 0.005376,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "move up in loaded 50000-line diff",
+        "key": "k",
+        "firstPaintMs": 0.674816,
+        "settledMs": 0.691968,
+        "inputQueueMs": 0.012288,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "jump to top of loaded diff",
+        "key": "Home",
+        "firstPaintMs": 0.699904,
+        "settledMs": 0.718848,
+        "inputQueueMs": 0.005632,
+        "focus": "main"
+      },
+      {
+        "round": 1,
+        "name": "return to commits",
+        "key": "Escape",
+        "firstPaintMs": 0.841728,
+        "settledMs": 38.557696,
+        "inputQueueMs": 0.009728,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select 10000-file commit",
+        "key": "j",
+        "firstPaintMs": 66.926592,
+        "settledMs": 192.258816,
+        "inputQueueMs": 0.031488,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "open 10000-file list",
+        "key": "Enter",
+        "firstPaintMs": 129.070336,
+        "settledMs": 133.069568,
+        "inputQueueMs": 0.028672,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "jump to last file",
+        "key": "End",
+        "firstPaintMs": 3.166208,
+        "settledMs": 3.37152,
+        "inputQueueMs": 0.009472,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 3.725568,
+        "settledMs": 4.00384,
+        "inputQueueMs": 0.007168,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 4.275968,
+        "settledMs": 4.588544,
+        "inputQueueMs": 0.03968,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 3.632384,
+        "settledMs": 3.814912,
+        "inputQueueMs": 0.005632,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 3.901184,
+        "settledMs": 4.246272,
+        "inputQueueMs": 0.006912,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "move up near last file",
+        "key": "k",
+        "firstPaintMs": 3.342848,
+        "settledMs": 3.598336,
+        "inputQueueMs": 0.005888,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "jump to first file",
+        "key": "Home",
+        "firstPaintMs": 84.613376,
+        "settledMs": 88.574208,
+        "inputQueueMs": 0.004608,
+        "focus": "commitFiles"
+      },
+      {
+        "round": 1,
+        "name": "file list to commits",
+        "key": "Escape",
+        "firstPaintMs": 76.09088,
+        "settledMs": 208.110848,
+        "inputQueueMs": 0.020992,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select big diff B upwards",
+        "key": "k",
+        "firstPaintMs": 39.56224,
+        "settledMs": 39.586816,
+        "inputQueueMs": 0.011008,
+        "focus": "commits"
+      },
+      {
+        "round": 1,
+        "name": "select small top",
+        "key": "k",
+        "firstPaintMs": 3.22048,
+        "settledMs": 3.456768,
+        "inputQueueMs": 0.017152,
+        "focus": "commits"
+      }
+    ]
+  },
+  "rapid": {
+    "commits": {
+      "before": [
+        {
+          "cadenceMs": 40,
+          "keys": 40,
+          "totalMs": 1569,
+          "finalPaintAfterLastHandledMs": 4.324864,
+          "maxQueueMs": 0.049152,
+          "p95QueueMs": 0.04608
+        },
+        {
+          "cadenceMs": 10,
+          "keys": 40,
+          "totalMs": 396,
+          "finalPaintAfterLastHandledMs": 4.054272,
+          "maxQueueMs": 0.048384,
+          "p95QueueMs": 0.046848
+        }
+      ],
+      "after": [
+        {
+          "cadenceMs": 40,
+          "keys": 40,
+          "totalMs": 1568,
+          "finalPaintAfterLastHandledMs": 3.986944,
+          "maxQueueMs": 0.419584,
+          "p95QueueMs": 0.3776
+        },
+        {
+          "cadenceMs": 10,
+          "keys": 40,
+          "totalMs": 396,
+          "finalPaintAfterLastHandledMs": 3.31008,
+          "maxQueueMs": 0.045312,
+          "p95QueueMs": 0.040704
+        }
+      ]
+    },
+    "panels": {
+      "before": [
+        {
+          "cadenceMs": 40,
+          "keys": 40,
+          "totalMs": 1605,
+          "finalPaintAfterLastHandledMs": 42.894592,
+          "maxQueueMs": 1.090048,
+          "p95QueueMs": 0.590336
+        },
+        {
+          "cadenceMs": 10,
+          "keys": 40,
+          "totalMs": 434,
+          "finalPaintAfterLastHandledMs": 36.088832,
+          "maxQueueMs": 0.050688,
+          "p95QueueMs": 0.04864
+        }
+      ],
+      "after": [
+        {
+          "cadenceMs": 40,
+          "keys": 40,
+          "totalMs": 1604,
+          "finalPaintAfterLastHandledMs": 34.770944,
+          "maxQueueMs": 0.94976,
+          "p95QueueMs": 0.792832
+        },
+        {
+          "cadenceMs": 10,
+          "keys": 40,
+          "totalMs": 434,
+          "finalPaintAfterLastHandledMs": 39.852032,
+          "maxQueueMs": 0.064,
+          "p95QueueMs": 0.059392
+        }
+      ]
+    }
+  },
+  "busyPanels": {
+    "delayAfterEndMs": 20,
+    "before": [
+      {
+        "round": 1,
+        "firstPaintMs": 8.024832,
+        "settledMs": 8.55296,
+        "inputQueueMs": 0.020992,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      },
+      {
+        "round": 2,
+        "firstPaintMs": 8.627968,
+        "settledMs": 9.232128,
+        "inputQueueMs": 0.010752,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      },
+      {
+        "round": 3,
+        "firstPaintMs": 9.439232,
+        "settledMs": 10.157056,
+        "inputQueueMs": 0.013056,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      },
+      {
+        "round": 4,
+        "firstPaintMs": 9.884416,
+        "settledMs": 10.729216,
+        "inputQueueMs": 0.018176,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      },
+      {
+        "round": 5,
+        "firstPaintMs": 8.397056,
+        "settledMs": 8.798976,
+        "inputQueueMs": 0.012288,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      }
+    ],
+    "after": [
+      {
+        "round": 1,
+        "firstPaintMs": 10.37184,
+        "settledMs": 10.926848,
+        "inputQueueMs": 0.013824,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      },
+      {
+        "round": 2,
+        "firstPaintMs": 9.531648,
+        "settledMs": 10.082304,
+        "inputQueueMs": 0.014336,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      },
+      {
+        "round": 3,
+        "firstPaintMs": 10.664192,
+        "settledMs": 11.15648,
+        "inputQueueMs": 0.013568,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      },
+      {
+        "round": 4,
+        "firstPaintMs": 9.120256,
+        "settledMs": 9.631232,
+        "inputQueueMs": 0.016384,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      },
+      {
+        "round": 5,
+        "firstPaintMs": 9.681152,
+        "settledMs": 10.143232,
+        "inputQueueMs": 0.03584,
+        "fullLoadCompletedBeforeSwitch": false,
+        "finalFocus": "files"
+      }
+    ]
+  },
+  "benchmarks": {
+    "writer": {
+      "before": [
+        {
+          "name": "BenchmarkNavigationGitDiffWrite",
+          "ns": 227297483,
+          "bytes": 658030000,
+          "allocations": 650120
+        },
+        {
+          "name": "BenchmarkNavigationGitDiffWrite",
+          "ns": 168587658,
+          "bytes": 657968696,
+          "allocations": 650047
+        },
+        {
+          "name": "BenchmarkNavigationGitDiffWrite",
+          "ns": 166363483,
+          "bytes": 657962816,
+          "allocations": 650035
+        }
+      ],
+      "after": [
+        {
+          "name": "BenchmarkNavigationGitDiffWrite",
+          "ns": 111334398,
+          "bytes": 286799012,
+          "allocations": 600079
+        },
+        {
+          "name": "BenchmarkNavigationGitDiffWrite",
+          "ns": 96160812,
+          "bytes": 286762880,
+          "allocations": 600035
+        },
+        {
+          "name": "BenchmarkNavigationGitDiffWrite",
+          "ns": 96349362,
+          "bytes": 286762760,
+          "allocations": 600033
+        }
+      ],
+      "scope": "Identical 50,000-row colored Git fixture; three samples per side."
+    },
+    "filename": {
+      "before": [
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 1350,
+          "bytes": 6928,
+          "allocations": 10
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 1364,
+          "bytes": 6928,
+          "allocations": 10
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 1335,
+          "bytes": 6928,
+          "allocations": 10
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 1329,
+          "bytes": 6928,
+          "allocations": 10
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 1327,
+          "bytes": 6928,
+          "allocations": 10
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 1364,
+          "bytes": 7024,
+          "allocations": 12
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 1434,
+          "bytes": 7024,
+          "allocations": 12
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 1399,
+          "bytes": 7024,
+          "allocations": 12
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 1322,
+          "bytes": 7024,
+          "allocations": 12
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 1266,
+          "bytes": 7024,
+          "allocations": 12
+        }
+      ],
+      "after": [
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 13.63,
+          "bytes": 0,
+          "allocations": 0
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 14.11,
+          "bytes": 0,
+          "allocations": 0
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 13.66,
+          "bytes": 0,
+          "allocations": 0
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 13.65,
+          "bytes": 0,
+          "allocations": 0
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file000.txt",
+          "ns": 13.82,
+          "bytes": 0,
+          "allocations": 0
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 69.83,
+          "bytes": 96,
+          "allocations": 2
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 71.69,
+          "bytes": 96,
+          "allocations": 2
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 69.48,
+          "bytes": 96,
+          "allocations": 2
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 71.03,
+          "bytes": 96,
+          "allocations": 2
+        },
+        {
+          "name": "BenchmarkEscapeSpecialChars/many/dir000/file_with_controls.txt",
+          "ns": 65.42,
+          "bytes": 96,
+          "allocations": 2
+        }
+      ],
+      "scope": "Identical filename fixtures; five samples per side."
+    },
+    "productionAfter": [
+      {
+        "name": "BenchmarkViewWriteGitColoredDiff",
+        "ns": 111109825,
+        "bytes": 286785088,
+        "allocations": 600061
+      },
+      {
+        "name": "BenchmarkViewWriteGitColoredDiff",
+        "ns": 97660782,
+        "bytes": 286764162,
+        "allocations": 600035
+      },
+      {
+        "name": "BenchmarkViewWriteGitColoredDiff",
+        "ns": 98304440,
+        "bytes": 286762708,
+        "allocations": 600033
+      },
+      {
+        "name": "BenchmarkViewWriteGitColoredDiff",
+        "ns": 101296125,
+        "bytes": 286762762,
+        "allocations": 600033
+      },
+      {
+        "name": "BenchmarkViewWriteGitColoredDiff",
+        "ns": 91693054,
+        "bytes": 286762792,
+        "allocations": 600033
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/ordinary",
+        "ns": 14.83,
+        "bytes": 0,
+        "allocations": 0
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/ordinary",
+        "ns": 14.24,
+        "bytes": 0,
+        "allocations": 0
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/ordinary",
+        "ns": 14.2,
+        "bytes": 0,
+        "allocations": 0
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/ordinary",
+        "ns": 14.21,
+        "bytes": 0,
+        "allocations": 0
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/ordinary",
+        "ns": 14.32,
+        "bytes": 0,
+        "allocations": 0
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/controls",
+        "ns": 70.28,
+        "bytes": 96,
+        "allocations": 2
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/controls",
+        "ns": 67.15,
+        "bytes": 96,
+        "allocations": 2
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/controls",
+        "ns": 70.87,
+        "bytes": 96,
+        "allocations": 2
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/controls",
+        "ns": 69.36,
+        "bytes": 96,
+        "allocations": 2
+      },
+      {
+        "name": "BenchmarkEscapeSpecialChars/controls",
+        "ns": 70.18,
+        "bytes": 96,
+        "allocations": 2
+      }
+    ]
+  },
+  "checks": [
+    "just format",
+    "just build",
+    "just unit-test",
+    "just lint",
+    "just e2e",
+    "go test -race ./pkg/gocui ./pkg/utils ./pkg/tasks",
+    "All benchmark families have comparison descriptions"
+  ],
+  "artifacts": ".git/navigation-pass-20261106"
+}
