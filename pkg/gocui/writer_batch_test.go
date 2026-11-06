@@ -18,6 +18,8 @@ func TestWriteMatchesSmallChunks(t *testing.T) {
 		{name: "Unicode boundaries", input: "before 界 é 👩‍💻 after\n"},
 		{name: "combining mark after ASCII", input: "abcde\u0301 tail x\ufe0f rest\n"},
 		{name: "invalid UTF-8", input: "before\xff\xfeafter\n"},
+		{name: "combining mark after SGR final", input: "\x1b[32m\u0301visible\x1b[0m"},
+		{name: "character set designation", input: "\x1b(BASCII text\n"},
 		{name: "SGR", input: "\x1b[32mcolored text\x1b[0m plain text\n"},
 		{name: "metadata", input: osc1717("1;a;1;;file.go") + "+added content\n"},
 		{name: "orphaned metadata", input: osc1717("1;a;1;;first.go") + osc1717("1;a;2;;second.go") + "visible content\n"},

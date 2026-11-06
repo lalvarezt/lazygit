@@ -1325,7 +1325,12 @@ func (b *viewBuffer) write(v *View, p []byte) {
 			state = -1
 			continue
 		}
-		chr, remaining, width, state = uniseg.FirstGraphemeCluster(remaining, state)
+		if remaining[0] >= ' ' && remaining[0] <= '~' && (len(remaining) == 1 || remaining[1] < utf8.RuneSelf) {
+			chr, remaining = remaining[:1], remaining[1:]
+			width, state = 1, -1
+		} else {
+			chr, remaining, width, state = uniseg.FirstGraphemeCluster(remaining, state)
+		}
 
 		switch {
 		case characterEquals(chr, '\n') || isCRLF(chr):
