@@ -164,12 +164,46 @@ func TestNearestSearchPosition(t *testing.T) {
 	v := NewView("search", 0, 0, 80, 24, OutputNormal)
 	assert.Zero(t, v.nearestSearchPosition())
 	v.searcher.searchPositions = []SearchPosition{{Y: 2}, {Y: 2}, {Y: 5}, {Y: 5}, {Y: 9}}
-	for _, test := range []struct{ line, want int }{
-		{0, 0}, {2, 0}, {3, 1}, {5, 2}, {8, 3}, {9, 4}, {10, 4},
+	for _, test := range []struct{ line, current, want int }{
+		{0, 0, 0},
+		{2, 0, 0},
+		{3, 0, 1},
+		{5, 0, 2},
+		{8, 0, 3},
+		{9, 0, 4},
+		{10, 0, 4},
+		{2, 1, 1},
+		{5, 3, 3},
+		{2, 3, 0},
+		{5, 1, 2},
 	} {
 		v.cy = 1
 		v.oy = test.line - v.cy
-		assert.Equal(t, test.want, v.nearestSearchPosition(), "line %d", test.line)
+		v.searcher.currentSearchIndex = test.current
+		assert.Equal(t, test.want, v.nearestSearchPosition(), "line %d, current %d", test.line, test.current)
+	}
+}
+
+func TestSearchRefreshKeepsCurrentMatch(t *testing.T) {
+	for _, highlight := range []bool{false, true} {
+		t.Run(fmt.Sprintf("highlight=%t", highlight), func(t *testing.T) {
+			v := NewView("search", 0, 0, 80, 24, OutputNormal)
+			v.Highlight = highlight
+			v.SetContent("other\nmatch match\nmatch")
+			v.Search("match", nil)
+			_ = v.gotoNextMatch()
+			assert.Equal(t, 1, v.searcher.currentSearchIndex)
+			firstResult := &v.searcher.searchPositions[0]
+
+			v.UpdateSearchResults("match", nil)
+			assert.Equal(t, 1, v.searcher.currentSearchIndex)
+			assert.Same(t, firstResult, &v.searcher.searchPositions[0])
+
+			v.SetContent("match")
+			v.UpdateSearchResults("match", nil)
+			assert.Zero(t, v.searcher.currentSearchIndex)
+			assert.Len(t, v.searcher.searchPositions, 1)
+		})
 	}
 }
 
