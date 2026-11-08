@@ -406,6 +406,7 @@ var tests = []*components.IntegrationTest{
 	main_view.ClickAFileInTheDiffStat,
 	main_view.ClickSelectsDiffLine,
 	main_view.CommitFromMainView,
+	main_view.CopyCombinedDiffWithoutLineMetadata,
 	main_view.CopyRowsThatAreNoDiffLine,
 	main_view.CopySelectedDiffLines,
 	main_view.CustomPatchGoesThroughTheDiffRenderer,
