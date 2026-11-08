@@ -435,6 +435,7 @@ type searcher struct {
 	// the whole view, and content arrives a line at a time, so it happens once per
 	// read rather than once per line written.
 	positionsStale bool
+	dirtyLine      int
 }
 
 func (v *View) setRenderSearchStatus(renderSearchStatus func(*View, int, int)) {
@@ -464,6 +465,7 @@ func (v *View) refreshSearchPositions() {
 
 // refreshSearchPositions for a caller that already holds writeMutex.
 func (v *View) refreshSearchPositionsIfNeeded() {
+	v.refreshViewLinesIfNeeded()
 	if v.searcher.positionsStale {
 		v.updateSearchPositions()
 	}
@@ -595,8 +597,10 @@ func (v *View) UpdateSearchResults(str string, modelSearchResults []SearchPositi
 	v.writeMutex.Lock()
 	defer v.writeMutex.Unlock()
 
-	v.searcher.search(str, modelSearchResults)
-	v.updateSearchPositions()
+	if str != v.searcher.searchString || modelSearchResults != nil || v.searcher.modelSearchResults != nil {
+		v.searcher.search(str, modelSearchResults)
+	}
+	v.refreshSearchPositionsIfNeeded()
 
 	if v.Highlight && len(v.searcher.searchPositions) > 0 {
 		v.searcher.currentSearchIndex = v.nearestSearchPosition()
@@ -758,6 +762,7 @@ func calculateNewOrigin(selectedLine int, oldOrigin int, lineCount int, viewHeig
 // search sets what to search for. It leaves the current match for the caller to choose
 // once the positions have been worked out.
 func (s *searcher) search(str string, modelSearchResults []SearchPosition) {
+	s.invalidateFrom(0)
 	s.searchString = str
 	if str == "" || s.searchPositions == nil {
 		s.searchPositions = []SearchPosition{}
@@ -765,6 +770,15 @@ func (s *searcher) search(str string, modelSearchResults []SearchPosition) {
 		s.searchPositions = s.searchPositions[:0]
 	}
 	s.modelSearchResults = modelSearchResults
+}
+
+func (s *searcher) invalidateFrom(line int) {
+	if s.positionsStale {
+		s.dirtyLine = min(s.dirtyLine, line)
+	} else {
+		s.dirtyLine = line
+	}
+	s.positionsStale = true
 }
 
 func (s *searcher) clearSearch() {
@@ -1312,8 +1326,6 @@ func (v *View) write(p []byte) {
 	v.clearHover()
 
 	v.buf.write(v, p)
-
-	v.searcher.positionsStale = true
 }
 
 // write parses p into cells and appends them to the buffer at its write cursor.
@@ -1816,6 +1828,7 @@ func (v *View) SwapInOffscreenRender() {
 	v.renderedTextArea.source = nil
 	v.buf = v.offscreen
 	v.offscreen = nil
+	v.firstDirtyLine = 0
 	v.markViewLinesDirty()
 	v.clearHover()
 }
@@ -1886,13 +1899,14 @@ func stringToGraphemes(s string) []string {
 }
 
 func (v *View) updateSearchPositions() {
+	v.refreshViewLinesIfNeeded()
 	v.searcher.positionsStale = false
 
 	if v.searcher.searchString != "" {
 		search := newLineSearcher(v.searcher.searchString)
-		v.searcher.searchPositions = v.searcher.searchPositions[:0]
 
 		if v.searcher.modelSearchResults != nil {
+			v.searcher.searchPositions = v.searcher.searchPositions[:0]
 			for _, result := range v.searcher.modelSearchResults {
 				// This code only works when v.Wrap is false.
 
@@ -1922,8 +1936,10 @@ func (v *View) updateSearchPositions() {
 				}
 			}
 		} else {
-			v.refreshViewLinesIfNeeded()
-			for y, line := range v.viewLines {
+			start := min(v.searcher.dirtyLine, len(v.viewLines))
+			v.searcher.searchPositions = v.searcher.searchPositions[:v.firstSearchPositionAtLine(start)]
+			for y := start; y < len(v.viewLines); y++ {
+				line := v.viewLines[y]
 				v.searcher.searchPositions = search.appendPositions(v.searcher.searchPositions, line.line, y)
 			}
 		}
@@ -2082,7 +2098,13 @@ func (v *View) refreshViewLinesIfNeeded() {
 
 	lineIdx := 0
 	lines := v.buf.lines
-	for i := range lines {
+	start := 0
+	if len(v.viewLines) > 0 && len(lines) > 0 && lines[0].wrappedCells != nil && lines[0].wrappedColumns == wrap {
+		start = min(v.firstDirtyLine, len(lines))
+		lineIdx = sort.Search(len(v.viewLines), func(i int) bool { return v.viewLines[i].linesY >= start })
+	}
+	v.searcher.invalidateFrom(lineIdx)
+	for i := start; i < len(lines); i++ {
 		line := &lines[i]
 
 		// Reuse the previously wrapped result for lines that haven't changed
@@ -2738,7 +2760,7 @@ func (v *View) renderTextAreaCells() bool {
 	content = slices.Grow(content, len(textCells)-start-prefix)
 	v.clear()
 	v.firstDirtyLine = keep
-	v.searcher.positionsStale = true
+	v.searcher.invalidateFrom(0)
 	clear(lines[keep:])
 	v.buf.lines = lines[:keep]
 	v.buf.ei.screenRow = screenRow
