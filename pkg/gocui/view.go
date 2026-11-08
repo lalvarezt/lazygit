@@ -1375,6 +1375,11 @@ func (b *viewBuffer) write(v *View, p []byte) {
 	cells := make([]cell, 0, 1)
 
 	for len(remaining) > 0 {
+		if count := b.ei.parseSGR(remaining); count > 0 {
+			remaining = remaining[count:]
+			state = -1
+			continue
+		}
 		if count := b.writeASCII(remaining); count > 0 {
 			remaining = remaining[count:]
 			state = -1

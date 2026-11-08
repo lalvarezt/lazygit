@@ -7,6 +7,7 @@ package gocui
 import (
 	"strconv"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/go-errors/errors"
 )
@@ -250,6 +251,52 @@ func (ei *escapeInterpreter) firstParamOrDefault(dflt int) int {
 
 func (ei *escapeInterpreter) instructionRead() {
 	ei.instruction = noInstruction{}
+}
+
+// parseSGR consumes a complete SGR without grapheme segmentation. Incomplete
+// sequences and non-SGR instructions belong to the streaming interpreter.
+func (ei *escapeInterpreter) parseSGR(p []byte) int {
+	if ei.state != stateNone || len(p) < 3 || p[0] != '\x1b' || p[1] != '[' || len(ei.orphanedMetadata) != 0 {
+		return 0
+	}
+	if _, ok := ei.instruction.(noInstruction); !ok {
+		return 0
+	}
+	parameters, digits := 1, 0
+	for end := 2; end < len(p); end++ {
+		switch {
+		case p[end] >= '0' && p[end] <= '9':
+			digits++
+			if digits > 255 {
+				return 0
+			}
+		case p[end] == ';':
+			parameters++
+			digits = 0
+			if parameters > 20 {
+				return 0
+			}
+		case p[end] == 'm':
+			// A Unicode continuation can extend the final ASCII grapheme.
+			if end+1 < len(p) && p[end+1] >= utf8.RuneSelf {
+				return 0
+			}
+			ei.csiParam = strings.Split(string(p[2:end]), ";")
+			if end == 2 {
+				ei.csiParam[0] = "0"
+			}
+			fg, bg := ei.curFgColor, ei.curBgColor
+			if err := ei.outputCSI(); err != nil {
+				ei.curFgColor, ei.curBgColor = fg, bg
+			}
+			ei.curch = "m"
+			ei.csiParam = nil
+			return end + 1
+		default:
+			return 0
+		}
+	}
+	return 0
 }
 
 // parseOne parses a character (grapheme cluster). If isEscape is true, it means that the character
