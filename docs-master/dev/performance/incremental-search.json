@@ -1,0 +1,452 @@
+{
+  "date": "2026-11-08",
+  "source_revisions": {
+    "lazygit": "561aa807bdbd057fee58382ab057f9420ea1e751",
+    "delta": "fffbb9d051f33bcc4b5bb44f7d93de8b39c4479f",
+    "chezmoi_before_tools": "4432dffc309c0672deaf1b75350e71dde4e36d45"
+  },
+  "ui_baseline": [
+    {
+      "name": "lazygit_large",
+      "included": true,
+      "samples": 10,
+      "ready_samples": 10,
+      "median_ms": 34.515,
+      "p95_ms": 42.773,
+      "worst_ms": 42.773,
+      "max_excess_loop_delay_ms": 3.65
+    },
+    {
+      "name": "lazygit_medium",
+      "included": true,
+      "samples": 10,
+      "ready_samples": 10,
+      "median_ms": 26.551,
+      "p95_ms": 28.965,
+      "worst_ms": 28.965,
+      "max_excess_loop_delay_ms": 1.35
+    },
+    {
+      "name": "lazygit_search_prompt_clean",
+      "included": true,
+      "samples": 3,
+      "ready_samples": 3,
+      "median_ms": 1225.182,
+      "p95_ms": 1244.57,
+      "worst_ms": 1244.57,
+      "max_excess_loop_delay_ms": 1.537
+    }
+  ],
+  "ui_summary": [
+    {
+      "name": "medium_final",
+      "samples": 5,
+      "median_ms": 22.09321689605713,
+      "worst_ms": 24.468081951141357,
+      "complete_samples": 0,
+      "complete_median_ms": null,
+      "max_excess_loop_delay_ms": 1.338587760925293
+    },
+    {
+      "name": "large_final",
+      "samples": 5,
+      "median_ms": 31.29688596725464,
+      "worst_ms": 34.07736921310425,
+      "complete_samples": 0,
+      "complete_median_ms": null,
+      "max_excess_loop_delay_ms": 0.8794469833374023
+    },
+    {
+      "name": "search_prompt_final",
+      "samples": 5,
+      "median_ms": 2.355632781982422,
+      "worst_ms": 3.2893686294555664,
+      "complete_samples": 0,
+      "complete_median_ms": null,
+      "max_excess_loop_delay_ms": 0.9251670837402344
+    },
+    {
+      "name": "search_late_match_final",
+      "samples": 5,
+      "median_ms": 390.8323812484741,
+      "worst_ms": 419.12257194519043,
+      "complete_samples": 5,
+      "complete_median_ms": 1402.692624092102,
+      "max_excess_loop_delay_ms": 2.349203109741211
+    },
+    {
+      "name": "medium_optimized",
+      "samples": 5,
+      "median_ms": 21.41789197921753,
+      "worst_ms": 24.47570276260376,
+      "complete_samples": 0,
+      "complete_median_ms": null,
+      "max_excess_loop_delay_ms": 0.8995771408081055
+    },
+    {
+      "name": "large_optimized",
+      "samples": 5,
+      "median_ms": 30.937267780303955,
+      "worst_ms": 32.50880289077759,
+      "complete_samples": 0,
+      "complete_median_ms": null,
+      "max_excess_loop_delay_ms": 0.8072671890258789
+    },
+    {
+      "name": "search_prompt_optimized",
+      "samples": 5,
+      "median_ms": 1.9567928314208984,
+      "worst_ms": 2.308023452758789,
+      "complete_samples": 0,
+      "complete_median_ms": null,
+      "max_excess_loop_delay_ms": 0.7740192413330078
+    },
+    {
+      "name": "search_late_match_optimized",
+      "samples": 5,
+      "median_ms": 343.6546621322632,
+      "worst_ms": 343.7529625892639,
+      "complete_samples": 5,
+      "complete_median_ms": 1065.3536267280579,
+      "max_excess_loop_delay_ms": 1.656237125396729
+    },
+    {
+      "name": "hide_optimized",
+      "samples": 3,
+      "median_ms": 5.333337306976318,
+      "worst_ms": 6.942348957061768,
+      "complete_samples": 0,
+      "complete_median_ms": null,
+      "max_excess_loop_delay_ms": 6.718075752258301
+    },
+    {
+      "name": "resume_optimized",
+      "samples": 3,
+      "median_ms": 12.812638759613037,
+      "worst_ms": 21.862171173095703,
+      "complete_samples": 0,
+      "complete_median_ms": null,
+      "max_excess_loop_delay_ms": 18.88255214691162
+    }
+  ],
+  "benchmarks": {
+    "sgr_before": {
+      "BenchmarkViewWriteGitColoredDiff": {
+        "samples": [
+          {
+            "ms": 96.275061,
+            "bytes": 286769228,
+            "allocations": 600041
+          },
+          {
+            "ms": 95.553669,
+            "bytes": 286762688,
+            "allocations": 600032
+          },
+          {
+            "ms": 93.022844,
+            "bytes": 286762718,
+            "allocations": 600032
+          },
+          {
+            "ms": 95.483087,
+            "bytes": 286762722,
+            "allocations": 600032
+          },
+          {
+            "ms": 95.696011,
+            "bytes": 286762729,
+            "allocations": 600032
+          }
+        ],
+        "median_ms": 95.553669
+      },
+      "BenchmarkViewWriteLargeDiff/colored": {
+        "samples": [
+          {
+            "ms": 80.977117,
+            "bytes": 247562800,
+            "allocations": 550033
+          },
+          {
+            "ms": 83.015714,
+            "bytes": 247562713,
+            "allocations": 550032
+          },
+          {
+            "ms": 79.31985,
+            "bytes": 247562720,
+            "allocations": 550032
+          },
+          {
+            "ms": 79.290077,
+            "bytes": 247562683,
+            "allocations": 550032
+          },
+          {
+            "ms": 84.226026,
+            "bytes": 247562722,
+            "allocations": 550032
+          }
+        ],
+        "median_ms": 80.977117
+      },
+      "BenchmarkViewWriteLargeDiff/metadata": {
+        "samples": [
+          {
+            "ms": 50.055686,
+            "bytes": 101962647,
+            "allocations": 250031
+          },
+          {
+            "ms": 47.557618,
+            "bytes": 101962652,
+            "allocations": 250031
+          },
+          {
+            "ms": 50.396557,
+            "bytes": 101962648,
+            "allocations": 250031
+          },
+          {
+            "ms": 50.511759,
+            "bytes": 101962653,
+            "allocations": 250031
+          },
+          {
+            "ms": 50.704578,
+            "bytes": 101962674,
+            "allocations": 250031
+          }
+        ],
+        "median_ms": 50.396557
+      }
+    },
+    "sgr_after": {
+      "BenchmarkViewWriteGitColoredDiff": {
+        "samples": [
+          {
+            "ms": 84.83451,
+            "bytes": 286768344,
+            "allocations": 600040
+          },
+          {
+            "ms": 80.30383,
+            "bytes": 286762729,
+            "allocations": 600032
+          },
+          {
+            "ms": 81.470567,
+            "bytes": 286762682,
+            "allocations": 600032
+          },
+          {
+            "ms": 83.611411,
+            "bytes": 286762684,
+            "allocations": 600032
+          },
+          {
+            "ms": 77.88946,
+            "bytes": 286762694,
+            "allocations": 600032
+          }
+        ],
+        "median_ms": 81.470567
+      },
+      "BenchmarkViewWriteLargeDiff/colored": {
+        "samples": [
+          {
+            "ms": 75.110418,
+            "bytes": 247562784,
+            "allocations": 550033
+          },
+          {
+            "ms": 75.684108,
+            "bytes": 247562740,
+            "allocations": 550032
+          },
+          {
+            "ms": 71.99362,
+            "bytes": 247562683,
+            "allocations": 550032
+          },
+          {
+            "ms": 74.881942,
+            "bytes": 247562720,
+            "allocations": 550032
+          },
+          {
+            "ms": 75.557193,
+            "bytes": 247562771,
+            "allocations": 550033
+          }
+        ],
+        "median_ms": 75.110418
+      },
+      "BenchmarkViewWriteLargeDiff/metadata": {
+        "samples": [
+          {
+            "ms": 51.60415,
+            "bytes": 101962620,
+            "allocations": 250031
+          },
+          {
+            "ms": 52.685712,
+            "bytes": 101962644,
+            "allocations": 250031
+          },
+          {
+            "ms": 51.439527,
+            "bytes": 101962640,
+            "allocations": 250031
+          },
+          {
+            "ms": 50.478404,
+            "bytes": 101962671,
+            "allocations": 250031
+          },
+          {
+            "ms": 52.373115,
+            "bytes": 101962629,
+            "allocations": 250031
+          }
+        ],
+        "median_ms": 51.60415
+      }
+    },
+    "streaming_before": {
+      "BenchmarkIncrementalSearchedDiff/plain": {
+        "samples": [
+          {
+            "ms": 86.085917,
+            "bytes": 47354714,
+            "allocations": 16773
+          },
+          {
+            "ms": 84.857804,
+            "bytes": 47350431,
+            "allocations": 16768
+          },
+          {
+            "ms": 85.369513,
+            "bytes": 47349998,
+            "allocations": 16767
+          },
+          {
+            "ms": 84.503326,
+            "bytes": 47350014,
+            "allocations": 16767
+          },
+          {
+            "ms": 85.114629,
+            "bytes": 47349970,
+            "allocations": 16767
+          }
+        ],
+        "median_ms": 85.114629
+      },
+      "BenchmarkIncrementalSearchedDiff/wrapped": {
+        "samples": [
+          {
+            "ms": 92.475912,
+            "bytes": 49974425,
+            "allocations": 25025
+          },
+          {
+            "ms": 88.45821,
+            "bytes": 49974438,
+            "allocations": 25025
+          },
+          {
+            "ms": 87.791454,
+            "bytes": 49974461,
+            "allocations": 25025
+          },
+          {
+            "ms": 89.674663,
+            "bytes": 49974456,
+            "allocations": 25025
+          },
+          {
+            "ms": 90.819462,
+            "bytes": 49974493,
+            "allocations": 25025
+          }
+        ],
+        "median_ms": 89.674663
+      }
+    },
+    "streaming_after": {
+      "BenchmarkIncrementalSearchedDiff/plain": {
+        "samples": [
+          {
+            "ms": 13.257075,
+            "bytes": 47350742,
+            "allocations": 16768
+          },
+          {
+            "ms": 13.359609,
+            "bytes": 47349985,
+            "allocations": 16767
+          },
+          {
+            "ms": 13.86757,
+            "bytes": 47349977,
+            "allocations": 16767
+          },
+          {
+            "ms": 13.351603,
+            "bytes": 47349992,
+            "allocations": 16767
+          },
+          {
+            "ms": 13.196436,
+            "bytes": 47349992,
+            "allocations": 16767
+          }
+        ],
+        "median_ms": 13.351603
+      },
+      "BenchmarkIncrementalSearchedDiff/wrapped": {
+        "samples": [
+          {
+            "ms": 16.73836,
+            "bytes": 49974461,
+            "allocations": 25025
+          },
+          {
+            "ms": 16.805555,
+            "bytes": 49974464,
+            "allocations": 25025
+          },
+          {
+            "ms": 16.049967,
+            "bytes": 49974463,
+            "allocations": 25025
+          },
+          {
+            "ms": 17.128658,
+            "bytes": 49974461,
+            "allocations": 25025
+          },
+          {
+            "ms": 16.419063,
+            "bytes": 49974446,
+            "allocations": 25025
+          }
+        ],
+        "median_ms": 16.73836
+      }
+    }
+  },
+  "validation": [
+    "just format",
+    "just lint",
+    "just unit-test",
+    "just e2e filter_and_search main_view",
+    "just e2e diff",
+    "go test -race ./pkg/tasks -run ReadToEnd|ReadRequests",
+    "stalled-output regression fails before fix and passes after",
+    "go test -race ./pkg/gocui ./pkg/tasks: pass"
+  ]
+}
