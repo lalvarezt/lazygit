@@ -14,6 +14,8 @@ const (
 type SearchState struct {
 	Context         Context
 	PrevSearchIndex int
+	Loading         bool
+	PendingMatch    bool
 }
 
 func NewSearchState() *SearchState {

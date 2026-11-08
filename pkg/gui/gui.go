@@ -454,6 +454,9 @@ func (gui *Gui) onNewRepo(startArgs appTypes.StartArgs, contextKey types.Context
 	})
 
 	gui.g.SetRenderSearchStatusFunc(func(v *gocui.View, index int, total int) {
+		if gui.c.Context().Current().GetKey() == context.SEARCH_CONTEXT_KEY {
+			return
+		}
 		ctx, ok := gui.helpers.View.ContextForView(v.Name())
 		if ok {
 			if searchableContext, ok := ctx.(types.ISearchableContext); ok {

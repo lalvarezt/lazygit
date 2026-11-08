@@ -717,6 +717,12 @@ func (self *ViewBufferManager) NewCmdTask(start func() (Cmd, io.Reader), prefix 
 					continue
 				}
 				{
+					var progress <-chan time.Time
+					if linesToRead.Total == -1 {
+						ticker := time.NewTicker(33 * time.Millisecond)
+						defer ticker.Stop()
+						progress = ticker.C
+					}
 					callThen := func() {
 						if linesToRead.Then != nil {
 							linesToRead.Then()
@@ -748,6 +754,11 @@ func (self *ViewBufferManager) NewCmdTask(start func() (Cmd, io.Reader), prefix 
 						case <-opts.Stop:
 							handOver()
 							break outer
+						case <-progress:
+							if painted {
+								refreshViewIfStale()
+							}
+							continue
 						case line, ok = <-lineChan:
 							// process line below
 						}

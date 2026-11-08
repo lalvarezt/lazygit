@@ -124,6 +124,7 @@ func (gui *Gui) resetHelpersAndControllers() {
 			windowHelper,
 			modeHelper,
 			appStatusHelper,
+			searchHelper,
 		),
 		Search:     searchHelper,
 		Worktree:   worktreeHelper,

@@ -31,6 +31,8 @@ func NewSearchHelper(
 
 func (self *SearchHelper) OpenFilterPrompt(context types.IFilterableContext) {
 	state := self.searchState()
+	state.Loading = false
+	state.PendingMatch = false
 
 	state.PrevSearchIndex = -1
 
@@ -53,11 +55,15 @@ func (self *SearchHelper) OpenSearchPrompt(context types.ISearchableContext) {
 	state.PrevSearchIndex = -1
 
 	state.Context = context
+	state.Loading = false
+	state.PendingMatch = false
 
 	self.searchPrefixView().SetContent(self.c.Tr.SearchPrefix)
+	self.RefreshLoading()
 	promptView := self.promptView()
 	promptView.ClearTextArea()
 	promptView.RenderTextArea()
+	self.OnPromptContentChanged("")
 
 	self.c.Context().Push(self.c.Contexts().Search, types.OnFocusOpts{})
 
@@ -82,9 +88,51 @@ func (self *SearchHelper) DisplaySearchStatus(context types.ISearchableContext) 
 
 	state.Context = context
 
-	self.searchPrefixView().SetContent(self.c.Tr.SearchPrefix)
+	self.searchPrefixView().SetContent(self.Prefix())
 	index, totalCount := context.GetView().GetSearchStatus()
 	context.RenderSearchStatus(index, totalCount)
+}
+
+func (self *SearchHelper) Prefix() string {
+	state := self.searchState()
+	if state.SearchType() == types.SearchTypeFilter {
+		return self.c.Tr.FilterPrefix
+	}
+	if state.Loading {
+		return self.c.Tr.SearchLoadingPrefix
+	}
+	return self.c.Tr.SearchPrefix
+}
+
+func (self *SearchHelper) RefreshLoading() bool {
+	state := self.searchState()
+	if state.SearchType() != types.SearchTypeSearch {
+		return false
+	}
+	manager := self.c.GetViewBufferManagerForView(state.Context.GetView())
+	loading := manager != nil && manager.IsLoading()
+	if state.Loading != loading {
+		state.Loading = loading
+		self.searchPrefixView().SetContent(self.Prefix())
+		return true
+	}
+	return false
+}
+
+func (self *SearchHelper) RefreshResults(view *gocui.View) {
+	view.RefreshSearch()
+	state := self.searchState()
+	if !state.PendingMatch || state.Context == nil || state.Context.GetView() != view {
+		return
+	}
+	_, count := view.GetSearchStatus()
+	if count > 0 {
+		state.PendingMatch = false
+		context := state.Context.(types.ISearchableContext)
+		view.Search(context.GetSearchString(), modelSearchResults(context))
+	} else if !state.Loading {
+		state.PendingMatch = false
+	}
 }
 
 func (self *SearchHelper) searchState() *types.SearchState {
@@ -159,6 +207,8 @@ func (self *SearchHelper) ConfirmSearch() {
 	self.c.Context().Pop()
 
 	context.GetView().Search(searchString, modelSearchResults(context))
+	_, count := context.GetView().GetSearchStatus()
+	state.PendingMatch = count == 0 && state.Loading
 }
 
 func modelSearchResults(context types.ISearchableContext) []gocui.SearchPosition {
@@ -206,6 +256,7 @@ func (self *SearchHelper) ScrollHistory(scrollIncrement int) {
 
 func (self *SearchHelper) Cancel() {
 	state := self.searchState()
+	state.PendingMatch = false
 
 	switch context := state.Context.(type) {
 	case types.IFilterableContext:
@@ -227,7 +278,10 @@ func (self *SearchHelper) OnPromptContentChanged(searchString string) {
 	case types.IFilterableContext:
 		self.ApplyFilter(context, searchString)
 	case types.ISearchableContext:
-		// do nothing
+		if self.c.GetViewBufferManagerForView(context.GetView()) != nil {
+			context.SetSearchString(searchString)
+			context.GetView().UpdateSearchResults(searchString, modelSearchResults(context))
+		}
 	default:
 		// do nothing (shouldn't land here)
 	}
@@ -321,6 +375,8 @@ func (self *SearchHelper) HidePrompt() {
 
 	state := self.searchState()
 	state.Context = nil
+	state.PendingMatch = false
+	state.Loading = false
 }
 
 func (self *SearchHelper) setSearchingFrameColor() {

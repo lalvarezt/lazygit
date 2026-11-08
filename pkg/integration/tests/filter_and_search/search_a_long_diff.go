@@ -46,8 +46,8 @@ var SearchALongDiff = NewIntegrationTest(NewIntegrationTestArgs{
 			IsFocused().
 			Press(keys.Universal.FocusMainView)
 
-		// All three matches are counted: opening the prompt reads the whole diff
-		// first, however much of it the render had got to.
+		// Searching reads beyond the initial screenful and eventually counts all
+		// three matches.
 		t.Views().Main().
 			IsFocused().
 			FilterOrSearch("NEEDLE")

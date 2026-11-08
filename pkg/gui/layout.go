@@ -21,6 +21,7 @@ func (gui *Gui) layout(g *gocui.Gui) error {
 
 	g.Highlight = true
 	width, height := g.Size()
+	gui.helpers.Search.RefreshLoading()
 
 	informationStr := gui.informationStr()
 

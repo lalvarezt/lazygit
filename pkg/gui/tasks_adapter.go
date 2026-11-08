@@ -218,6 +218,10 @@ func (gui *Gui) getManager(view *gocui.View) *tasks.ViewBufferManager {
 				// opens with a long diffstat it isn't.
 				gui.c.OnUIThreadContentOnly(func() error {
 					gui.updateDiffPaneDecorations(view, false)
+					if gui.helpers.Search.RefreshLoading() {
+						gui.c.OnUIThread(func() error { return nil })
+					}
+					gui.helpers.Search.RefreshResults(view)
 					return nil
 				})
 			},

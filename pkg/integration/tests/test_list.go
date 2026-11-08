@@ -313,6 +313,7 @@ var tests = []*components.IntegrationTest{
 	filter_and_search.RerenderTheSearchedMainView,
 	filter_and_search.SearchALongDiff,
 	filter_and_search.SearchStatusAfterARerender,
+	filter_and_search.SearchWhileADiffLoads,
 	filter_and_search.StageAllStagesOnlyTrackedFilesInTrackedOnlyFilter,
 	filter_and_search.StagingFolderStagesOnlyTrackedFilesInTrackedOnlyFilter,
 	filter_by_author.SelectAuthor,

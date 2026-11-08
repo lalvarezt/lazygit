@@ -21,6 +21,7 @@ type WindowArrangementHelper struct {
 	windowHelper    *WindowHelper
 	modeHelper      *ModeHelper
 	appStatusHelper *AppStatusHelper
+	searchHelper    *SearchHelper
 }
 
 func NewWindowArrangementHelper(
@@ -28,12 +29,14 @@ func NewWindowArrangementHelper(
 	windowHelper *WindowHelper,
 	modeHelper *ModeHelper,
 	appStatusHelper *AppStatusHelper,
+	searchHelper *SearchHelper,
 ) *WindowArrangementHelper {
 	return &WindowArrangementHelper{
 		c:               c,
 		windowHelper:    windowHelper,
 		modeHelper:      modeHelper,
 		appStatusHelper: appStatusHelper,
+		searchHelper:    searchHelper,
 	}
 }
 
@@ -78,7 +81,7 @@ type WindowArrangementArgs struct {
 	IsAnyModeActive bool
 	// Whether the search prompt is shown in the bottom left
 	InSearchPrompt bool
-	// One of '' (not searching), 'Search: ', and 'Filter: '
+	// Label before the search or filter text, including its loading state.
 	SearchPrefix string
 }
 
@@ -86,12 +89,7 @@ func (self *WindowArrangementHelper) GetWindowDimensions(informationStr string, 
 	width, height := self.c.GocuiGui().Size()
 	repoState := self.c.State().GetRepoState()
 
-	var searchPrefix string
-	if _, ok := repoState.GetSearchState().Context.(types.IFilterableContext); ok {
-		searchPrefix = self.c.Tr.FilterPrefix
-	} else {
-		searchPrefix = self.c.Tr.SearchPrefix
-	}
+	searchPrefix := self.searchHelper.Prefix()
 
 	args := WindowArrangementArgs{
 		Width:               width,

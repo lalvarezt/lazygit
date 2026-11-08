@@ -938,6 +938,7 @@ type TranslationSet struct {
 	MatchesFor                               string
 	SearchKeybindings                        string
 	SearchPrefix                             string
+	SearchLoadingPrefix                      string
 	FilterPrefix                             string
 	FilterPrefixMenu                         string
 	MenuFilterHint                           string
@@ -2161,6 +2162,7 @@ func EnglishTranslationSet() *TranslationSet {
 		MatchesFor:                               "matches for '%s' (%d of %d) %s", // lowercase because it's after other text
 		SearchKeybindings:                        "%s: Next match, %s: Previous match, %s: Exit search mode",
 		SearchPrefix:                             "Search: ",
+		SearchLoadingPrefix:                      "Search (loading): ",
 		FilterPrefix:                             "Filter: ",
 		FilterPrefixMenu:                         "Filter ('@' for keybindings): ",
 		MenuFilterHint:                           "(Type to filter)",
