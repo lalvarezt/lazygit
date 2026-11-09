@@ -74,7 +74,7 @@ func RenderAux(pipeSets [][]Pipe, commits []*models.Commit, selectedCommitHashPt
 	for _, pipes := range pipeSets {
 		pipeCount += len(pipes)
 	}
-	maxProcs := min(runtime.GOMAXPROCS(0), max(1, pipeCount/pipesPerWorker), max(1, len(pipeSets)))
+	maxProcs := min(runtime.GOMAXPROCS(0), max(1, (pipeCount+pipesPerWorker-1)/pipesPerWorker), max(1, len(pipeSets)))
 	lines := make([]string, len(pipeSets))
 	render := func(from, to int) {
 		for k := from; k < to; k++ {
@@ -85,7 +85,7 @@ func RenderAux(pipeSets [][]Pipe, commits []*models.Commit, selectedCommitHashPt
 			lines[k] = renderPipeSet(pipeSets[k], selectedCommitHashPtr, prevCommit, symbolSet)
 		}
 	}
-	if maxProcs == 1 {
+	if pipeCount <= pipesPerWorker {
 		render(0, len(pipeSets))
 		return lines
 	}
