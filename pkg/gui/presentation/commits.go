@@ -183,8 +183,13 @@ func GetCommitListDisplayStrings(
 		commits, common.UserConfig().Gui.CommitHashLength, fullDescription,
 		timeFormat, shortTimeFormat, now, bisectInfo)
 
-	mergedIntoLocalMainBranch := branchstack.CommitsMergedIntoLocalMainBranch(
-		commits, branches, common.UserConfig().Git.MainBranches)
+	mergedIntoLocalMainBranch := set.New[string]()
+	if lo.SomeBy(filteredCommits, func(commit *models.Commit) bool {
+		return !commit.IsTODO() && commit.Status != models.StatusMerged && branchHeadsToVisualize.Includes(commit.Hash())
+	}) {
+		mergedIntoLocalMainBranch = branchstack.CommitsMergedIntoLocalMainBranch(
+			commits, branches, common.UserConfig().Git.MainBranches)
+	}
 
 	lines := make([][]string, 0, len(filteredCommits))
 	var bisectStatus BisectStatus
