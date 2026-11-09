@@ -674,15 +674,22 @@ func (self *TextArea) SetCursor2D(x int, y int) {
 	if y > lastRow {
 		return
 	}
-	newCursor, _ := slices.BinarySearchFunc(self.cells, y, func(c TextAreaCell, row int) int {
+	newCursor, upper := 0, len(self.cells)
+	for newCursor < upper {
+		middle := int(uint(newCursor+upper) >> 1)
+		c := &self.cells[middle]
 		cellRow := c.y
 		// A soft break stores the following row's coordinates, but ends the
 		// preceding row for cursor placement.
 		if c.char == "\n" && self.content[c.contentIndex] != '\n' {
 			cellRow--
 		}
-		return cellRow - row
-	})
+		if cellRow < y {
+			newCursor = middle + 1
+		} else {
+			upper = middle
+		}
+	}
 	for newCursor < len(self.cells) && x > 0 && self.cells[newCursor].char != "\n" {
 		x -= self.cells[newCursor].width
 		newCursor++
