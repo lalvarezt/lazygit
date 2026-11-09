@@ -64,10 +64,14 @@ func CommitsMergedIntoLocalMainBranch(
 		return result
 	}
 
+	if !lo.SomeBy(commits, func(commit *models.Commit) bool {
+		return !commit.IsTODO() && commit.Status != models.StatusMerged && lo.Contains(mainBranchTips, commit.Hash())
+	}) {
+		return result
+	}
+
 	// The parents of a merged commit are merged too, so the walk never needs
-	// to go past a merged commit. Usually the tip of a local main branch is
-	// merged itself, so there is nothing to walk; this keeps it cheap enough to
-	// do on every render of the commits list.
+	// to go past a merged commit. Only loaded, unmerged main tips need a walk.
 	unmergedCommitsByHash := map[string]*models.Commit{}
 	for _, commit := range commits {
 		if !commit.IsTODO() && commit.Status != models.StatusMerged {

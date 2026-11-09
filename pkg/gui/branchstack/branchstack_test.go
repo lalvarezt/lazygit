@@ -147,3 +147,32 @@ func TestBranchesBelow(t *testing.T) {
 		})
 	}
 }
+
+func TestCommitsMergedIntoLocalMainBranch(t *testing.T) {
+	pool := &utils.StringPool{}
+	commits := []*models.Commit{
+		models.NewCommit(pool, models.NewCommitOpts{Hash: "feature", Parents: []string{"local"}}),
+		models.NewCommit(pool, models.NewCommitOpts{Hash: "local", Parents: []string{"merged", "side"}}),
+		models.NewCommit(pool, models.NewCommitOpts{Hash: "side", Parents: []string{"merged"}}),
+		models.NewCommit(pool, models.NewCommitOpts{Hash: "merged", Status: models.StatusMerged}),
+		models.NewCommit(pool, models.NewCommitOpts{Hash: "todo", Action: todo.Pick, Status: models.StatusRebasing}),
+	}
+	for _, test := range []struct {
+		name string
+		tips []string
+		want []string
+	}{
+		{"missing", []string{"outside"}, nil},
+		{"merged", []string{"merged"}, nil},
+		{"todo", []string{"todo"}, nil},
+		{"unmerged", []string{"local"}, []string{"local", "side"}},
+		{"mixed", []string{"outside", "merged", "local"}, []string{"local", "side"}},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			branches := lo.Map(test.tips, func(hash string, i int) *models.Branch {
+				return &models.Branch{Name: []string{"main", "master", "develop"}[i], CommitHash: hash}
+			})
+			assert.ElementsMatch(t, test.want, CommitsMergedIntoLocalMainBranch(commits, branches, []string{"main", "master", "develop"}).ToSlice())
+		})
+	}
+}
