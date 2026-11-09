@@ -159,26 +159,21 @@ func getNextPipes(prevPipes []Pipe, commit *models.Commit, getStyle func(c *mode
 		}
 	}
 
+	continuingPos := int16(0)
 	getNextAvailablePosForContinuingPipe := func() int16 {
-		i := int16(0)
-		for {
-			if !columns[i].traversed {
-				return i
-			}
-			i++
+		for columns[continuingPos].traversed {
+			continuingPos++
 		}
+		return continuingPos
 	}
 
+	newPos := int16(0)
 	getNextAvailablePosForNewPipe := func() int16 {
-		i := int16(0)
-		for {
-			// a newly created pipe is not allowed to end on a spot that's already taken,
-			// nor on a spot that's been traversed by a continuing pipe.
-			if !columns[i].taken && !columns[i].continuing {
-				return i
-			}
-			i++
+		// New pipes cannot occupy a taken column or displace a continuing pipe.
+		for columns[newPos].taken || columns[newPos].continuing {
+			newPos++
 		}
+		return newPos
 	}
 
 	traverse := func(from, to int16) {

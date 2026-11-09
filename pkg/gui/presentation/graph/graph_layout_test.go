@@ -42,3 +42,49 @@ func TestGetNextPipesWithSparseColumns(t *testing.T) {
 		{fromPos: 1024, toPos: 1024, fromHash: commit.HashPtr(), toHash: commit.ParentPtrs()[0], kind: STARTS, style: &style.FgDefault},
 	}, getNextPipes(previous, commit, getStyle))
 }
+
+func continuingGraphRow(width int) ([]Pipe, *models.Commit) {
+	hashPool := &utils.StringPool{}
+	commit := models.NewCommit(hashPool, models.NewCommitOpts{Hash: "commit", Parents: []string{"parent"}})
+	previous := make([]Pipe, width)
+	for i := range previous {
+		previous[i] = Pipe{
+			fromPos: int16(i), toPos: int16(i),
+			fromHash: hashPool.Add(fmt.Sprintf("source-%d", i)),
+			toHash:   hashPool.Add(fmt.Sprintf("target-%d", i)),
+			kind:     STARTS, style: &style.FgDefault,
+		}
+	}
+	previous[width-1].toHash = commit.HashPtr()
+	return previous, commit
+}
+
+func TestGetNextPipesWithContinuingColumns(t *testing.T) {
+	previous, commit := continuingGraphRow(64)
+	want := make([]Pipe, 0, len(previous)+1)
+	for _, pipe := range previous[:len(previous)-1] {
+		pipe.kind = CONTINUES
+		want = append(want, pipe)
+	}
+	last := previous[len(previous)-1]
+	last.kind = TERMINATES
+	want = append(want, last, Pipe{
+		fromPos: last.toPos, toPos: last.toPos,
+		fromHash: commit.HashPtr(), toHash: commit.ParentPtrs()[0],
+		kind: STARTS, style: &style.FgDefault,
+	})
+	assert.Equal(t, want, getNextPipes(previous, commit, func(*models.Commit) *style.TextStyle { return &style.FgDefault }))
+}
+
+func BenchmarkGraphColumnAllocation(b *testing.B) {
+	for _, width := range []int{4, 16, 64, 256} {
+		b.Run(fmt.Sprintf("columns=%d", width), func(b *testing.B) {
+			previous, commit := continuingGraphRow(width)
+			b.ReportAllocs()
+			b.ResetTimer()
+			for b.Loop() {
+				getNextPipes(previous, commit, func(*models.Commit) *style.TextStyle { return &style.FgDefault })
+			}
+		})
+	}
+}
