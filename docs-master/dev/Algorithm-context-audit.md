@@ -14,6 +14,13 @@ Production source is unchanged.
 The two already-discussed follow-ups have a separate
 [post-merge implementation plan](Post-merge-performance-plan.md).
 
+Each additional finding also has a separate implementation plan:
+
+- [Graph occupancy](performance-plans/Graph-occupancy.md)
+- [Editor navigation](performance-plans/Editor-navigation.md)
+- [Graph render scheduling](performance-plans/Graph-render-scheduling.md)
+- [Flat file lists](performance-plans/Flat-file-lists.md)
+
 ## Graph occupancy has cheap lookups but repeated prefix scans
 
 **Evidence: counted operations in the real algorithm.**
