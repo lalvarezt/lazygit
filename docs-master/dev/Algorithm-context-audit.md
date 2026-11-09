@@ -9,7 +9,9 @@ The same question applies elsewhere: what does the caller already know,
 retain, or process in order? The findings below identify missed opportunities
 around existing improvements. They do not establish that those measured
 improvements were regressions or that these paths dominate application CPU.
-Production source is unchanged.
+Production source was unchanged during the audit. The independent follow-ups
+are now implemented; see the
+[implementation record](Independent-performance-follow-ups.md).
 
 The two already-discussed follow-ups have a separate
 [post-merge implementation plan](Post-merge-performance-plan.md).

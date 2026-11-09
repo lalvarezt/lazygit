@@ -1,8 +1,9 @@
 # Avoid unused directory structure in flat file lists
 
-Investigate this follow-up after the pending upstream integration, following
-the [shared implementation guidance](README.md). This is a source-backed
-candidate with no measured alternative yet.
+Implemented with a shared ordering descriptor and direct leaf construction,
+retaining the existing builder for ambiguous cases. See the
+[implementation record](../Independent-performance-follow-ups.md) for commits
+and validation. The sections below retain the implementation plan.
 
 ## Establish the flat-mode contract
 

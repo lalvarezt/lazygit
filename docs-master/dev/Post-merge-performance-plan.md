@@ -1,9 +1,11 @@
 # Implement performance follow-ups after the upstream merge
 
-Wait for [upstream PR #6201](https://github.com/jesseduffield/lazygit/pull/6201)
-to merge, then integrate the merged upstream code before starting this plan.
-Do not cherry-pick the open PR or replace our drawing implementation early.
-These notes describe proposed changes, not measured improvements.
+Cached tree-range selection is implemented independently, as recorded in the
+[implementation results](Independent-performance-follow-ups.md).
+Prepared-query reuse remains deferred until
+[upstream PR #6201](https://github.com/jesseduffield/lazygit/pull/6201) is merged
+and integrated. Do not cherry-pick the open PR or replace our drawing
+implementation early. The sections below retain the original plans.
 
 The source inspection used fork revision `96e977c85`. Recheck the named
 functions after integration because upstream may change their interfaces.

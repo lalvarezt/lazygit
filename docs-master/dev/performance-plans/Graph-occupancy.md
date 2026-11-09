@@ -1,8 +1,9 @@
 # Avoid repeated graph-column prefix scans
 
-Implement this follow-up after the pending upstream integration, following
-the [shared implementation guidance](README.md). This plan preserves graph
-layout and changes how available columns are found within one row.
+Implemented independently of the pending upstream integration. See the
+[implementation record](../Independent-performance-follow-ups.md) for commits
+and validation. The plan below preserves graph layout while changing how
+available columns are found within one row.
 
 ## Establish the current behavior
 

@@ -1,8 +1,9 @@
 # Reuse editor layout during cursor navigation
 
-Implement this follow-up after the pending upstream integration, following
-the [shared implementation guidance](README.md). Preserve editor cursor
-semantics while avoiding work proportional to unrelated preceding text.
+Implemented with one coordinate-based row lookup and a backward newline
+search. See the [implementation record](../Independent-performance-follow-ups.md)
+for commits and validation. The plan below preserves editor cursor semantics
+while avoiding work proportional to unrelated preceding text.
 
 ## Trace complete navigation operations
 

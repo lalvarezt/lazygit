@@ -1,0 +1,6340 @@
+{
+  "sourceBase": "9b8e081566984e8c11873d79a9d072ddd4fd56f4",
+  "goVersion": "go version go1.27.3 linux/amd64",
+  "environment": {
+    "GOGC": "default",
+    "GOMEMLIMIT": "default",
+    "colorSensitiveChecks": "NO_COLOR removed; FORCE_COLOR=1; CLICOLOR_FORCE=1"
+  },
+  "implementationCommits": {
+    "graphOccupancy": "07e4bf9fe",
+    "editorCoordinates": "e7fe1a597",
+    "editorLineStart": "43d454348",
+    "graphSharedOutput": "2f9bb7e38",
+    "cachedTreeRanges": "a1402046e",
+    "restoredRangeCoverage": "240a2cfe1",
+    "graphWorkerPolicy": "b41c6edca",
+    "sharedOrdering": "8b4df7052",
+    "sharedFlatPath": "62b93fab9",
+    "directFlatBuilder": "0ab8449ad"
+  },
+  "pending": [
+    "Prepared-query reuse and upstream PR #6201 integration remain deferred."
+  ],
+  "limits": [
+    "Synthetic microbenchmarks; no live UI latency claims.",
+    "Graph before/after viewport samples: five 100 ms samples; other final comparisons: three 100 ms samples. Disposable policy exploration used three 50 ms samples.",
+    "Graph policy logs are disposable alternatives, not implemented production behavior.",
+    "Range benchmark cold cases explicitly invalidate the visible-row cache.",
+    "The small tree range fixture selects a single row near the end; complete-range benchmark remains available."
+  ],
+  "validation": [
+    "just format",
+    "just build",
+    "just unit-test with color enabled",
+    "just lint",
+    "go test -race -short ./pkg/gui/presentation/graph ./pkg/gocui ./pkg/gui/filetree",
+    "just e2e file commit ui"
+  ],
+  "logs": {
+    "editor-after.log": [
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=100/bottom=false",
+        "samples": [
+          {
+            "ns": 114.8,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 116.3,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 117.1,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 116.3,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=100/bottom=true",
+        "samples": [
+          {
+            "ns": 117.6,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 116.1,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 117,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 117,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=1000/bottom=false",
+        "samples": [
+          {
+            "ns": 146.2,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 146.8,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 144.5,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 146.2,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=1000/bottom=true",
+        "samples": [
+          {
+            "ns": 136.1,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 136.1,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 136.9,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 136.1,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=10000/bottom=false",
+        "samples": [
+          {
+            "ns": 170.2,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 170.3,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 169.7,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 170.2,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=10000/bottom=true",
+        "samples": [
+          {
+            "ns": 160.1,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 160.4,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 161.2,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 160.4,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalKeypress/lines=100",
+        "samples": [
+          {
+            "ns": 216.9,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 218.9,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 217,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 217,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalKeypress/lines=1000",
+        "samples": [
+          {
+            "ns": 256.8,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 258.3,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 263.6,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 258.3,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalKeypress/lines=10000",
+        "samples": [
+          {
+            "ns": 281.1,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 276.2,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 282.8,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 281.1,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      }
+    ],
+    "editor-before.log": [
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=100/bottom=false",
+        "samples": [
+          {
+            "ns": 129.2,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 128.8,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 129.6,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 129.2,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=100/bottom=true",
+        "samples": [
+          {
+            "ns": 4749,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4963,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4739,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 4749,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=1000/bottom=false",
+        "samples": [
+          {
+            "ns": 141.6,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 141.1,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 136.1,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 141.1,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=1000/bottom=true",
+        "samples": [
+          {
+            "ns": 47446,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 48349,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 48141,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 48141,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=10000/bottom=false",
+        "samples": [
+          {
+            "ns": 151.7,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 151.6,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 151.5,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 151.6,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalMovement/lines=10000/bottom=true",
+        "samples": [
+          {
+            "ns": 461168,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 469156,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 470768,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 469156,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalKeypress/lines=100",
+        "samples": [
+          {
+            "ns": 4965,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 5008,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 5255,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 5008,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalKeypress/lines=1000",
+        "samples": [
+          {
+            "ns": 51204,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 49377,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 49016,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 49377,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaVerticalKeypress/lines=10000",
+        "samples": [
+          {
+            "ns": 463372,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 459817,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 449151,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 459817,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      }
+    ],
+    "editor-line-start-after.log": [
+      {
+        "name": "BenchmarkTextAreaLineStart/lines=100",
+        "samples": [
+          {
+            "ns": 53.91,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 52.36,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 52.96,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 52.96,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaLineStart/lines=1000",
+        "samples": [
+          {
+            "ns": 63.69,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 63.46,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 63.13,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 63.46,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaLineStart/lines=10000",
+        "samples": [
+          {
+            "ns": 68.33,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 67.98,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 72.2,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 68.33,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      }
+    ],
+    "editor-line-start-before.log": [
+      {
+        "name": "BenchmarkTextAreaLineStart/lines=100",
+        "samples": [
+          {
+            "ns": 1409,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 1388,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 1376,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 1388,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaLineStart/lines=1000",
+        "samples": [
+          {
+            "ns": 16441,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16406,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 16230,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 16406,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "name": "BenchmarkTextAreaLineStart/lines=10000",
+        "samples": [
+          {
+            "ns": 162652,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 151781,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 152790,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 152790,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      }
+    ],
+    "flat-before.log": [
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=false",
+        "samples": [
+          {
+            "ns": 34591,
+            "bytes": 28672,
+            "allocations": 637
+          },
+          {
+            "ns": 35196,
+            "bytes": 28672,
+            "allocations": 637
+          },
+          {
+            "ns": 34951,
+            "bytes": 28672,
+            "allocations": 637
+          }
+        ],
+        "medianNs": 34951,
+        "medianBytes": 28672,
+        "medianAllocations": 637
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=true",
+        "samples": [
+          {
+            "ns": 31691,
+            "bytes": 28616,
+            "allocations": 635
+          },
+          {
+            "ns": 32272,
+            "bytes": 28616,
+            "allocations": 635
+          },
+          {
+            "ns": 32195,
+            "bytes": 28616,
+            "allocations": 635
+          }
+        ],
+        "medianNs": 32195,
+        "medianBytes": 28616,
+        "medianAllocations": 635
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=false",
+        "samples": [
+          {
+            "ns": 94267,
+            "bytes": 116424,
+            "allocations": 1948
+          },
+          {
+            "ns": 97535,
+            "bytes": 116424,
+            "allocations": 1948
+          },
+          {
+            "ns": 93696,
+            "bytes": 116424,
+            "allocations": 1948
+          }
+        ],
+        "medianNs": 94267,
+        "medianBytes": 116424,
+        "medianAllocations": 1948
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=true",
+        "samples": [
+          {
+            "ns": 91034,
+            "bytes": 116368,
+            "allocations": 1946
+          },
+          {
+            "ns": 91455,
+            "bytes": 116368,
+            "allocations": 1946
+          },
+          {
+            "ns": 92451,
+            "bytes": 116368,
+            "allocations": 1946
+          }
+        ],
+        "medianNs": 91455,
+        "medianBytes": 116368,
+        "medianAllocations": 1946
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=false",
+        "samples": [
+          {
+            "ns": 379696,
+            "bytes": 311984,
+            "allocations": 6051
+          },
+          {
+            "ns": 378936,
+            "bytes": 311984,
+            "allocations": 6051
+          },
+          {
+            "ns": 378826,
+            "bytes": 311984,
+            "allocations": 6051
+          }
+        ],
+        "medianNs": 378936,
+        "medianBytes": 311984,
+        "medianAllocations": 6051
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=true",
+        "samples": [
+          {
+            "ns": 335370,
+            "bytes": 311928,
+            "allocations": 6049
+          },
+          {
+            "ns": 332691,
+            "bytes": 311928,
+            "allocations": 6049
+          },
+          {
+            "ns": 334450,
+            "bytes": 311928,
+            "allocations": 6049
+          }
+        ],
+        "medianNs": 334450,
+        "medianBytes": 311928,
+        "medianAllocations": 6049
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=false",
+        "samples": [
+          {
+            "ns": 1131363,
+            "bytes": 1244138,
+            "allocations": 19080
+          },
+          {
+            "ns": 1163058,
+            "bytes": 1244137,
+            "allocations": 19080
+          },
+          {
+            "ns": 1187006,
+            "bytes": 1244138,
+            "allocations": 19080
+          }
+        ],
+        "medianNs": 1163058,
+        "medianBytes": 1244138,
+        "medianAllocations": 19080
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=true",
+        "samples": [
+          {
+            "ns": 1074814,
+            "bytes": 1244082,
+            "allocations": 19078
+          },
+          {
+            "ns": 1086047,
+            "bytes": 1244082,
+            "allocations": 19078
+          },
+          {
+            "ns": 1088216,
+            "bytes": 1244082,
+            "allocations": 19078
+          }
+        ],
+        "medianNs": 1086047,
+        "medianBytes": 1244082,
+        "medianAllocations": 19078
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=false",
+        "samples": [
+          {
+            "ns": 4283322,
+            "bytes": 3030546,
+            "allocations": 60117
+          },
+          {
+            "ns": 3997409,
+            "bytes": 3030546,
+            "allocations": 60117
+          },
+          {
+            "ns": 3910522,
+            "bytes": 3030546,
+            "allocations": 60117
+          }
+        ],
+        "medianNs": 3997409,
+        "medianBytes": 3030546,
+        "medianAllocations": 60117
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=true",
+        "samples": [
+          {
+            "ns": 3479616,
+            "bytes": 3030490,
+            "allocations": 60115
+          },
+          {
+            "ns": 3495380,
+            "bytes": 3030490,
+            "allocations": 60115
+          },
+          {
+            "ns": 3569581,
+            "bytes": 3030491,
+            "allocations": 60115
+          }
+        ],
+        "medianNs": 3495380,
+        "medianBytes": 3030490,
+        "medianAllocations": 60115
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=false",
+        "samples": [
+          {
+            "ns": 11968796,
+            "bytes": 12053129,
+            "allocations": 190261
+          },
+          {
+            "ns": 11574099,
+            "bytes": 12053133,
+            "allocations": 190261
+          },
+          {
+            "ns": 12268952,
+            "bytes": 12053133,
+            "allocations": 190261
+          }
+        ],
+        "medianNs": 11968796,
+        "medianBytes": 12053133,
+        "medianAllocations": 190261
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=true",
+        "samples": [
+          {
+            "ns": 11124714,
+            "bytes": 12053078,
+            "allocations": 190259
+          },
+          {
+            "ns": 11396106,
+            "bytes": 12053080,
+            "allocations": 190259
+          },
+          {
+            "ns": 11879631,
+            "bytes": 12053075,
+            "allocations": 190259
+          }
+        ],
+        "medianNs": 11396106,
+        "medianBytes": 12053078,
+        "medianAllocations": 190259
+      },
+      {
+        "name": "BenchmarkFlatTreeRefresh/files=100/commits=false",
+        "samples": [
+          {
+            "ns": 88236,
+            "bytes": 116424,
+            "allocations": 2150
+          },
+          {
+            "ns": 88260,
+            "bytes": 116424,
+            "allocations": 2150
+          },
+          {
+            "ns": 87968,
+            "bytes": 116424,
+            "allocations": 2150
+          }
+        ],
+        "medianNs": 88236,
+        "medianBytes": 116424,
+        "medianAllocations": 2150
+      },
+      {
+        "name": "BenchmarkFlatTreeRefresh/files=100/commits=true",
+        "samples": [
+          {
+            "ns": 81397,
+            "bytes": 111232,
+            "allocations": 1841
+          },
+          {
+            "ns": 80972,
+            "bytes": 111232,
+            "allocations": 1841
+          },
+          {
+            "ns": 83651,
+            "bytes": 111232,
+            "allocations": 1841
+          }
+        ],
+        "medianNs": 81397,
+        "medianBytes": 111232,
+        "medianAllocations": 1841
+      },
+      {
+        "name": "BenchmarkFlatTreeRefresh/files=10000/commits=false",
+        "samples": [
+          {
+            "ns": 10871665,
+            "bytes": 12058600,
+            "allocations": 210263
+          },
+          {
+            "ns": 11255673,
+            "bytes": 12058600,
+            "allocations": 210263
+          },
+          {
+            "ns": 11785212,
+            "bytes": 12058600,
+            "allocations": 210263
+          }
+        ],
+        "medianNs": 11255673,
+        "medianBytes": 12058600,
+        "medianAllocations": 210263
+      },
+      {
+        "name": "BenchmarkFlatTreeRefresh/files=10000/commits=true",
+        "samples": [
+          {
+            "ns": 10474800,
+            "bytes": 11572736,
+            "allocations": 180254
+          },
+          {
+            "ns": 10472138,
+            "bytes": 11572736,
+            "allocations": 180254
+          },
+          {
+            "ns": 10078409,
+            "bytes": 11572736,
+            "allocations": 180254
+          }
+        ],
+        "medianNs": 10472138,
+        "medianBytes": 11572736,
+        "medianAllocations": 180254
+      }
+    ],
+    "graph-occupancy-after.log": [
+      {
+        "name": "BenchmarkGraphColumnAllocation/columns=4",
+        "samples": [
+          {
+            "ns": 261.5,
+            "bytes": 288,
+            "allocations": 2
+          },
+          {
+            "ns": 260.8,
+            "bytes": 288,
+            "allocations": 2
+          },
+          {
+            "ns": 261.4,
+            "bytes": 288,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 261.4,
+        "medianBytes": 288,
+        "medianAllocations": 2
+      },
+      {
+        "name": "BenchmarkGraphColumnAllocation/columns=16",
+        "samples": [
+          {
+            "ns": 1001,
+            "bytes": 1152,
+            "allocations": 3
+          },
+          {
+            "ns": 1006,
+            "bytes": 1152,
+            "allocations": 3
+          },
+          {
+            "ns": 1023,
+            "bytes": 1152,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 1006,
+        "medianBytes": 1152,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkGraphColumnAllocation/columns=64",
+        "samples": [
+          {
+            "ns": 3573,
+            "bytes": 4816,
+            "allocations": 3
+          },
+          {
+            "ns": 3501,
+            "bytes": 4816,
+            "allocations": 3
+          },
+          {
+            "ns": 3513,
+            "bytes": 4816,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 3513,
+        "medianBytes": 4816,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkGraphColumnAllocation/columns=256",
+        "samples": [
+          {
+            "ns": 13203,
+            "bytes": 19840,
+            "allocations": 3
+          },
+          {
+            "ns": 14157,
+            "bytes": 19840,
+            "allocations": 3
+          },
+          {
+            "ns": 14231,
+            "bytes": 19840,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 14157,
+        "medianBytes": 19840,
+        "medianAllocations": 3
+      }
+    ],
+    "graph-occupancy-before.log": [
+      {
+        "name": "BenchmarkGraphColumnAllocation/columns=4",
+        "samples": [
+          {
+            "ns": 260.5,
+            "bytes": 288,
+            "allocations": 2
+          },
+          {
+            "ns": 259.2,
+            "bytes": 288,
+            "allocations": 2
+          },
+          {
+            "ns": 245.6,
+            "bytes": 288,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 259.2,
+        "medianBytes": 288,
+        "medianAllocations": 2
+      },
+      {
+        "name": "BenchmarkGraphColumnAllocation/columns=16",
+        "samples": [
+          {
+            "ns": 1000,
+            "bytes": 1152,
+            "allocations": 3
+          },
+          {
+            "ns": 1086,
+            "bytes": 1152,
+            "allocations": 3
+          },
+          {
+            "ns": 979.7,
+            "bytes": 1152,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 1000,
+        "medianBytes": 1152,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkGraphColumnAllocation/columns=64",
+        "samples": [
+          {
+            "ns": 4014,
+            "bytes": 4816,
+            "allocations": 3
+          },
+          {
+            "ns": 4008,
+            "bytes": 4816,
+            "allocations": 3
+          },
+          {
+            "ns": 4008,
+            "bytes": 4816,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 4008,
+        "medianBytes": 4816,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkGraphColumnAllocation/columns=256",
+        "samples": [
+          {
+            "ns": 24392,
+            "bytes": 19840,
+            "allocations": 3
+          },
+          {
+            "ns": 24576,
+            "bytes": 19840,
+            "allocations": 3
+          },
+          {
+            "ns": 24807,
+            "bytes": 19840,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 24576,
+        "medianBytes": 19840,
+        "medianAllocations": 3
+      }
+    ],
+    "graph-policy-pipes128.log": [
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1",
+        "samples": [
+          {
+            "ns": 218.7,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 259.7,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 258.4,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 258.4,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-4",
+        "samples": [
+          {
+            "ns": 192.7,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 194.9,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 186.2,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 192.7,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-16",
+        "samples": [
+          {
+            "ns": 208.4,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 207.8,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 207.3,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 207.8,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8",
+        "samples": [
+          {
+            "ns": 1405,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1790,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1681,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1681,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-4",
+        "samples": [
+          {
+            "ns": 1228,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1218,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1210,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1218,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-16",
+        "samples": [
+          {
+            "ns": 1324,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1392,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1389,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1389,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40",
+        "samples": [
+          {
+            "ns": 6660,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 7885,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 8167,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 7885,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-4",
+        "samples": [
+          {
+            "ns": 5956,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 5869,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 5727,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 5869,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-16",
+        "samples": [
+          {
+            "ns": 6449,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 6565,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 6212,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 6449,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120",
+        "samples": [
+          {
+            "ns": 19491,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 22540,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 23376,
+            "bytes": 26152,
+            "allocations": 723
+          }
+        ],
+        "medianNs": 22540,
+        "medianBytes": 26152,
+        "medianAllocations": 723
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-4",
+        "samples": [
+          {
+            "ns": 17346,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 17325,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 17306,
+            "bytes": 26152,
+            "allocations": 723
+          }
+        ],
+        "medianNs": 17325,
+        "medianBytes": 26152,
+        "medianAllocations": 723
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-16",
+        "samples": [
+          {
+            "ns": 18565,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 19108,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 20094,
+            "bytes": 26152,
+            "allocations": 723
+          }
+        ],
+        "medianNs": 19108,
+        "medianBytes": 26152,
+        "medianAllocations": 723
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1",
+        "samples": [
+          {
+            "ns": 1862,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 2230,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 2279,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 2230,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-4",
+        "samples": [
+          {
+            "ns": 1629,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1706,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1546,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 1629,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-16",
+        "samples": [
+          {
+            "ns": 1802,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1956,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1931,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 1931,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8",
+        "samples": [
+          {
+            "ns": 17010,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 20491,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 21203,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 20491,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-4",
+        "samples": [
+          {
+            "ns": 14662,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 14414,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 13595,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 14414,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-16",
+        "samples": [
+          {
+            "ns": 15654,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 16102,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 15381,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 15654,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40",
+        "samples": [
+          {
+            "ns": 76365,
+            "bytes": 97730,
+            "allocations": 1850
+          },
+          {
+            "ns": 95592,
+            "bytes": 96992,
+            "allocations": 1839
+          },
+          {
+            "ns": 97387,
+            "bytes": 96992,
+            "allocations": 1839
+          }
+        ],
+        "medianNs": 95592,
+        "medianBytes": 96992,
+        "medianAllocations": 1839
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-4",
+        "samples": [
+          {
+            "ns": 55878,
+            "bytes": 97395,
+            "allocations": 1848
+          },
+          {
+            "ns": 50307,
+            "bytes": 97394,
+            "allocations": 1848
+          },
+          {
+            "ns": 52834,
+            "bytes": 97393,
+            "allocations": 1848
+          }
+        ],
+        "medianNs": 52834,
+        "medianBytes": 97394,
+        "medianAllocations": 1848
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-16",
+        "samples": [
+          {
+            "ns": 73593,
+            "bytes": 97514,
+            "allocations": 1850
+          },
+          {
+            "ns": 74732,
+            "bytes": 97504,
+            "allocations": 1850
+          },
+          {
+            "ns": 70730,
+            "bytes": 97512,
+            "allocations": 1850
+          }
+        ],
+        "medianNs": 73593,
+        "medianBytes": 97512,
+        "medianAllocations": 1850
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120",
+        "samples": [
+          {
+            "ns": 284417,
+            "bytes": 382664,
+            "allocations": 7218
+          },
+          {
+            "ns": 361467,
+            "bytes": 380816,
+            "allocations": 7184
+          },
+          {
+            "ns": 377697,
+            "bytes": 380816,
+            "allocations": 7184
+          }
+        ],
+        "medianNs": 361467,
+        "medianBytes": 380816,
+        "medianAllocations": 7184
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-4",
+        "samples": [
+          {
+            "ns": 193169,
+            "bytes": 381236,
+            "allocations": 7193
+          },
+          {
+            "ns": 199939,
+            "bytes": 381225,
+            "allocations": 7193
+          },
+          {
+            "ns": 195457,
+            "bytes": 381227,
+            "allocations": 7193
+          }
+        ],
+        "medianNs": 195457,
+        "medianBytes": 381227,
+        "medianAllocations": 7193
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-16",
+        "samples": [
+          {
+            "ns": 300490,
+            "bytes": 382468,
+            "allocations": 7217
+          },
+          {
+            "ns": 291653,
+            "bytes": 382429,
+            "allocations": 7217
+          },
+          {
+            "ns": 280215,
+            "bytes": 382414,
+            "allocations": 7217
+          }
+        ],
+        "medianNs": 291653,
+        "medianBytes": 382429,
+        "medianAllocations": 7217
+      }
+    ],
+    "graph-policy-pipes256.log": [
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1",
+        "samples": [
+          {
+            "ns": 231.9,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 266.9,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 267.9,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 266.9,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-4",
+        "samples": [
+          {
+            "ns": 192,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 192,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 195.1,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 192,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-16",
+        "samples": [
+          {
+            "ns": 211.3,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 227.9,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 211.9,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 211.9,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8",
+        "samples": [
+          {
+            "ns": 1278,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1575,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1656,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1575,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-4",
+        "samples": [
+          {
+            "ns": 1214,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1206,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1273,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1214,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-16",
+        "samples": [
+          {
+            "ns": 1338,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1414,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1389,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1389,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40",
+        "samples": [
+          {
+            "ns": 6537,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 7854,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 8184,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 7854,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-4",
+        "samples": [
+          {
+            "ns": 5771,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 5781,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 5673,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 5771,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-16",
+        "samples": [
+          {
+            "ns": 6368,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 6287,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 7348,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 6368,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120",
+        "samples": [
+          {
+            "ns": 18216,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 22859,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 23953,
+            "bytes": 26152,
+            "allocations": 723
+          }
+        ],
+        "medianNs": 22859,
+        "medianBytes": 26152,
+        "medianAllocations": 723
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-4",
+        "samples": [
+          {
+            "ns": 18772,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 17014,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 17402,
+            "bytes": 26152,
+            "allocations": 723
+          }
+        ],
+        "medianNs": 17402,
+        "medianBytes": 26152,
+        "medianAllocations": 723
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-16",
+        "samples": [
+          {
+            "ns": 20621,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 18443,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 18885,
+            "bytes": 26152,
+            "allocations": 723
+          }
+        ],
+        "medianNs": 18885,
+        "medianBytes": 26152,
+        "medianAllocations": 723
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1",
+        "samples": [
+          {
+            "ns": 1861,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 2259,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 2341,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 2259,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-4",
+        "samples": [
+          {
+            "ns": 1791,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1541,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1551,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 1551,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-16",
+        "samples": [
+          {
+            "ns": 1853,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1640,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1778,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 1778,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8",
+        "samples": [
+          {
+            "ns": 16598,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 20202,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 21016,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 20202,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-4",
+        "samples": [
+          {
+            "ns": 14898,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 14987,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 14776,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 14898,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-16",
+        "samples": [
+          {
+            "ns": 17302,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 15889,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 16314,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 16314,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40",
+        "samples": [
+          {
+            "ns": 74699,
+            "bytes": 97280,
+            "allocations": 1844
+          },
+          {
+            "ns": 96130,
+            "bytes": 96992,
+            "allocations": 1839
+          },
+          {
+            "ns": 100205,
+            "bytes": 96992,
+            "allocations": 1839
+          }
+        ],
+        "medianNs": 96130,
+        "medianBytes": 96992,
+        "medianAllocations": 1839
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-4",
+        "samples": [
+          {
+            "ns": 64435,
+            "bytes": 97202,
+            "allocations": 1844
+          },
+          {
+            "ns": 54553,
+            "bytes": 97201,
+            "allocations": 1844
+          },
+          {
+            "ns": 52837,
+            "bytes": 97201,
+            "allocations": 1844
+          }
+        ],
+        "medianNs": 54553,
+        "medianBytes": 97201,
+        "medianAllocations": 1844
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-16",
+        "samples": [
+          {
+            "ns": 73693,
+            "bytes": 97267,
+            "allocations": 1844
+          },
+          {
+            "ns": 77939,
+            "bytes": 97221,
+            "allocations": 1844
+          },
+          {
+            "ns": 73889,
+            "bytes": 97219,
+            "allocations": 1844
+          }
+        ],
+        "medianNs": 73889,
+        "medianBytes": 97221,
+        "medianAllocations": 1844
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120",
+        "samples": [
+          {
+            "ns": 278260,
+            "bytes": 381980,
+            "allocations": 7203
+          },
+          {
+            "ns": 382150,
+            "bytes": 380816,
+            "allocations": 7184
+          },
+          {
+            "ns": 376645,
+            "bytes": 380816,
+            "allocations": 7184
+          }
+        ],
+        "medianNs": 376645,
+        "medianBytes": 380816,
+        "medianAllocations": 7184
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-4",
+        "samples": [
+          {
+            "ns": 193011,
+            "bytes": 381236,
+            "allocations": 7193
+          },
+          {
+            "ns": 191178,
+            "bytes": 381227,
+            "allocations": 7193
+          },
+          {
+            "ns": 187902,
+            "bytes": 381223,
+            "allocations": 7193
+          }
+        ],
+        "medianNs": 191178,
+        "medianBytes": 381227,
+        "medianAllocations": 7193
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-16",
+        "samples": [
+          {
+            "ns": 273923,
+            "bytes": 381796,
+            "allocations": 7203
+          },
+          {
+            "ns": 273237,
+            "bytes": 381777,
+            "allocations": 7203
+          },
+          {
+            "ns": 298228,
+            "bytes": 381766,
+            "allocations": 7203
+          }
+        ],
+        "medianNs": 273923,
+        "medianBytes": 381777,
+        "medianAllocations": 7203
+      }
+    ],
+    "graph-policy-pipes64.log": [
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1",
+        "samples": [
+          {
+            "ns": 207,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 252.1,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 257.8,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 252.1,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-4",
+        "samples": [
+          {
+            "ns": 192.4,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 188.2,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 188.5,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 188.5,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-16",
+        "samples": [
+          {
+            "ns": 208,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 220.9,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 204.4,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 208,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8",
+        "samples": [
+          {
+            "ns": 1402,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1651,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1653,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1651,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-4",
+        "samples": [
+          {
+            "ns": 1235,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1223,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1221,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1223,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-16",
+        "samples": [
+          {
+            "ns": 1344,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1451,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1380,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1380,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40",
+        "samples": [
+          {
+            "ns": 6326,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 7750,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 8409,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 7750,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-4",
+        "samples": [
+          {
+            "ns": 6649,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 5635,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 5625,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 5635,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-16",
+        "samples": [
+          {
+            "ns": 6292,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 6094,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 6197,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 6197,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120",
+        "samples": [
+          {
+            "ns": 20444,
+            "bytes": 26501,
+            "allocations": 730
+          },
+          {
+            "ns": 24490,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 24486,
+            "bytes": 26152,
+            "allocations": 723
+          }
+        ],
+        "medianNs": 24486,
+        "medianBytes": 26152,
+        "medianAllocations": 723
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-4",
+        "samples": [
+          {
+            "ns": 19319,
+            "bytes": 26456,
+            "allocations": 730
+          },
+          {
+            "ns": 15102,
+            "bytes": 26456,
+            "allocations": 730
+          },
+          {
+            "ns": 14748,
+            "bytes": 26456,
+            "allocations": 730
+          }
+        ],
+        "medianNs": 15102,
+        "medianBytes": 26456,
+        "medianAllocations": 730
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-16",
+        "samples": [
+          {
+            "ns": 19950,
+            "bytes": 26464,
+            "allocations": 730
+          },
+          {
+            "ns": 19989,
+            "bytes": 26457,
+            "allocations": 730
+          },
+          {
+            "ns": 19513,
+            "bytes": 26456,
+            "allocations": 730
+          }
+        ],
+        "medianNs": 19950,
+        "medianBytes": 26457,
+        "medianAllocations": 730
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1",
+        "samples": [
+          {
+            "ns": 1976,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 2230,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 2266,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 2230,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-4",
+        "samples": [
+          {
+            "ns": 1681,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1577,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1595,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 1595,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-16",
+        "samples": [
+          {
+            "ns": 1925,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1812,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1868,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 1868,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8",
+        "samples": [
+          {
+            "ns": 21592,
+            "bytes": 21755,
+            "allocations": 437
+          },
+          {
+            "ns": 20463,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 20703,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 20703,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-4",
+        "samples": [
+          {
+            "ns": 17635,
+            "bytes": 21752,
+            "allocations": 437
+          },
+          {
+            "ns": 14638,
+            "bytes": 21752,
+            "allocations": 437
+          },
+          {
+            "ns": 15481,
+            "bytes": 21752,
+            "allocations": 437
+          }
+        ],
+        "medianNs": 15481,
+        "medianBytes": 21752,
+        "medianAllocations": 437
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-16",
+        "samples": [
+          {
+            "ns": 20994,
+            "bytes": 21753,
+            "allocations": 437
+          },
+          {
+            "ns": 22213,
+            "bytes": 21752,
+            "allocations": 437
+          },
+          {
+            "ns": 22106,
+            "bytes": 21763,
+            "allocations": 437
+          }
+        ],
+        "medianNs": 22106,
+        "medianBytes": 21753,
+        "medianAllocations": 437
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40",
+        "samples": [
+          {
+            "ns": 93385,
+            "bytes": 98031,
+            "allocations": 1860
+          },
+          {
+            "ns": 93734,
+            "bytes": 96992,
+            "allocations": 1839
+          },
+          {
+            "ns": 96325,
+            "bytes": 96992,
+            "allocations": 1839
+          }
+        ],
+        "medianNs": 93734,
+        "medianBytes": 96992,
+        "medianAllocations": 1839
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-4",
+        "samples": [
+          {
+            "ns": 51974,
+            "bytes": 97395,
+            "allocations": 1848
+          },
+          {
+            "ns": 50412,
+            "bytes": 97393,
+            "allocations": 1848
+          },
+          {
+            "ns": 48274,
+            "bytes": 97395,
+            "allocations": 1848
+          }
+        ],
+        "medianNs": 50412,
+        "medianBytes": 97395,
+        "medianAllocations": 1848
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-16",
+        "samples": [
+          {
+            "ns": 100349,
+            "bytes": 98019,
+            "allocations": 1860
+          },
+          {
+            "ns": 95106,
+            "bytes": 97981,
+            "allocations": 1860
+          },
+          {
+            "ns": 94369,
+            "bytes": 98016,
+            "allocations": 1860
+          }
+        ],
+        "medianNs": 95106,
+        "medianBytes": 98016,
+        "medianAllocations": 1860
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120",
+        "samples": [
+          {
+            "ns": 284629,
+            "bytes": 382459,
+            "allocations": 7217
+          },
+          {
+            "ns": 358912,
+            "bytes": 380816,
+            "allocations": 7184
+          },
+          {
+            "ns": 369304,
+            "bytes": 380816,
+            "allocations": 7184
+          }
+        ],
+        "medianNs": 358912,
+        "medianBytes": 380816,
+        "medianAllocations": 7184
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-4",
+        "samples": [
+          {
+            "ns": 194541,
+            "bytes": 381231,
+            "allocations": 7193
+          },
+          {
+            "ns": 191810,
+            "bytes": 381229,
+            "allocations": 7193
+          },
+          {
+            "ns": 194995,
+            "bytes": 381228,
+            "allocations": 7193
+          }
+        ],
+        "medianNs": 194541,
+        "medianBytes": 381229,
+        "medianAllocations": 7193
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-16",
+        "samples": [
+          {
+            "ns": 274559,
+            "bytes": 382452,
+            "allocations": 7217
+          },
+          {
+            "ns": 276438,
+            "bytes": 382454,
+            "allocations": 7217
+          },
+          {
+            "ns": 279681,
+            "bytes": 382413,
+            "allocations": 7217
+          }
+        ],
+        "medianNs": 276438,
+        "medianBytes": 382452,
+        "medianAllocations": 7217
+      }
+    ],
+    "graph-policy-rows16.log": [
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1",
+        "samples": [
+          {
+            "ns": 223.1,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 275,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 263.6,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 263.6,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-4",
+        "samples": [
+          {
+            "ns": 194.1,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 188.3,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 193.5,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 193.5,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-16",
+        "samples": [
+          {
+            "ns": 212.9,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 202.3,
+            "bytes": 320,
+            "allocations": 9
+          },
+          {
+            "ns": 207.9,
+            "bytes": 320,
+            "allocations": 9
+          }
+        ],
+        "medianNs": 207.9,
+        "medianBytes": 320,
+        "medianAllocations": 9
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8",
+        "samples": [
+          {
+            "ns": 1360,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1546,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1601,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1546,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-4",
+        "samples": [
+          {
+            "ns": 1293,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1227,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1205,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1227,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-16",
+        "samples": [
+          {
+            "ns": 1315,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1322,
+            "bytes": 1832,
+            "allocations": 51
+          },
+          {
+            "ns": 1337,
+            "bytes": 1832,
+            "allocations": 51
+          }
+        ],
+        "medianNs": 1322,
+        "medianBytes": 1832,
+        "medianAllocations": 51
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40",
+        "samples": [
+          {
+            "ns": 9979,
+            "bytes": 9033,
+            "allocations": 248
+          },
+          {
+            "ns": 7686,
+            "bytes": 8808,
+            "allocations": 243
+          },
+          {
+            "ns": 7745,
+            "bytes": 8808,
+            "allocations": 243
+          }
+        ],
+        "medianNs": 7745,
+        "medianBytes": 8808,
+        "medianAllocations": 243
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-4",
+        "samples": [
+          {
+            "ns": 8028,
+            "bytes": 9016,
+            "allocations": 248
+          },
+          {
+            "ns": 7744,
+            "bytes": 9016,
+            "allocations": 248
+          },
+          {
+            "ns": 8083,
+            "bytes": 9016,
+            "allocations": 248
+          }
+        ],
+        "medianNs": 8028,
+        "medianBytes": 9016,
+        "medianAllocations": 248
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-16",
+        "samples": [
+          {
+            "ns": 9490,
+            "bytes": 9020,
+            "allocations": 248
+          },
+          {
+            "ns": 10696,
+            "bytes": 9017,
+            "allocations": 248
+          },
+          {
+            "ns": 10767,
+            "bytes": 9024,
+            "allocations": 248
+          }
+        ],
+        "medianNs": 10696,
+        "medianBytes": 9020,
+        "medianAllocations": 248
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120",
+        "samples": [
+          {
+            "ns": 25202,
+            "bytes": 26852,
+            "allocations": 738
+          },
+          {
+            "ns": 24237,
+            "bytes": 26152,
+            "allocations": 723
+          },
+          {
+            "ns": 24002,
+            "bytes": 26152,
+            "allocations": 723
+          }
+        ],
+        "medianNs": 24237,
+        "medianBytes": 26152,
+        "medianAllocations": 723
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-4",
+        "samples": [
+          {
+            "ns": 18061,
+            "bytes": 26552,
+            "allocations": 732
+          },
+          {
+            "ns": 15530,
+            "bytes": 26552,
+            "allocations": 732
+          },
+          {
+            "ns": 14897,
+            "bytes": 26552,
+            "allocations": 732
+          }
+        ],
+        "medianNs": 15530,
+        "medianBytes": 26552,
+        "medianAllocations": 732
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-16",
+        "samples": [
+          {
+            "ns": 27666,
+            "bytes": 26850,
+            "allocations": 738
+          },
+          {
+            "ns": 26320,
+            "bytes": 26840,
+            "allocations": 738
+          },
+          {
+            "ns": 25626,
+            "bytes": 26840,
+            "allocations": 738
+          }
+        ],
+        "medianNs": 26320,
+        "medianBytes": 26840,
+        "medianAllocations": 738
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1",
+        "samples": [
+          {
+            "ns": 1879,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 2175,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 2286,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 2175,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-4",
+        "samples": [
+          {
+            "ns": 1700,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1585,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1577,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 1585,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-16",
+        "samples": [
+          {
+            "ns": 1878,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 1986,
+            "bytes": 2328,
+            "allocations": 50
+          },
+          {
+            "ns": 2015,
+            "bytes": 2328,
+            "allocations": 50
+          }
+        ],
+        "medianNs": 1986,
+        "medianBytes": 2328,
+        "medianAllocations": 50
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8",
+        "samples": [
+          {
+            "ns": 18630,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 20350,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 20745,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 20350,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-4",
+        "samples": [
+          {
+            "ns": 15364,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 15679,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 15406,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 15406,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-16",
+        "samples": [
+          {
+            "ns": 18260,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 18744,
+            "bytes": 21544,
+            "allocations": 432
+          },
+          {
+            "ns": 18521,
+            "bytes": 21544,
+            "allocations": 432
+          }
+        ],
+        "medianNs": 18521,
+        "medianBytes": 21544,
+        "medianAllocations": 432
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40",
+        "samples": [
+          {
+            "ns": 78630,
+            "bytes": 97202,
+            "allocations": 1844
+          },
+          {
+            "ns": 92550,
+            "bytes": 96992,
+            "allocations": 1839
+          },
+          {
+            "ns": 94974,
+            "bytes": 96992,
+            "allocations": 1839
+          }
+        ],
+        "medianNs": 92550,
+        "medianBytes": 96992,
+        "medianAllocations": 1839
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-4",
+        "samples": [
+          {
+            "ns": 55772,
+            "bytes": 97202,
+            "allocations": 1844
+          },
+          {
+            "ns": 55459,
+            "bytes": 97201,
+            "allocations": 1844
+          },
+          {
+            "ns": 56537,
+            "bytes": 97201,
+            "allocations": 1844
+          }
+        ],
+        "medianNs": 55772,
+        "medianBytes": 97201,
+        "medianAllocations": 1844
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-16",
+        "samples": [
+          {
+            "ns": 77224,
+            "bytes": 97202,
+            "allocations": 1844
+          },
+          {
+            "ns": 76104,
+            "bytes": 97201,
+            "allocations": 1844
+          },
+          {
+            "ns": 78248,
+            "bytes": 97201,
+            "allocations": 1844
+          }
+        ],
+        "medianNs": 77224,
+        "medianBytes": 97201,
+        "medianAllocations": 1844
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120",
+        "samples": [
+          {
+            "ns": 248923,
+            "bytes": 381552,
+            "allocations": 7199
+          },
+          {
+            "ns": 369146,
+            "bytes": 380816,
+            "allocations": 7184
+          },
+          {
+            "ns": 377739,
+            "bytes": 380816,
+            "allocations": 7184
+          }
+        ],
+        "medianNs": 369146,
+        "medianBytes": 380816,
+        "medianAllocations": 7184
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-4",
+        "samples": [
+          {
+            "ns": 210766,
+            "bytes": 381230,
+            "allocations": 7193
+          },
+          {
+            "ns": 190023,
+            "bytes": 381228,
+            "allocations": 7193
+          },
+          {
+            "ns": 186479,
+            "bytes": 381227,
+            "allocations": 7193
+          }
+        ],
+        "medianNs": 190023,
+        "medianBytes": 381228,
+        "medianAllocations": 7193
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-16",
+        "samples": [
+          {
+            "ns": 252142,
+            "bytes": 381553,
+            "allocations": 7199
+          },
+          {
+            "ns": 248395,
+            "bytes": 381552,
+            "allocations": 7199
+          },
+          {
+            "ns": 248071,
+            "bytes": 381536,
+            "allocations": 7199
+          }
+        ],
+        "medianNs": 248395,
+        "medianBytes": 381552,
+        "medianAllocations": 7199
+      }
+    ],
+    "graph-viewport-before.log": [
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1",
+        "samples": [
+          {
+            "ns": 6039,
+            "bytes": 2977,
+            "allocations": 44
+          },
+          {
+            "ns": 1518,
+            "bytes": 448,
+            "allocations": 14
+          },
+          {
+            "ns": 1527,
+            "bytes": 448,
+            "allocations": 14
+          },
+          {
+            "ns": 1507,
+            "bytes": 448,
+            "allocations": 14
+          },
+          {
+            "ns": 1509,
+            "bytes": 448,
+            "allocations": 14
+          }
+        ],
+        "medianNs": 1518,
+        "medianBytes": 448,
+        "medianAllocations": 14
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-4",
+        "samples": [
+          {
+            "ns": 2332,
+            "bytes": 952,
+            "allocations": 20
+          },
+          {
+            "ns": 2433,
+            "bytes": 952,
+            "allocations": 20
+          },
+          {
+            "ns": 2400,
+            "bytes": 952,
+            "allocations": 20
+          },
+          {
+            "ns": 2337,
+            "bytes": 952,
+            "allocations": 20
+          },
+          {
+            "ns": 2575,
+            "bytes": 952,
+            "allocations": 20
+          }
+        ],
+        "medianNs": 2400,
+        "medianBytes": 952,
+        "medianAllocations": 20
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-16",
+        "samples": [
+          {
+            "ns": 5414,
+            "bytes": 2968,
+            "allocations": 44
+          },
+          {
+            "ns": 5316,
+            "bytes": 2969,
+            "allocations": 44
+          },
+          {
+            "ns": 5329,
+            "bytes": 2968,
+            "allocations": 44
+          },
+          {
+            "ns": 5457,
+            "bytes": 2968,
+            "allocations": 44
+          },
+          {
+            "ns": 5623,
+            "bytes": 2968,
+            "allocations": 44
+          }
+        ],
+        "medianNs": 5414,
+        "medianBytes": 2968,
+        "medianAllocations": 44
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8",
+        "samples": [
+          {
+            "ns": 7881,
+            "bytes": 4816,
+            "allocations": 100
+          },
+          {
+            "ns": 3241,
+            "bytes": 2296,
+            "allocations": 70
+          },
+          {
+            "ns": 3435,
+            "bytes": 2296,
+            "allocations": 70
+          },
+          {
+            "ns": 3287,
+            "bytes": 2296,
+            "allocations": 70
+          },
+          {
+            "ns": 3244,
+            "bytes": 2296,
+            "allocations": 70
+          }
+        ],
+        "medianNs": 3287,
+        "medianBytes": 2296,
+        "medianAllocations": 70
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-4",
+        "samples": [
+          {
+            "ns": 6590,
+            "bytes": 2800,
+            "allocations": 79
+          },
+          {
+            "ns": 6540,
+            "bytes": 2800,
+            "allocations": 79
+          },
+          {
+            "ns": 6603,
+            "bytes": 2800,
+            "allocations": 79
+          },
+          {
+            "ns": 6408,
+            "bytes": 2800,
+            "allocations": 79
+          },
+          {
+            "ns": 6568,
+            "bytes": 2800,
+            "allocations": 79
+          }
+        ],
+        "medianNs": 6568,
+        "medianBytes": 2800,
+        "medianAllocations": 79
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-16",
+        "samples": [
+          {
+            "ns": 8143,
+            "bytes": 4816,
+            "allocations": 100
+          },
+          {
+            "ns": 8070,
+            "bytes": 4816,
+            "allocations": 100
+          },
+          {
+            "ns": 7755,
+            "bytes": 4816,
+            "allocations": 100
+          },
+          {
+            "ns": 8022,
+            "bytes": 4816,
+            "allocations": 100
+          },
+          {
+            "ns": 7896,
+            "bytes": 4816,
+            "allocations": 100
+          }
+        ],
+        "medianNs": 8022,
+        "medianBytes": 4816,
+        "medianAllocations": 100
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40",
+        "samples": [
+          {
+            "ns": 25648,
+            "bytes": 13334,
+            "allocations": 371
+          },
+          {
+            "ns": 10764,
+            "bytes": 10872,
+            "allocations": 326
+          },
+          {
+            "ns": 11065,
+            "bytes": 10872,
+            "allocations": 326
+          },
+          {
+            "ns": 10969,
+            "bytes": 10872,
+            "allocations": 326
+          },
+          {
+            "ns": 11601,
+            "bytes": 10872,
+            "allocations": 326
+          }
+        ],
+        "medianNs": 11065,
+        "medianBytes": 10872,
+        "medianAllocations": 326
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-4",
+        "samples": [
+          {
+            "ns": 11274,
+            "bytes": 11312,
+            "allocations": 335
+          },
+          {
+            "ns": 11373,
+            "bytes": 11312,
+            "allocations": 335
+          },
+          {
+            "ns": 11388,
+            "bytes": 11312,
+            "allocations": 335
+          },
+          {
+            "ns": 11207,
+            "bytes": 11312,
+            "allocations": 335
+          },
+          {
+            "ns": 11500,
+            "bytes": 11312,
+            "allocations": 335
+          }
+        ],
+        "medianNs": 11373,
+        "medianBytes": 11312,
+        "medianAllocations": 335
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-16",
+        "samples": [
+          {
+            "ns": 25828,
+            "bytes": 13328,
+            "allocations": 371
+          },
+          {
+            "ns": 25236,
+            "bytes": 13328,
+            "allocations": 371
+          },
+          {
+            "ns": 25126,
+            "bytes": 13328,
+            "allocations": 371
+          },
+          {
+            "ns": 24710,
+            "bytes": 13328,
+            "allocations": 371
+          },
+          {
+            "ns": 24388,
+            "bytes": 13328,
+            "allocations": 371
+          }
+        ],
+        "medianNs": 25126,
+        "medianBytes": 13328,
+        "medianAllocations": 371
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120",
+        "samples": [
+          {
+            "ns": 35859,
+            "bytes": 34513,
+            "allocations": 1011
+          },
+          {
+            "ns": 29384,
+            "bytes": 32120,
+            "allocations": 966
+          },
+          {
+            "ns": 29827,
+            "bytes": 32120,
+            "allocations": 966
+          },
+          {
+            "ns": 29928,
+            "bytes": 32120,
+            "allocations": 966
+          },
+          {
+            "ns": 29554,
+            "bytes": 32120,
+            "allocations": 966
+          }
+        ],
+        "medianNs": 29827,
+        "medianBytes": 32120,
+        "medianAllocations": 966
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-4",
+        "samples": [
+          {
+            "ns": 19896,
+            "bytes": 32496,
+            "allocations": 975
+          },
+          {
+            "ns": 20729,
+            "bytes": 32496,
+            "allocations": 975
+          },
+          {
+            "ns": 18672,
+            "bytes": 32496,
+            "allocations": 975
+          },
+          {
+            "ns": 17683,
+            "bytes": 32496,
+            "allocations": 975
+          },
+          {
+            "ns": 18426,
+            "bytes": 32496,
+            "allocations": 975
+          }
+        ],
+        "medianNs": 18672,
+        "medianBytes": 32496,
+        "medianAllocations": 975
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-16",
+        "samples": [
+          {
+            "ns": 38314,
+            "bytes": 34513,
+            "allocations": 1011
+          },
+          {
+            "ns": 36699,
+            "bytes": 34513,
+            "allocations": 1011
+          },
+          {
+            "ns": 37411,
+            "bytes": 34513,
+            "allocations": 1011
+          },
+          {
+            "ns": 37695,
+            "bytes": 34512,
+            "allocations": 1011
+          },
+          {
+            "ns": 36971,
+            "bytes": 34513,
+            "allocations": 1011
+          }
+        ],
+        "medianNs": 37411,
+        "medianBytes": 34513,
+        "medianAllocations": 1011
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1",
+        "samples": [
+          {
+            "ns": 10050,
+            "bytes": 5520,
+            "allocations": 104
+          },
+          {
+            "ns": 4426,
+            "bytes": 3000,
+            "allocations": 74
+          },
+          {
+            "ns": 4501,
+            "bytes": 3000,
+            "allocations": 74
+          },
+          {
+            "ns": 4516,
+            "bytes": 3000,
+            "allocations": 74
+          },
+          {
+            "ns": 4527,
+            "bytes": 3000,
+            "allocations": 74
+          }
+        ],
+        "medianNs": 4516,
+        "medianBytes": 3000,
+        "medianAllocations": 74
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-4",
+        "samples": [
+          {
+            "ns": 5351,
+            "bytes": 3504,
+            "allocations": 80
+          },
+          {
+            "ns": 4952,
+            "bytes": 3504,
+            "allocations": 80
+          },
+          {
+            "ns": 5066,
+            "bytes": 3504,
+            "allocations": 80
+          },
+          {
+            "ns": 6055,
+            "bytes": 3504,
+            "allocations": 80
+          },
+          {
+            "ns": 5350,
+            "bytes": 3504,
+            "allocations": 80
+          }
+        ],
+        "medianNs": 5350,
+        "medianBytes": 3504,
+        "medianAllocations": 80
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-16",
+        "samples": [
+          {
+            "ns": 9923,
+            "bytes": 5520,
+            "allocations": 104
+          },
+          {
+            "ns": 10294,
+            "bytes": 5522,
+            "allocations": 104
+          },
+          {
+            "ns": 9961,
+            "bytes": 5523,
+            "allocations": 104
+          },
+          {
+            "ns": 10198,
+            "bytes": 5520,
+            "allocations": 104
+          },
+          {
+            "ns": 9833,
+            "bytes": 5520,
+            "allocations": 104
+          }
+        ],
+        "medianNs": 9961,
+        "medianBytes": 5520,
+        "medianAllocations": 104
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8",
+        "samples": [
+          {
+            "ns": 35082,
+            "bytes": 31440,
+            "allocations": 666
+          },
+          {
+            "ns": 29807,
+            "bytes": 28920,
+            "allocations": 636
+          },
+          {
+            "ns": 30445,
+            "bytes": 28920,
+            "allocations": 636
+          },
+          {
+            "ns": 30383,
+            "bytes": 28920,
+            "allocations": 636
+          },
+          {
+            "ns": 34101,
+            "bytes": 28920,
+            "allocations": 636
+          }
+        ],
+        "medianNs": 30445,
+        "medianBytes": 28920,
+        "medianAllocations": 636
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-4",
+        "samples": [
+          {
+            "ns": 20129,
+            "bytes": 29424,
+            "allocations": 645
+          },
+          {
+            "ns": 20598,
+            "bytes": 29424,
+            "allocations": 645
+          },
+          {
+            "ns": 19320,
+            "bytes": 29424,
+            "allocations": 645
+          },
+          {
+            "ns": 19025,
+            "bytes": 29424,
+            "allocations": 645
+          },
+          {
+            "ns": 20780,
+            "bytes": 29424,
+            "allocations": 645
+          }
+        ],
+        "medianNs": 20129,
+        "medianBytes": 29424,
+        "medianAllocations": 645
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-16",
+        "samples": [
+          {
+            "ns": 36479,
+            "bytes": 31440,
+            "allocations": 666
+          },
+          {
+            "ns": 34951,
+            "bytes": 31440,
+            "allocations": 666
+          },
+          {
+            "ns": 35769,
+            "bytes": 31440,
+            "allocations": 666
+          },
+          {
+            "ns": 35758,
+            "bytes": 31440,
+            "allocations": 666
+          },
+          {
+            "ns": 36835,
+            "bytes": 31440,
+            "allocations": 666
+          }
+        ],
+        "medianNs": 35769,
+        "medianBytes": 31440,
+        "medianAllocations": 666
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40",
+        "samples": [
+          {
+            "ns": 150380,
+            "bytes": 132938,
+            "allocations": 2752
+          },
+          {
+            "ns": 135669,
+            "bytes": 130464,
+            "allocations": 2707
+          },
+          {
+            "ns": 141281,
+            "bytes": 130464,
+            "allocations": 2707
+          },
+          {
+            "ns": 136978,
+            "bytes": 130464,
+            "allocations": 2707
+          },
+          {
+            "ns": 142233,
+            "bytes": 130464,
+            "allocations": 2707
+          }
+        ],
+        "medianNs": 141281,
+        "medianBytes": 130464,
+        "medianAllocations": 2707
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-4",
+        "samples": [
+          {
+            "ns": 71403,
+            "bytes": 130906,
+            "allocations": 2716
+          },
+          {
+            "ns": 71630,
+            "bytes": 130906,
+            "allocations": 2716
+          },
+          {
+            "ns": 74265,
+            "bytes": 130904,
+            "allocations": 2716
+          },
+          {
+            "ns": 68588,
+            "bytes": 130906,
+            "allocations": 2716
+          },
+          {
+            "ns": 68862,
+            "bytes": 130905,
+            "allocations": 2716
+          }
+        ],
+        "medianNs": 71403,
+        "medianBytes": 130906,
+        "medianAllocations": 2716
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-16",
+        "samples": [
+          {
+            "ns": 151569,
+            "bytes": 132945,
+            "allocations": 2752
+          },
+          {
+            "ns": 148947,
+            "bytes": 132934,
+            "allocations": 2752
+          },
+          {
+            "ns": 153314,
+            "bytes": 132933,
+            "allocations": 2752
+          },
+          {
+            "ns": 153939,
+            "bytes": 132930,
+            "allocations": 2752
+          },
+          {
+            "ns": 145016,
+            "bytes": 132932,
+            "allocations": 2752
+          }
+        ],
+        "medianNs": 151569,
+        "medianBytes": 132933,
+        "medianAllocations": 2752
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120",
+        "samples": [
+          {
+            "ns": 450056,
+            "bytes": 522048,
+            "allocations": 10667
+          },
+          {
+            "ns": 518851,
+            "bytes": 519600,
+            "allocations": 10622
+          },
+          {
+            "ns": 524583,
+            "bytes": 519600,
+            "allocations": 10622
+          },
+          {
+            "ns": 525840,
+            "bytes": 519600,
+            "allocations": 10622
+          },
+          {
+            "ns": 526146,
+            "bytes": 519600,
+            "allocations": 10622
+          }
+        ],
+        "medianNs": 524583,
+        "medianBytes": 519600,
+        "medianAllocations": 10622
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-4",
+        "samples": [
+          {
+            "ns": 265574,
+            "bytes": 519988,
+            "allocations": 10631
+          },
+          {
+            "ns": 258493,
+            "bytes": 519989,
+            "allocations": 10631
+          },
+          {
+            "ns": 258303,
+            "bytes": 519995,
+            "allocations": 10631
+          },
+          {
+            "ns": 257221,
+            "bytes": 519987,
+            "allocations": 10631
+          },
+          {
+            "ns": 253029,
+            "bytes": 519992,
+            "allocations": 10631
+          }
+        ],
+        "medianNs": 258303,
+        "medianBytes": 519989,
+        "medianAllocations": 10631
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-16",
+        "samples": [
+          {
+            "ns": 445376,
+            "bytes": 522148,
+            "allocations": 10668
+          },
+          {
+            "ns": 460790,
+            "bytes": 522091,
+            "allocations": 10667
+          },
+          {
+            "ns": 446221,
+            "bytes": 522031,
+            "allocations": 10667
+          },
+          {
+            "ns": 462887,
+            "bytes": 522067,
+            "allocations": 10667
+          },
+          {
+            "ns": 447154,
+            "bytes": 522041,
+            "allocations": 10667
+          }
+        ],
+        "medianNs": 447154,
+        "medianBytes": 522067,
+        "medianAllocations": 10667
+      }
+    ],
+    "graph-viewport-shared-output.log": [
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1",
+        "samples": [
+          {
+            "ns": 5723,
+            "bytes": 1906,
+            "allocations": 43
+          },
+          {
+            "ns": 1583,
+            "bytes": 456,
+            "allocations": 13
+          },
+          {
+            "ns": 1574,
+            "bytes": 456,
+            "allocations": 13
+          }
+        ],
+        "medianNs": 1583,
+        "medianBytes": 456,
+        "medianAllocations": 13
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-4",
+        "samples": [
+          {
+            "ns": 2457,
+            "bytes": 744,
+            "allocations": 19
+          },
+          {
+            "ns": 2358,
+            "bytes": 744,
+            "allocations": 19
+          },
+          {
+            "ns": 2472,
+            "bytes": 744,
+            "allocations": 19
+          }
+        ],
+        "medianNs": 2457,
+        "medianBytes": 744,
+        "medianAllocations": 19
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-16",
+        "samples": [
+          {
+            "ns": 5410,
+            "bytes": 1897,
+            "allocations": 43
+          },
+          {
+            "ns": 5021,
+            "bytes": 1897,
+            "allocations": 43
+          },
+          {
+            "ns": 5941,
+            "bytes": 1896,
+            "allocations": 43
+          }
+        ],
+        "medianNs": 5410,
+        "medianBytes": 1897,
+        "medianAllocations": 43
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8",
+        "samples": [
+          {
+            "ns": 8657,
+            "bytes": 3632,
+            "allocations": 99
+          },
+          {
+            "ns": 3131,
+            "bytes": 2192,
+            "allocations": 69
+          },
+          {
+            "ns": 3192,
+            "bytes": 2192,
+            "allocations": 69
+          }
+        ],
+        "medianNs": 3192,
+        "medianBytes": 2192,
+        "medianAllocations": 69
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-4",
+        "samples": [
+          {
+            "ns": 6945,
+            "bytes": 2480,
+            "allocations": 75
+          },
+          {
+            "ns": 6859,
+            "bytes": 2480,
+            "allocations": 75
+          },
+          {
+            "ns": 6653,
+            "bytes": 2480,
+            "allocations": 75
+          }
+        ],
+        "medianNs": 6859,
+        "medianBytes": 2480,
+        "medianAllocations": 75
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-16",
+        "samples": [
+          {
+            "ns": 7100,
+            "bytes": 3635,
+            "allocations": 99
+          },
+          {
+            "ns": 7240,
+            "bytes": 3632,
+            "allocations": 99
+          },
+          {
+            "ns": 7136,
+            "bytes": 3632,
+            "allocations": 99
+          }
+        ],
+        "medianNs": 7136,
+        "medianBytes": 3632,
+        "medianAllocations": 99
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40",
+        "samples": [
+          {
+            "ns": 25164,
+            "bytes": 11633,
+            "allocations": 355
+          },
+          {
+            "ns": 10043,
+            "bytes": 10192,
+            "allocations": 325
+          },
+          {
+            "ns": 10192,
+            "bytes": 10192,
+            "allocations": 325
+          }
+        ],
+        "medianNs": 10192,
+        "medianBytes": 10192,
+        "medianAllocations": 325
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-4",
+        "samples": [
+          {
+            "ns": 11193,
+            "bytes": 10480,
+            "allocations": 331
+          },
+          {
+            "ns": 11335,
+            "bytes": 10480,
+            "allocations": 331
+          },
+          {
+            "ns": 11082,
+            "bytes": 10480,
+            "allocations": 331
+          }
+        ],
+        "medianNs": 11193,
+        "medianBytes": 10480,
+        "medianAllocations": 331
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-16",
+        "samples": [
+          {
+            "ns": 25829,
+            "bytes": 11646,
+            "allocations": 355
+          },
+          {
+            "ns": 24778,
+            "bytes": 11632,
+            "allocations": 355
+          },
+          {
+            "ns": 25206,
+            "bytes": 11643,
+            "allocations": 355
+          }
+        ],
+        "medianNs": 25206,
+        "medianBytes": 11643,
+        "medianAllocations": 355
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120",
+        "samples": [
+          {
+            "ns": 35797,
+            "bytes": 31536,
+            "allocations": 995
+          },
+          {
+            "ns": 26682,
+            "bytes": 30096,
+            "allocations": 965
+          },
+          {
+            "ns": 27124,
+            "bytes": 30096,
+            "allocations": 965
+          }
+        ],
+        "medianNs": 27124,
+        "medianBytes": 30096,
+        "medianAllocations": 965
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-4",
+        "samples": [
+          {
+            "ns": 17156,
+            "bytes": 30384,
+            "allocations": 971
+          },
+          {
+            "ns": 17763,
+            "bytes": 30384,
+            "allocations": 971
+          },
+          {
+            "ns": 16888,
+            "bytes": 30384,
+            "allocations": 971
+          }
+        ],
+        "medianNs": 17156,
+        "medianBytes": 30384,
+        "medianAllocations": 971
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-16",
+        "samples": [
+          {
+            "ns": 35124,
+            "bytes": 31537,
+            "allocations": 995
+          },
+          {
+            "ns": 35543,
+            "bytes": 31537,
+            "allocations": 995
+          },
+          {
+            "ns": 33482,
+            "bytes": 31537,
+            "allocations": 995
+          }
+        ],
+        "medianNs": 35124,
+        "medianBytes": 31537,
+        "medianAllocations": 995
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1",
+        "samples": [
+          {
+            "ns": 8273,
+            "bytes": 4448,
+            "allocations": 103
+          },
+          {
+            "ns": 3989,
+            "bytes": 3008,
+            "allocations": 73
+          },
+          {
+            "ns": 4068,
+            "bytes": 3008,
+            "allocations": 73
+          }
+        ],
+        "medianNs": 4068,
+        "medianBytes": 3008,
+        "medianAllocations": 73
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-4",
+        "samples": [
+          {
+            "ns": 5181,
+            "bytes": 3296,
+            "allocations": 79
+          },
+          {
+            "ns": 4841,
+            "bytes": 3296,
+            "allocations": 79
+          },
+          {
+            "ns": 4794,
+            "bytes": 3296,
+            "allocations": 79
+          }
+        ],
+        "medianNs": 4841,
+        "medianBytes": 3296,
+        "medianAllocations": 79
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-16",
+        "samples": [
+          {
+            "ns": 8424,
+            "bytes": 4448,
+            "allocations": 103
+          },
+          {
+            "ns": 8757,
+            "bytes": 4448,
+            "allocations": 103
+          },
+          {
+            "ns": 8665,
+            "bytes": 4448,
+            "allocations": 103
+          }
+        ],
+        "medianNs": 8665,
+        "medianBytes": 4448,
+        "medianAllocations": 103
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8",
+        "samples": [
+          {
+            "ns": 28664,
+            "bytes": 30256,
+            "allocations": 665
+          },
+          {
+            "ns": 25204,
+            "bytes": 28816,
+            "allocations": 635
+          },
+          {
+            "ns": 26181,
+            "bytes": 28816,
+            "allocations": 635
+          }
+        ],
+        "medianNs": 26181,
+        "medianBytes": 28816,
+        "medianAllocations": 635
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-4",
+        "samples": [
+          {
+            "ns": 16077,
+            "bytes": 29104,
+            "allocations": 641
+          },
+          {
+            "ns": 18950,
+            "bytes": 29104,
+            "allocations": 641
+          },
+          {
+            "ns": 18085,
+            "bytes": 29104,
+            "allocations": 641
+          }
+        ],
+        "medianNs": 18085,
+        "medianBytes": 29104,
+        "medianAllocations": 641
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-16",
+        "samples": [
+          {
+            "ns": 30155,
+            "bytes": 30256,
+            "allocations": 665
+          },
+          {
+            "ns": 30042,
+            "bytes": 30256,
+            "allocations": 665
+          },
+          {
+            "ns": 29553,
+            "bytes": 30277,
+            "allocations": 665
+          }
+        ],
+        "medianNs": 30042,
+        "medianBytes": 30256,
+        "medianAllocations": 665
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40",
+        "samples": [
+          {
+            "ns": 83269,
+            "bytes": 131245,
+            "allocations": 2736
+          },
+          {
+            "ns": 111261,
+            "bytes": 129784,
+            "allocations": 2706
+          },
+          {
+            "ns": 112908,
+            "bytes": 129784,
+            "allocations": 2706
+          }
+        ],
+        "medianNs": 111261,
+        "medianBytes": 129784,
+        "medianAllocations": 2706
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-4",
+        "samples": [
+          {
+            "ns": 50846,
+            "bytes": 130073,
+            "allocations": 2712
+          },
+          {
+            "ns": 49341,
+            "bytes": 130072,
+            "allocations": 2712
+          },
+          {
+            "ns": 49860,
+            "bytes": 130073,
+            "allocations": 2712
+          }
+        ],
+        "medianNs": 49860,
+        "medianBytes": 130073,
+        "medianAllocations": 2712
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-16",
+        "samples": [
+          {
+            "ns": 90049,
+            "bytes": 131234,
+            "allocations": 2736
+          },
+          {
+            "ns": 82800,
+            "bytes": 131229,
+            "allocations": 2736
+          },
+          {
+            "ns": 86449,
+            "bytes": 131231,
+            "allocations": 2736
+          }
+        ],
+        "medianNs": 86449,
+        "medianBytes": 131231,
+        "medianAllocations": 2736
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120",
+        "samples": [
+          {
+            "ns": 261513,
+            "bytes": 519062,
+            "allocations": 10651
+          },
+          {
+            "ns": 413068,
+            "bytes": 517576,
+            "allocations": 10621
+          },
+          {
+            "ns": 423873,
+            "bytes": 517576,
+            "allocations": 10621
+          }
+        ],
+        "medianNs": 413068,
+        "medianBytes": 517576,
+        "medianAllocations": 10621
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-4",
+        "samples": [
+          {
+            "ns": 186158,
+            "bytes": 517876,
+            "allocations": 10627
+          },
+          {
+            "ns": 202964,
+            "bytes": 517873,
+            "allocations": 10627
+          },
+          {
+            "ns": 197921,
+            "bytes": 517873,
+            "allocations": 10627
+          }
+        ],
+        "medianNs": 197921,
+        "medianBytes": 517873,
+        "medianAllocations": 10627
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-16",
+        "samples": [
+          {
+            "ns": 267105,
+            "bytes": 519081,
+            "allocations": 10651
+          },
+          {
+            "ns": 260666,
+            "bytes": 519077,
+            "allocations": 10651
+          },
+          {
+            "ns": 253970,
+            "bytes": 519060,
+            "allocations": 10651
+          }
+        ],
+        "medianNs": 260666,
+        "medianBytes": 519077,
+        "medianAllocations": 10651
+      }
+    ],
+    "tree-range-after.log": [
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=false",
+        "samples": [
+          {
+            "ns": 30.28,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 30.15,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 30.39,
+            "bytes": 16,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 30.28,
+        "medianBytes": 16,
+        "medianAllocations": 2
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=true",
+        "samples": [
+          {
+            "ns": 30.14,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 30.2,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 30.21,
+            "bytes": 16,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 30.2,
+        "medianBytes": 16,
+        "medianAllocations": 2
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=false",
+        "samples": [
+          {
+            "ns": 306.3,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 304.8,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 291.7,
+            "bytes": 16,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 304.8,
+        "medianBytes": 16,
+        "medianAllocations": 2
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=true",
+        "samples": [
+          {
+            "ns": 304.1,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 328,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 344,
+            "bytes": 16,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 328,
+        "medianBytes": 16,
+        "medianAllocations": 2
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=false",
+        "samples": [
+          {
+            "ns": 32.9,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 32.38,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 31.84,
+            "bytes": 16,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 32.38,
+        "medianBytes": 16,
+        "medianAllocations": 2
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=true",
+        "samples": [
+          {
+            "ns": 32.48,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 32.54,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 32.36,
+            "bytes": 16,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 32.48,
+        "medianBytes": 16,
+        "medianAllocations": 2
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=false",
+        "samples": [
+          {
+            "ns": 30676,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 28983,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 30583,
+            "bytes": 16,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 30583,
+        "medianBytes": 16,
+        "medianAllocations": 2
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=true",
+        "samples": [
+          {
+            "ns": 30030,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 31380,
+            "bytes": 16,
+            "allocations": 2
+          },
+          {
+            "ns": 30431,
+            "bytes": 16,
+            "allocations": 2
+          }
+        ],
+        "medianNs": 30431,
+        "medianBytes": 16,
+        "medianAllocations": 2
+      }
+    ],
+    "tree-range-before.log": [
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=false",
+        "samples": [
+          {
+            "ns": 386,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 372.5,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 379.9,
+            "bytes": 24,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 379.9,
+        "medianBytes": 24,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=true",
+        "samples": [
+          {
+            "ns": 381.6,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 376.1,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 372.8,
+            "bytes": 24,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 376.1,
+        "medianBytes": 24,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=false",
+        "samples": [
+          {
+            "ns": 945.6,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 639.9,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 703.4,
+            "bytes": 24,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 703.4,
+        "medianBytes": 24,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=true",
+        "samples": [
+          {
+            "ns": 693.7,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 679,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 686.1,
+            "bytes": 24,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 686.1,
+        "medianBytes": 24,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=false",
+        "samples": [
+          {
+            "ns": 35504,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 36526,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 36403,
+            "bytes": 24,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 36403,
+        "medianBytes": 24,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=true",
+        "samples": [
+          {
+            "ns": 36333,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 37682,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 37073,
+            "bytes": 24,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 37073,
+        "medianBytes": 24,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=false",
+        "samples": [
+          {
+            "ns": 68706,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 67778,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 64684,
+            "bytes": 24,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 67778,
+        "medianBytes": 24,
+        "medianAllocations": 3
+      },
+      {
+        "name": "BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=true",
+        "samples": [
+          {
+            "ns": 66178,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 66044,
+            "bytes": 24,
+            "allocations": 3
+          },
+          {
+            "ns": 68165,
+            "bytes": 24,
+            "allocations": 3
+          }
+        ],
+        "medianNs": 66178,
+        "medianBytes": 24,
+        "medianAllocations": 3
+      }
+    ],
+    "flat-after.log": [
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=false",
+        "samples": [
+          {
+            "ns": 24211,
+            "bytes": 18528,
+            "allocations": 208
+          },
+          {
+            "ns": 24264,
+            "bytes": 18528,
+            "allocations": 208
+          },
+          {
+            "ns": 24229,
+            "bytes": 18528,
+            "allocations": 208
+          }
+        ],
+        "medianNs": 24229,
+        "medianBytes": 18528,
+        "medianAllocations": 208
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=true",
+        "samples": [
+          {
+            "ns": 20660,
+            "bytes": 18472,
+            "allocations": 206
+          },
+          {
+            "ns": 21062,
+            "bytes": 18472,
+            "allocations": 206
+          },
+          {
+            "ns": 20792,
+            "bytes": 18472,
+            "allocations": 206
+          }
+        ],
+        "medianNs": 20792,
+        "medianBytes": 18472,
+        "medianAllocations": 206
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=false",
+        "samples": [
+          {
+            "ns": 42166,
+            "bytes": 52832,
+            "allocations": 212
+          },
+          {
+            "ns": 42632,
+            "bytes": 52832,
+            "allocations": 212
+          },
+          {
+            "ns": 43367,
+            "bytes": 52832,
+            "allocations": 212
+          }
+        ],
+        "medianNs": 42632,
+        "medianBytes": 52832,
+        "medianAllocations": 212
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=true",
+        "samples": [
+          {
+            "ns": 39031,
+            "bytes": 52776,
+            "allocations": 210
+          },
+          {
+            "ns": 38781,
+            "bytes": 52776,
+            "allocations": 210
+          },
+          {
+            "ns": 38876,
+            "bytes": 52776,
+            "allocations": 210
+          }
+        ],
+        "medianNs": 38876,
+        "medianBytes": 52776,
+        "medianAllocations": 210
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=false",
+        "samples": [
+          {
+            "ns": 244176,
+            "bytes": 227656,
+            "allocations": 2010
+          },
+          {
+            "ns": 244625,
+            "bytes": 227656,
+            "allocations": 2010
+          },
+          {
+            "ns": 246868,
+            "bytes": 227656,
+            "allocations": 2010
+          }
+        ],
+        "medianNs": 244625,
+        "medianBytes": 227656,
+        "medianAllocations": 2010
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=true",
+        "samples": [
+          {
+            "ns": 202098,
+            "bytes": 227600,
+            "allocations": 2008
+          },
+          {
+            "ns": 202794,
+            "bytes": 227600,
+            "allocations": 2008
+          },
+          {
+            "ns": 203173,
+            "bytes": 227600,
+            "allocations": 2008
+          }
+        ],
+        "medianNs": 202794,
+        "medianBytes": 227600,
+        "medianAllocations": 2008
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=false",
+        "samples": [
+          {
+            "ns": 387016,
+            "bytes": 440424,
+            "allocations": 2019
+          },
+          {
+            "ns": 386957,
+            "bytes": 440424,
+            "allocations": 2019
+          },
+          {
+            "ns": 386747,
+            "bytes": 440424,
+            "allocations": 2019
+          }
+        ],
+        "medianNs": 386957,
+        "medianBytes": 440424,
+        "medianAllocations": 2019
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=true",
+        "samples": [
+          {
+            "ns": 356199,
+            "bytes": 440368,
+            "allocations": 2017
+          },
+          {
+            "ns": 346093,
+            "bytes": 440368,
+            "allocations": 2017
+          },
+          {
+            "ns": 349401,
+            "bytes": 440368,
+            "allocations": 2017
+          }
+        ],
+        "medianNs": 349401,
+        "medianBytes": 440368,
+        "medianAllocations": 2017
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=false",
+        "samples": [
+          {
+            "ns": 2870368,
+            "bytes": 2070520,
+            "allocations": 20038
+          },
+          {
+            "ns": 2675323,
+            "bytes": 2070520,
+            "allocations": 20038
+          },
+          {
+            "ns": 2586201,
+            "bytes": 2070520,
+            "allocations": 20038
+          }
+        ],
+        "medianNs": 2675323,
+        "medianBytes": 2070520,
+        "medianAllocations": 20038
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=true",
+        "samples": [
+          {
+            "ns": 2097760,
+            "bytes": 2070464,
+            "allocations": 20036
+          },
+          {
+            "ns": 2030675,
+            "bytes": 2070464,
+            "allocations": 20036
+          },
+          {
+            "ns": 2027740,
+            "bytes": 2070464,
+            "allocations": 20036
+          }
+        ],
+        "medianNs": 2030675,
+        "medianBytes": 2070464,
+        "medianAllocations": 20036
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=false",
+        "samples": [
+          {
+            "ns": 5447157,
+            "bytes": 6657848,
+            "allocations": 20220
+          },
+          {
+            "ns": 5506358,
+            "bytes": 6704689,
+            "allocations": 20221
+          },
+          {
+            "ns": 5390605,
+            "bytes": 6716868,
+            "allocations": 20222
+          }
+        ],
+        "medianNs": 5447157,
+        "medianBytes": 6704689,
+        "medianAllocations": 20221
+      },
+      {
+        "name": "BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=true",
+        "samples": [
+          {
+            "ns": 4676773,
+            "bytes": 6654008,
+            "allocations": 20217
+          },
+          {
+            "ns": 4713763,
+            "bytes": 6708943,
+            "allocations": 20220
+          },
+          {
+            "ns": 4768139,
+            "bytes": 6691842,
+            "allocations": 20219
+          }
+        ],
+        "medianNs": 4713763,
+        "medianBytes": 6691842,
+        "medianAllocations": 20219
+      },
+      {
+        "name": "BenchmarkFlatTreeRefresh/files=100/commits=false",
+        "samples": [
+          {
+            "ns": 39572,
+            "bytes": 57168,
+            "allocations": 519
+          },
+          {
+            "ns": 39173,
+            "bytes": 57168,
+            "allocations": 519
+          },
+          {
+            "ns": 40612,
+            "bytes": 57168,
+            "allocations": 519
+          }
+        ],
+        "medianNs": 39572,
+        "medianBytes": 57168,
+        "medianAllocations": 519
+      },
+      {
+        "name": "BenchmarkFlatTreeRefresh/files=100/commits=true",
+        "samples": [
+          {
+            "ns": 34139,
+            "bytes": 51976,
+            "allocations": 210
+          },
+          {
+            "ns": 34104,
+            "bytes": 51976,
+            "allocations": 210
+          },
+          {
+            "ns": 34436,
+            "bytes": 51976,
+            "allocations": 210
+          }
+        ],
+        "medianNs": 34139,
+        "medianBytes": 51976,
+        "medianAllocations": 210
+      },
+      {
+        "name": "BenchmarkFlatTreeRefresh/files=10000/commits=false",
+        "samples": [
+          {
+            "ns": 5267566,
+            "bytes": 7136521,
+            "allocations": 50229
+          },
+          {
+            "ns": 5209917,
+            "bytes": 7126611,
+            "allocations": 50229
+          },
+          {
+            "ns": 5199254,
+            "bytes": 7119397,
+            "allocations": 50229
+          }
+        ],
+        "medianNs": 5209917,
+        "medianBytes": 7126611,
+        "medianAllocations": 50229
+      },
+      {
+        "name": "BenchmarkFlatTreeRefresh/files=10000/commits=true",
+        "samples": [
+          {
+            "ns": 4590844,
+            "bytes": 6549101,
+            "allocations": 20216
+          },
+          {
+            "ns": 4547765,
+            "bytes": 6634542,
+            "allocations": 20220
+          },
+          {
+            "ns": 4477224,
+            "bytes": 6623192,
+            "allocations": 20219
+          }
+        ],
+        "medianNs": 4547765,
+        "medianBytes": 6623192,
+        "medianAllocations": 20219
+      }
+    ],
+    "graph-viewport-after.log": [
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1",
+        "samples": [
+          {
+            "ns": 254.3,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 320.9,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 310.2,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 308.3,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 310,
+            "bytes": 344,
+            "allocations": 10
+          }
+        ],
+        "medianNs": 310,
+        "medianBytes": 344,
+        "medianAllocations": 10
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-4",
+        "samples": [
+          {
+            "ns": 239.9,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 241.2,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 238.5,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 240.2,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 243.8,
+            "bytes": 344,
+            "allocations": 10
+          }
+        ],
+        "medianNs": 240.2,
+        "medianBytes": 344,
+        "medianAllocations": 10
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=1-16",
+        "samples": [
+          {
+            "ns": 256.8,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 259.8,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 257.7,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 260.5,
+            "bytes": 344,
+            "allocations": 10
+          },
+          {
+            "ns": 255.2,
+            "bytes": 344,
+            "allocations": 10
+          }
+        ],
+        "medianNs": 257.7,
+        "medianBytes": 344,
+        "medianAllocations": 10
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8",
+        "samples": [
+          {
+            "ns": 1646,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 1997,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 2105,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 2035,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 2011,
+            "bytes": 2080,
+            "allocations": 66
+          }
+        ],
+        "medianNs": 2011,
+        "medianBytes": 2080,
+        "medianAllocations": 66
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-4",
+        "samples": [
+          {
+            "ns": 1517,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 1519,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 1523,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 1529,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 1597,
+            "bytes": 2080,
+            "allocations": 66
+          }
+        ],
+        "medianNs": 1523,
+        "medianBytes": 2080,
+        "medianAllocations": 66
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=8-16",
+        "samples": [
+          {
+            "ns": 1694,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 1662,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 1698,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 1591,
+            "bytes": 2080,
+            "allocations": 66
+          },
+          {
+            "ns": 1625,
+            "bytes": 2080,
+            "allocations": 66
+          }
+        ],
+        "medianNs": 1662,
+        "medianBytes": 2080,
+        "medianAllocations": 66
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40",
+        "samples": [
+          {
+            "ns": 7595,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 9650,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 9889,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 9895,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 10055,
+            "bytes": 10080,
+            "allocations": 322
+          }
+        ],
+        "medianNs": 9889,
+        "medianBytes": 10080,
+        "medianAllocations": 322
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-4",
+        "samples": [
+          {
+            "ns": 7671,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 7384,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 7282,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 7410,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 7506,
+            "bytes": 10080,
+            "allocations": 322
+          }
+        ],
+        "medianNs": 7410,
+        "medianBytes": 10080,
+        "medianAllocations": 322
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=40-16",
+        "samples": [
+          {
+            "ns": 8230,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 7787,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 7597,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 7959,
+            "bytes": 10080,
+            "allocations": 322
+          },
+          {
+            "ns": 7948,
+            "bytes": 10080,
+            "allocations": 322
+          }
+        ],
+        "medianNs": 7948,
+        "medianBytes": 10080,
+        "medianAllocations": 322
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120",
+        "samples": [
+          {
+            "ns": 24906,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 28398,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 28932,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 29063,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 29386,
+            "bytes": 29984,
+            "allocations": 962
+          }
+        ],
+        "medianNs": 28932,
+        "medianBytes": 29984,
+        "medianAllocations": 962
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-4",
+        "samples": [
+          {
+            "ns": 22345,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 22574,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 21803,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 21987,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 21842,
+            "bytes": 29984,
+            "allocations": 962
+          }
+        ],
+        "medianNs": 21987,
+        "medianBytes": 29984,
+        "medianAllocations": 962
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=false/rows=120-16",
+        "samples": [
+          {
+            "ns": 22936,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 23541,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 22906,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 23427,
+            "bytes": 29984,
+            "allocations": 962
+          },
+          {
+            "ns": 23235,
+            "bytes": 29984,
+            "allocations": 962
+          }
+        ],
+        "medianNs": 23235,
+        "medianBytes": 29984,
+        "medianAllocations": 962
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1",
+        "samples": [
+          {
+            "ns": 2129,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 2614,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 2684,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 2668,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 2667,
+            "bytes": 2896,
+            "allocations": 70
+          }
+        ],
+        "medianNs": 2667,
+        "medianBytes": 2896,
+        "medianAllocations": 70
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-4",
+        "samples": [
+          {
+            "ns": 1912,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 1935,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 1943,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 2039,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 1999,
+            "bytes": 2896,
+            "allocations": 70
+          }
+        ],
+        "medianNs": 1943,
+        "medianBytes": 2896,
+        "medianAllocations": 70
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=1-16",
+        "samples": [
+          {
+            "ns": 2145,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 2058,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 2058,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 2143,
+            "bytes": 2896,
+            "allocations": 70
+          },
+          {
+            "ns": 2133,
+            "bytes": 2896,
+            "allocations": 70
+          }
+        ],
+        "medianNs": 2133,
+        "medianBytes": 2896,
+        "medianAllocations": 70
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8",
+        "samples": [
+          {
+            "ns": 21622,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 24816,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 25279,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 25204,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 25091,
+            "bytes": 28704,
+            "allocations": 632
+          }
+        ],
+        "medianNs": 25091,
+        "medianBytes": 28704,
+        "medianAllocations": 632
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-4",
+        "samples": [
+          {
+            "ns": 19216,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 18982,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 18763,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 20024,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 18561,
+            "bytes": 28704,
+            "allocations": 632
+          }
+        ],
+        "medianNs": 18982,
+        "medianBytes": 28704,
+        "medianAllocations": 632
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=8-16",
+        "samples": [
+          {
+            "ns": 21128,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 21935,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 20968,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 22239,
+            "bytes": 28704,
+            "allocations": 632
+          },
+          {
+            "ns": 21519,
+            "bytes": 28704,
+            "allocations": 632
+          }
+        ],
+        "medianNs": 21519,
+        "medianBytes": 28704,
+        "medianAllocations": 632
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40",
+        "samples": [
+          {
+            "ns": 72920,
+            "bytes": 130317,
+            "allocations": 2714
+          },
+          {
+            "ns": 113169,
+            "bytes": 129672,
+            "allocations": 2703
+          },
+          {
+            "ns": 117099,
+            "bytes": 129672,
+            "allocations": 2703
+          },
+          {
+            "ns": 115690,
+            "bytes": 129672,
+            "allocations": 2703
+          },
+          {
+            "ns": 118190,
+            "bytes": 129672,
+            "allocations": 2703
+          }
+        ],
+        "medianNs": 115690,
+        "medianBytes": 129672,
+        "medianAllocations": 2703
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-4",
+        "samples": [
+          {
+            "ns": 51993,
+            "bytes": 130073,
+            "allocations": 2712
+          },
+          {
+            "ns": 50800,
+            "bytes": 130073,
+            "allocations": 2712
+          },
+          {
+            "ns": 48739,
+            "bytes": 130072,
+            "allocations": 2712
+          },
+          {
+            "ns": 47964,
+            "bytes": 130072,
+            "allocations": 2712
+          },
+          {
+            "ns": 49587,
+            "bytes": 130072,
+            "allocations": 2712
+          }
+        ],
+        "medianNs": 49587,
+        "medianBytes": 130072,
+        "medianAllocations": 2712
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=40-16",
+        "samples": [
+          {
+            "ns": 69634,
+            "bytes": 130185,
+            "allocations": 2714
+          },
+          {
+            "ns": 66689,
+            "bytes": 130186,
+            "allocations": 2714
+          },
+          {
+            "ns": 66011,
+            "bytes": 130172,
+            "allocations": 2714
+          },
+          {
+            "ns": 68088,
+            "bytes": 130169,
+            "allocations": 2714
+          },
+          {
+            "ns": 68515,
+            "bytes": 130170,
+            "allocations": 2714
+          }
+        ],
+        "medianNs": 68088,
+        "medianBytes": 130172,
+        "medianAllocations": 2714
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120",
+        "samples": [
+          {
+            "ns": 259610,
+            "bytes": 519059,
+            "allocations": 10651
+          },
+          {
+            "ns": 459097,
+            "bytes": 517464,
+            "allocations": 10618
+          },
+          {
+            "ns": 460279,
+            "bytes": 517464,
+            "allocations": 10618
+          },
+          {
+            "ns": 465151,
+            "bytes": 517464,
+            "allocations": 10618
+          },
+          {
+            "ns": 460854,
+            "bytes": 517464,
+            "allocations": 10618
+          }
+        ],
+        "medianNs": 460279,
+        "medianBytes": 517464,
+        "medianAllocations": 10618
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-4",
+        "samples": [
+          {
+            "ns": 181291,
+            "bytes": 517870,
+            "allocations": 10627
+          },
+          {
+            "ns": 181014,
+            "bytes": 517868,
+            "allocations": 10627
+          },
+          {
+            "ns": 173528,
+            "bytes": 517878,
+            "allocations": 10627
+          },
+          {
+            "ns": 180362,
+            "bytes": 517866,
+            "allocations": 10627
+          },
+          {
+            "ns": 187081,
+            "bytes": 517867,
+            "allocations": 10627
+          }
+        ],
+        "medianNs": 181014,
+        "medianBytes": 517868,
+        "medianAllocations": 10627
+      },
+      {
+        "name": "BenchmarkGraphViewport/branches=true/rows=120-16",
+        "samples": [
+          {
+            "ns": 259539,
+            "bytes": 519069,
+            "allocations": 10651
+          },
+          {
+            "ns": 258017,
+            "bytes": 519051,
+            "allocations": 10651
+          },
+          {
+            "ns": 260271,
+            "bytes": 519050,
+            "allocations": 10651
+          },
+          {
+            "ns": 256194,
+            "bytes": 519047,
+            "allocations": 10651
+          },
+          {
+            "ns": 257990,
+            "bytes": 519040,
+            "allocations": 10651
+          }
+        ],
+        "medianNs": 258017,
+        "medianBytes": 519050,
+        "medianAllocations": 10651
+      }
+    ]
+  },
+  "baselines": {
+    "graphRenderOverlay": "9b8e08156:pkg/gui/presentation/graph/graph.go",
+    "editorOverlay": "07e4bf9fe:pkg/gocui/text_area.go",
+    "flatOverlay": "62b93fab9:pkg/gui/filetree/build_tree.go",
+    "lineStart": "e7fe1a597:pkg/gocui/text_area.go",
+    "ranges": "9b8e08156:pkg/gui/filetree/selected_nodes.go"
+  },
+  "benchmarkArguments": {
+    "graph": [
+      "go",
+      "test",
+      "./pkg/gui/presentation/graph",
+      "-run=^TestRenderAuxMatchesSequentialRows$",
+      "-bench=^BenchmarkGraphViewport$",
+      "-benchmem",
+      "-count=5",
+      "-benchtime=100ms",
+      "-cpu=1,4,16"
+    ],
+    "occupancy": [
+      "go",
+      "test",
+      "./pkg/gui/presentation/graph",
+      "-run=TestGetNextPipes",
+      "-bench=^BenchmarkGraphColumnAllocation$",
+      "-benchmem",
+      "-count=3",
+      "-benchtime=100ms",
+      "-cpu=1"
+    ],
+    "editor": [
+      "go",
+      "test",
+      "./pkg/gocui",
+      "-run=^TestSetCursor2DMatchesSequentialNavigation$",
+      "-bench=^BenchmarkTextAreaVertical",
+      "-benchmem",
+      "-count=3",
+      "-benchtime=100ms",
+      "-cpu=1"
+    ],
+    "lineStart": [
+      "go",
+      "test",
+      "./pkg/gocui",
+      "-run=^TestTextArea$",
+      "-bench=^BenchmarkTextAreaLineStart$",
+      "-benchmem",
+      "-count=3",
+      "-benchtime=100ms",
+      "-cpu=1"
+    ],
+    "ranges": [
+      "go",
+      "test",
+      "./pkg/gui/filetree",
+      "-run=^TestSelectedTreeRangesFollowVisibility$",
+      "-bench=^BenchmarkSmallTreeRangeSelection$",
+      "-benchmem",
+      "-count=3",
+      "-benchtime=100ms",
+      "-cpu=1"
+    ],
+    "flat": [
+      "go",
+      "test",
+      "./pkg/gui/filetree",
+      "-run=TestFlatTree|TestBuildFlatTree",
+      "-bench=BenchmarkBuildFlatFileTrees|BenchmarkFlatTreeRefresh",
+      "-benchmem",
+      "-count=3",
+      "-benchtime=100ms",
+      "-cpu=1"
+    ]
+  },
+  "metadata": [
+    "goos: linux",
+    "goarch: amd64",
+    "pkg: github.com/jesseduffield/lazygit/pkg/gui/presentation/graph",
+    "cpu: 13th Gen Intel(R) Core(TM) i7-1370P"
+  ]
+}

@@ -1,8 +1,9 @@
 # Schedule graph rendering for the visible workload
 
-Implement this follow-up after the pending upstream integration, following
-the [shared implementation guidance](README.md). Choose a scheduling policy
-from caller-shaped measurements while preserving rendered lines and order.
+Implemented with shared output storage and a pipe-count worker budget. See
+the [implementation record](../Independent-performance-follow-ups.md) for
+commits and validation. The plan below selects scheduling from caller-shaped
+measurements while preserving rendered lines and order.
 
 ## Separate cold layout from viewport redraws
 

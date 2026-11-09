@@ -1,9 +1,10 @@
 # Implement the algorithm-context follow-ups
 
 These plans expand the findings in the
-[algorithm-context audit](../Algorithm-context-audit.md). Wait for upstream
-PR #6201 to merge and for its merged code to be integrated into the fork
-before implementing them. Recheck the source after integration.
+[algorithm-context audit](../Algorithm-context-audit.md). The user authorized
+their implementation independently after checking compatibility with
+upstream PR #6201. All four are implemented; see the
+[implementation record](../Independent-performance-follow-ups.md).
 
 Each plan describes a separate investigation and possible implementation:
 
@@ -15,8 +16,9 @@ Each plan describes a separate investigation and possible implementation:
 | [Flat file lists](Flat-file-lists.md) | Intermediate directory structures are discarded | Establish ordering parity and measure flat-mode construction |
 
 The earlier [post-merge plan](../Post-merge-performance-plan.md) covers
-cached tree-range selection and prepared-query reuse. Keep those changes
-separate from these four follow-ups.
+cached tree-range selection and prepared-query reuse. Cached selection is
+also implemented. Prepared-query reuse and PR #6201 integration remain
+deferred. The sections below retain the implementation guidance.
 
 ## Start with the recorded evidence
 
