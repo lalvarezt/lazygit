@@ -81,10 +81,12 @@ func BuildFlatTreeFromCommitFiles(
 	showRootItem bool,
 	order NodeSortOrder,
 ) *Node[models.CommitFile] {
-	rootAux := BuildTreeFromCommitFiles(files, showRootItem, order)
-	sortedFiles := rootAux.GetLeaves()
-
+	sortedFiles := flatTreeLeaves(files, func(file *models.CommitFile) string { return file.Path }, showRootItem, order)
 	return &Node[models.CommitFile]{Children: sortedFiles}
+}
+
+func flatTreeLeaves[T any](files []*T, getPath func(*T) string, showRootItem bool, order NodeSortOrder) []*Node[T] {
+	return buildTree(files, getPath, showRootItem, order).GetLeaves()
 }
 
 func BuildTreeFromCommitFiles(
@@ -100,8 +102,7 @@ func BuildFlatTreeFromFiles(
 	showRootItem bool,
 	order NodeSortOrder,
 ) *Node[models.File] {
-	rootAux := BuildTreeFromFiles(files, showRootItem, order)
-	sortedFiles := rootAux.GetLeaves()
+	sortedFiles := flatTreeLeaves(files, func(file *models.File) string { return file.Path }, showRootItem, order)
 
 	// from top down we have merge conflict files, then tracked file, then untracked
 	// files. This is the one way in which sorting differs between flat mode and
