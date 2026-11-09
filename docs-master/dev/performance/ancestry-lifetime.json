@@ -1,0 +1,1698 @@
+{
+  "rows": [
+    {
+      "id": "BenchmarkCommitViewport/commits=1000/main=absent/markers=false",
+      "before": {
+        "ns": 16019,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "after": {
+        "ns": 15712,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 16075,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 15900,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16019,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15946,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16123,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ],
+        "after": [
+          {
+            "ns": 16074,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 15712,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15643,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15739,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15669,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=1000/main=absent/markers=true",
+      "before": {
+        "ns": 18152,
+        "bytes": 9961,
+        "allocations": 294
+      },
+      "after": {
+        "ns": 16573,
+        "bytes": 9857,
+        "allocations": 291
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 18295,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 18174,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 18152,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 18054,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 18113,
+            "bytes": 9961,
+            "allocations": 294
+          }
+        ],
+        "after": [
+          {
+            "ns": 16635,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16497,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16757,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16573,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16551,
+            "bytes": 9857,
+            "allocations": 291
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=1000/main=merged/markers=false",
+      "before": {
+        "ns": 16034,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "after": {
+        "ns": 15749,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 15903,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16251,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16034,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16519,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15976,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ],
+        "after": [
+          {
+            "ns": 15644,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15657,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15749,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15778,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15939,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=1000/main=merged/markers=true",
+      "before": {
+        "ns": 19880,
+        "bytes": 9961,
+        "allocations": 294
+      },
+      "after": {
+        "ns": 16490,
+        "bytes": 9857,
+        "allocations": 291
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 19581,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 19883,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 19844,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 19880,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 19908,
+            "bytes": 9961,
+            "allocations": 294
+          }
+        ],
+        "after": [
+          {
+            "ns": 16882,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16455,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16556,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16422,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16490,
+            "bytes": 9857,
+            "allocations": 291
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=1000/main=unmerged/markers=false",
+      "before": {
+        "ns": 15822,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "after": {
+        "ns": 16162,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 15715,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16094,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16196,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15822,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 15808,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ],
+        "after": [
+          {
+            "ns": 16087,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16121,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16448,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16162,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 16224,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=1000/main=unmerged/markers=true",
+      "before": {
+        "ns": 91692,
+        "bytes": 118949,
+        "allocations": 315
+      },
+      "after": {
+        "ns": 16863,
+        "bytes": 9857,
+        "allocations": 291
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 91884,
+            "bytes": 118949,
+            "allocations": 315
+          },
+          {
+            "ns": 91692,
+            "bytes": 118949,
+            "allocations": 315
+          },
+          {
+            "ns": 91822,
+            "bytes": 118949,
+            "allocations": 315
+          },
+          {
+            "ns": 91666,
+            "bytes": 118949,
+            "allocations": 315
+          },
+          {
+            "ns": 91647,
+            "bytes": 118949,
+            "allocations": 315
+          }
+        ],
+        "after": [
+          {
+            "ns": 16863,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16850,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16731,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 17014,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 16864,
+            "bytes": 9857,
+            "allocations": 291
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=10000/main=absent/markers=false",
+      "before": {
+        "ns": 72076,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "after": {
+        "ns": 70068,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 74514,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 72076,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 68923,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 67186,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 73859,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ],
+        "after": [
+          {
+            "ns": 70068,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 75400,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 69828,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 67921,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 70633,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=10000/main=absent/markers=true",
+      "before": {
+        "ns": 110223,
+        "bytes": 9961,
+        "allocations": 294
+      },
+      "after": {
+        "ns": 69810,
+        "bytes": 9857,
+        "allocations": 291
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 110223,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 106718,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 109692,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 122932,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 111359,
+            "bytes": 9961,
+            "allocations": 294
+          }
+        ],
+        "after": [
+          {
+            "ns": 69783,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 69810,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 69590,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 77045,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 71950,
+            "bytes": 9857,
+            "allocations": 291
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=10000/main=merged/markers=false",
+      "before": {
+        "ns": 69617,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "after": {
+        "ns": 68851,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 72464,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 69617,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 69077,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 69995,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 69345,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ],
+        "after": [
+          {
+            "ns": 68682,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 69027,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 68851,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 67976,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 69769,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=10000/main=merged/markers=true",
+      "before": {
+        "ns": 123597,
+        "bytes": 9961,
+        "allocations": 294
+      },
+      "after": {
+        "ns": 74078,
+        "bytes": 9857,
+        "allocations": 291
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 121715,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 150779,
+            "bytes": 9962,
+            "allocations": 294
+          },
+          {
+            "ns": 122718,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 127079,
+            "bytes": 9961,
+            "allocations": 294
+          },
+          {
+            "ns": 123597,
+            "bytes": 9961,
+            "allocations": 294
+          }
+        ],
+        "after": [
+          {
+            "ns": 70916,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 74078,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 75872,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 76181,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 69950,
+            "bytes": 9857,
+            "allocations": 291
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=10000/main=unmerged/markers=false",
+      "before": {
+        "ns": 69970,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "after": {
+        "ns": 68959,
+        "bytes": 9689,
+        "allocations": 282
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 69970,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 69520,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 68517,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 74513,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 75268,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ],
+        "after": [
+          {
+            "ns": 68774,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 68959,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 68742,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 69101,
+            "bytes": 9689,
+            "allocations": 282
+          },
+          {
+            "ns": 76097,
+            "bytes": 9689,
+            "allocations": 282
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=10000/main=unmerged/markers=true",
+      "before": {
+        "ns": 864333,
+        "bytes": 883517,
+        "allocations": 375
+      },
+      "after": {
+        "ns": 71091,
+        "bytes": 9857,
+        "allocations": 291
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 861270,
+            "bytes": 883519,
+            "allocations": 375
+          },
+          {
+            "ns": 870840,
+            "bytes": 883518,
+            "allocations": 375
+          },
+          {
+            "ns": 867740,
+            "bytes": 883518,
+            "allocations": 375
+          },
+          {
+            "ns": 864333,
+            "bytes": 883517,
+            "allocations": 375
+          },
+          {
+            "ns": 857767,
+            "bytes": 883519,
+            "allocations": 375
+          }
+        ],
+        "after": [
+          {
+            "ns": 71368,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 71091,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 70274,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 71752,
+            "bytes": 9857,
+            "allocations": 291
+          },
+          {
+            "ns": 69924,
+            "bytes": 9857,
+            "allocations": 291
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=100000/main=absent/markers=false",
+      "before": {
+        "ns": 1047452,
+        "bytes": 9693,
+        "allocations": 282
+      },
+      "after": {
+        "ns": 1036411,
+        "bytes": 9692,
+        "allocations": 282
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 1005147,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1067069,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1047452,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 1024644,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1055935,
+            "bytes": 9693,
+            "allocations": 282
+          }
+        ],
+        "after": [
+          {
+            "ns": 1006144,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1060152,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 1014211,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1036411,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1051353,
+            "bytes": 9692,
+            "allocations": 282
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=100000/main=absent/markers=true",
+      "before": {
+        "ns": 1804335,
+        "bytes": 9968,
+        "allocations": 294
+      },
+      "after": {
+        "ns": 1033001,
+        "bytes": 9860,
+        "allocations": 291
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 1783486,
+            "bytes": 9968,
+            "allocations": 294
+          },
+          {
+            "ns": 1805164,
+            "bytes": 9968,
+            "allocations": 294
+          },
+          {
+            "ns": 1804335,
+            "bytes": 9968,
+            "allocations": 294
+          },
+          {
+            "ns": 1831549,
+            "bytes": 9969,
+            "allocations": 294
+          },
+          {
+            "ns": 1742889,
+            "bytes": 9968,
+            "allocations": 294
+          }
+        ],
+        "after": [
+          {
+            "ns": 1088525,
+            "bytes": 9860,
+            "allocations": 291
+          },
+          {
+            "ns": 998298,
+            "bytes": 9860,
+            "allocations": 291
+          },
+          {
+            "ns": 1072687,
+            "bytes": 9861,
+            "allocations": 291
+          },
+          {
+            "ns": 1033001,
+            "bytes": 9860,
+            "allocations": 291
+          },
+          {
+            "ns": 1014398,
+            "bytes": 9860,
+            "allocations": 291
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=100000/main=merged/markers=false",
+      "before": {
+        "ns": 1048971,
+        "bytes": 9693,
+        "allocations": 282
+      },
+      "after": {
+        "ns": 1038230,
+        "bytes": 9693,
+        "allocations": 282
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 1048971,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 1077161,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 1063911,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 1014744,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1014946,
+            "bytes": 9692,
+            "allocations": 282
+          }
+        ],
+        "after": [
+          {
+            "ns": 1038230,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 996470,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1047688,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 1008150,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1107626,
+            "bytes": 9693,
+            "allocations": 282
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=100000/main=merged/markers=true",
+      "before": {
+        "ns": 1962984,
+        "bytes": 9969,
+        "allocations": 294
+      },
+      "after": {
+        "ns": 1056699,
+        "bytes": 9861,
+        "allocations": 291
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 1947146,
+            "bytes": 9969,
+            "allocations": 294
+          },
+          {
+            "ns": 1962984,
+            "bytes": 9969,
+            "allocations": 294
+          },
+          {
+            "ns": 1971578,
+            "bytes": 9969,
+            "allocations": 294
+          },
+          {
+            "ns": 2007940,
+            "bytes": 9969,
+            "allocations": 294
+          },
+          {
+            "ns": 1955327,
+            "bytes": 9969,
+            "allocations": 294
+          }
+        ],
+        "after": [
+          {
+            "ns": 1006704,
+            "bytes": 9860,
+            "allocations": 291
+          },
+          {
+            "ns": 1009656,
+            "bytes": 9860,
+            "allocations": 291
+          },
+          {
+            "ns": 1062652,
+            "bytes": 9861,
+            "allocations": 291
+          },
+          {
+            "ns": 1064143,
+            "bytes": 9860,
+            "allocations": 291
+          },
+          {
+            "ns": 1056699,
+            "bytes": 9861,
+            "allocations": 291
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=100000/main=unmerged/markers=false",
+      "before": {
+        "ns": 1046435,
+        "bytes": 9693,
+        "allocations": 282
+      },
+      "after": {
+        "ns": 1022273,
+        "bytes": 9692,
+        "allocations": 282
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 1008322,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1100612,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 1097900,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 1037524,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1046435,
+            "bytes": 9693,
+            "allocations": 282
+          }
+        ],
+        "after": [
+          {
+            "ns": 1022273,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1091825,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 996883,
+            "bytes": 9692,
+            "allocations": 282
+          },
+          {
+            "ns": 1063586,
+            "bytes": 9693,
+            "allocations": 282
+          },
+          {
+            "ns": 1007652,
+            "bytes": 9692,
+            "allocations": 282
+          }
+        ]
+      }
+    },
+    {
+      "id": "BenchmarkCommitViewport/commits=100000/main=unmerged/markers=true",
+      "before": {
+        "ns": 10477917,
+        "bytes": 6999774,
+        "allocations": 826
+      },
+      "after": {
+        "ns": 1057217,
+        "bytes": 9861,
+        "allocations": 291
+      },
+      "samples": {
+        "before": [
+          {
+            "ns": 10778265,
+            "bytes": 6999779,
+            "allocations": 826
+          },
+          {
+            "ns": 10561404,
+            "bytes": 6999782,
+            "allocations": 826
+          },
+          {
+            "ns": 10477917,
+            "bytes": 6999774,
+            "allocations": 826
+          },
+          {
+            "ns": 10240799,
+            "bytes": 6999774,
+            "allocations": 826
+          },
+          {
+            "ns": 10339104,
+            "bytes": 6999774,
+            "allocations": 826
+          }
+        ],
+        "after": [
+          {
+            "ns": 1021348,
+            "bytes": 9860,
+            "allocations": 291
+          },
+          {
+            "ns": 999472,
+            "bytes": 9860,
+            "allocations": 291
+          },
+          {
+            "ns": 1105236,
+            "bytes": 9861,
+            "allocations": 291
+          },
+          {
+            "ns": 1072246,
+            "bytes": 9861,
+            "allocations": 291
+          },
+          {
+            "ns": 1057217,
+            "bytes": 9861,
+            "allocations": 291
+          }
+        ]
+      }
+    }
+  ],
+  "revisions": {
+    "before": "b920143e765fe8a0562777c505c24434e1734fce",
+    "after": "cc2e9b8b01bb60ed5beb68575aaf49a4a43c811e"
+  },
+  "checkpoints": {
+    "before": {
+      "key": "e86258d8c6bd9d346724ef9a001fe19da0642d59ba3b5f99a0f05299d21b71fe",
+      "inputs": {
+        "revision": "b920143e765fe8a0562777c505c24434e1734fce",
+        "pkg": "./pkg/gui/presentation",
+        "args": [
+          "test",
+          "./pkg/gui/presentation",
+          "-run=^$",
+          "-bench=^(BenchmarkEditorInput|BenchmarkEditorParagraphInput|BenchmarkEditorUnbrokenInput|BenchmarkEditorEditUnbrokenText|BenchmarkDrawSearchedView|BenchmarkSearchLargeDiff|BenchmarkSearchRepeatedPrefix|BenchmarkSearchOrdinaryText|BenchmarkSearchQueryLifetime|BenchmarkNearestSearchPosition|BenchmarkScrollSearchPosition|BenchmarkIncrementalSearchedDiff|BenchmarkPasteText|BenchmarkTextAreaVerticalMovement|BenchmarkTextAreaVerticalKeypress|BenchmarkTextAreaLineStart|BenchmarkViewDraw|BenchmarkGuiFlush|BenchmarkViewWrite|BenchmarkViewWriteLongLine|BenchmarkViewWriteGitColoredDiff|BenchmarkViewWriteLargeDiff|BenchmarkFilteredListNavigation|BenchmarkCommitDescriptionInput|BenchmarkBuildCommitFileTree|BenchmarkBuildFlatFileTrees|BenchmarkFlatTreeRefresh|BenchmarkFileTreeRangeSelection|BenchmarkFileTreeNavigation|BenchmarkSmallTreeRangeSelection|BenchmarkRestoreFileSelection|BenchmarkRestoreAfterSingleRemoval|BenchmarkRefreshAfterDirectoryRemoval|BenchmarkCommitViewport|BenchmarkRenderCommitGraphVariants|BenchmarkGraphColumnAllocation|BenchmarkGraphViewport|BenchmarkEscapeSpecialChars|BenchmarkWriteToSearchedView|BenchmarkRenderCommitGraph)$",
+          "-benchmem",
+          "-benchtime=200ms",
+          "-count=5",
+          "-cpu=1"
+        ],
+        "settings": {
+          "samples": 5,
+          "benchtime": "200ms",
+          "GOMAXPROCS": "1",
+          "GOGC": "100",
+          "GOMEMLIMIT": "off"
+        },
+        "sources": [
+          {
+            "path": "branches.go",
+            "sha256": "a6edeefe322a4f1e35e3629d95d3c7396ef9f222d97bb273aad0c54cec64f7fa"
+          },
+          {
+            "path": "branches_test.go",
+            "sha256": "052687e74f88cb8afbf80ef9386b5f2821b665749de02ac193a84e6b5916fcb1"
+          },
+          {
+            "path": "commits.go",
+            "sha256": "5aa3c609efd48680c2160a9476fb4c783c86a2fd3e40b7e35504ec2bc50c7c22"
+          },
+          {
+            "path": "commits_bench_test.go",
+            "sha256": "caad4caff9035c7531479b46c50f37cd9db6d6e23b21e7ba28c720de38130a18"
+          },
+          {
+            "path": "commits_test.go",
+            "sha256": "32fcc0fed4ea6e7d8dc2fd495547651564e8f6c83917124a92bb6905899ba9fa"
+          },
+          {
+            "path": "files.go",
+            "sha256": "8d68602715157ec066577c591f422a68334e6a398273eb1567735216649ebafb"
+          },
+          {
+            "path": "files_test.go",
+            "sha256": "193ff5df4b389e80a6eff51694cf75d69e13e4a362738df61cf7af0d771eeb63"
+          },
+          {
+            "path": "item_operations.go",
+            "sha256": "88ca0dd29dd893cf36523451f947918d08fb5c823f6916949afea258628ebb85"
+          },
+          {
+            "path": "loader.go",
+            "sha256": "c49846cbac3f203c582561b22702a1c027c084f562ac4cd378888e90af636917"
+          },
+          {
+            "path": "reflog_commits.go",
+            "sha256": "e594e1fd454bd41fd09b10650ed01c01c7e9a0a085dab0bf5082e990d0430387"
+          },
+          {
+            "path": "reflog_commits_test.go",
+            "sha256": "555f358cd1690152cd98f77aec3737984621c8e7fbd0e503faf78c6b96a10100"
+          },
+          {
+            "path": "remote_branches.go",
+            "sha256": "0f4d13c70d7d4ecba975719e8050d1e388142d4699eb1f340f78576117b2c9e5"
+          },
+          {
+            "path": "remotes.go",
+            "sha256": "cb5da05b68cfb17cdc525b9c6bb6dd99691c59fb813141637384ac1431ae20f1"
+          },
+          {
+            "path": "stash_entries.go",
+            "sha256": "4409330ebf4cd6efcd7449c427d6c82584ee787b798380574abc20f816676c6f"
+          },
+          {
+            "path": "status.go",
+            "sha256": "3eaa1bbba27df8f005d38e9b3c36bd554147ef15c7bfb2e81e9466f93fae4c11"
+          },
+          {
+            "path": "submodules.go",
+            "sha256": "0e080eb770ba9553852d4390c555427d31a83a4e959c0ef0b7f0a76d6bf3b761"
+          },
+          {
+            "path": "suggestions.go",
+            "sha256": "93869f38b024641aabc83077b0b3abb363174aa4e44de2100eea28d7639d3ca2"
+          },
+          {
+            "path": "tags.go",
+            "sha256": "af2f0a35754c7c13e179fb2edb0f5467359178f3c2ba4a9e950c78c9fc82e3c5"
+          },
+          {
+            "path": "worktrees.go",
+            "sha256": "001f19dc9de97cb9b3f8b92649863eb047ddd79bf96bd2533e53daaf156d9fe9"
+          },
+          {
+            "path": "worktrees_test.go",
+            "sha256": "139855bcfe289eb13afc75a08718987b3a8029abc0e2c4e5573080c138cb8e9e"
+          }
+        ],
+        "goVersion": "go version go1.27.3 linux/amd64",
+        "cpu": "13th Gen Intel(R) Core(TM) i7-1370P"
+      },
+      "outputHash": "8146ac2cf4e6e6af20a33d1d1b21d548b2acf224ba3576157feb57e5066c5da4"
+    },
+    "after": {
+      "key": "dbcbcb3d2611ca48edc318dd6824035ff4d4e17c79783c5f42dd6f01e4f66a7e",
+      "inputs": {
+        "revision": "cc2e9b8b01bb60ed5beb68575aaf49a4a43c811e",
+        "pkg": "./pkg/gui/presentation",
+        "args": [
+          "test",
+          "./pkg/gui/presentation",
+          "-run=^$",
+          "-bench=^(BenchmarkEditorInput|BenchmarkEditorParagraphInput|BenchmarkEditorUnbrokenInput|BenchmarkEditorEditUnbrokenText|BenchmarkDrawSearchedView|BenchmarkSearchLargeDiff|BenchmarkSearchRepeatedPrefix|BenchmarkSearchOrdinaryText|BenchmarkSearchQueryLifetime|BenchmarkNearestSearchPosition|BenchmarkScrollSearchPosition|BenchmarkIncrementalSearchedDiff|BenchmarkPasteText|BenchmarkTextAreaVerticalMovement|BenchmarkTextAreaVerticalKeypress|BenchmarkTextAreaLineStart|BenchmarkViewDraw|BenchmarkGuiFlush|BenchmarkViewWrite|BenchmarkViewWriteLongLine|BenchmarkViewWriteGitColoredDiff|BenchmarkViewWriteLargeDiff|BenchmarkFilteredListNavigation|BenchmarkCommitDescriptionInput|BenchmarkBuildCommitFileTree|BenchmarkBuildFlatFileTrees|BenchmarkFlatTreeRefresh|BenchmarkFileTreeRangeSelection|BenchmarkFileTreeNavigation|BenchmarkSmallTreeRangeSelection|BenchmarkRestoreFileSelection|BenchmarkRestoreAfterSingleRemoval|BenchmarkRefreshAfterDirectoryRemoval|BenchmarkCommitViewport|BenchmarkRenderCommitGraphVariants|BenchmarkGraphColumnAllocation|BenchmarkGraphViewport|BenchmarkEscapeSpecialChars|BenchmarkWriteToSearchedView|BenchmarkRenderCommitGraph)$",
+          "-benchmem",
+          "-benchtime=200ms",
+          "-count=5",
+          "-cpu=1"
+        ],
+        "settings": {
+          "samples": 5,
+          "benchtime": "200ms",
+          "GOMAXPROCS": "1",
+          "GOGC": "100",
+          "GOMEMLIMIT": "off"
+        },
+        "sources": [
+          {
+            "path": "branches.go",
+            "sha256": "a6edeefe322a4f1e35e3629d95d3c7396ef9f222d97bb273aad0c54cec64f7fa"
+          },
+          {
+            "path": "branches_test.go",
+            "sha256": "052687e74f88cb8afbf80ef9386b5f2821b665749de02ac193a84e6b5916fcb1"
+          },
+          {
+            "path": "commits.go",
+            "sha256": "780c97345eed82c17af245b6fffaa2b3b3270cff0398ae1c8307a0d7dbc6d477"
+          },
+          {
+            "path": "commits_bench_test.go",
+            "sha256": "caad4caff9035c7531479b46c50f37cd9db6d6e23b21e7ba28c720de38130a18"
+          },
+          {
+            "path": "commits_test.go",
+            "sha256": "fd74546147642d5984aac321ad139cd8e10e6b9a29a350eabfbe5c55a01db772"
+          },
+          {
+            "path": "files.go",
+            "sha256": "8d68602715157ec066577c591f422a68334e6a398273eb1567735216649ebafb"
+          },
+          {
+            "path": "files_test.go",
+            "sha256": "193ff5df4b389e80a6eff51694cf75d69e13e4a362738df61cf7af0d771eeb63"
+          },
+          {
+            "path": "item_operations.go",
+            "sha256": "88ca0dd29dd893cf36523451f947918d08fb5c823f6916949afea258628ebb85"
+          },
+          {
+            "path": "loader.go",
+            "sha256": "c49846cbac3f203c582561b22702a1c027c084f562ac4cd378888e90af636917"
+          },
+          {
+            "path": "reflog_commits.go",
+            "sha256": "e594e1fd454bd41fd09b10650ed01c01c7e9a0a085dab0bf5082e990d0430387"
+          },
+          {
+            "path": "reflog_commits_test.go",
+            "sha256": "555f358cd1690152cd98f77aec3737984621c8e7fbd0e503faf78c6b96a10100"
+          },
+          {
+            "path": "remote_branches.go",
+            "sha256": "0f4d13c70d7d4ecba975719e8050d1e388142d4699eb1f340f78576117b2c9e5"
+          },
+          {
+            "path": "remotes.go",
+            "sha256": "cb5da05b68cfb17cdc525b9c6bb6dd99691c59fb813141637384ac1431ae20f1"
+          },
+          {
+            "path": "stash_entries.go",
+            "sha256": "4409330ebf4cd6efcd7449c427d6c82584ee787b798380574abc20f816676c6f"
+          },
+          {
+            "path": "status.go",
+            "sha256": "3eaa1bbba27df8f005d38e9b3c36bd554147ef15c7bfb2e81e9466f93fae4c11"
+          },
+          {
+            "path": "submodules.go",
+            "sha256": "0e080eb770ba9553852d4390c555427d31a83a4e959c0ef0b7f0a76d6bf3b761"
+          },
+          {
+            "path": "suggestions.go",
+            "sha256": "93869f38b024641aabc83077b0b3abb363174aa4e44de2100eea28d7639d3ca2"
+          },
+          {
+            "path": "tags.go",
+            "sha256": "af2f0a35754c7c13e179fb2edb0f5467359178f3c2ba4a9e950c78c9fc82e3c5"
+          },
+          {
+            "path": "worktrees.go",
+            "sha256": "001f19dc9de97cb9b3f8b92649863eb047ddd79bf96bd2533e53daaf156d9fe9"
+          },
+          {
+            "path": "worktrees_test.go",
+            "sha256": "139855bcfe289eb13afc75a08718987b3a8029abc0e2c4e5573080c138cb8e9e"
+          }
+        ],
+        "goVersion": "go version go1.27.3 linux/amd64",
+        "cpu": "13th Gen Intel(R) Core(TM) i7-1370P"
+      },
+      "outputHash": "7bd909a5010ab1e05fce2959ef7836a690feb23daa8ae66953669f4e9945d3cc"
+    }
+  },
+  "modelUpdates": {
+    "revision": "cc2e9b8b01bb60ed5beb68575aaf49a4a43c811e",
+    "args": [
+      "test",
+      "./pkg/gui/types",
+      "-run=^$",
+      "-bench=^BenchmarkModelBranchMarkerUpdate$",
+      "-benchmem",
+      "-count=5",
+      "-benchtime=200ms",
+      "-cpu=1"
+    ],
+    "settings": {
+      "GOMAXPROCS": 1,
+      "GOGC": 100,
+      "GOMEMLIMIT": "off",
+      "samples": 5,
+      "benchtime": "200ms"
+    },
+    "source": "package types_test\n\nimport (\n\t\"fmt\"\n\t\"testing\"\n\n\t\"github.com/jesseduffield/lazygit/pkg/commands/models\"\n\t\"github.com/jesseduffield/lazygit/pkg/gui/types\"\n\t\"github.com/jesseduffield/lazygit/pkg/utils\"\n\t\"github.com/stretchr/testify/assert\"\n)\n\nfunc TestModelBranchMarkerUpdates(t *testing.T) {\n\tpool := &utils.StringPool{}\n\tcommits := []*models.Commit{\n\t\tmodels.NewCommit(pool, models.NewCommitOpts{Hash: \"tip\", Parents: []string{\"side\", \"base\"}}),\n\t\tmodels.NewCommit(pool, models.NewCommitOpts{Hash: \"side\", Parents: []string{\"base\"}}),\n\t\tmodels.NewCommit(pool, models.NewCommitOpts{Hash: \"base\", Status: models.StatusMerged}),\n\t}\n\tfor _, branchesFirst := range []bool{false, true} {\n\t\tt.Run(fmt.Sprintf(\"branchesFirst=%t\", branchesFirst), func(t *testing.T) {\n\t\t\tmodel := &types.Model{}\n\t\t\tassert.Empty(t, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n\t\t\tassert.Empty(t, model.SubCommitsMergedIntoLocalMainBranch().ToSlice())\n\t\t\tmodel.SetMainBranchNames([]string{\"main\"})\n\t\t\tbranches := []*models.Branch{{Name: \"main\", CommitHash: \"tip\"}}\n\t\t\tif branchesFirst {\n\t\t\t\tmodel.SetBranches(branches)\n\t\t\t}\n\t\t\tmodel.SetCommits(commits)\n\t\t\tmodel.SetSubCommits(commits[1:])\n\t\t\tif !branchesFirst {\n\t\t\t\tmodel.SetBranches(branches)\n\t\t\t}\n\t\t\tassert.ElementsMatch(t, []string{\"tip\", \"side\"}, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n\t\t\tassert.Empty(t, model.SubCommitsMergedIntoLocalMainBranch().ToSlice())\n\n\t\t\tmodel.SetBranches([]*models.Branch{{Name: \"main\", CommitHash: \"side\"}})\n\t\t\tassert.ElementsMatch(t, []string{\"side\"}, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n\t\t\tassert.ElementsMatch(t, []string{\"side\"}, model.SubCommitsMergedIntoLocalMainBranch().ToSlice())\n\n\t\t\tmodel.SetSubCommits(commits[2:])\n\t\t\tassert.Empty(t, model.SubCommitsMergedIntoLocalMainBranch().ToSlice())\n\t\t\tassert.ElementsMatch(t, []string{\"side\"}, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n\n\t\t\tmodel.SetMainBranchNames([]string{\"develop\"})\n\t\t\tassert.Empty(t, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n\t\t\tmodel.SetMainBranchNames([]string{\"main\"})\n\t\t\tassert.ElementsMatch(t, []string{\"side\"}, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n\t\t\tmodel.SetCommits(commits[2:])\n\t\t\tassert.Empty(t, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n\t\t})\n\t}\n}\n\nfunc TestModelBranchMarkersUseUpdatedCommitData(t *testing.T) {\n\tpool := &utils.StringPool{}\n\tcommit := models.NewCommit(pool, models.NewCommitOpts{Hash: \"tip\", Parents: []string{\"parent\"}})\n\tparent := models.NewCommit(pool, models.NewCommitOpts{Hash: \"parent\"})\n\tmodel := &types.Model{}\n\tmodel.SetMainBranchNames([]string{\"main\"})\n\tmodel.SetBranches([]*models.Branch{{Name: \"main\", CommitHash: \"tip\"}})\n\tcommits := []*models.Commit{commit, parent}\n\tmodel.SetCommits(commits)\n\tassert.ElementsMatch(t, []string{\"tip\", \"parent\"}, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n\tcommit.Status = models.StatusMerged\n\tmodel.SetCommits(commits)\n\tassert.Empty(t, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n\tcommits[0] = models.NewCommit(pool, models.NewCommitOpts{Hash: \"tip\"})\n\tmodel.SetCommits(commits)\n\tassert.ElementsMatch(t, []string{\"tip\"}, model.CommitsMergedIntoLocalMainBranch().ToSlice())\n}\n\nfunc TestModelBranchMarkerConfigurationIsRepoLocal(t *testing.T) {\n\tpool := &utils.StringPool{}\n\tcommits := []*models.Commit{models.NewCommit(pool, models.NewCommitOpts{Hash: \"tip\"})}\n\tbranches := []*models.Branch{{Name: \"main\", CommitHash: \"tip\"}}\n\tfirst, second := &types.Model{}, &types.Model{}\n\tnames := []string{\"main\"}\n\tfirst.SetMainBranchNames(names)\n\tsecond.SetMainBranchNames([]string{\"develop\"})\n\tnames[0] = \"develop\"\n\tfor _, model := range []*types.Model{first, second} {\n\t\tmodel.SetCommits(commits)\n\t\tmodel.SetBranches(branches)\n\t}\n\tassert.ElementsMatch(t, []string{\"tip\"}, first.CommitsMergedIntoLocalMainBranch().ToSlice())\n\tassert.Empty(t, second.CommitsMergedIntoLocalMainBranch().ToSlice())\n}\n\nfunc BenchmarkModelBranchMarkerUpdate(b *testing.B) {\n\tfor _, count := range []int{1000, 10000, 100000} {\n\t\tb.Run(fmt.Sprintf(\"commits=%d\", count), func(b *testing.B) {\n\t\t\tpool := &utils.StringPool{}\n\t\t\tcommits := make([]*models.Commit, count)\n\t\t\tfor i := range commits {\n\t\t\t\tcommits[i] = models.NewCommit(pool, models.NewCommitOpts{Hash: fmt.Sprintf(\"commit-%d\", i)})\n\t\t\t}\n\t\t\tmodel := &types.Model{}\n\t\t\tmodel.SetMainBranchNames([]string{\"main\"})\n\t\t\tmodel.SetBranches([]*models.Branch{{Name: \"main\", CommitHash: commits[count-1].Hash()}})\n\t\t\tb.ReportAllocs()\n\t\t\tfor b.Loop() {\n\t\t\t\tmodel.SetCommits(commits)\n\t\t\t}\n\t\t})\n\t}\n}\n",
+    "rows": [
+      {
+        "id": "BenchmarkModelBranchMarkerUpdate/commits=1000",
+        "ns": 66299,
+        "bytes": 109024,
+        "allocations": 23,
+        "samples": [
+          {
+            "ns": 64839,
+            "bytes": 109024,
+            "allocations": 23
+          },
+          {
+            "ns": 66299,
+            "bytes": 109024,
+            "allocations": 23
+          },
+          {
+            "ns": 66518,
+            "bytes": 109024,
+            "allocations": 23
+          },
+          {
+            "ns": 66391,
+            "bytes": 109024,
+            "allocations": 23
+          },
+          {
+            "ns": 66082,
+            "bytes": 109024,
+            "allocations": 23
+          }
+        ]
+      },
+      {
+        "id": "BenchmarkModelBranchMarkerUpdate/commits=10000",
+        "ns": 718985,
+        "bytes": 873536,
+        "allocations": 82,
+        "samples": [
+          {
+            "ns": 712715,
+            "bytes": 873536,
+            "allocations": 82
+          },
+          {
+            "ns": 718985,
+            "bytes": 873536,
+            "allocations": 82
+          },
+          {
+            "ns": 739320,
+            "bytes": 873536,
+            "allocations": 82
+          },
+          {
+            "ns": 718505,
+            "bytes": 873536,
+            "allocations": 82
+          },
+          {
+            "ns": 724557,
+            "bytes": 873536,
+            "allocations": 82
+          }
+        ]
+      },
+      {
+        "id": "BenchmarkModelBranchMarkerUpdate/commits=100000",
+        "ns": 7756681,
+        "bytes": 6989760,
+        "allocations": 533,
+        "samples": [
+          {
+            "ns": 8027135,
+            "bytes": 6989760,
+            "allocations": 533
+          },
+          {
+            "ns": 7756681,
+            "bytes": 6989760,
+            "allocations": 533
+          },
+          {
+            "ns": 7764150,
+            "bytes": 6989760,
+            "allocations": 533
+          },
+          {
+            "ns": 7713113,
+            "bytes": 6989760,
+            "allocations": 533
+          },
+          {
+            "ns": 7734754,
+            "bytes": 6991053,
+            "allocations": 533
+          }
+        ]
+      }
+    ]
+  },
+  "method": "Viewport rows use identical portable fixture sources. The typed renderer call is selected before timing. Known fixture ancestry is prepared outside timing. Model updates are measured separately on the current implementation.",
+  "mergedViewportRecheck": {
+    "controls": {
+      "samples": 9,
+      "benchtime": "300ms",
+      "affinity": "4",
+      "order": "alternating AB/BA",
+      "fixtureSha256": "caad4caff9035c7531479b46c50f37cd9db6d6e23b21e7ba28c720de38130a18"
+    },
+    "samples": {
+      "before": [
+        {
+          "ns": 942157,
+          "bytes": 9964,
+          "allocations": 291
+        },
+        {
+          "ns": 886927,
+          "bytes": 9958,
+          "allocations": 291
+        },
+        {
+          "ns": 892085,
+          "bytes": 9967,
+          "allocations": 291
+        },
+        {
+          "ns": 883855,
+          "bytes": 9953,
+          "allocations": 291
+        },
+        {
+          "ns": 882202,
+          "bytes": 9951,
+          "allocations": 291
+        },
+        {
+          "ns": 930863,
+          "bytes": 9960,
+          "allocations": 291
+        },
+        {
+          "ns": 918690,
+          "bytes": 9962,
+          "allocations": 291
+        },
+        {
+          "ns": 909160,
+          "bytes": 9954,
+          "allocations": 291
+        },
+        {
+          "ns": 931252,
+          "bytes": 9955,
+          "allocations": 291
+        }
+      ],
+      "after": [
+        {
+          "ns": 953183,
+          "bytes": 9973,
+          "allocations": 291
+        },
+        {
+          "ns": 945115,
+          "bytes": 9959,
+          "allocations": 291
+        },
+        {
+          "ns": 1018216,
+          "bytes": 9967,
+          "allocations": 291
+        },
+        {
+          "ns": 934852,
+          "bytes": 9958,
+          "allocations": 291
+        },
+        {
+          "ns": 945430,
+          "bytes": 9958,
+          "allocations": 291
+        },
+        {
+          "ns": 930645,
+          "bytes": 9957,
+          "allocations": 291
+        },
+        {
+          "ns": 936684,
+          "bytes": 9957,
+          "allocations": 291
+        },
+        {
+          "ns": 1011090,
+          "bytes": 9970,
+          "allocations": 291
+        },
+        {
+          "ns": 977628,
+          "bytes": 9959,
+          "allocations": 291
+        }
+      ]
+    }
+  }
+}
