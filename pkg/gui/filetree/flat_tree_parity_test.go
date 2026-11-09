@@ -27,7 +27,7 @@ func TestFlatTreesPreserveHierarchicalLeafOrder(t *testing.T) {
 							files[i] = &models.File{Path: path, Tracked: i%2 == 0, HasMergeConflicts: i%3 == 0}
 							commits[i] = &models.CommitFile{Path: path}
 						}
-						fileOrder := NodeSortComparator[models.File](sortOrder, caseSensitive)
+						fileOrder := NewNodeSortOrder(sortOrder, caseSensitive)
 						wantFiles := BuildTreeFromFiles(files, showRoot, fileOrder).GetLeaves()
 						statusGroup := func(file *models.File) int {
 							group := 0
@@ -43,7 +43,7 @@ func TestFlatTreesPreserveHierarchicalLeafOrder(t *testing.T) {
 							return cmp.Compare(statusGroup(a.File), statusGroup(b.File))
 						})
 						assert.Equal(t, wantFiles, BuildFlatTreeFromFiles(files, showRoot, fileOrder).Children)
-						commitOrder := NodeSortComparator[models.CommitFile](sortOrder, caseSensitive)
+						commitOrder := NewNodeSortOrder(sortOrder, caseSensitive)
 						wantCommits := BuildTreeFromCommitFiles(commits, showRoot, commitOrder).GetLeaves()
 						assert.Equal(t, wantCommits, BuildFlatTreeFromCommitFiles(commits, showRoot, commitOrder).Children)
 					})
@@ -68,8 +68,8 @@ func BenchmarkBuildFlatFileTrees(b *testing.B) {
 						files[i] = &models.File{Path: path, Tracked: i%2 == 0}
 						commits[i] = &models.CommitFile{Path: path}
 					}
-					fileOrder := NodeSortComparator[models.File]("mixed", false)
-					commitOrder := NodeSortComparator[models.CommitFile]("mixed", false)
+					fileOrder := NewNodeSortOrder("mixed", false)
+					commitOrder := NewNodeSortOrder("mixed", false)
 					b.ReportAllocs()
 					b.ResetTimer()
 					for b.Loop() {

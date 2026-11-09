@@ -10,16 +10,16 @@ import (
 func BuildTreeFromFiles(
 	files []*models.File,
 	showRootItem bool,
-	cmp func(a, b *Node[models.File]) int,
+	order NodeSortOrder,
 ) *Node[models.File] {
-	return buildTree(files, func(file *models.File) string { return file.Path }, showRootItem, cmp)
+	return buildTree(files, func(file *models.File) string { return file.Path }, showRootItem, order)
 }
 
 func buildTree[T any](
 	files []*T,
 	getPath func(*T) string,
 	showRootItem bool,
-	cmp func(a, b *Node[T]) int,
+	order NodeSortOrder,
 ) *Node[T] {
 	root := &Node[T]{}
 
@@ -70,7 +70,7 @@ func buildTree[T any](
 		}
 	}
 
-	root.Sort(cmp)
+	root.Sort(order)
 	root.Compress()
 
 	return root
@@ -79,9 +79,9 @@ func buildTree[T any](
 func BuildFlatTreeFromCommitFiles(
 	files []*models.CommitFile,
 	showRootItem bool,
-	cmp func(a, b *Node[models.CommitFile]) int,
+	order NodeSortOrder,
 ) *Node[models.CommitFile] {
-	rootAux := BuildTreeFromCommitFiles(files, showRootItem, cmp)
+	rootAux := BuildTreeFromCommitFiles(files, showRootItem, order)
 	sortedFiles := rootAux.GetLeaves()
 
 	return &Node[models.CommitFile]{Children: sortedFiles}
@@ -90,17 +90,17 @@ func BuildFlatTreeFromCommitFiles(
 func BuildTreeFromCommitFiles(
 	files []*models.CommitFile,
 	showRootItem bool,
-	cmp func(a, b *Node[models.CommitFile]) int,
+	order NodeSortOrder,
 ) *Node[models.CommitFile] {
-	return buildTree(files, func(file *models.CommitFile) string { return file.Path }, showRootItem, cmp)
+	return buildTree(files, func(file *models.CommitFile) string { return file.Path }, showRootItem, order)
 }
 
 func BuildFlatTreeFromFiles(
 	files []*models.File,
 	showRootItem bool,
-	cmp func(a, b *Node[models.File]) int,
+	order NodeSortOrder,
 ) *Node[models.File] {
-	rootAux := BuildTreeFromFiles(files, showRootItem, cmp)
+	rootAux := BuildTreeFromFiles(files, showRootItem, order)
 	sortedFiles := rootAux.GetLeaves()
 
 	// from top down we have merge conflict files, then tracked file, then untracked

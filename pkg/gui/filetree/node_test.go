@@ -139,7 +139,7 @@ func TestGetVisualDepthAtIndex(t *testing.T) {
 
 	for _, s := range scenarios {
 		t.Run(s.name, func(t *testing.T) {
-			tree := BuildTreeFromFiles(s.files, s.showRootItem, NodeSortComparator[models.File]("mixed", false))
+			tree := BuildTreeFromFiles(s.files, s.showRootItem, NewNodeSortOrder("mixed", false))
 			collapsedPaths := NewCollapsedPaths()
 			for _, p := range s.collapsedPaths {
 				collapsedPaths.Collapse(p)

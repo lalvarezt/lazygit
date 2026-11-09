@@ -102,7 +102,7 @@ func (self *CommitFileTree) SetTree() {
 	filesForDisplay := self.getFilesForDisplay()
 	guiConfig := self.common.UserConfig().Gui
 	showRootItem := guiConfig.ShowRootItemInFileTree
-	cmp := NodeSortComparator[models.CommitFile](guiConfig.FileTreeSortOrder, guiConfig.FileTreeSortCaseSensitive)
+	cmp := NewNodeSortOrder(guiConfig.FileTreeSortOrder, guiConfig.FileTreeSortCaseSensitive)
 	if self.showTree {
 		self.tree = BuildTreeFromCommitFiles(filesForDisplay, showRootItem, cmp)
 	} else {

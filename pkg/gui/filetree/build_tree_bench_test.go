@@ -14,7 +14,7 @@ func BenchmarkBuildCommitFileTree(b *testing.B) {
 			for i := range files {
 				files[i] = &models.CommitFile{Path: fmt.Sprintf("directory/file-%05d", count-i)}
 			}
-			cmp := NodeSortComparator[models.CommitFile]("mixed", false)
+			cmp := NewNodeSortOrder("mixed", false)
 			b.ReportAllocs()
 			b.ResetTimer()
 			for b.Loop() {

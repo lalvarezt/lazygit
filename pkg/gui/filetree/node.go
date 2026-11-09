@@ -83,53 +83,46 @@ func (self *Node[T]) GetPaths() []string {
 	return paths
 }
 
-func (self *Node[T]) Sort(cmp func(a, b *Node[T]) int) {
-	self.SortChildren(cmp)
+func (self *Node[T]) Sort(order NodeSortOrder) {
+	self.SortChildren(order)
 
 	for _, child := range self.Children {
-		child.Sort(cmp)
+		child.Sort(order)
 	}
 }
 
-// NodeSortComparator returns a comparator function for sorting tree nodes
-// based on the given sort order and case sensitivity.
-// sortOrder must be one of: "mixed", "filesFirst", "foldersFirst".
-func NodeSortComparator[T any](sortOrder string, caseSensitive bool) func(a, b *Node[T]) int {
-	strCmp := strings.Compare
-	if !caseSensitive {
-		strCmp = func(a, b string) int {
-			return strings.Compare(strings.ToLower(a), strings.ToLower(b))
-		}
-	}
+type NodeSortOrder struct {
+	dirVsFileOrder int
+	caseSensitive  bool
+}
 
-	// dirVsFileOrder is the return value when a is a directory and b is a file.
-	// -1 means directories come first, 1 means files come first.
-	dirVsFileOrder := 0
+// NewNodeSortOrder accepts "mixed", "filesFirst", or "foldersFirst".
+func NewNodeSortOrder(sortOrder string, caseSensitive bool) NodeSortOrder {
+	order := NodeSortOrder{caseSensitive: caseSensitive}
 	switch sortOrder {
 	case "foldersFirst":
-		dirVsFileOrder = -1
+		order.dirVsFileOrder = -1
 	case "filesFirst":
-		dirVsFileOrder = 1
+		order.dirVsFileOrder = 1
 	}
+	return order
+}
 
-	if dirVsFileOrder != 0 {
-		return func(a, b *Node[T]) int {
-			aIsDir := !a.IsFile()
-			bIsDir := !b.IsFile()
-			if aIsDir != bIsDir {
-				if aIsDir {
-					return dirVsFileOrder
-				}
-				return -dirVsFileOrder
-			}
-			return strCmp(a.path, b.path)
+func (order NodeSortOrder) sortPath(path string) string {
+	if !order.caseSensitive {
+		return strings.ToLower(path)
+	}
+	return path
+}
+
+func (order NodeSortOrder) compare(aPath, bPath string, aIsDir, bIsDir bool) int {
+	if order.dirVsFileOrder != 0 && aIsDir != bIsDir {
+		if aIsDir {
+			return order.dirVsFileOrder
 		}
+		return -order.dirVsFileOrder
 	}
-
-	// "mixed": sort by path only
-	return func(a, b *Node[T]) int {
-		return strCmp(a.path, b.path)
-	}
+	return strings.Compare(order.sortPath(aPath), order.sortPath(bPath))
 }
 
 func (self *Node[T]) ForEachFile(cb func(*T) error) error {
@@ -148,14 +141,16 @@ func (self *Node[T]) ForEachFile(cb func(*T) error) error {
 	return nil
 }
 
-func (self *Node[T]) SortChildren(cmp func(a, b *Node[T]) int) {
+func (self *Node[T]) SortChildren(order NodeSortOrder) {
 	if self.IsFile() {
 		return
 	}
 
 	children := slices.Clone(self.Children)
 
-	slices.SortFunc(children, cmp)
+	slices.SortFunc(children, func(a, b *Node[T]) int {
+		return order.compare(a.path, b.path, !a.IsFile(), !b.IsFile())
+	})
 
 	// TODO: think about making this in-place
 	self.Children = children

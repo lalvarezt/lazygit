@@ -196,7 +196,7 @@ func (self *FileTree) SetTree() {
 	filesForDisplay := self.getFilesForDisplay()
 	guiConfig := self.common.UserConfig().Gui
 	showRootItem := guiConfig.ShowRootItemInFileTree
-	cmp := NodeSortComparator[models.File](guiConfig.FileTreeSortOrder, guiConfig.FileTreeSortCaseSensitive)
+	cmp := NewNodeSortOrder(guiConfig.FileTreeSortOrder, guiConfig.FileTreeSortCaseSensitive)
 	if self.showTree {
 		self.tree = BuildTreeFromFiles(filesForDisplay, showRootItem, cmp)
 	} else {

@@ -100,7 +100,7 @@ func TestDiffPathsForNode(t *testing.T) {
 	for _, s := range scenarios {
 		t.Run(s.testName, func(t *testing.T) {
 			files := lo.Ternary(s.files != nil, s.files, files)
-			cmp := filetree.NodeSortComparator[models.CommitFile]("mixed", true)
+			cmp := filetree.NewNodeSortOrder("mixed", true)
 			root := filetree.BuildTreeFromCommitFiles(files, true, cmp)
 			node, found := lo.Find(root.Flatten(filetree.NewCollapsedPaths()), func(node *filetree.Node[models.CommitFile]) bool {
 				return node.GetPath() == s.selectedPath

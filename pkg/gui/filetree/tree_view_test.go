@@ -15,7 +15,7 @@ func TestTreeViewIndexFollowsVisibility(t *testing.T) {
 				view := newTreeView[models.File]()
 				files := []*models.File{{Path: "a/b/one"}, {Path: "a/b/two"}, {Path: "c/three"}, {Path: "c/four"}}
 				build := func() *Node[models.File] {
-					cmp := NodeSortComparator[models.File]("mixed", true)
+					cmp := NewNodeSortOrder("mixed", true)
 					if treeMode {
 						return BuildTreeFromFiles(files, showRoot, cmp)
 					}
