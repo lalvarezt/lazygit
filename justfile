@@ -22,8 +22,8 @@ unit-test:
     go test ./... -short
 
 # Compare identical benchmark cases against two pinned revisions.
-perf-compare base="" head="HEAD":
-    node scripts/compare_performance.cjs "{{base}}" "{{head}}"
+perf-compare base="" head="HEAD" *options:
+    node scripts/compare_performance.cjs "{{base}}" "{{head}}" {{options}}
 
 # Run both unit tests and integration tests.
 [unix]

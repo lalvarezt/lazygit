@@ -9,6 +9,50 @@ const { renderComparison } = require('./render_performance.cjs');
 const PERFORMANCE_BASE = '8e3ac76991f5ffe810bd9a18597cdb017c909020';
 
 const root = path.resolve(__dirname, '..');
+const extraFixtures = [
+  {
+    path: 'pkg/gocui/text_area_navigation_test.go',
+    symbols: ['BenchmarkTextAreaVerticalMovement', 'BenchmarkTextAreaVerticalKeypress', 'BenchmarkTextAreaLineStart'],
+    imports: ['fmt', 'strings', 'testing'],
+  },
+  {
+    path: 'pkg/gocui/search_stream_test.go',
+    symbols: ['BenchmarkIncrementalSearchedDiff'],
+    imports: ['strings', 'testing'],
+  },
+  {
+    path: 'pkg/gui/filetree/selected_nodes_test.go',
+    symbols: ['BenchmarkSmallTreeRangeSelection'],
+    imports: ['fmt', 'testing', 'github.com/jesseduffield/lazygit/pkg/commands/models', 'github.com/jesseduffield/lazygit/pkg/common'],
+  },
+  {
+    path: 'pkg/gui/filetree/flat_tree_parity_test.go',
+    symbols: ['BenchmarkBuildFlatFileTrees', 'BenchmarkFlatTreeRefresh'],
+    imports: ['fmt', 'testing', 'github.com/jesseduffield/lazygit/pkg/commands/models', 'github.com/jesseduffield/lazygit/pkg/common'],
+  },
+  {
+    path: 'pkg/gui/presentation/graph/graph_layout_test.go',
+    symbols: ['continuingGraphRow', 'BenchmarkGraphColumnAllocation'],
+    imports: ['fmt', 'testing', 'github.com/jesseduffield/lazygit/pkg/commands/models', 'github.com/jesseduffield/lazygit/pkg/gui/style', 'github.com/jesseduffield/lazygit/pkg/utils'],
+  },
+  {
+    path: 'pkg/gui/presentation/graph/graph_render_test.go',
+    symbols: ['graphViewportFixture', 'BenchmarkGraphViewport'],
+    imports: ['fmt', 'testing', 'github.com/gookit/color', 'github.com/jesseduffield/lazygit/pkg/commands/models', 'github.com/jesseduffield/lazygit/pkg/gui/style', 'github.com/jesseduffield/lazygit/pkg/utils', 'github.com/xo/terminfo'],
+  },
+];
+
+function fixtureSource(file, text) {
+  const fixture = extraFixtures.find(fixture => fixture.path === file);
+  if (!fixture) return text;
+  const declarations = fixture.symbols.map(symbol => {
+    const declaration = text.match(new RegExp(`^func ${symbol}\\([\\s\\S]*?\\n}`, 'm'))?.[0];
+    if (!declaration) throw new Error(`Missing fixture symbol: ${file}: ${symbol}`);
+    return declaration;
+  });
+  return `package ${path.basename(path.dirname(file))}\n\nimport (\n${fixture.imports.map(name => `\t"${name}"`).join('\n')}\n)\n\n${declarations.join('\n\n')}\n`;
+}
+
 function benchmarkSource(file, text) {
   // Seeding this existing-text fixture is outside the timed edit pair.
   // Direct initialization avoids benchmarking TypeString during setup.
@@ -16,6 +60,11 @@ function benchmarkSource(file, text) {
     const seed = 'v.TextArea.TypeString(strings.Repeat("a", size))';
     if (!text.includes(seed)) throw new Error('The existing-text benchmark setup changed');
     text = text.replace(seed, 'v.TextArea.content = strings.Repeat("a", size)\n\t\t\tv.TextArea.cursor = len(v.TextArea.content)\n\t\t\tv.TextArea.updateCells()');
+  }
+  if (file === 'pkg/gocui/text_area_navigation_test.go') {
+    const seed = 'v.TextArea.TypeString(strings.Repeat("some text for a line\\n", count))';
+    if (!text.includes(seed)) throw new Error('The editor-navigation setup changed');
+    text = text.replace(seed, 'v.TextArea.content = strings.Repeat("some text for a line\\n", count)\n v.TextArea.updateCells()');
   }
   for (const [target, variable] of [
     ['pkg/gui/context/filtered_list_bench_test.go', 'list'],
@@ -28,12 +77,72 @@ function benchmarkSource(file, text) {
     if (!text.includes(step)) throw new Error(`The navigation benchmark changed: ${file}`);
     text = text.replace(step, resetStep);
   }
+  if (file === 'pkg/gui/filetree/build_tree_bench_test.go') {
+    const order = /cmp := (?:NewNodeSortOrder|NodeSortComparator\[models\.CommitFile\])\("mixed", false\)/;
+    if (!order.test(text)) throw new Error('The tree-construction fixture changed');
+    text = text.replace('"testing"', '"testing"\n\t"github.com/jesseduffield/lazygit/pkg/common"');
+    text = text.replace(order, `c := common.NewDummyCommon()
+      c.UserConfig().Gui.ShowRootItemInFileTree = true
+      c.UserConfig().Gui.FileTreeSortOrder = "mixed"
+      c.UserConfig().Gui.FileTreeSortCaseSensitive = false
+      tree := NewCommitFileTree(func() []*models.CommitFile { return files }, c, true)`);
+    text = text.replace('BuildTreeFromCommitFiles(files, true, cmp)', 'tree.SetTree()');
+  }
+  if (file === 'pkg/gui/filetree/flat_tree_parity_test.go') {
+    const orders = /fileOrder := NewNodeSortOrder\("mixed", false\)\s+commitOrder := NewNodeSortOrder\("mixed", false\)/;
+    if (!orders.test(text)) throw new Error('The flat-construction fixture changed');
+    text = text.replace(orders, `c := common.NewDummyCommon()
+      c.UserConfig().Gui.ShowRootItemInFileTree = true
+      c.UserConfig().Gui.FileTreeSortOrder = "mixed"
+      c.UserConfig().Gui.FileTreeSortCaseSensitive = false
+      working := NewFileTree(func() []*models.File { return files }, c, false)
+      committed := NewCommitFileTree(func() []*models.CommitFile { return commits }, c, false)`);
+    text = text.replace('BuildFlatTreeFromCommitFiles(commits, true, commitOrder)', 'committed.SetTree()');
+    text = text.replace('BuildFlatTreeFromFiles(files, true, fileOrder)', 'working.SetTree()');
+  }
+  if (file === 'pkg/gui/filetree/selected_nodes_test.go') {
+    text = text.replace('c := common.NewDummyCommon()', 'c := common.NewDummyCommon()\n c.UserConfig().Gui.ShowRootItemInFileTree = false');
+    for (const [variable, tree] of [['working', 'IFileTree'], ['committed', 'ICommitFileTree']]) {
+      const cast = tree === 'IFileTree' ? 'FileTree' : 'CommitFileTree';
+      const invalidation = `${variable}.${tree}.(*${cast}).indexedTree = nil`;
+      if (!text.includes(invalidation)) throw new Error('The cold range fixture changed');
+      text = text.replace(invalidation, `${variable}.ToggleCollapsed("dir")\n ${variable}.ToggleCollapsed("dir")`);
+    }
+  }
+  if (file === 'pkg/gocui/search_stream_test.go') {
+    if (!text.includes('v.RefreshSearch()')) throw new Error('The streaming-search fixture changed');
+    text = text.replaceAll('v.RefreshSearch()', 'v.GetSearchStatus()');
+  }
   return text;
+}
+
+function benchmarkCheckpoint(directory, pkg, args, settings) {
+  const digest = text => crypto.createHash('sha256').update(text).digest('hex');
+  const packageDirectory = path.join(directory, pkg);
+  const sources = fs.readdirSync(packageDirectory).filter(file => file.endsWith('.go')).sort().map(file => ({
+    path: file, sha256: digest(fs.readFileSync(path.join(packageDirectory, file))),
+  }));
+  const inputs = {
+    revision: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: directory, encoding: 'utf8' }).trim(),
+    pkg, args, settings, sources,
+    goVersion: execFileSync('go', ['version'], { cwd: directory, encoding: 'utf8' }).trim(),
+    cpu: os.cpus()[0].model,
+  };
+  return { key: digest(JSON.stringify(inputs)), inputs };
 }
 
 function measure() {
   const git = (...args) => execFileSync('git', args, { cwd: root, encoding: 'utf8' }).trim();
-  const refs = { before: process.argv[2] || PERFORMANCE_BASE, after: process.argv[3] || 'HEAD' };
+  const options = process.argv.slice(2);
+  for (const option of options.filter(arg => arg.startsWith('--'))) {
+    if (!['--prepare-only', '--resume'].includes(option) && !option.startsWith('--package=')) throw new Error(`Unknown comparison option: ${option}`);
+  }
+  const prepareOnly = options.includes('--prepare-only');
+  const resume = options.includes('--resume');
+  const onlyPackage = options.find(arg => arg.startsWith('--package='))?.slice('--package='.length);
+  if (onlyPackage === '') throw new Error('A benchmark package is required');
+  const args = options.filter(arg => !arg.startsWith('--'));
+  const refs = { before: args[0] || PERFORMANCE_BASE, after: args[1] || 'HEAD' };
   const revisions = Object.fromEntries(Object.entries(refs).map(([side, ref]) => [side, git('rev-parse', `${ref}^{commit}`)]));
   const workspace = path.join(git('rev-parse', '--absolute-git-dir'), 'perf-comparison');
   const settings = { samples: 5, benchtime: '200ms', GOMAXPROCS: '1', GOGC: '100', GOMEMLIMIT: 'off' };
@@ -42,7 +151,8 @@ function measure() {
   const go = (cwd, ...args) => execFileSync('go', args, { cwd, env, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
   const sha256 = value => crypto.createHash('sha256').update(value).digest('hex');
   const source = (revision, file) => execFileSync('git', ['show', `${revision}:${file}`], { cwd: root, encoding: 'utf8' });
-  const files = git('ls-tree', '-r', '--name-only', revisions.after).split('\n').filter(file => /bench.*_test\.go$/.test(file));
+  const treeFiles = git('ls-tree', '-r', '--name-only', revisions.after).split('\n');
+  const files = treeFiles.filter(file => /bench.*_test\.go$/.test(file) || extraFixtures.some(fixture => fixture.path === file));
   const harness = [];
   const families = new Set();
   fs.mkdirSync(workspace, { recursive: true });
@@ -60,7 +170,7 @@ function measure() {
   }
 
   for (const file of files) {
-    const text = benchmarkSource(file, source(revisions.after, file));
+    const text = benchmarkSource(file, fixtureSource(file, source(revisions.after, file)));
     for (const match of text.matchAll(/^func (Benchmark\w+)\(/gm)) families.add(match[1]);
     const digest = sha256(text);
     for (const directory of Object.values(checkouts)) {
@@ -69,7 +179,8 @@ function measure() {
       fs.writeFileSync(target, text);
       if (sha256(fs.readFileSync(target)) !== digest) throw new Error(`Harness mismatch: ${file}`);
     }
-    harness.push({ path: file, sha256: digest });
+    const fixture = extraFixtures.find(fixture => fixture.path === file);
+    harness.push({ path: file, sha256: digest, ...(fixture ? { symbols: fixture.symbols } : {}) });
   }
 
   // These existing cases also have identical fixtures in both revisions.
@@ -104,7 +215,16 @@ function measure() {
     BenchmarkCommitDescriptionInput: p => `Type ${Math.floor(value(p, 'bytes') / 10) * 10} bytes through the commit-description editor.`,
     BenchmarkPasteText: p => `Insert ${Math.floor(value(p, 'bytes') / 17) * 17} bytes into prefilled text with TypeString, including layout.`,
     BenchmarkFilteredListNavigation: p => `Reset selection to the midpoint, move one row, retrieve it, and count ${value(p, 'items')} filtered branches.`,
-    BenchmarkBuildCommitFileTree: p => `Build and sort a tree of ${value(p, 'files')} commit files supplied in reverse order.`,
+    BenchmarkBuildCommitFileTree: p => `Build and sort ${value(p, 'files')} reverse-ordered commit files through the file-tree construction entry point.`,
+    BenchmarkBuildFlatFileTrees: p => `Build a flat ${value(p, 'commits') === 'true' ? 'commit-file' : 'working-file'} list of ${value(p, 'files')} files with ${value(p, 'deep') === 'true' ? 'a distinct nested directory per file' : 'one shared directory'}; construction entry point included.`,
+    BenchmarkFlatTreeRefresh: p => `Refresh a flat ${value(p, 'commits') === 'true' ? 'commit-file' : 'working-file'} view model with ${value(p, 'files')} files, including selection recovery.`,
+    BenchmarkSmallTreeRangeSelection: p => `Select one row near the end of a ${value(p, 'files')}-file ${value(p, 'commits') === 'true' ? 'commit-file' : 'working-file'} tree; ${value(p, 'cold') === 'true' ? 'toggle a directory twice before each selection to invalidate visibility' : 'visibility unchanged'}.`,
+    BenchmarkTextAreaVerticalMovement: p => `Move Up and Down in ${value(p, 'lines')} prepared editor lines, ${value(p, 'bottom') === 'true' ? 'near the end' : 'near the beginning'}; rendering excluded.`,
+    BenchmarkTextAreaVerticalKeypress: p => `Handle Up and Down through the default editor near the end of ${value(p, 'lines')} lines, including rendering.`,
+    BenchmarkTextAreaLineStart: p => `Move to the start of a line near the end of ${value(p, 'lines')} prepared editor lines.`,
+    BenchmarkIncrementalSearchedDiff: p => `Stream 8,192 searched lines in 64 batches, reading search status after each batch; ${p[0]} view.`,
+    BenchmarkGraphColumnAllocation: p => `Lay out a graph row with ${value(p, 'columns')} incoming columns and its current commit in the final column.`,
+    BenchmarkGraphViewport: p => `Render ${value(p, 'rows')} cached ${value(p, 'branches') === 'true' ? 'branching' : 'linear'} graph rows with GOMAXPROCS=${value(p, 'cpu') || '1'}; layout excluded.`,
     BenchmarkFileTreeRangeSelection: p => `Retrieve a range spanning a ${value(p, 'files')}-file tree.`,
     BenchmarkFileTreeNavigation: p => `Reset selection to the midpoint, move one row, retrieve it, and count rows in a ${value(p, 'files')}-file tree.`,
     BenchmarkRestoreFileSelection: p => `Restore selection among ${value(p, 'files')} files; selected file ${value(p, 'removed') === 'true' ? 'removed' : 'retained'}.`,
@@ -122,33 +242,71 @@ function measure() {
   };
   function value(parts, name) { return parts.find(part => part.startsWith(`${name}=`))?.slice(name.length + 1); }
   for (const name of families) if (!descriptions[name]) throw new Error(`Missing description: ${name}`);
-  const packages = [...new Set([...files.map(file => `./${path.dirname(file)}`), './pkg/gui/presentation/graph'])];
+  let packages = [...new Set([...files.map(file => `./${path.dirname(file)}`), './pkg/gui/presentation/graph'])];
+  if (onlyPackage) {
+    if (!packages.includes(onlyPackage)) throw new Error(`Unknown benchmark package: ${onlyPackage}`);
+    packages = [onlyPackage];
+  }
   const pattern = `^(${[...families].join('|')})$`;
   const samples = { before: new Map(), after: new Map() };
+  const checkpoints = [];
+
+  function runBenchmark(pkg, side, args, filename) {
+    const file = path.join(workspace, filename);
+    const metadataFile = file + '.json';
+    const checkpoint = benchmarkCheckpoint(checkouts[side], pkg, args, settings);
+    let output;
+    let metadata;
+    if (resume && fs.existsSync(file) && fs.existsSync(metadataFile)) {
+      metadata = JSON.parse(fs.readFileSync(metadataFile, 'utf8'));
+      const saved = fs.readFileSync(file, 'utf8');
+      if (metadata.key === checkpoint.key && metadata.outputHash === sha256(saved)) {
+        output = saved;
+        console.log(`${side}: ${pkg} reused ${filename}`);
+      }
+    }
+    if (output === undefined) {
+      output = go(checkouts[side], ...args);
+      metadata = { ...checkpoint, outputHash: sha256(output) };
+      fs.writeFileSync(file, output);
+      fs.writeFileSync(metadataFile, JSON.stringify(metadata, null, 2) + '\n');
+    }
+    checkpoints.push({ side, pkg, file: filename, key: metadata.key, outputHash: metadata.outputHash, recoveredFromInterruptedRun: metadata.recoveredFromInterruptedRun || undefined });
+    return output;
+  }
 
   function recordSamples(output, pkg, side) {
     for (const line of output.split('\n')) {
-      const match = line.match(/^(Benchmark\S+?)(?:-\d+)?\s+\d+\s+([\d.]+) ns\/op/);
+      const match = line.match(/^(Benchmark\S+?)(?:-(\d+))?\s+\d+\s+([\d.]+) ns\/op/);
       if (!match) continue;
-      const id = `${pkg.slice(6)}/${match[1]}`;
-      const row = { ns: Number(match[2]), bytes: Number(line.match(/(\d+) B\/op/)?.[1]), allocations: Number(line.match(/(\d+) allocs\/op/)?.[1]) };
+      const cpu = Number(match[2] || 1);
+      const id = `${pkg.slice(6)}/${match[1]}${cpu === 1 ? '' : `/cpu=${cpu}`}`;
+      const row = { ns: Number(match[3]), bytes: Number(line.match(/(\d+) B\/op/)?.[1]), allocations: Number(line.match(/(\d+) allocs\/op/)?.[1]) };
       if (!Number.isFinite(row.bytes) || !Number.isFinite(row.allocations)) throw new Error(`Incomplete sample: ${id}`);
       if (!samples[side].has(id)) samples[side].set(id, []);
       samples[side].get(id).push(row);
     }
   }
 
-
   for (const pkg of packages) {
     for (const side of ['before', 'after']) {
       console.log(`${side}: ${pkg}`);
-      const output = go(checkouts[side], 'test', pkg, '-run=^$', `-bench=${pattern}`, '-benchmem', `-benchtime=${settings.benchtime}`, `-count=${settings.samples}`, '-cpu=1');
+      if (prepareOnly) {
+        go(checkouts[side], 'test', pkg, '-run=^$', '-bench=^$');
+        console.log(`${side}: ${pkg} fixtures compile`);
+        continue;
+      }
       const filename = `${side}-${pkg.slice(2).replaceAll('/', '-')}.txt`;
-      fs.writeFileSync(path.join(workspace, filename), output);
+      const output = runBenchmark(pkg, side, ['test', pkg, '-run=^$', `-bench=${pattern}`, '-benchmem', `-benchtime=${settings.benchtime}`, `-count=${settings.samples}`, '-cpu=1'], filename);
       recordSamples(output, pkg, side);
       console.log(`${side}: ${pkg} complete`);
+      if (pkg === './pkg/gui/presentation/graph' && families.has('BenchmarkGraphViewport')) {
+        const parallelOutput = runBenchmark(pkg, side, ['test', pkg, '-run=^$', '-bench=^BenchmarkGraphViewport$', '-benchmem', `-benchtime=${settings.benchtime}`, `-count=${settings.samples}`, '-cpu=4,16'], `${side}-graph-viewport-parallel.txt`);
+        recordSamples(parallelOutput, pkg, side);
+      }
     }
   }
+  if (prepareOnly || onlyPackage) return null;
 
   const ids = [...samples.before.keys()].sort((a, b) => a.localeCompare(b, 'en', { numeric: true }));
   if (ids.length !== samples.after.size || [...samples.after.keys()].some(id => !samples.before.has(id))) throw new Error('Benchmark case sets differ');
@@ -164,14 +322,15 @@ function measure() {
     if (!describe) throw new Error(`Missing description: ${id}`);
     return { id, description: describe(benchmark), before: median(before.map(row => row.ns)), after: median(after.map(row => row.ns)), samples: { before, after } };
   });
-  return { refs, revisions, settings, goVersion: go(root, 'version').trim(), platform: `${os.platform()}/${os.arch()}`, cpu: os.cpus()[0].model, harness, rows };
+  return { refs, revisions, settings, graphViewportCPUs: families.has('BenchmarkGraphViewport') ? [1, 4, 16] : undefined, goVersion: go(root, 'version').trim(), platform: `${os.platform()}/${os.arch()}`, cpu: os.cpus()[0].model, harness, checkpoints, rows };
 }
 
 if (require.main === module) {
   const dataPath = path.join(root, 'docs-master/dev/performance-comparison.json');
-  const data = process.argv[2] === '--render-only'
+  const data = process.argv.slice(2).includes('--render-only')
     ? JSON.parse(fs.readFileSync(dataPath, 'utf8'))
     : measure();
+  if (data === null) process.exit(0);
   const { revisions, settings } = data;
   const imageDirectory = 'docs-master/dev/performance-comparisons';
   const { table, images } = renderComparison(data, imageDirectory);
@@ -187,11 +346,12 @@ if (require.main === module) {
   summary.push(
     `Same benchmark sources and settings. Median of ${settings.samples} samples, ${settings.benchtime} per sample, GOMAXPROCS=${settings.GOMAXPROCS}, GOGC=${settings.GOGC}, GOMEMLIMIT=${settings.GOMEMLIMIT}.`,
     '',
+    ...(data.graphViewportCPUs ? [`Cached graph viewports also run with GOMAXPROCS=${data.graphViewportCPUs.filter(cpu => cpu !== Number(settings.GOMAXPROCS)).join(' and ')}; those rows state their CPU setting.`, ''] : []),
     `\`${data.goVersion}\` · ${data.cpu}.`,
     '',
     'Each pair of bars uses its own scale. Negative change means faster; positive means slower.',
     '',
-    '[Raw samples and fixture metadata](docs-master/dev/performance-comparison.json) · [Investigation notes](docs-master/dev/Performance-follow-up.md).',
+    '[Raw samples and fixture metadata](docs-master/dev/performance-comparison.json) · [Investigation notes](docs-master/dev/Performance-follow-up.md) · [Independent follow-up results](docs-master/dev/Independent-performance-follow-ups.md).',
     '',
     table,
   );
@@ -219,4 +379,4 @@ if (require.main === module) {
   console.log(`Wrote ${images.length} timing SVGs to ${imageDirectory} and updated README.md`);
 }
 
-module.exports = { benchmarkSource };
+module.exports = { benchmarkSource, fixtureSource, benchmarkCheckpoint };

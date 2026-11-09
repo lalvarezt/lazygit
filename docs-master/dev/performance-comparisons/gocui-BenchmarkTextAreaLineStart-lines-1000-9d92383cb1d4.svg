@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="60" viewBox="0 0 420 60" class="performance-timing" role="img" aria-labelledby="timing-title" data-benchmark="gocui/BenchmarkTextAreaLineStart/lines=1000" data-before="12451" data-after="65.65">
+<title id="timing-title">gocui/BenchmarkTextAreaLineStart/lines=1000: 12.45 µs before, 65.65 ns after, -99.47% change</title>
+<style>
+.performance-timing{color-scheme:light dark;--performance-fg:#1f2328;--performance-muted:#59636e;--performance-track:#f0f2f5;--performance-before:#8c959f;--performance-after:#0f766e;--performance-loss:#cf222e}
+@media(prefers-color-scheme:dark){.performance-timing{--performance-fg:#f0f6fc;--performance-muted:#9198a1;--performance-track:#161b22;--performance-before:#9198a1;--performance-after:#2dd4bf;--performance-loss:#f85149}}
+text{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;fill:var(--performance-fg);font-size:14px}.bar-label{font-size:12px;fill:var(--performance-muted)}.value{font-variant-numeric:tabular-nums}.track{fill:var(--performance-track)}.before{fill:var(--performance-before)}.after{fill:var(--performance-after)}.gain{fill:var(--performance-after);font-size:15px;font-weight:600}.loss{fill:var(--performance-loss);font-size:15px;font-weight:600}
+</style>
+<text x="12" y="20" class="bar-label" text-anchor="start">Before</text>
+<rect x="62" y="10" width="180" height="12" rx="3" class="track"/>
+<rect x="62" y="10" width="180.000" height="12" rx="3" class="before"/>
+<text x="314" y="20" class="value" text-anchor="end">12.45 µs</text>
+<text x="12" y="51" class="bar-label" text-anchor="start">After</text>
+<rect x="62" y="41" width="180" height="12" rx="3" class="track"/>
+<rect x="62" y="41" width="1.000" height="12" rx="3" class="after"/>
+<text x="314" y="51" class="value" text-anchor="end">65.65 ns</text>
+<text x="408" y="35" class="gain" text-anchor="end">-99.47%</text>
+</svg>

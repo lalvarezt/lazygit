@@ -523,3 +523,52 @@ go test ./pkg/gocui -run='^$' -bench='Benchmark(EditorParagraphInput|EditorUnbro
 go test ./pkg/gocui -run='^$' -bench=BenchmarkNotifyCellsWritten -benchmem -benchtime=150ms -count=3
 go test ./pkg/gocui -run='^$' -bench=BenchmarkEditorEditUnbrokenText -benchmem -benchtime=150ms -count=3
 ```
+
+## README comparison after the independent follow-ups
+
+The README comparison now measures `3c989658a2e5` against the fixed fork base
+`8e3ac76991f5`. It retains all 103 existing cases and adds 66 cases for editor
+navigation, small tree selections, flat construction and refresh, graph
+columns, cached graph viewports, and streamed search. The
+[raw comparison](performance-comparison.json) contains five samples per side
+and case, measured for 200 ms per sample with the pinned settings.
+
+Cached graph viewports also run with GOMAXPROCS=4 and 16. Those rows state
+their CPU setting; the other rows use GOMAXPROCS=1. Slower medians remain in
+the README, including navigation near the beginning of a long editor buffer
+and some linear graph viewports. These operation timings do not measure
+end-to-end UI latency.
+
+The runner extracts benchmark-only fixtures from files whose names do not
+contain `bench`. It copies identical fixture text into both measurement
+checkouts and records source hashes. Public construction entry points bridge
+the ordering-interface change between revisions. The invalidated-visibility
+case toggles a directory twice before selecting a row; those operations are
+included in its time. Streamed search reads status after each batch. Large
+editor fixtures seed their content outside the timed operation.
+
+Reproduce this comparison with:
+
+```sh
+just perf-compare 8e3ac76991f5 3c989658a2e5
+```
+
+Check fixture compilation without measuring with `--prepare-only`. For a
+bounded run, measure one package and then collect the complete comparison:
+
+```sh
+just perf-compare 8e3ac76991f5 3c989658a2e5 --prepare-only
+just perf-compare 8e3ac76991f5 3c989658a2e5 --resume --package=./pkg/gui/filetree
+just perf-compare 8e3ac76991f5 3c989658a2e5 --resume
+```
+
+A package-only run saves samples without changing the README. Resume reuses
+only checkpoints whose revisions, Go sources, toolchain, CPU, sampling
+settings, command arguments, and output hashes match. Missing or invalid
+checkpoints are measured again. The final collection verifies matching case
+sets and complete repetitions before writing the README and timing images.
+
+The [independent implementation results](Independent-performance-follow-ups.md)
+retain the immediate before-and-after measurements for those changes. Their
+baselines and some fixtures differ from the broader README comparison, so
+the two sets of timings should be interpreted separately.
