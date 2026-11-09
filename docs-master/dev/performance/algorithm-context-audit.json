@@ -1,0 +1,814 @@
+{
+  "sourceRevision": "dd68e659c6a6b9b4b43ed31840ebe98c3bd356ce",
+  "goVersion": "go version go1.27.3 linux/amd64",
+  "metadata": [
+    "goos: linux",
+    "goarch: amd64",
+    "pkg: github.com/jesseduffield/lazygit/pkg/gui/presentation/graph",
+    "cpu: 13th Gen Intel(R) Core(TM) i7-1370P"
+  ],
+  "environment": {
+    "GOGC": 100,
+    "GOMEMLIMIT": "off"
+  },
+  "method": "Three samples per case, 100 ms each. Graph includes parity tests for both symbol sets and selected/unselected matches. Editor operation is one Up/Down pair; setup excluded. Synthetic fixtures, no live UI latency measurements.",
+  "results": {
+    "graph-viewport": [
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=1/sequential=false",
+        "samples": [
+          {
+            "ns": 8725,
+            "bytes": 4956,
+            "allocations": 83
+          },
+          {
+            "ns": 3489,
+            "bytes": 2424,
+            "allocations": 53
+          },
+          {
+            "ns": 3539,
+            "bytes": 2424,
+            "allocations": 53
+          }
+        ],
+        "medianNs": 3539,
+        "medianBytes": 2424,
+        "medianAllocations": 53
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=1/sequential=false-4",
+        "samples": [
+          {
+            "ns": 4276,
+            "bytes": 2928,
+            "allocations": 59
+          },
+          {
+            "ns": 4090,
+            "bytes": 2928,
+            "allocations": 59
+          },
+          {
+            "ns": 4759,
+            "bytes": 2928,
+            "allocations": 59
+          }
+        ],
+        "medianNs": 4276,
+        "medianBytes": 2928,
+        "medianAllocations": 59
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=1/sequential=false-16",
+        "samples": [
+          {
+            "ns": 9227,
+            "bytes": 4944,
+            "allocations": 83
+          },
+          {
+            "ns": 8874,
+            "bytes": 4944,
+            "allocations": 83
+          },
+          {
+            "ns": 9001,
+            "bytes": 4944,
+            "allocations": 83
+          }
+        ],
+        "medianNs": 9001,
+        "medianBytes": 4944,
+        "medianAllocations": 83
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=1/sequential=true",
+        "samples": [
+          {
+            "ns": 1869,
+            "bytes": 2224,
+            "allocations": 48
+          },
+          {
+            "ns": 2142,
+            "bytes": 2224,
+            "allocations": 48
+          },
+          {
+            "ns": 2198,
+            "bytes": 2224,
+            "allocations": 48
+          }
+        ],
+        "medianNs": 2142,
+        "medianBytes": 2224,
+        "medianAllocations": 48
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=1/sequential=true-4",
+        "samples": [
+          {
+            "ns": 1592,
+            "bytes": 2224,
+            "allocations": 48
+          },
+          {
+            "ns": 1552,
+            "bytes": 2224,
+            "allocations": 48
+          },
+          {
+            "ns": 1540,
+            "bytes": 2224,
+            "allocations": 48
+          }
+        ],
+        "medianNs": 1552,
+        "medianBytes": 2224,
+        "medianAllocations": 48
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=1/sequential=true-16",
+        "samples": [
+          {
+            "ns": 2021,
+            "bytes": 2224,
+            "allocations": 48
+          },
+          {
+            "ns": 1977,
+            "bytes": 2224,
+            "allocations": 48
+          },
+          {
+            "ns": 1921,
+            "bytes": 2224,
+            "allocations": 48
+          }
+        ],
+        "medianNs": 1977,
+        "medianBytes": 2224,
+        "medianAllocations": 48
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=8/sequential=false",
+        "samples": [
+          {
+            "ns": 25867,
+            "bytes": 24282,
+            "allocations": 465
+          },
+          {
+            "ns": 21414,
+            "bytes": 21752,
+            "allocations": 435
+          },
+          {
+            "ns": 22074,
+            "bytes": 21752,
+            "allocations": 435
+          }
+        ],
+        "medianNs": 22074,
+        "medianBytes": 21752,
+        "medianAllocations": 435
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=8/sequential=false-4",
+        "samples": [
+          {
+            "ns": 17171,
+            "bytes": 22256,
+            "allocations": 444
+          },
+          {
+            "ns": 18380,
+            "bytes": 22256,
+            "allocations": 444
+          },
+          {
+            "ns": 15490,
+            "bytes": 22256,
+            "allocations": 444
+          }
+        ],
+        "medianNs": 17171,
+        "medianBytes": 22256,
+        "medianAllocations": 444
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=8/sequential=false-16",
+        "samples": [
+          {
+            "ns": 26046,
+            "bytes": 24272,
+            "allocations": 465
+          },
+          {
+            "ns": 26273,
+            "bytes": 24272,
+            "allocations": 465
+          },
+          {
+            "ns": 26158,
+            "bytes": 24272,
+            "allocations": 465
+          }
+        ],
+        "medianNs": 26158,
+        "medianBytes": 24272,
+        "medianAllocations": 465
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=8/sequential=true",
+        "samples": [
+          {
+            "ns": 19640,
+            "bytes": 21440,
+            "allocations": 430
+          },
+          {
+            "ns": 20107,
+            "bytes": 21440,
+            "allocations": 430
+          },
+          {
+            "ns": 20384,
+            "bytes": 21440,
+            "allocations": 430
+          }
+        ],
+        "medianNs": 20107,
+        "medianBytes": 21440,
+        "medianAllocations": 430
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=8/sequential=true-4",
+        "samples": [
+          {
+            "ns": 15866,
+            "bytes": 21440,
+            "allocations": 430
+          },
+          {
+            "ns": 15538,
+            "bytes": 21440,
+            "allocations": 430
+          },
+          {
+            "ns": 15212,
+            "bytes": 21440,
+            "allocations": 430
+          }
+        ],
+        "medianNs": 15538,
+        "medianBytes": 21440,
+        "medianAllocations": 430
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=8/sequential=true-16",
+        "samples": [
+          {
+            "ns": 19834,
+            "bytes": 21440,
+            "allocations": 430
+          },
+          {
+            "ns": 20034,
+            "bytes": 21440,
+            "allocations": 430
+          },
+          {
+            "ns": 20214,
+            "bytes": 21440,
+            "allocations": 430
+          }
+        ],
+        "medianNs": 20034,
+        "medianBytes": 21440,
+        "medianAllocations": 430
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=40/sequential=false",
+        "samples": [
+          {
+            "ns": 104454,
+            "bytes": 100251,
+            "allocations": 1887
+          },
+          {
+            "ns": 95033,
+            "bytes": 97776,
+            "allocations": 1842
+          },
+          {
+            "ns": 102721,
+            "bytes": 97776,
+            "allocations": 1842
+          }
+        ],
+        "medianNs": 102721,
+        "medianBytes": 97776,
+        "medianAllocations": 1842
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=40/sequential=false-4",
+        "samples": [
+          {
+            "ns": 57730,
+            "bytes": 98218,
+            "allocations": 1851
+          },
+          {
+            "ns": 52572,
+            "bytes": 98217,
+            "allocations": 1851
+          },
+          {
+            "ns": 52358,
+            "bytes": 98217,
+            "allocations": 1851
+          }
+        ],
+        "medianNs": 52572,
+        "medianBytes": 98217,
+        "medianAllocations": 1851
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=40/sequential=false-16",
+        "samples": [
+          {
+            "ns": 108148,
+            "bytes": 100248,
+            "allocations": 1887
+          },
+          {
+            "ns": 103711,
+            "bytes": 100242,
+            "allocations": 1887
+          },
+          {
+            "ns": 103595,
+            "bytes": 100240,
+            "allocations": 1887
+          }
+        ],
+        "medianNs": 103711,
+        "medianBytes": 100242,
+        "medianAllocations": 1887
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=40/sequential=true",
+        "samples": [
+          {
+            "ns": 89677,
+            "bytes": 96888,
+            "allocations": 1837
+          },
+          {
+            "ns": 91383,
+            "bytes": 96888,
+            "allocations": 1837
+          },
+          {
+            "ns": 93822,
+            "bytes": 96888,
+            "allocations": 1837
+          }
+        ],
+        "medianNs": 91383,
+        "medianBytes": 96888,
+        "medianAllocations": 1837
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=40/sequential=true-4",
+        "samples": [
+          {
+            "ns": 72228,
+            "bytes": 96888,
+            "allocations": 1837
+          },
+          {
+            "ns": 72272,
+            "bytes": 96888,
+            "allocations": 1837
+          },
+          {
+            "ns": 71340,
+            "bytes": 96888,
+            "allocations": 1837
+          }
+        ],
+        "medianNs": 72228,
+        "medianBytes": 96888,
+        "medianAllocations": 1837
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=40/sequential=true-16",
+        "samples": [
+          {
+            "ns": 82223,
+            "bytes": 96888,
+            "allocations": 1837
+          },
+          {
+            "ns": 81643,
+            "bytes": 96888,
+            "allocations": 1837
+          },
+          {
+            "ns": 93167,
+            "bytes": 96888,
+            "allocations": 1837
+          }
+        ],
+        "medianNs": 82223,
+        "medianBytes": 96888,
+        "medianAllocations": 1837
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=120/sequential=false",
+        "samples": [
+          {
+            "ns": 305046,
+            "bytes": 385431,
+            "allocations": 7232
+          },
+          {
+            "ns": 390092,
+            "bytes": 382944,
+            "allocations": 7187
+          },
+          {
+            "ns": 377888,
+            "bytes": 382944,
+            "allocations": 7187
+          }
+        ],
+        "medianNs": 377888,
+        "medianBytes": 382944,
+        "medianAllocations": 7187
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=120/sequential=false-4",
+        "samples": [
+          {
+            "ns": 194674,
+            "bytes": 383324,
+            "allocations": 7196
+          },
+          {
+            "ns": 191028,
+            "bytes": 383331,
+            "allocations": 7196
+          },
+          {
+            "ns": 189874,
+            "bytes": 383333,
+            "allocations": 7196
+          }
+        ],
+        "medianNs": 191028,
+        "medianBytes": 383331,
+        "medianAllocations": 7196
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=120/sequential=false-16",
+        "samples": [
+          {
+            "ns": 300941,
+            "bytes": 385428,
+            "allocations": 7232
+          },
+          {
+            "ns": 294723,
+            "bytes": 385384,
+            "allocations": 7232
+          },
+          {
+            "ns": 284926,
+            "bytes": 385375,
+            "allocations": 7232
+          }
+        ],
+        "medianNs": 294723,
+        "medianBytes": 385384,
+        "medianAllocations": 7232
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=120/sequential=true",
+        "samples": [
+          {
+            "ns": 340098,
+            "bytes": 380712,
+            "allocations": 7182
+          },
+          {
+            "ns": 363671,
+            "bytes": 380712,
+            "allocations": 7182
+          },
+          {
+            "ns": 367402,
+            "bytes": 380712,
+            "allocations": 7182
+          }
+        ],
+        "medianNs": 363671,
+        "medianBytes": 380712,
+        "medianAllocations": 7182
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=120/sequential=true-4",
+        "samples": [
+          {
+            "ns": 279771,
+            "bytes": 380713,
+            "allocations": 7182
+          },
+          {
+            "ns": 271713,
+            "bytes": 380712,
+            "allocations": 7182
+          },
+          {
+            "ns": 275568,
+            "bytes": 380713,
+            "allocations": 7182
+          }
+        ],
+        "medianNs": 275568,
+        "medianBytes": 380713,
+        "medianAllocations": 7182
+      },
+      {
+        "benchmark": "BenchmarkAuditGraphViewport/rows=120/sequential=true-16",
+        "samples": [
+          {
+            "ns": 342491,
+            "bytes": 380714,
+            "allocations": 7182
+          },
+          {
+            "ns": 360269,
+            "bytes": 380714,
+            "allocations": 7182
+          },
+          {
+            "ns": 360446,
+            "bytes": 380713,
+            "allocations": 7182
+          }
+        ],
+        "medianNs": 360269,
+        "medianBytes": 380714,
+        "medianAllocations": 7182
+      }
+    ],
+    "editor-navigation": [
+      {
+        "benchmark": "BenchmarkAuditEditorVerticalMovement/lines=100/bottom=false",
+        "samples": [
+          {
+            "ns": 135.1,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 133.8,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 134.3,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 134.3,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "benchmark": "BenchmarkAuditEditorVerticalMovement/lines=100/bottom=true",
+        "samples": [
+          {
+            "ns": 4901,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4951,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 4920,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 4920,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "benchmark": "BenchmarkAuditEditorVerticalMovement/lines=1000/bottom=false",
+        "samples": [
+          {
+            "ns": 143.7,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 144.1,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 143.7,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 143.7,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "benchmark": "BenchmarkAuditEditorVerticalMovement/lines=1000/bottom=true",
+        "samples": [
+          {
+            "ns": 49856,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 49804,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 49881,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 49856,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "benchmark": "BenchmarkAuditEditorVerticalMovement/lines=10000/bottom=false",
+        "samples": [
+          {
+            "ns": 157.8,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 166.4,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 166,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 166,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      },
+      {
+        "benchmark": "BenchmarkAuditEditorVerticalMovement/lines=10000/bottom=true",
+        "samples": [
+          {
+            "ns": 417343,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 412664,
+            "bytes": 0,
+            "allocations": 0
+          },
+          {
+            "ns": 412508,
+            "bytes": 0,
+            "allocations": 0
+          }
+        ],
+        "medianNs": 412664,
+        "medianBytes": 0,
+        "medianAllocations": 0
+      }
+    ]
+  },
+  "occupancyCounts": [
+    {
+      "kind": "continuing width",
+      "size": 4,
+      "probes": 6
+    },
+    {
+      "kind": "new parents",
+      "size": 4,
+      "probes": 6
+    },
+    {
+      "kind": "continuing width",
+      "size": 16,
+      "probes": 120
+    },
+    {
+      "kind": "new parents",
+      "size": 16,
+      "probes": 120
+    },
+    {
+      "kind": "continuing width",
+      "size": 64,
+      "probes": 2016
+    },
+    {
+      "kind": "new parents",
+      "size": 64,
+      "probes": 2016
+    }
+  ],
+  "probes": {
+    "graphBenchmark": {
+      "replaces": "pkg/gui/presentation/graph/graph_bench_test.go",
+      "content": "package graph\n\nimport (\n\t\"fmt\"\n\t\"testing\"\n \"github.com/stretchr/testify/assert\"\n\n\t\"github.com/gookit/color\"\n\t\"github.com/jesseduffield/lazygit/pkg/commands/models\"\n\t\"github.com/jesseduffield/lazygit/pkg/gui/presentation/authors\"\n\t\"github.com/jesseduffield/lazygit/pkg/gui/style\"\n\t\"github.com/jesseduffield/lazygit/pkg/utils\"\n\t\"github.com/xo/terminfo\"\n)\n\nfunc BenchmarkRenderCommitGraphVariants(b *testing.B) {\n\toldColorLevel := color.ForceSetColorLevel(terminfo.ColorLevelMillions)\n\tdefer color.ForceSetColorLevel(oldColorLevel)\n\n\tfor _, count := range []int{50, 500} {\n\t\tfor _, symbols := range []struct {\n\t\t\tname string\n\t\t\tset  SymbolSet\n\t\t}{\n\t\t\t{name: \"box\", set: BoxDrawingSymbols},\n\t\t\t{name: \"branch\", set: BranchDrawingSymbols},\n\t\t} {\n\t\t\tfor _, selected := range []bool{false, true} {\n\t\t\t\tb.Run(fmt.Sprintf(\"commits=%d/symbols=%s/selected=%t\", count, symbols.name, selected), func(b *testing.B) {\n\t\t\t\t\tcommits := generateCommits(&utils.StringPool{}, count)\n\t\t\t\t\tvar selectedHash *string\n\t\t\t\t\tif selected {\n\t\t\t\t\t\tselectedHash = commits[count/2].HashPtr()\n\t\t\t\t\t}\n\t\t\t\t\tgetStyle := func(commit *models.Commit) *style.TextStyle {\n\t\t\t\t\t\treturn authors.AuthorStyle(commit.AuthorName)\n\t\t\t\t\t}\n\t\t\t\t\tb.ReportAllocs()\n\t\t\t\t\tb.ResetTimer()\n\t\t\t\t\tfor b.Loop() {\n\t\t\t\t\t\tRenderCommitGraph(commits, selectedHash, getStyle, symbols.set)\n\t\t\t\t\t}\n\t\t\t\t})\n\t\t\t}\n\t\t}\n\t}\n}\n\nfunc auditSequentialGraph(pipeSets [][]Pipe, commits []*models.Commit, selected *string, symbols SymbolSet) []string {\n lines := make([]string, len(pipeSets))\n for k, pipes := range pipeSets {\n  var previous *models.Commit\n  if k > 0 { previous = commits[k-1] }\n  lines[k] = renderPipeSet(pipes, selected, previous, symbols)\n }\n return lines\n}\nfunc TestAuditGraphSequentialParity(t *testing.T) {\n commits := generateCommits(&utils.StringPool{}, 500)\n pipes := GetPipeSets(commits, func(*models.Commit) *style.TextStyle { return &style.FgDefault })\n for _, rows := range []int{1, 8, 40, 120} {\n  for _, symbols := range []SymbolSet{BoxDrawingSymbols, BranchDrawingSymbols} {\n   for _, selected := range []*string{nil, commits[100+rows/2].HashPtr()} {\n    actual := RenderAux(pipes[100:100+rows], commits[100:100+rows], selected, symbols)\n    want := auditSequentialGraph(pipes[100:100+rows], commits[100:100+rows], selected, symbols)\n    assert.Equal(t, want, actual)\n   }\n  }\n }\n}\nvar auditGraphOutput []string\nfunc BenchmarkAuditGraphViewport(b *testing.B) {\n commits := generateCommits(&utils.StringPool{}, 500)\n pipes := GetPipeSets(commits, func(*models.Commit) *style.TextStyle { return &style.FgDefault })\n for _, rows := range []int{1, 8, 40, 120} {\n  for _, sequential := range []bool{false, true} {\n   b.Run(fmt.Sprintf(\"rows=%d/sequential=%t\", rows, sequential), func(b *testing.B) {\n    b.ReportAllocs()\n    for b.Loop() {\n     if sequential { auditGraphOutput = auditSequentialGraph(pipes[100:100+rows], commits[100:100+rows], nil, BoxDrawingSymbols) } else { auditGraphOutput = RenderAux(pipes[100:100+rows], commits[100:100+rows], nil, BoxDrawingSymbols) }\n    }\n   })\n  }\n }\n}\n"
+    },
+    "editorBenchmark": {
+      "replaces": "pkg/gocui/text_area_bench_test.go",
+      "content": "package gocui\n\nimport (\n\t\"fmt\"\n\t\"strings\"\n\t\"testing\"\n)\n\nfunc BenchmarkPasteText(b *testing.B) {\n\tfor _, size := range []int{1000, 10000, 100000} {\n\t\tb.Run(fmt.Sprintf(\"bytes=%d\", size), func(b *testing.B) {\n\t\t\tpasted := strings.Repeat(\"some pasted text\\n\", size/17)\n\t\t\tb.SetBytes(int64(len(pasted)))\n\t\t\tb.ReportAllocs()\n\t\t\tfor b.Loop() {\n\t\t\t\tarea := &TextArea{content: \"prefix suffix\", cursor: len(\"prefix \"), AutoWrapWidth: 72, AutoWrap: true}\n\t\t\t\tarea.TypeString(pasted)\n\t\t\t}\n\t\t})\n\t}\n}\n\nfunc BenchmarkAuditEditorVerticalMovement(b *testing.B) {\n for _, count := range []int{100, 1000, 10000} {\n  for _, bottom := range []bool{false, true} {\n   b.Run(fmt.Sprintf(\"lines=%d/bottom=%t\", count, bottom), func(b *testing.B) {\n    area := &TextArea{content: strings.Repeat(\"some text for a line\\n\", count)}\n    area.updateCells()\n    row := 2\n    if bottom { row = count-2 }\n    area.SetCursor2D(5, row)\n    b.ReportAllocs()\n    b.ResetTimer()\n    for b.Loop() { area.MoveCursorUp(); area.MoveCursorDown() }\n   })\n  }\n }\n}\n"
+    },
+    "occupancyTest": {
+      "replaces": "pkg/gui/presentation/graph/graph_bench_test.go",
+      "content": "package graph\n\nimport (\n\t\"fmt\"\n\t\"testing\"\n \"github.com/stretchr/testify/assert\"\n\n\t\"github.com/gookit/color\"\n\t\"github.com/jesseduffield/lazygit/pkg/commands/models\"\n\t\"github.com/jesseduffield/lazygit/pkg/gui/presentation/authors\"\n\t\"github.com/jesseduffield/lazygit/pkg/gui/style\"\n\t\"github.com/jesseduffield/lazygit/pkg/utils\"\n\t\"github.com/xo/terminfo\"\n)\n\nfunc BenchmarkRenderCommitGraphVariants(b *testing.B) {\n\toldColorLevel := color.ForceSetColorLevel(terminfo.ColorLevelMillions)\n\tdefer color.ForceSetColorLevel(oldColorLevel)\n\n\tfor _, count := range []int{50, 500} {\n\t\tfor _, symbols := range []struct {\n\t\t\tname string\n\t\t\tset  SymbolSet\n\t\t}{\n\t\t\t{name: \"box\", set: BoxDrawingSymbols},\n\t\t\t{name: \"branch\", set: BranchDrawingSymbols},\n\t\t} {\n\t\t\tfor _, selected := range []bool{false, true} {\n\t\t\t\tb.Run(fmt.Sprintf(\"commits=%d/symbols=%s/selected=%t\", count, symbols.name, selected), func(b *testing.B) {\n\t\t\t\t\tcommits := generateCommits(&utils.StringPool{}, count)\n\t\t\t\t\tvar selectedHash *string\n\t\t\t\t\tif selected {\n\t\t\t\t\t\tselectedHash = commits[count/2].HashPtr()\n\t\t\t\t\t}\n\t\t\t\t\tgetStyle := func(commit *models.Commit) *style.TextStyle {\n\t\t\t\t\t\treturn authors.AuthorStyle(commit.AuthorName)\n\t\t\t\t\t}\n\t\t\t\t\tb.ReportAllocs()\n\t\t\t\t\tb.ResetTimer()\n\t\t\t\t\tfor b.Loop() {\n\t\t\t\t\t\tRenderCommitGraph(commits, selectedHash, getStyle, symbols.set)\n\t\t\t\t\t}\n\t\t\t\t})\n\t\t\t}\n\t\t}\n\t}\n}\n\nfunc auditSequentialGraph(pipeSets [][]Pipe, commits []*models.Commit, selected *string, symbols SymbolSet) []string {\n lines := make([]string, len(pipeSets))\n for k, pipes := range pipeSets {\n  var previous *models.Commit\n  if k > 0 { previous = commits[k-1] }\n  lines[k] = renderPipeSet(pipes, selected, previous, symbols)\n }\n return lines\n}\nfunc TestAuditGraphSequentialParity(t *testing.T) {\n commits := generateCommits(&utils.StringPool{}, 500)\n pipes := GetPipeSets(commits, func(*models.Commit) *style.TextStyle { return &style.FgDefault })\n for _, rows := range []int{1, 8, 40, 120} {\n  for _, symbols := range []SymbolSet{BoxDrawingSymbols, BranchDrawingSymbols} {\n   for _, selected := range []*string{nil, commits[100+rows/2].HashPtr()} {\n    actual := RenderAux(pipes[100:100+rows], commits[100:100+rows], selected, symbols)\n    want := auditSequentialGraph(pipes[100:100+rows], commits[100:100+rows], selected, symbols)\n    assert.Equal(t, want, actual)\n   }\n  }\n }\n}\nvar auditGraphOutput []string\nfunc BenchmarkAuditGraphViewport(b *testing.B) {\n commits := generateCommits(&utils.StringPool{}, 500)\n pipes := GetPipeSets(commits, func(*models.Commit) *style.TextStyle { return &style.FgDefault })\n for _, rows := range []int{1, 8, 40, 120} {\n  for _, sequential := range []bool{false, true} {\n   b.Run(fmt.Sprintf(\"rows=%d/sequential=%t\", rows, sequential), func(b *testing.B) {\n    b.ReportAllocs()\n    for b.Loop() {\n     if sequential { auditGraphOutput = auditSequentialGraph(pipes[100:100+rows], commits[100:100+rows], nil, BoxDrawingSymbols) } else { auditGraphOutput = RenderAux(pipes[100:100+rows], commits[100:100+rows], nil, BoxDrawingSymbols) }\n    }\n   })\n  }\n }\n}\n\nfunc TestAuditGraphOccupancyCounts(t *testing.T) {\n for _, width := range []int{4,16,64} {\n  pool := &utils.StringPool{}\n  commit := models.NewCommit(pool, models.NewCommitOpts{Hash:\"selected\", Parents:[]string{\"parent\"}})\n  pipes := make([]Pipe, width)\n  for i := range pipes {\n   target := fmt.Sprintf(\"other-%d\", i)\n   toHash := models.NewCommit(pool, models.NewCommitOpts{Hash:target}).HashPtr()\n   if i == width-1 { toHash = commit.HashPtr() }\n   pipes[i] = Pipe{toPos:int16(i), toHash:toHash, kind:CONTINUES, style:&style.FgDefault}\n  }\n  auditContinuingProbes, auditNewProbes = 0, 0\n  getNextPipes(pipes, commit, func(*models.Commit) *style.TextStyle { return &style.FgDefault })\n  t.Logf(\"continuing width=%d probes=%d\", width, auditContinuingProbes)\n  parents := make([]string,width)\n  for i := range parents { parents[i]=fmt.Sprintf(\"parent-%d\",i) }\n  merge := models.NewCommit(pool, models.NewCommitOpts{Hash:\"merge\",Parents:parents})\n  auditContinuingProbes, auditNewProbes = 0, 0\n  getNextPipes(nil,merge,func(*models.Commit) *style.TextStyle { return &style.FgDefault })\n  t.Logf(\"new parents=%d probes=%d\",width,auditNewProbes)\n }\n}\n"
+    },
+    "occupancyInstrumentation": {
+      "replaces": "pkg/gui/presentation/graph/graph.go",
+      "changes": [
+        {
+          "from": "getNextAvailablePosForContinuingPipe := func() int16 {\n\t\ti := int16(0)\n\t\tfor {",
+          "to": "getNextAvailablePosForContinuingPipe := func() int16 {\n\t\ti := int16(0)\n\t\tfor {\n auditContinuingProbes++"
+        },
+        {
+          "from": "getNextAvailablePosForNewPipe := func() int16 {\n\t\ti := int16(0)\n\t\tfor {",
+          "to": "getNextAvailablePosForNewPipe := func() int16 {\n\t\ti := int16(0)\n\t\tfor {\n auditNewProbes++"
+        }
+      ],
+      "append": "\nvar auditContinuingProbes, auditNewProbes int\n"
+    }
+  },
+  "commands": {
+    "graph": [
+      "go",
+      "test",
+      "-overlay=.git/algorithm-context-audit/overlay.json",
+      "./pkg/gui/presentation/graph",
+      "-run=^TestAuditGraphSequentialParity$",
+      "-bench=^BenchmarkAuditGraphViewport$",
+      "-benchmem",
+      "-benchtime=100ms",
+      "-count=3",
+      "-cpu=1,4,16"
+    ],
+    "editor": [
+      "go",
+      "test",
+      "-overlay=.git/algorithm-context-audit/overlay.json",
+      "./pkg/gocui",
+      "-run=^$",
+      "-bench=^BenchmarkAuditEditorVerticalMovement$",
+      "-benchmem",
+      "-benchtime=100ms",
+      "-count=3",
+      "-cpu=1"
+    ],
+    "occupancy": [
+      "go",
+      "test",
+      "-overlay=.git/algorithm-context-audit/occupancy-overlay.json",
+      "./pkg/gui/presentation/graph",
+      "-run=^TestAuditGraphOccupancyCounts$",
+      "-v"
+    ]
+  },
+  "limits": [
+    "Synthetic Go benchmarks; not live UI or end-to-end latency measurements.",
+    "Three short samples per timed case; suitable for ranking, not for choosing production scheduling thresholds.",
+    "Graph timing uses box symbols, a fixed 500-commit generated fixture and a viewport beginning at commit 100.",
+    "Graph output parity covers both symbol sets and selected/unselected matches; the sequential alternative is only a disposable probe.",
+    "CPU-frequency and scheduling differences can affect cross-case comparisons.",
+    "Editor measures an Up/Down pair over already prepared unwrapped cells, excluding rendering and callbacks.",
+    "Occupancy counts measure an adversarial wide row and octopus merge; they do not establish the frequency or CPU share of those shapes in real repositories."
+  ]
+}
