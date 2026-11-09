@@ -99,7 +99,7 @@ func (self *CommitFileTreeViewModel) GetSelectedItemId() string {
 }
 
 func (self *CommitFileTreeViewModel) GetSelectedItems() ([]*CommitFileNode, int, int) {
-	return selectedNodes(self, self.GetRoot().Raw(), self.CollapsedPaths(), NewCommitFileNode)
+	return selectedNodes(self, self.GetRange)
 }
 
 func (self *CommitFileTreeViewModel) GetSelectedItemIds() ([]string, int, int) {

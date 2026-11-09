@@ -11,6 +11,7 @@ type ICommitFileTree interface {
 	ITree[models.CommitFile]
 
 	Get(index int) *CommitFileNode
+	GetRange(start, end int) []*CommitFileNode
 	GetFile(path string) *models.CommitFile
 	GetAllItems() []*CommitFileNode
 	GetAllFiles() []*models.CommitFile
@@ -57,6 +58,12 @@ func (self *CommitFileTree) ToggleShowTree() {
 func (self *CommitFileTree) Get(index int) *CommitFileNode {
 	// need to traverse the three depth first until we get to the index.
 	return NewCommitFileNode(self.getNode(index)) // ignoring root
+}
+
+func (self *CommitFileTree) GetRange(start, end int) []*CommitFileNode {
+	return lo.Map(self.getNodes()[start:end], func(node *Node[models.CommitFile], _ int) *CommitFileNode {
+		return NewCommitFileNode(node)
+	})
 }
 
 func (self *CommitFileTree) GetAllItems() []*CommitFileNode {

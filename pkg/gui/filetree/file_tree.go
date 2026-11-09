@@ -46,6 +46,7 @@ type IFileTree interface {
 	RememberConflictedPaths(paths []string)
 	ForceShowUntracked() bool
 	Get(index int) *FileNode
+	GetRange(start, end int) []*FileNode
 	GetFile(path string) *models.File
 	GetAllItems() []*FileNode
 	GetAllFiles() []*models.File
@@ -145,6 +146,12 @@ func (self *FileTree) ToggleShowTree() {
 func (self *FileTree) Get(index int) *FileNode {
 	// need to traverse the tree depth first until we get to the index.
 	return NewFileNode(self.getNode(index)) // ignoring root
+}
+
+func (self *FileTree) GetRange(start, end int) []*FileNode {
+	return lo.Map(self.getNodes()[start:end], func(node *Node[models.File], _ int) *FileNode {
+		return NewFileNode(node)
+	})
 }
 
 func (self *FileTree) GetFile(path string) *models.File {

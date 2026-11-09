@@ -55,7 +55,7 @@ func (self *FileTreeViewModel) GetSelectedItemId() string {
 }
 
 func (self *FileTreeViewModel) GetSelectedItems() ([]*FileNode, int, int) {
-	return selectedNodes(self, self.GetRoot().Raw(), self.CollapsedPaths(), NewFileNode)
+	return selectedNodes(self, self.GetRange)
 }
 
 func (self *FileTreeViewModel) GetSelectedItemIds() ([]string, int, int) {
