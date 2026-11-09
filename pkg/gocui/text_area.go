@@ -665,44 +665,31 @@ func (self *TextArea) GetCursorXY() (int, int) {
 
 // takes an x,y position and maps it to a 1D cursor position
 func (self *TextArea) SetCursor2D(x int, y int) {
-	if y < 0 {
-		y = 0
+	x, y = max(x, 0), max(y, 0)
+	lastRow := 0
+	if len(self.cells) > 0 {
+		_, lastRow = self.cells[len(self.cells)-1].nextCursorXY()
 	}
-	if x < 0 {
-		x = 0
-	}
-
-	newCursor := 0
-	for _, c := range self.cells {
-		if x <= 0 && y == 0 {
-			self.cursor = self.cellCursorToContentCursor(newCursor)
-			if self.cells[newCursor].char == "\n" {
-				self.moveLeftFromSoftLineBreak()
-			}
-			return
-		}
-
-		if c.char == "\n" {
-			if y == 0 {
-				self.cursor = self.cellCursorToContentCursor(newCursor)
-				self.moveLeftFromSoftLineBreak()
-				return
-			}
-			y--
-		} else if y == 0 {
-			x -= c.width
-		}
-
-		newCursor++
-	}
-
-	// if we weren't able to run-down our arg, the user is trying to move out of
-	// bounds so we'll just return
-	if y > 0 {
+	if y > lastRow {
 		return
 	}
-
+	newCursor, _ := slices.BinarySearchFunc(self.cells, y, func(c TextAreaCell, row int) int {
+		cellRow := c.y
+		// A soft break stores the following row's coordinates, but ends the
+		// preceding row for cursor placement.
+		if c.char == "\n" && self.content[c.contentIndex] != '\n' {
+			cellRow--
+		}
+		return cellRow - row
+	})
+	for newCursor < len(self.cells) && x > 0 && self.cells[newCursor].char != "\n" {
+		x -= self.cells[newCursor].width
+		newCursor++
+	}
 	self.cursor = self.cellCursorToContentCursor(newCursor)
+	if newCursor < len(self.cells) && self.cells[newCursor].char == "\n" {
+		self.moveLeftFromSoftLineBreak()
+	}
 }
 
 func (self *TextArea) Clear() {
