@@ -70,9 +70,16 @@ func GetPipeSets(commits []*models.Commit, getStyle func(c *models.Commit) *styl
 
 func RenderAux(pipeSets [][]Pipe, commits []*models.Commit, selectedCommitHashPtr *string, symbolSet SymbolSet) []string {
 	maxProcs := runtime.GOMAXPROCS(0)
-
-	// splitting up the rendering of the graph into multiple goroutines allows us to render the graph in parallel
-	chunks := make([][]string, maxProcs)
+	lines := make([]string, len(pipeSets))
+	render := func(from, to int) {
+		for k := from; k < to; k++ {
+			var prevCommit *models.Commit
+			if k > 0 {
+				prevCommit = commits[k-1]
+			}
+			lines[k] = renderPipeSet(pipeSets[k], selectedCommitHashPtr, prevCommit, symbolSet)
+		}
+	}
 	perProc := len(pipeSets) / maxProcs
 
 	wg := sync.WaitGroup{}
@@ -85,24 +92,14 @@ func RenderAux(pipeSets [][]Pipe, commits []*models.Commit, selectedCommitHashPt
 			if i == maxProcs-1 {
 				to = len(pipeSets)
 			}
-			innerLines := make([]string, 0, to-from)
-			for j, pipeSet := range pipeSets[from:to] {
-				k := from + j
-				var prevCommit *models.Commit
-				if k > 0 {
-					prevCommit = commits[k-1]
-				}
-				line := renderPipeSet(pipeSet, selectedCommitHashPtr, prevCommit, symbolSet)
-				innerLines = append(innerLines, line)
-			}
-			chunks[i] = innerLines
+			render(from, to)
 			wg.Done()
 		})
 	}
 
 	wg.Wait()
 
-	return lo.Flatten(chunks)
+	return lines
 }
 
 func getNextPipes(prevPipes []Pipe, commit *models.Commit, getStyle func(c *models.Commit) *style.TextStyle) []Pipe {
