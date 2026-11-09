@@ -575,12 +575,13 @@ the two sets of timings should be interpreted separately.
 ## Audit against the previous README snapshot
 
 The [snapshot regression audit](Snapshot-regression-audit.md) compares the
-previous snapshot `818a17b1d` with the corrected checkpoint `b920143e7`. The
+previous snapshot `818a17b1d` with the corrected checkpoint `cc2e9b8b0`. The
 README now includes 18 full commit-viewport cases, bringing its fixed-base
 comparison to 187 cases. These include branch-marker work outside graph
-rendering. Early returns remove unused ancestry work; the visible-marker,
-unmerged-main case still rebuilds its history map and is awaiting the
-model-lifetime design decision. Its slower measurements remain visible.
+rendering. Commit, branch, and configuration updates now prepare model-owned ancestry.
+Rendering reads that result, including the visible-marker, unmerged-main
+case. Model-update work is measured separately, and slower timing samples
+remain visible.
 
 The graph and editor fixes, full samples, review scope, remaining search
 lookup cost, and validation results are recorded in that audit.
