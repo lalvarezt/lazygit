@@ -521,9 +521,10 @@ func (self *TextArea) closestNewlineOnLeft() int {
 
 	newlineCellIndex := -1
 
-	for i, c := range self.cells[0:cellCursor] {
-		if c.char == "\n" {
+	for i := cellCursor - 1; i >= 0; i-- {
+		if self.cells[i].char == "\n" {
 			newlineCellIndex = i
+			break
 		}
 	}
 

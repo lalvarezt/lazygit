@@ -96,3 +96,19 @@ func BenchmarkTextAreaVerticalKeypress(b *testing.B) {
 		})
 	}
 }
+
+func BenchmarkTextAreaLineStart(b *testing.B) {
+	for _, count := range []int{100, 1000, 10000} {
+		b.Run(fmt.Sprintf("lines=%d", count), func(b *testing.B) {
+			area := &TextArea{content: strings.Repeat("some text for a line\n", count)}
+			area.updateCells()
+			cursor := len(area.content) - 3
+			b.ReportAllocs()
+			b.ResetTimer()
+			for b.Loop() {
+				area.cursor = cursor
+				area.GoToStartOfLine()
+			}
+		})
+	}
+}
