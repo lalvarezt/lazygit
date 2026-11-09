@@ -213,6 +213,7 @@ function measure() {
     BenchmarkEditorUnbrokenInput: p => `Type ${value(p, 'bytes')} unbroken ASCII characters, updating layout and view per key.`,
     BenchmarkEditorEditUnbrokenText: p => `Insert and backspace one character in ${value(p, 'bytes')} bytes of existing unbroken text; update layout and view after each key.`,
     BenchmarkCommitDescriptionInput: p => `Type ${Math.floor(value(p, 'bytes') / 10) * 10} bytes through the commit-description editor.`,
+    BenchmarkCommitViewport: p => `Render 40 commit rows from ${value(p, 'commits')} loaded commits without a graph; local main tip ${value(p, 'main')}, other branch marker ${value(p, 'markers') === 'true' ? 'visible' : 'outside the viewport'}.`,
     BenchmarkPasteText: p => `Insert ${Math.floor(value(p, 'bytes') / 17) * 17} bytes into prefilled text with TypeString, including layout.`,
     BenchmarkFilteredListNavigation: p => `Reset selection to the midpoint, move one row, retrieve it, and count ${value(p, 'items')} filtered branches.`,
     BenchmarkBuildCommitFileTree: p => `Build and sort ${value(p, 'files')} reverse-ordered commit files through the file-tree construction entry point.`,
