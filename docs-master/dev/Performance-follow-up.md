@@ -526,7 +526,7 @@ go test ./pkg/gocui -run='^$' -bench=BenchmarkEditorEditUnbrokenText -benchmem -
 
 ## README comparison after the independent follow-ups
 
-The README comparison now measures `3c989658a2e5` against the fixed fork base
+The initial follow-up comparison measured `3c989658a2e5` against the fixed fork base
 `8e3ac76991f5`. It retains all 103 existing cases and adds 66 cases for editor
 navigation, small tree selections, flat construction and refresh, graph
 columns, cached graph viewports, and streamed search. The
@@ -534,9 +534,8 @@ columns, cached graph viewports, and streamed search. The
 and case, measured for 200 ms per sample with the pinned settings.
 
 Cached graph viewports also run with GOMAXPROCS=4 and 16. Those rows state
-their CPU setting; the other rows use GOMAXPROCS=1. Slower medians remain in
-the README, including navigation near the beginning of a long editor buffer
-and some linear graph viewports. These operation timings do not measure
+their CPU setting; the other rows use GOMAXPROCS=1. That run retained slower medians, including navigation near the beginning of
+a long editor buffer and some linear graph viewports. These operation timings do not measure
 end-to-end UI latency.
 
 The runner extracts benchmark-only fixtures from files whose names do not
@@ -572,3 +571,16 @@ The [independent implementation results](Independent-performance-follow-ups.md)
 retain the immediate before-and-after measurements for those changes. Their
 baselines and some fixtures differ from the broader README comparison, so
 the two sets of timings should be interpreted separately.
+
+## Audit against the previous README snapshot
+
+The [snapshot regression audit](Snapshot-regression-audit.md) compares the
+previous snapshot `818a17b1d` with the corrected checkpoint `b920143e7`. The
+README now includes 18 full commit-viewport cases, bringing its fixed-base
+comparison to 187 cases. These include branch-marker work outside graph
+rendering. Early returns remove unused ancestry work; the visible-marker,
+unmerged-main case still rebuilds its history map and is awaiting the
+model-lifetime design decision. Its slower measurements remain visible.
+
+The graph and editor fixes, full samples, review scope, remaining search
+lookup cost, and validation results are recorded in that audit.

@@ -16,7 +16,7 @@ This fork builds on [Lazygit](https://github.com/jesseduffield/lazygit) by
 
 ## Performance
 
-Before (baseline): `8e3ac76991f5` · After (measured revision): `3c989658a2e5`.
+Before (baseline): `8e3ac76991f5` · After (measured revision): `b920143e765f`.
 
 Same benchmark sources and settings. Median of 5 samples, 200ms per sample, GOMAXPROCS=1, GOGC=100, GOMEMLIMIT=off.
 
@@ -34,847 +34,937 @@ Each pair of bars uses its own scale. Negative change means faster; positive mea
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkDrawSearchedView/lines=100">Draw searched view</strong><br>
 Redraw an 80 × 24 searched viewport within 100 lines.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkDrawSearchedView-lines-100-a6b7847bb28d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkDrawSearchedView/lines=100: 651 µs before, 53.9 µs after, -91.72% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkDrawSearchedView-lines-100-b3cacbadd434.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkDrawSearchedView/lines=100: 655.3 µs before, 53.9 µs after, -91.77% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkDrawSearchedView/lines=1000">Draw searched view</strong><br>
 Redraw an 80 × 24 searched viewport within 1000 lines.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkDrawSearchedView-lines-1000-2df5034d04bc.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkDrawSearchedView/lines=1000: 5.311 ms before, 55.46 µs after, -98.96% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkDrawSearchedView-lines-1000-d66a7e5b1fe8.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkDrawSearchedView/lines=1000: 5.36 ms before, 55.25 µs after, -98.97% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkDrawSearchedView/lines=10000">Draw searched view</strong><br>
 Redraw an 80 × 24 searched viewport within 10000 lines.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkDrawSearchedView-lines-10000-15dc95feaa5d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkDrawSearchedView/lines=10000: 51.25 ms before, 57.2 µs after, -99.89% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkDrawSearchedView-lines-10000-eafc1afee103.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkDrawSearchedView/lines=10000: 51.43 ms before, 56.82 µs after, -99.89% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorEditUnbrokenText/bytes=4096">Editor edit unbroken text</strong><br>
 Insert and backspace one character in 4096 bytes of existing unbroken text; update layout and view after each key.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorEditUnbrokenText-bytes-4096-afafa832403e.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorEditUnbrokenText/bytes=4096: 1.243 ms before, 10.01 µs after, -99.19% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorEditUnbrokenText-bytes-4096-87ce01a97fe1.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorEditUnbrokenText/bytes=4096: 1.297 ms before, 10.08 µs after, -99.22% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorEditUnbrokenText/bytes=100000">Editor edit unbroken text</strong><br>
 Insert and backspace one character in 100000 bytes of existing unbroken text; update layout and view after each key.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorEditUnbrokenText-bytes-100000-6825e801a9d8.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorEditUnbrokenText/bytes=100000: 51 ms before, 17.61 µs after, -99.97% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorEditUnbrokenText-bytes-100000-e62a15199e42.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorEditUnbrokenText/bytes=100000: 56.67 ms before, 18.11 µs after, -99.97% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorEditUnbrokenText/bytes=1000000">Editor edit unbroken text</strong><br>
 Insert and backspace one character in 1000000 bytes of existing unbroken text; update layout and view after each key.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorEditUnbrokenText-bytes-1000000-ca0c085f95d6.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorEditUnbrokenText/bytes=1000000: 470.6 ms before, 162.3 µs after, -99.97% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorEditUnbrokenText-bytes-1000000-e42a0fa5f66d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorEditUnbrokenText/bytes=1000000: 482.9 ms before, 161.8 µs after, -99.97% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorInput/bytes=256">Editor input</strong><br>
 Type 250 bytes with hard newlines, updating layout and view per key.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorInput-bytes-256-8a3738290a8e.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorInput/bytes=256: 5.201 ms before, 148.8 µs after, -97.14% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorInput-bytes-256-b6528ee6e145.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorInput/bytes=256: 5.271 ms before, 150.1 µs after, -97.15% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorInput/bytes=1024">Editor input</strong><br>
 Type 1020 bytes with hard newlines, updating layout and view per key.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorInput-bytes-1024-0791a66b7b6c.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorInput/bytes=1024: 84.34 ms before, 692.8 µs after, -99.18% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorInput-bytes-1024-48ddabbd61d7.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorInput/bytes=1024: 92.08 ms before, 712.4 µs after, -99.23% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorInput/bytes=4096">Editor input</strong><br>
 Type 4090 bytes with hard newlines, updating layout and view per key.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorInput-bytes-4096-b53e7a6863ff.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorInput/bytes=4096: 1.533 s before, 4.035 ms after, -99.74% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorInput-bytes-4096-3ec3b006afc6.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorInput/bytes=4096: 1.56 s before, 4.04 ms after, -99.74% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorParagraphInput/bytes=256">Editor paragraph input</strong><br>
 Type 250 bytes of a spaced paragraph, wrapping at 72 columns.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorParagraphInput-bytes-256-94dfade1b148.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorParagraphInput/bytes=256: 4.325 ms before, 389.3 µs after, -91.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorParagraphInput-bytes-256-8236d0ba98ff.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorParagraphInput/bytes=256: 4.439 ms before, 395.2 µs after, -91.10% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorParagraphInput/bytes=1024">Editor paragraph input</strong><br>
 Type 1020 bytes of a spaced paragraph, wrapping at 72 columns.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorParagraphInput-bytes-1024-7495075e9cf0.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorParagraphInput/bytes=1024: 72.29 ms before, 1.771 ms after, -97.55% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorParagraphInput-bytes-1024-6a6ccb836113.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorParagraphInput/bytes=1024: 75.56 ms before, 1.8 ms after, -97.62% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorParagraphInput/bytes=4096">Editor paragraph input</strong><br>
 Type 4090 bytes of a spaced paragraph, wrapping at 72 columns.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorParagraphInput-bytes-4096-26736b12c072.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorParagraphInput/bytes=4096: 1.323 s before, 8.355 ms after, -99.37% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorParagraphInput-bytes-4096-b320b87eaf3f.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorParagraphInput/bytes=4096: 1.37 s before, 8.541 ms after, -99.38% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorUnbrokenInput/bytes=256">Editor unbroken input</strong><br>
 Type 256 unbroken ASCII characters, updating layout and view per key.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorUnbrokenInput-bytes-256-2ae296b3ee5a.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorUnbrokenInput/bytes=256: 4.437 ms before, 609.2 µs after, -86.27% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorUnbrokenInput-bytes-256-2420cfe2fe98.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorUnbrokenInput/bytes=256: 4.584 ms before, 625.1 µs after, -86.36% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorUnbrokenInput/bytes=1024">Editor unbroken input</strong><br>
 Type 1024 unbroken ASCII characters, updating layout and view per key.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorUnbrokenInput-bytes-1024-c72410298a77.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorUnbrokenInput/bytes=1024: 70.82 ms before, 2.678 ms after, -96.22% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorUnbrokenInput-bytes-1024-14480fa12f5e.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorUnbrokenInput/bytes=1024: 72.71 ms before, 2.703 ms after, -96.28% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkEditorUnbrokenInput/bytes=4096">Editor unbroken input</strong><br>
 Type 4096 unbroken ASCII characters, updating layout and view per key.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorUnbrokenInput-bytes-4096-4367df3ecb41.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorUnbrokenInput/bytes=4096: 1.269 s before, 12.5 ms after, -99.01% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkEditorUnbrokenInput-bytes-4096-277fee7a932b.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkEditorUnbrokenInput/bytes=4096: 1.304 s before, 12.6 ms after, -99.03% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkGuiFlush/80x24">Gui flush</strong><br>
 Flush two panes through a mock terminal at 80x24, changing selection and scroll position.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkGuiFlush-80x24-d30298ef5ea9.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkGuiFlush/80x24: 283.1 µs before, 203.9 µs after, -27.96% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkGuiFlush-80x24-1e32dc0240a0.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkGuiFlush/80x24: 290.5 µs before, 207.8 µs after, -28.48% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkGuiFlush/160x48">Gui flush</strong><br>
 Flush two panes through a mock terminal at 160x48, changing selection and scroll position.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkGuiFlush-160x48-4e99a96c6b4d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkGuiFlush/160x48: 898.8 µs before, 545.7 µs after, -39.29% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkGuiFlush-160x48-a7299703a799.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkGuiFlush/160x48: 930.4 µs before, 553.6 µs after, -40.51% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkIncrementalSearchedDiff/plain">Incremental searched diff</strong><br>
 Stream 8,192 searched lines in 64 batches, reading search status after each batch; plain view.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkIncrementalSearchedDiff-plain-d771765fdcf5.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkIncrementalSearchedDiff/plain: 182.6 ms before, 14.94 ms after, -91.82% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkIncrementalSearchedDiff-plain-0faf60c398eb.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkIncrementalSearchedDiff/plain: 182.5 ms before, 15.49 ms after, -91.51% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkIncrementalSearchedDiff/wrapped">Incremental searched diff</strong><br>
 Stream 8,192 searched lines in 64 batches, reading search status after each batch; wrapped view.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkIncrementalSearchedDiff-wrapped-ac5a805591df.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkIncrementalSearchedDiff/wrapped: 207.9 ms before, 18.92 ms after, -90.90% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkIncrementalSearchedDiff-wrapped-478204c5ff0e.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkIncrementalSearchedDiff/wrapped: 205.8 ms before, 18.94 ms after, -90.80% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkNearestSearchPosition/matches=100">Nearest search position</strong><br>
 Find the nearest result near the end of 100 search matches.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkNearestSearchPosition-matches-100-942475821199.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkNearestSearchPosition/matches=100: 44.51 ns before, 4.187 ns after, -90.59% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkNearestSearchPosition-matches-100-deecbafa7f0a.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkNearestSearchPosition/matches=100: 44.64 ns before, 4.17 ns after, -90.66% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkNearestSearchPosition/matches=1000">Nearest search position</strong><br>
 Find the nearest result near the end of 1000 search matches.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkNearestSearchPosition-matches-1000-599e68521dc1.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkNearestSearchPosition/matches=1000: 332 ns before, 6.978 ns after, -97.90% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkNearestSearchPosition-matches-1000-9d66696ac3b1.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkNearestSearchPosition/matches=1000: 331.9 ns before, 7.017 ns after, -97.89% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkNearestSearchPosition/matches=10000">Nearest search position</strong><br>
 Find the nearest result near the end of 10000 search matches.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkNearestSearchPosition-matches-10000-925da8974074.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkNearestSearchPosition/matches=10000: 3.236 µs before, 8.676 ns after, -99.73% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkNearestSearchPosition-matches-10000-6e376f106dbf.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkNearestSearchPosition/matches=10000: 3.242 µs before, 8.668 ns after, -99.73% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkNearestSearchPosition/matches=100000">Nearest search position</strong><br>
 Find the nearest result near the end of 100000 search matches.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkNearestSearchPosition-matches-100000-b5152b0bfcca.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkNearestSearchPosition/matches=100000: 38.16 µs before, 11.3 ns after, -99.97% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkNearestSearchPosition-matches-100000-b3d9ccb08d3d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkNearestSearchPosition/matches=100000: 38.52 µs before, 11.47 ns after, -99.97% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkPasteText/bytes=1000">Paste text</strong><br>
 Insert 986 bytes into prefilled text with TypeString, including layout.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkPasteText-bytes-1000-f034625b5299.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkPasteText/bytes=1000: 129.5 µs before, 30.66 µs after, -76.32% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkPasteText-bytes-1000-d48054bd2a07.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkPasteText/bytes=1000: 131.9 µs before, 30.25 µs after, -77.06% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkPasteText/bytes=10000">Paste text</strong><br>
 Insert 9996 bytes into prefilled text with TypeString, including layout.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkPasteText-bytes-10000-5a6a8d9622b3.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkPasteText/bytes=10000: 6.48 ms before, 307.9 µs after, -95.25% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkPasteText-bytes-10000-9620c0f37395.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkPasteText/bytes=10000: 6.433 ms before, 305.8 µs after, -95.25% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkPasteText/bytes=100000">Paste text</strong><br>
 Insert 99994 bytes into prefilled text with TypeString, including layout.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkPasteText-bytes-100000-e27cf55c780d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkPasteText/bytes=100000: 411.4 ms before, 2.845 ms after, -99.31% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkPasteText-bytes-100000-ce9f87d16d3e.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkPasteText/bytes=100000: 419.6 ms before, 2.912 ms after, -99.31% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkScrollSearchPosition/matches=100/up=false">Scroll search position</strong><br>
 Select a visible result after a distant scroll down across 100 matches; reset each iteration.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-100-up-false-2c38d31a5e94.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=100/up=false: 55.75 ns before, 16.6 ns after, -70.22% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-100-up-false-38dc04d5d5f9.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=100/up=false: 56.04 ns before, 16.62 ns after, -70.34% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkScrollSearchPosition/matches=100/up=true">Scroll search position</strong><br>
 Select a visible result after a distant scroll up across 100 matches; reset each iteration.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-100-up-true-59acfc0cceb0.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=100/up=true: 37.3 ns before, 16.08 ns after, -56.89% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-100-up-true-5fdc83f5a17f.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=100/up=true: 37.09 ns before, 16.07 ns after, -56.67% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkScrollSearchPosition/matches=1000/up=false">Scroll search position</strong><br>
 Select a visible result after a distant scroll down across 1000 matches; reset each iteration.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-1000-up-false-451628ad3fdd.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=1000/up=false: 423.7 ns before, 18.92 ns after, -95.53% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-1000-up-false-a52956fd955b.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=1000/up=false: 431.1 ns before, 18.92 ns after, -95.61% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkScrollSearchPosition/matches=1000/up=true">Scroll search position</strong><br>
 Select a visible result after a distant scroll up across 1000 matches; reset each iteration.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-1000-up-true-cc91c7c44088.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=1000/up=true: 306.1 ns before, 17.72 ns after, -94.21% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-1000-up-true-c1abe24c1406.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=1000/up=true: 315.6 ns before, 17.76 ns after, -94.37% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkScrollSearchPosition/matches=10000/up=false">Scroll search position</strong><br>
 Select a visible result after a distant scroll down across 10000 matches; reset each iteration.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-10000-up-false-1c326e910cb8.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=10000/up=false: 4.235 µs before, 22.07 ns after, -99.48% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-10000-up-false-29e4a4854751.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=10000/up=false: 4.289 µs before, 22.09 ns after, -99.48% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkScrollSearchPosition/matches=10000/up=true">Scroll search position</strong><br>
 Select a visible result after a distant scroll up across 10000 matches; reset each iteration.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-10000-up-true-838066482851.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=10000/up=true: 3.063 µs before, 20.04 ns after, -99.35% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-10000-up-true-f8b05b03fd52.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=10000/up=true: 3.099 µs before, 20.02 ns after, -99.35% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkScrollSearchPosition/matches=100000/up=false">Scroll search position</strong><br>
 Select a visible result after a distant scroll down across 100000 matches; reset each iteration.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-100000-up-false-d4db5ab45971.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=100000/up=false: 43.42 µs before, 25.5 ns after, -99.94% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-100000-up-false-cea1f49e2a95.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=100000/up=false: 43.27 µs before, 25.25 ns after, -99.94% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkScrollSearchPosition/matches=100000/up=true">Scroll search position</strong><br>
 Select a visible result after a distant scroll up across 100000 matches; reset each iteration.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-100000-up-true-cfe1dbfa2366.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=100000/up=true: 36.25 µs before, 23.42 ns after, -99.94% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkScrollSearchPosition-matches-100000-up-true-e3f2a565cd05.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkScrollSearchPosition/matches=100000/up=true: 36.81 µs before, 23.14 ns after, -99.94% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=a">Search large diff</strong><br>
 Search 50000 diff lines with wide and combining characters for &quot;a&quot;; rendered layout and initial query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-mixed-case-query-a-20b958bf8323.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=a: 43.16 ms before, 12.48 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-mixed-case-query-a-c9e2f9c6ed26.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=a: 43.24 ms before, 12.12 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=MATCH">Search large diff</strong><br>
 Search 50000 diff lines with wide and combining characters for &quot;MATCH&quot;; rendered layout and initial query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-mixed-case-query-MATCH-da8e2bc37dc2.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=MATCH: 20.07 ms before, 12.58 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-mixed-case-query-MATCH-bdc3c481df01.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=MATCH: 20.31 ms before, 12.33 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=missing">Search large diff</strong><br>
 Search 50000 diff lines with wide and combining characters for &quot;missing&quot;; rendered layout and initial query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-mixed-case-query-missing-32b721099eab.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=missing: 32.45 ms before, 12.29 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-mixed-case-query-missing-19ddd862b43a.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=missing: 33.37 ms before, 12.22 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=performance-match">Search large diff</strong><br>
 Search 50000 diff lines with wide and combining characters for &quot;performance-match&quot;; rendered layout and initial query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-mixed-case-query-performance-match-e5d173548cfd.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=performance-match: 47.76 ms before, 12.72 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-mixed-case-query-performance-match-6c3b9aef3f96.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=mixed-case/query=performance-match: 46.48 ms before, 12.54 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=a">Search large diff</strong><br>
 Search 50000 diff lines with wide and combining characters for &quot;a&quot;; rendered layout and initial query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-ordinary-query-a-bce11e39c0ae.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=a: 37.53 ms before, 12.03 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-ordinary-query-a-3a97cbadacb7.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=a: 38.15 ms before, 12.02 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=MATCH">Search large diff</strong><br>
 Search 50000 diff lines with wide and combining characters for &quot;MATCH&quot;; rendered layout and initial query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-ordinary-query-MATCH-f099a3c83060.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=MATCH: 20.01 ms before, 12.43 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-ordinary-query-MATCH-d302bbec5080.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=MATCH: 20.68 ms before, 12.07 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=missing">Search large diff</strong><br>
 Search 50000 diff lines with wide and combining characters for &quot;missing&quot;; rendered layout and initial query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-ordinary-query-missing-0a5aa7b6a784.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=missing: 27.78 ms before, 12.41 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-ordinary-query-missing-00d1a42effd7.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=missing: 28.75 ms before, 12.11 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=performance-match">Search large diff</strong><br>
 Search 50000 diff lines with wide and combining characters for &quot;performance-match&quot;; rendered layout and initial query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-ordinary-query-performance-match-a42e7c697284.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=performance-match: 41.57 ms before, 12.56 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchLargeDiff-lines-50000-text-ordinary-query-performance-match-673b717a9ff6.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchLargeDiff/lines=50000/text=ordinary/query=performance-match: 41.93 ms before, 12.97 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchOrdinaryText/match">Search ordinary text</strong><br>
 Search 2,000 ordinary diff lines for &quot;match&quot;; rendered layout warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchOrdinaryText-match-39321243ae2b.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchOrdinaryText/match: 770.2 µs before, 12.21 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchOrdinaryText-match-d6a687ba458f.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchOrdinaryText/match: 779.9 µs before, 12.21 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchOrdinaryText/MATCH">Search ordinary text</strong><br>
 Search 2,000 ordinary diff lines for &quot;MATCH&quot;; rendered layout warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchOrdinaryText-MATCH-3b8e6571fd65.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchOrdinaryText/MATCH: 533.3 µs before, 12.11 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchOrdinaryText-MATCH-b940bf313969.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchOrdinaryText/MATCH: 537.1 µs before, 12.21 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchOrdinaryText/missing">Search ordinary text</strong><br>
 Search 2,000 ordinary diff lines for &quot;missing&quot;; rendered layout warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchOrdinaryText-missing-4661ef027f33.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchOrdinaryText/missing: 712.6 µs before, 12.63 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchOrdinaryText-missing-c9f77e277cc1.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchOrdinaryText/missing: 706.9 µs before, 12.82 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchQueryLifetime/clear=false">Search query lifetime</strong><br>
 Alternate aa, aaa, aaaa, and a queries across 2,000 lines of 200 a characters; keep search active; rendered layout and initial a query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchQueryLifetime-clear-false-33ab4113aa64.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchQueryLifetime/clear=false: 18.54 ms before, 2.983 ms after, -83.91% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchQueryLifetime-clear-false-082d6aa0b8b1.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchQueryLifetime/clear=false: 18.06 ms before, 2.974 ms after, -83.53% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchQueryLifetime/clear=true">Search query lifetime</strong><br>
 Alternate aa, aaa, aaaa, and a queries across 2,000 lines of 200 a characters; clear search after each query; rendered layout and initial a query warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchQueryLifetime-clear-true-d320db88d6cd.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchQueryLifetime/clear=true: 19.42 ms before, 11.64 ms after, -40.07% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchQueryLifetime-clear-true-7721ac7e3570.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchQueryLifetime/clear=true: 19.35 ms before, 11.56 ms after, -40.29% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchRepeatedPrefix/query=1">Search repeated prefix</strong><br>
 Search 2,000 lines of 200 a characters for a; rendered layout warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchRepeatedPrefix-query-1-ce8634954293.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchRepeatedPrefix/query=1: 16.29 ms before, 12.16 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchRepeatedPrefix-query-1-86e50afcc00a.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchRepeatedPrefix/query=1: 15.39 ms before, 12.09 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchRepeatedPrefix/query=32">Search repeated prefix</strong><br>
 Search 2,000 lines of 200 a characters for a 32-character query ending in b; rendered layout warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchRepeatedPrefix-query-32-a51acc08ac4d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchRepeatedPrefix/query=32: 55.94 ms before, 12.06 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchRepeatedPrefix-query-32-1774ace96361.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchRepeatedPrefix/query=32: 56.07 ms before, 11.98 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkSearchRepeatedPrefix/query=128">Search repeated prefix</strong><br>
 Search 2,000 lines of 200 a characters for a 128-character query ending in b; rendered layout warmed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchRepeatedPrefix-query-128-3e5a65243417.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchRepeatedPrefix/query=128: 158.2 ms before, 12 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkSearchRepeatedPrefix-query-128-90a8ca3888d9.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkSearchRepeatedPrefix/query=128: 157.8 ms before, 12.01 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaLineStart/lines=100">Text area line start</strong><br>
 Move to the start of a line near the end of 100 prepared editor lines.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaLineStart-lines-100-1706453c9878.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaLineStart/lines=100: 1.227 µs before, 54.51 ns after, -95.56% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaLineStart-lines-100-420a9008d7d0.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaLineStart/lines=100: 1.239 µs before, 55.42 ns after, -95.53% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaLineStart/lines=1000">Text area line start</strong><br>
 Move to the start of a line near the end of 1000 prepared editor lines.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaLineStart-lines-1000-9d92383cb1d4.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaLineStart/lines=1000: 12.45 µs before, 65.65 ns after, -99.47% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaLineStart-lines-1000-1ebf05460fbb.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaLineStart/lines=1000: 12.12 µs before, 68.07 ns after, -99.44% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaLineStart/lines=10000">Text area line start</strong><br>
 Move to the start of a line near the end of 10000 prepared editor lines.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaLineStart-lines-10000-488cd574dc28.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaLineStart/lines=10000: 162.9 µs before, 70.15 ns after, -99.96% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaLineStart-lines-10000-f60249d9b1a4.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaLineStart/lines=10000: 163.7 µs before, 72.21 ns after, -99.96% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaVerticalKeypress/lines=100">Text area vertical keypress</strong><br>
 Handle Up and Down through the default editor near the end of 100 lines, including rendering.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalKeypress-lines-100-aa850ed4b50d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalKeypress/lines=100: 569 µs before, 219.9 ns after, -99.96% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalKeypress-lines-100-e5df6524de16.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalKeypress/lines=100: 567.5 µs before, 189.4 ns after, -99.97% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaVerticalKeypress/lines=1000">Text area vertical keypress</strong><br>
 Handle Up and Down through the default editor near the end of 1000 lines, including rendering.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalKeypress-lines-1000-da9325241800.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalKeypress/lines=1000: 6.829 ms before, 247.2 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalKeypress-lines-1000-1593b14dfa99.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalKeypress/lines=1000: 6.929 ms before, 209.7 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaVerticalKeypress/lines=10000">Text area vertical keypress</strong><br>
 Handle Up and Down through the default editor near the end of 10000 lines, including rendering.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalKeypress-lines-10000-3c691a5bf337.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalKeypress/lines=10000: 74.78 ms before, 281.1 ns after, -100.00% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalKeypress-lines-10000-cc30cd026039.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalKeypress/lines=10000: 77.54 ms before, 236.2 ns after, -100.00% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaVerticalMovement/lines=100/bottom=false">Text area vertical movement</strong><br>
 Move Up and Down in 100 prepared editor lines, near the beginning; rendering excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-100-bottom-false-2371184b3b46.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=100/bottom=false: 122.1 ns before, 118.4 ns after, -3.03% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-100-bottom-false-dd8d1b4ac796.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=100/bottom=false: 122.5 ns before, 86.1 ns after, -29.71% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaVerticalMovement/lines=100/bottom=true">Text area vertical movement</strong><br>
 Move Up and Down in 100 prepared editor lines, near the end; rendering excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-100-bottom-true-6de895c6c2d4.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=100/bottom=true: 4.671 µs before, 116.1 ns after, -97.51% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-100-bottom-true-76073ef179b9.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=100/bottom=true: 4.677 µs before, 87.1 ns after, -98.14% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaVerticalMovement/lines=1000/bottom=false">Text area vertical movement</strong><br>
 Move Up and Down in 1000 prepared editor lines, near the beginning; rendering excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-1000-bottom-false-10be24253cec.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=1000/bottom=false: 131.9 ns before, 144.6 ns after, +9.63% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-1000-bottom-false-fd62ad794d50.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=1000/bottom=false: 132.8 ns before, 104.5 ns after, -21.31% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaVerticalMovement/lines=1000/bottom=true">Text area vertical movement</strong><br>
 Move Up and Down in 1000 prepared editor lines, near the end; rendering excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-1000-bottom-true-edccaa39bdc9.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=1000/bottom=true: 48.07 µs before, 137.4 ns after, -99.71% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-1000-bottom-true-c64cf5c10154.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=1000/bottom=true: 48.19 µs before, 95.68 ns after, -99.80% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaVerticalMovement/lines=10000/bottom=false">Text area vertical movement</strong><br>
 Move Up and Down in 10000 prepared editor lines, near the beginning; rendering excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-10000-bottom-false-2c7f0c7b4faa.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=10000/bottom=false: 145.2 ns before, 170.5 ns after, +17.42% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-10000-bottom-false-7a7289719d7c.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=10000/bottom=false: 145.6 ns before, 120.9 ns after, -16.96% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkTextAreaVerticalMovement/lines=10000/bottom=true">Text area vertical movement</strong><br>
 Move Up and Down in 10000 prepared editor lines, near the end; rendering excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-10000-bottom-true-ce54d0c42a8d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=10000/bottom=true: 401.3 µs before, 163.3 ns after, -99.96% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkTextAreaVerticalMovement-lines-10000-bottom-true-9b30edcdb93b.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkTextAreaVerticalMovement/lines=10000/bottom=true: 409.6 µs before, 111.5 ns after, -99.97% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewDraw/80x24/empty">View draw</strong><br>
 Redraw a 80x24 view with empty content.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-80x24-empty-cc07666fa9d7.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/80x24/empty: 55.37 µs before, 4.759 µs after, -91.40% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-80x24-empty-9dbba7c18dcf.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/80x24/empty: 55.35 µs before, 4.871 µs after, -91.20% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewDraw/80x24/full">View draw</strong><br>
 Redraw a 80x24 view with full content.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-80x24-full-88dd135cf6f0.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/80x24/full: 123.1 µs before, 39.86 µs after, -67.61% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-80x24-full-694f9f37dcb1.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/80x24/full: 124.1 µs before, 40.47 µs after, -67.38% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewDraw/80x24/short">View draw</strong><br>
 Redraw a 80x24 view with short content.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-80x24-short-9e228afa5598.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/80x24/short: 55.3 µs before, 4.751 µs after, -91.41% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-80x24-short-e515e1456e1f.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/80x24/short: 55.31 µs before, 4.824 µs after, -91.28% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewDraw/80x24/unicode">View draw</strong><br>
 Redraw a 80x24 view with unicode content.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-80x24-unicode-dda46df891cc.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/80x24/unicode: 143.2 µs before, 30.48 µs after, -78.71% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-80x24-unicode-d63ab1e908fc.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/80x24/unicode: 145.2 µs before, 32.01 µs after, -77.94% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewDraw/160x48/empty">View draw</strong><br>
 Redraw a 160x48 view with empty content.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-160x48-empty-a9b4e94e1e63.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/160x48/empty: 224.3 µs before, 16.23 µs after, -92.77% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-160x48-empty-d5ce01334541.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/160x48/empty: 231 µs before, 16.4 µs after, -92.90% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewDraw/160x48/full">View draw</strong><br>
 Redraw a 160x48 view with full content.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-160x48-full-caa5b1a81d64.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/160x48/full: 504.7 µs before, 169.4 µs after, -66.43% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-160x48-full-a5954f539bef.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/160x48/full: 520.2 µs before, 175.7 µs after, -66.23% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewDraw/160x48/short">View draw</strong><br>
 Redraw a 160x48 view with short content.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-160x48-short-be689b5bda27.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/160x48/short: 224.7 µs before, 16.56 µs after, -92.63% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-160x48-short-953de0120bb0.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/160x48/short: 230.2 µs before, 16.45 µs after, -92.85% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewDraw/160x48/unicode">View draw</strong><br>
 Redraw a 160x48 view with unicode content.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-160x48-unicode-ac02bb4b44f8.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/160x48/unicode: 611.4 µs before, 127.2 µs after, -79.19% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewDraw-160x48-unicode-d880f113dcc7.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewDraw/160x48/unicode: 634 µs before, 129.9 µs after, -79.52% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewWrite/colored">View write</strong><br>
 Write 2,000 colored lines into a new view.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWrite-colored-de4ef8caf7d1.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWrite/colored: 9.354 ms before, 3.926 ms after, -58.02% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWrite-colored-317a17285f62.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWrite/colored: 9.348 ms before, 3.905 ms after, -58.22% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewWrite/metadata">View write</strong><br>
 Write 2,000 metadata lines into a new view.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWrite-metadata-2dc354b2c4e5.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWrite/metadata: 5.804 ms before, 2.602 ms after, -55.17% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWrite-metadata-597c3fcb95c8.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWrite/metadata: 5.894 ms before, 2.668 ms after, -54.73% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewWrite/plain">View write</strong><br>
 Write 2,000 plain lines into a new view.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWrite-plain-6e38d5374ae4.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWrite/plain: 13.52 ms before, 2.929 ms after, -78.33% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWrite-plain-3b2f90c3be4d.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWrite/plain: 13.66 ms before, 2.865 ms after, -79.03% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewWrite/unicode">View write</strong><br>
 Write 2,000 unicode lines into a new view.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWrite-unicode-7dfe5888e446.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWrite/unicode: 8.096 ms before, 4.006 ms after, -50.52% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWrite-unicode-bf14bcb7023f.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWrite/unicode: 8.044 ms before, 3.964 ms after, -50.72% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewWriteGitColoredDiff">View write git colored diff</strong><br>
 Stream 50,000 mixed Unicode lines with separately colored Git prefixes into a new view.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWriteGitColoredDiff-abc8a7b9db0e.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWriteGitColoredDiff: 497.2 ms before, 132.7 ms after, -73.31% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWriteGitColoredDiff-bcacb328385e.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWriteGitColoredDiff: 496.9 ms before, 141.6 ms after, -71.51% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewWriteLargeDiff/colored">View write large diff</strong><br>
 Stream 50,000 colored diff lines into a new view, including parsing and allocation.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWriteLargeDiff-colored-7251f3ee4170.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWriteLargeDiff/colored: 258.2 ms before, 111.8 ms after, -56.71% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWriteLargeDiff-colored-41d27aa65e97.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWriteLargeDiff/colored: 257.2 ms before, 114.6 ms after, -55.43% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewWriteLargeDiff/metadata">View write large diff</strong><br>
 Stream 50,000 metadata diff lines into a new view, including parsing and allocation.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWriteLargeDiff-metadata-53a1b7a2ecc8.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWriteLargeDiff/metadata: 176.2 ms before, 76.48 ms after, -56.60% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWriteLargeDiff-metadata-f87a83d5651f.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWriteLargeDiff/metadata: 176.1 ms before, 77.36 ms after, -56.06% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkViewWriteLongLine">View write long line</strong><br>
 Write one 13,001-byte line into a new view.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWriteLongLine-8ce034d74d81.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWriteLongLine: 1.884 ms before, 220.3 µs after, -88.31% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkViewWriteLongLine-b0623613cc10.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkViewWriteLongLine: 1.897 ms before, 225.5 µs after, -88.11% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gocui/BenchmarkWriteToSearchedView">Write to searched view</strong><br>
 Write 2,000 lines into a searched view and read search status.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkWriteToSearchedView-195178a64d86.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkWriteToSearchedView: 15.05 ms before, 3.892 ms after, -74.15% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gocui-BenchmarkWriteToSearchedView-fb9fd7bdb721.svg" width="420" height="60" align="middle" alt="gocui/BenchmarkWriteToSearchedView: 15.48 ms before, 3.907 ms after, -74.76% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/BenchmarkCommitDescriptionInput/bytes=256">Commit description input</strong><br>
 Type 250 bytes through the commit-description editor.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-BenchmarkCommitDescriptionInput-bytes-256-d3847fe97ef3.svg" width="420" height="60" align="middle" alt="gui/BenchmarkCommitDescriptionInput/bytes=256: 10.22 ms before, 159.5 µs after, -98.44% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-BenchmarkCommitDescriptionInput-bytes-256-12e08211e049.svg" width="420" height="60" align="middle" alt="gui/BenchmarkCommitDescriptionInput/bytes=256: 10.32 ms before, 160.1 µs after, -98.45% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/BenchmarkCommitDescriptionInput/bytes=1024">Commit description input</strong><br>
 Type 1020 bytes through the commit-description editor.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-BenchmarkCommitDescriptionInput-bytes-1024-b760dcf1960a.svg" width="420" height="60" align="middle" alt="gui/BenchmarkCommitDescriptionInput/bytes=1024: 170.6 ms before, 745.9 µs after, -99.56% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-BenchmarkCommitDescriptionInput-bytes-1024-79a891150daf.svg" width="420" height="60" align="middle" alt="gui/BenchmarkCommitDescriptionInput/bytes=1024: 172.5 ms before, 753 µs after, -99.56% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/BenchmarkCommitDescriptionInput/bytes=4096">Commit description input</strong><br>
 Type 4090 bytes through the commit-description editor.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-BenchmarkCommitDescriptionInput-bytes-4096-6e75ba8b9b19.svg" width="420" height="60" align="middle" alt="gui/BenchmarkCommitDescriptionInput/bytes=4096: 3.005 s before, 4.358 ms after, -99.85% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-BenchmarkCommitDescriptionInput-bytes-4096-daee709fba0b.svg" width="420" height="60" align="middle" alt="gui/BenchmarkCommitDescriptionInput/bytes=4096: 3.047 s before, 4.438 ms after, -99.85% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/context/BenchmarkFilteredListNavigation/items=100">Filtered list navigation</strong><br>
 Reset selection to the midpoint, move one row, retrieve it, and count 100 filtered branches.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-context-BenchmarkFilteredListNavigation-items-100-b28b12830173.svg" width="420" height="60" align="middle" alt="gui/context/BenchmarkFilteredListNavigation/items=100: 2.698 µs before, 36.86 ns after, -98.63% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-context-BenchmarkFilteredListNavigation-items-100-931d27cdab9d.svg" width="420" height="60" align="middle" alt="gui/context/BenchmarkFilteredListNavigation/items=100: 2.684 µs before, 37.48 ns after, -98.60% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/context/BenchmarkFilteredListNavigation/items=1000">Filtered list navigation</strong><br>
 Reset selection to the midpoint, move one row, retrieve it, and count 1000 filtered branches.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-context-BenchmarkFilteredListNavigation-items-1000-d0a2d6b6f3eb.svg" width="420" height="60" align="middle" alt="gui/context/BenchmarkFilteredListNavigation/items=1000: 25.17 µs before, 37.18 ns after, -99.85% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-context-BenchmarkFilteredListNavigation-items-1000-d8d3b935c672.svg" width="420" height="60" align="middle" alt="gui/context/BenchmarkFilteredListNavigation/items=1000: 26.09 µs before, 37.64 ns after, -99.86% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/context/BenchmarkFilteredListNavigation/items=10000">Filtered list navigation</strong><br>
 Reset selection to the midpoint, move one row, retrieve it, and count 10000 filtered branches.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-context-BenchmarkFilteredListNavigation-items-10000-8986aa74d217.svg" width="420" height="60" align="middle" alt="gui/context/BenchmarkFilteredListNavigation/items=10000: 278.8 µs before, 38.08 ns after, -99.99% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-context-BenchmarkFilteredListNavigation-items-10000-1ac590a5eed4.svg" width="420" height="60" align="middle" alt="gui/context/BenchmarkFilteredListNavigation/items=10000: 282.7 µs before, 38.38 ns after, -99.99% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildCommitFileTree/files=100">Build commit file tree</strong><br>
 Build and sort 100 reverse-ordered commit files through the file-tree construction entry point.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildCommitFileTree-files-100-dd7a07b000f0.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildCommitFileTree/files=100: 33.68 µs before, 31.76 µs after, -5.69% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildCommitFileTree-files-100-94492e381348.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildCommitFileTree/files=100: 35.35 µs before, 31.82 µs after, -9.99% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildCommitFileTree/files=1000">Build commit file tree</strong><br>
 Build and sort 1000 reverse-ordered commit files through the file-tree construction entry point.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildCommitFileTree-files-1000-0ae8beafe856.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildCommitFileTree/files=1000: 1.206 ms before, 332.7 µs after, -72.41% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildCommitFileTree-files-1000-48d1c38294f4.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildCommitFileTree/files=1000: 1.265 ms before, 330.9 µs after, -73.83% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildCommitFileTree/files=10000">Build commit file tree</strong><br>
 Build and sort 10000 reverse-ordered commit files through the file-tree construction entry point.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildCommitFileTree-files-10000-7616009b9c90.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildCommitFileTree/files=10000: 105.5 ms before, 3.637 ms after, -96.55% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildCommitFileTree-files-10000-7e4526f158ab.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildCommitFileTree/files=10000: 108.9 ms before, 3.627 ms after, -96.67% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=false">Build flat file trees</strong><br>
 Build a flat working-file list of 100 files with one shared directory; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-100-deep-false-commits-false-4aea079d72c7.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=false: 35.28 µs before, 24.02 µs after, -31.92% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-100-deep-false-commits-false-7206e320bab3.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=false: 36.98 µs before, 24.45 µs after, -33.88% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=true">Build flat file trees</strong><br>
 Build a flat commit-file list of 100 files with one shared directory; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-100-deep-false-commits-true-b83ba648ca79.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=true: 33.91 µs before, 20.68 µs after, -39.01% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-100-deep-false-commits-true-821cb7db900d.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=false/commits=true: 35.14 µs before, 20.55 µs after, -41.50% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=false">Build flat file trees</strong><br>
 Build a flat working-file list of 100 files with a distinct nested directory per file; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-100-deep-true-commits-false-c656d5e2eedb.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=false: 94.04 µs before, 41.64 µs after, -55.72% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-100-deep-true-commits-false-ba0371e8179d.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=false: 97.17 µs before, 42.26 µs after, -56.51% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=true">Build flat file trees</strong><br>
 Build a flat commit-file list of 100 files with a distinct nested directory per file; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-100-deep-true-commits-true-c602272fb855.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=true: 61.52 µs before, 39.03 µs after, -36.55% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-100-deep-true-commits-true-ff43ec78dd8b.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=100/deep=true/commits=true: 63.33 µs before, 38.81 µs after, -38.72% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=false">Build flat file trees</strong><br>
 Build a flat working-file list of 1000 files with one shared directory; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-1000-deep-false-commits-false-2d80bdfdbcd6.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=false: 439.5 µs before, 250.1 µs after, -43.10% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-1000-deep-false-commits-false-9c0c60cb1d8e.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=false: 382.9 µs before, 247.2 µs after, -35.45% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=true">Build flat file trees</strong><br>
 Build a flat commit-file list of 1000 files with one shared directory; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-1000-deep-false-commits-true-5028bc9b7e8f.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=true: 1.146 ms before, 208 µs after, -81.86% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-1000-deep-false-commits-true-ea05449e4282.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=false/commits=true: 1.167 ms before, 204.9 µs after, -82.44% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=false">Build flat file trees</strong><br>
 Build a flat working-file list of 1000 files with a distinct nested directory per file; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-1000-deep-true-commits-false-71d0972d4893.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=false: 1.158 ms before, 389.4 µs after, -66.37% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-1000-deep-true-commits-false-762ebd94be3b.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=false: 1.175 ms before, 390.7 µs after, -66.75% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=true">Build flat file trees</strong><br>
 Build a flat commit-file list of 1000 files with a distinct nested directory per file; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-1000-deep-true-commits-true-2516620e5d17.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=true: 1.492 ms before, 351.9 µs after, -76.41% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-1000-deep-true-commits-true-62f4fd29490d.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=1000/deep=true/commits=true: 1.508 ms before, 349.9 µs after, -76.80% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=false">Build flat file trees</strong><br>
 Build a flat working-file list of 10000 files with one shared directory; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-10000-deep-false-commits-false-fc7eec28eb45.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=false: 4.114 ms before, 2.749 ms after, -33.19% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-10000-deep-false-commits-false-34324236e6d7.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=false: 4.221 ms before, 2.753 ms after, -34.79% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=true">Build flat file trees</strong><br>
 Build a flat commit-file list of 10000 files with one shared directory; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-10000-deep-false-commits-true-940cea2d28a2.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=true: 94.03 ms before, 2.245 ms after, -97.61% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-10000-deep-false-commits-true-72d31ef2ece8.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=false/commits=true: 95.91 ms before, 2.267 ms after, -97.64% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=false">Build flat file trees</strong><br>
 Build a flat working-file list of 10000 files with a distinct nested directory per file; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-10000-deep-true-commits-false-f58108b71df1.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=false: 12.46 ms before, 5.55 ms after, -55.45% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-10000-deep-true-commits-false-8aa7bf87f7c1.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=false: 13.04 ms before, 5.493 ms after, -57.88% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=true">Build flat file trees</strong><br>
 Build a flat commit-file list of 10000 files with a distinct nested directory per file; construction entry point included.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-10000-deep-true-commits-true-aafc776b5c02.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=true: 122.9 ms before, 5.036 ms after, -95.90% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkBuildFlatFileTrees-files-10000-deep-true-commits-true-ce20a1bbb6ff.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkBuildFlatFileTrees/files=10000/deep=true/commits=true: 122.1 ms before, 4.996 ms after, -95.91% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFileTreeNavigation/files=100">File tree navigation</strong><br>
 Reset selection to the midpoint, move one row, retrieve it, and count rows in a 100-file tree.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeNavigation-files-100-c1b70ad4e855.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeNavigation/files=100: 1.419 µs before, 28.67 ns after, -97.98% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeNavigation-files-100-38c1cc7e23dc.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeNavigation/files=100: 1.444 µs before, 28.76 ns after, -98.01% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFileTreeNavigation/files=1000">File tree navigation</strong><br>
 Reset selection to the midpoint, move one row, retrieve it, and count rows in a 1000-file tree.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeNavigation-files-1000-cf8cdec60610.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeNavigation/files=1000: 13.17 µs before, 28.8 ns after, -99.78% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeNavigation-files-1000-4bbb80b23742.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeNavigation/files=1000: 13.61 µs before, 29.05 ns after, -99.79% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFileTreeNavigation/files=10000">File tree navigation</strong><br>
 Reset selection to the midpoint, move one row, retrieve it, and count rows in a 10000-file tree.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeNavigation-files-10000-9d206fe77260.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeNavigation/files=10000: 130.8 µs before, 29.56 ns after, -99.98% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeNavigation-files-10000-4afbd9af84e3.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeNavigation/files=10000: 135 µs before, 29.6 ns after, -99.98% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFileTreeRangeSelection/files=100">File tree range selection</strong><br>
 Retrieve a range spanning a 100-file tree.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeRangeSelection-files-100-53c1c3299147.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeRangeSelection/files=100: 18.98 µs before, 1.359 µs after, -92.84% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeRangeSelection-files-100-2fb911f791ed.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeRangeSelection/files=100: 19.6 µs before, 1.35 µs after, -93.11% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFileTreeRangeSelection/files=1000">File tree range selection</strong><br>
 Retrieve a range spanning a 1000-file tree.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeRangeSelection-files-1000-494aaadb9272.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeRangeSelection/files=1000: 1.616 ms before, 13.4 µs after, -99.17% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeRangeSelection-files-1000-f30b72fdee2e.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeRangeSelection/files=1000: 1.655 ms before, 13.54 µs after, -99.18% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFileTreeRangeSelection/files=10000">File tree range selection</strong><br>
 Retrieve a range spanning a 10000-file tree.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeRangeSelection-files-10000-465e086ac291.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeRangeSelection/files=10000: 156.7 ms before, 150 µs after, -99.90% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFileTreeRangeSelection-files-10000-cd1741432ddd.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFileTreeRangeSelection/files=10000: 164.4 ms before, 150.5 µs after, -99.91% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFlatTreeRefresh/files=100/commits=false">Flat tree refresh</strong><br>
 Refresh a flat working-file view model with 100 files, including selection recovery.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFlatTreeRefresh-files-100-commits-false-12fc78baa718.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFlatTreeRefresh/files=100/commits=false: 91.37 µs before, 39.43 µs after, -56.84% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFlatTreeRefresh-files-100-commits-false-0ba71dced7ba.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFlatTreeRefresh/files=100/commits=false: 94.11 µs before, 39.48 µs after, -58.05% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFlatTreeRefresh/files=100/commits=true">Flat tree refresh</strong><br>
 Refresh a flat commit-file view model with 100 files, including selection recovery.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFlatTreeRefresh-files-100-commits-true-e126bc2e0705.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFlatTreeRefresh/files=100/commits=true: 51.27 µs before, 33.8 µs after, -34.08% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFlatTreeRefresh-files-100-commits-true-45734e52dcdb.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFlatTreeRefresh/files=100/commits=true: 53.03 µs before, 33.4 µs after, -37.01% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFlatTreeRefresh/files=10000/commits=false">Flat tree refresh</strong><br>
 Refresh a flat working-file view model with 10000 files, including selection recovery.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFlatTreeRefresh-files-10000-commits-false-77b9f338ad02.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFlatTreeRefresh/files=10000/commits=false: 12.59 ms before, 5.391 ms after, -57.19% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFlatTreeRefresh-files-10000-commits-false-7e2b628199c5.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFlatTreeRefresh/files=10000/commits=false: 12.6 ms before, 5.37 ms after, -57.38% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkFlatTreeRefresh/files=10000/commits=true">Flat tree refresh</strong><br>
 Refresh a flat commit-file view model with 10000 files, including selection recovery.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFlatTreeRefresh-files-10000-commits-true-e3b045338b59.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFlatTreeRefresh/files=10000/commits=true: 147.6 ms before, 4.674 ms after, -96.83% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkFlatTreeRefresh-files-10000-commits-true-4c2db369f6be.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkFlatTreeRefresh/files=10000/commits=true: 151.5 ms before, 4.627 ms after, -96.95% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=100">Refresh after directory removal</strong><br>
 Refresh a tree after removing a 100-file directory; fixture setup excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRefreshAfterDirectoryRemoval-files-100-1fe2b0d98224.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=100: 981.4 µs before, 41.55 µs after, -95.77% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRefreshAfterDirectoryRemoval-files-100-90069f748cab.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=100: 985.8 µs before, 42.03 µs after, -95.74% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=1000">Refresh after directory removal</strong><br>
 Refresh a tree after removing a 1000-file directory; fixture setup excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRefreshAfterDirectoryRemoval-files-1000-7b8b97a2b58b.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=1000: 101.7 ms before, 377 µs after, -99.63% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRefreshAfterDirectoryRemoval-files-1000-9b9906ac9c86.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=1000: 101.8 ms before, 382.4 µs after, -99.62% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=5000">Refresh after directory removal</strong><br>
 Refresh a tree after removing a 5000-file directory; fixture setup excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRefreshAfterDirectoryRemoval-files-5000-3350251f91c8.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=5000: 2.714 s before, 2.197 ms after, -99.92% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRefreshAfterDirectoryRemoval-files-5000-0b9d3a6459a7.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRefreshAfterDirectoryRemoval/files=5000: 2.718 s before, 2.188 ms after, -99.92% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=100">Restore after single removal</strong><br>
 Restore selection after removing one file from 100 remaining files.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreAfterSingleRemoval-files-100-59b55567473b.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=100: 7.748 µs before, 1.928 µs after, -75.12% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreAfterSingleRemoval-files-100-85d9dfe6be51.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=100: 7.786 µs before, 1.963 µs after, -74.79% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=1000">Restore after single removal</strong><br>
 Restore selection after removing one file from 1000 remaining files.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreAfterSingleRemoval-files-1000-ee5f215fbfc1.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=1000: 77.24 µs before, 19.04 µs after, -75.36% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreAfterSingleRemoval-files-1000-99f5712ef27d.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=1000: 78.34 µs before, 19.56 µs after, -75.03% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=5000">Restore after single removal</strong><br>
 Restore selection after removing one file from 5000 remaining files.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreAfterSingleRemoval-files-5000-a991863037e8.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=5000: 434.7 µs before, 107.4 µs after, -75.28% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreAfterSingleRemoval-files-5000-b796c4b2f690.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreAfterSingleRemoval/files=5000: 435.7 µs before, 109.6 µs after, -74.85% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=false">Restore file selection</strong><br>
 Restore selection among 100 files; selected file retained.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-100-removed-false-a229dd4c810f.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=false: 153.1 ns before, 37.05 ns after, -75.80% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-100-removed-false-f21bbf9cfe1b.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=false: 163.9 ns before, 37.98 ns after, -76.83% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=true">Restore file selection</strong><br>
 Restore selection among 100 files; selected file removed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-100-removed-true-9b88a70394fe.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=true: 775.6 µs before, 12.22 µs after, -98.42% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-100-removed-true-d75a1de15d91.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=100/removed=true: 789.7 µs before, 12.37 µs after, -98.43% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=false">Restore file selection</strong><br>
 Restore selection among 1000 files; selected file retained.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-1000-removed-false-a2e26d08bd69.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=false: 159.9 ns before, 38.82 ns after, -75.72% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-1000-removed-false-fab28116babd.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=false: 163.5 ns before, 39.95 ns after, -75.57% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=true">Restore file selection</strong><br>
 Restore selection among 1000 files; selected file removed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-1000-removed-true-61dd9d10309e.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=true: 79.92 ms before, 122.1 µs after, -99.85% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-1000-removed-true-80bd973c8dd6.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=1000/removed=true: 80.31 ms before, 124.1 µs after, -99.85% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=false">Restore file selection</strong><br>
 Restore selection among 5000 files; selected file retained.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-5000-removed-false-a256fedf46d2.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=false: 174.3 ns before, 42.92 ns after, -75.38% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-5000-removed-false-173d0156293d.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=false: 176.4 ns before, 43.94 ns after, -75.09% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=true">Restore file selection</strong><br>
 Restore selection among 5000 files; selected file removed.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-5000-removed-true-28dc60d9421d.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=true: 2.165 s before, 702.4 µs after, -99.97% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkRestoreFileSelection-files-5000-removed-true-0248f58474a5.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkRestoreFileSelection/files=5000/removed=true: 2.163 s before, 720.9 µs after, -99.97% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=false">Small tree range selection</strong><br>
 Select one row near the end of a 100-file working-file tree; visibility unchanged.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-100-cold-false-commits-false-87bd85701aad.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=false: 675.6 ns before, 31.57 ns after, -95.33% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-100-cold-false-commits-false-1bb3ba10a52b.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=false: 693.1 ns before, 31.99 ns after, -95.38% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=true">Small tree range selection</strong><br>
 Select one row near the end of a 100-file commit-file tree; visibility unchanged.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-100-cold-false-commits-true-e33a2a53848f.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=true: 647.5 ns before, 31.87 ns after, -95.08% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-100-cold-false-commits-true-db5c0ee6364f.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=false/commits=true: 694.2 ns before, 31.79 ns after, -95.42% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=false">Small tree range selection</strong><br>
 Select one row near the end of a 100-file working-file tree; toggle a directory twice before each selection to invalidate visibility.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-100-cold-true-commits-false-0d8c289ded2f.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=false: 716.3 ns before, 389.2 ns after, -45.67% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-100-cold-true-commits-false-f981c5cb0789.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=false: 710.3 ns before, 389.8 ns after, -45.12% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=true">Small tree range selection</strong><br>
 Select one row near the end of a 100-file commit-file tree; toggle a directory twice before each selection to invalidate visibility.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-100-cold-true-commits-true-f568a92529da.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=true: 693 ns before, 360.8 ns after, -47.94% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-100-cold-true-commits-true-4e21d1debce7.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=100/cold=true/commits=true: 733.6 ns before, 368.8 ns after, -49.73% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=false">Small tree range selection</strong><br>
 Select one row near the end of a 10000-file working-file tree; visibility unchanged.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-10000-cold-false-commits-false-b222c8ebb74b.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=false: 61 µs before, 34.1 ns after, -99.94% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-10000-cold-false-commits-false-8976ea9ca8d3.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=false: 61.91 µs before, 34.11 ns after, -99.94% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=true">Small tree range selection</strong><br>
 Select one row near the end of a 10000-file commit-file tree; visibility unchanged.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-10000-cold-false-commits-true-0a6c8226128b.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=true: 61.28 µs before, 33.72 ns after, -99.94% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-10000-cold-false-commits-true-fd0e9c8d1cc1.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=false/commits=true: 61.87 µs before, 34.2 ns after, -99.94% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=false">Small tree range selection</strong><br>
 Select one row near the end of a 10000-file working-file tree; toggle a directory twice before each selection to invalidate visibility.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-10000-cold-true-commits-false-41479b11e321.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=false: 62.05 µs before, 28.9 µs after, -53.43% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-10000-cold-true-commits-false-31ef0aff52e0.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=false: 62.36 µs before, 29.92 µs after, -52.01% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=true">Small tree range selection</strong><br>
 Select one row near the end of a 10000-file commit-file tree; toggle a directory twice before each selection to invalidate visibility.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-10000-cold-true-commits-true-8222450a3af0.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=true: 61.88 µs before, 29.03 µs after, -53.08% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-filetree-BenchmarkSmallTreeRangeSelection-files-10000-cold-true-commits-true-2b4b11b2bb98.svg" width="420" height="60" align="middle" alt="gui/filetree/BenchmarkSmallTreeRangeSelection/files=10000/cold=true/commits=true: 62.27 µs before, 29.67 µs after, -52.35% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=1000/main=absent/markers=false">Commit viewport</strong><br>
+Render 40 commit rows from 1000 loaded commits without a graph; local main tip absent, other branch marker absent.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-1000-main-absent-markers-false-061cef0f8e32.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=1000/main=absent/markers=false: 15.55 µs before, 15.99 µs after, +2.80% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=1000/main=absent/markers=true">Commit viewport</strong><br>
+Render 40 commit rows from 1000 loaded commits without a graph; local main tip absent, other branch marker visible.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-1000-main-absent-markers-true-d744a829355d.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=1000/main=absent/markers=true: 16.17 µs before, 18.2 µs after, +12.57% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=1000/main=merged/markers=false">Commit viewport</strong><br>
+Render 40 commit rows from 1000 loaded commits without a graph; local main tip merged, other branch marker absent.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-1000-main-merged-markers-false-eab34025f752.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=1000/main=merged/markers=false: 15.8 µs before, 15.93 µs after, +0.78% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=1000/main=merged/markers=true">Commit viewport</strong><br>
+Render 40 commit rows from 1000 loaded commits without a graph; local main tip merged, other branch marker visible.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-1000-main-merged-markers-true-9c39391fe5ed.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=1000/main=merged/markers=true: 16.55 µs before, 20.68 µs after, +24.94% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=1000/main=unmerged/markers=false">Commit viewport</strong><br>
+Render 40 commit rows from 1000 loaded commits without a graph; local main tip unmerged, other branch marker absent.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-1000-main-unmerged-markers-false-1b61d22fbce9.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=1000/main=unmerged/markers=false: 15.65 µs before, 16.03 µs after, +2.40% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=1000/main=unmerged/markers=true">Commit viewport</strong><br>
+Render 40 commit rows from 1000 loaded commits without a graph; local main tip unmerged, other branch marker visible.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-1000-main-unmerged-markers-true-ca7f903c4a32.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=1000/main=unmerged/markers=true: 16.53 µs before, 94.3 µs after, +470.35% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=10000/main=absent/markers=false">Commit viewport</strong><br>
+Render 40 commit rows from 10000 loaded commits without a graph; local main tip absent, other branch marker absent.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-10000-main-absent-markers-false-87d6d22da058.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=10000/main=absent/markers=false: 67.43 µs before, 70.21 µs after, +4.12% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=10000/main=absent/markers=true">Commit viewport</strong><br>
+Render 40 commit rows from 10000 loaded commits without a graph; local main tip absent, other branch marker visible.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-10000-main-absent-markers-true-f689d61de812.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=10000/main=absent/markers=true: 73.31 µs before, 111 µs after, +51.34% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=10000/main=merged/markers=false">Commit viewport</strong><br>
+Render 40 commit rows from 10000 loaded commits without a graph; local main tip merged, other branch marker absent.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-10000-main-merged-markers-false-7db830a47337.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=10000/main=merged/markers=false: 69.52 µs before, 72.14 µs after, +3.78% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=10000/main=merged/markers=true">Commit viewport</strong><br>
+Render 40 commit rows from 10000 loaded commits without a graph; local main tip merged, other branch marker visible.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-10000-main-merged-markers-true-1bbc6df6c572.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=10000/main=merged/markers=true: 70.39 µs before, 127.7 µs after, +81.47% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=10000/main=unmerged/markers=false">Commit viewport</strong><br>
+Render 40 commit rows from 10000 loaded commits without a graph; local main tip unmerged, other branch marker absent.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-10000-main-unmerged-markers-false-1d3b80a7921e.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=10000/main=unmerged/markers=false: 68.33 µs before, 69.57 µs after, +1.81% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=10000/main=unmerged/markers=true">Commit viewport</strong><br>
+Render 40 commit rows from 10000 loaded commits without a graph; local main tip unmerged, other branch marker visible.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-10000-main-unmerged-markers-true-f412a97d62f9.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=10000/main=unmerged/markers=true: 72.06 µs before, 894.3 µs after, +1,140.96% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=100000/main=absent/markers=false">Commit viewport</strong><br>
+Render 40 commit rows from 100000 loaded commits without a graph; local main tip absent, other branch marker absent.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-100000-main-absent-markers-false-245e4b3f26cd.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=100000/main=absent/markers=false: 992.8 µs before, 1.053 ms after, +6.04% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=100000/main=absent/markers=true">Commit viewport</strong><br>
+Render 40 commit rows from 100000 loaded commits without a graph; local main tip absent, other branch marker visible.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-100000-main-absent-markers-true-b0e67a2a24c6.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=100000/main=absent/markers=true: 996.4 µs before, 1.805 ms after, +81.14% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=100000/main=merged/markers=false">Commit viewport</strong><br>
+Render 40 commit rows from 100000 loaded commits without a graph; local main tip merged, other branch marker absent.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-100000-main-merged-markers-false-09456e599312.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=100000/main=merged/markers=false: 1.002 ms before, 1.091 ms after, +8.84% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=100000/main=merged/markers=true">Commit viewport</strong><br>
+Render 40 commit rows from 100000 loaded commits without a graph; local main tip merged, other branch marker visible.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-100000-main-merged-markers-true-aeb80d51791e.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=100000/main=merged/markers=true: 1.008 ms before, 2.065 ms after, +104.93% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=100000/main=unmerged/markers=false">Commit viewport</strong><br>
+Render 40 commit rows from 100000 loaded commits without a graph; local main tip unmerged, other branch marker absent.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-100000-main-unmerged-markers-false-4cd08242aa10.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=100000/main=unmerged/markers=false: 998.1 µs before, 1.077 ms after, +7.93% change"></td>
+</tr>
+<tr>
+<td width="380" valign="top"><p><strong title="gui/presentation/BenchmarkCommitViewport/commits=100000/main=unmerged/markers=true">Commit viewport</strong><br>
+Render 40 commit rows from 100000 loaded commits without a graph; local main tip unmerged, other branch marker visible.</p></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-BenchmarkCommitViewport-commits-100000-main-unmerged-markers-true-dbd1d867c9ed.svg" width="420" height="60" align="middle" alt="gui/presentation/BenchmarkCommitViewport/commits=100000/main=unmerged/markers=true: 998.6 µs before, 11.03 ms after, +1,004.72% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=4">Graph column allocation</strong><br>
 Lay out a graph row with 4 incoming columns and its current commit in the final column.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphColumnAllocation-columns-4-55a23f897f00.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=4: 348.6 ns before, 258.7 ns after, -25.79% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphColumnAllocation-columns-4-11e773dc51c4.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=4: 355 ns before, 260.2 ns after, -26.70% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=16">Graph column allocation</strong><br>
 Lay out a graph row with 16 incoming columns and its current commit in the final column.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphColumnAllocation-columns-16-64e0ed368350.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=16: 3.508 µs before, 1 µs after, -71.49% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphColumnAllocation-columns-16-c4afac1ed186.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=16: 3.515 µs before, 996.9 ns after, -71.64% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=64">Graph column allocation</strong><br>
 Lay out a graph row with 64 incoming columns and its current commit in the final column.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphColumnAllocation-columns-64-8689e70c2cc3.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=64: 21.64 µs before, 3.423 µs after, -84.18% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphColumnAllocation-columns-64-766d0a9e52d1.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=64: 22.5 µs before, 3.45 µs after, -84.67% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=256">Graph column allocation</strong><br>
 Lay out a graph row with 256 incoming columns and its current commit in the final column.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphColumnAllocation-columns-256-7e3800467252.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=256: 192.4 µs before, 13.05 µs after, -93.22% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphColumnAllocation-columns-256-a58db7c1f45a.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphColumnAllocation/columns=256: 202.7 µs before, 12.9 µs after, -93.63% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=1">Graph viewport</strong><br>
 Render 1 cached linear graph rows with GOMAXPROCS=1; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-1-fccf9f77b30b.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=1: 1.421 µs before, 318.5 ns after, -77.59% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-1-31a8a4f2cf50.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=1: 1.436 µs before, 318.2 ns after, -77.84% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=1/cpu=4">Graph viewport</strong><br>
 Render 1 cached linear graph rows with GOMAXPROCS=4; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-1-cpu-4-e5787bd9e05a.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=1/cpu=4: 2.388 µs before, 241.8 ns after, -89.87% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-1-cpu-4-c9154de69360.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=1/cpu=4: 2.34 µs before, 237.7 ns after, -89.84% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=1/cpu=16">Graph viewport</strong><br>
 Render 1 cached linear graph rows with GOMAXPROCS=16; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-1-cpu-16-195bdf8f983e.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=1/cpu=16: 5.591 µs before, 260.6 ns after, -95.34% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-1-cpu-16-4a5460c62e86.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=1/cpu=16: 5.627 µs before, 257.5 ns after, -95.42% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=8">Graph viewport</strong><br>
 Render 8 cached linear graph rows with GOMAXPROCS=1; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-8-1f296c66c910.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=8: 3.126 µs before, 2.088 µs after, -33.21% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-8-6e146f61f0fd.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=8: 3.137 µs before, 2.086 µs after, -33.50% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=8/cpu=4">Graph viewport</strong><br>
 Render 8 cached linear graph rows with GOMAXPROCS=4; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-8-cpu-4-259780658bc8.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=8/cpu=4: 6.463 µs before, 1.53 µs after, -76.33% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-8-cpu-4-96c5a9c63b70.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=8/cpu=4: 6.576 µs before, 1.512 µs after, -77.01% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=8/cpu=16">Graph viewport</strong><br>
 Render 8 cached linear graph rows with GOMAXPROCS=16; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-8-cpu-16-7d29d1798a6d.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=8/cpu=16: 7.772 µs before, 1.617 µs after, -79.19% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-8-cpu-16-d219b90130fb.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=8/cpu=16: 8.121 µs before, 1.623 µs after, -80.01% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=40">Graph viewport</strong><br>
 Render 40 cached linear graph rows with GOMAXPROCS=1; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-40-c031465e3682.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=40: 10.39 µs before, 10.08 µs after, -2.98% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-40-69e8e46ca6b5.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=40: 10.55 µs before, 10.09 µs after, -4.33% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=40/cpu=4">Graph viewport</strong><br>
 Render 40 cached linear graph rows with GOMAXPROCS=4; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-40-cpu-4-f231d9e9a929.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=40/cpu=4: 11.89 µs before, 7.503 µs after, -36.92% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-40-cpu-4-634a2e865bc0.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=40/cpu=4: 12 µs before, 7.483 µs after, -37.66% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=40/cpu=16">Graph viewport</strong><br>
 Render 40 cached linear graph rows with GOMAXPROCS=16; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-40-cpu-16-d761696d4683.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=40/cpu=16: 24.09 µs before, 7.875 µs after, -67.32% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-40-cpu-16-322936f0f61a.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=40/cpu=16: 24.86 µs before, 7.867 µs after, -68.36% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=120">Graph viewport</strong><br>
 Render 120 cached linear graph rows with GOMAXPROCS=1; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-120-185e8b94be14.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=120: 28.36 µs before, 29.92 µs after, +5.50% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-120-88aea746ad25.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=120: 28.68 µs before, 27.05 µs after, -5.66% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=120/cpu=4">Graph viewport</strong><br>
 Render 120 cached linear graph rows with GOMAXPROCS=4; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-120-cpu-4-85fc114021e5.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=120/cpu=4: 20.1 µs before, 22.5 µs after, +11.97% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-120-cpu-4-07cc0516bdfe.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=120/cpu=4: 19.51 µs before, 20.18 µs after, +3.44% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=120/cpu=16">Graph viewport</strong><br>
 Render 120 cached linear graph rows with GOMAXPROCS=16; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-120-cpu-16-5a4c4cb79ce1.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=120/cpu=16: 37.4 µs before, 23.59 µs after, -36.93% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-false-rows-120-cpu-16-a6deec92b3e9.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=false/rows=120/cpu=16: 37.16 µs before, 25.15 µs after, -32.31% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=1">Graph viewport</strong><br>
 Render 1 cached branching graph rows with GOMAXPROCS=1; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-1-ef1ca0643f45.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=1: 4.426 µs before, 3.112 µs after, -29.69% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-1-0894c94dd681.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=1: 4.4 µs before, 3.086 µs after, -29.86% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=1/cpu=4">Graph viewport</strong><br>
 Render 1 cached branching graph rows with GOMAXPROCS=4; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-1-cpu-4-fe9f455c4805.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=1/cpu=4: 5.07 µs before, 2.098 µs after, -58.62% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-1-cpu-4-a41752fe2467.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=1/cpu=4: 5.206 µs before, 2.245 µs after, -56.88% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=1/cpu=16">Graph viewport</strong><br>
 Render 1 cached branching graph rows with GOMAXPROCS=16; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-1-cpu-16-80aea1583721.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=1/cpu=16: 9.857 µs before, 2.332 µs after, -76.34% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-1-cpu-16-22b57db1fa7a.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=1/cpu=16: 9.955 µs before, 2.727 µs after, -72.61% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=8">Graph viewport</strong><br>
 Render 8 cached branching graph rows with GOMAXPROCS=1; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-8-c1252e0e65d1.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=8: 32.35 µs before, 29.47 µs after, -8.88% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-8-1fb13b64f058.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=8: 32.32 µs before, 31.29 µs after, -3.19% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=8/cpu=4">Graph viewport</strong><br>
 Render 8 cached branching graph rows with GOMAXPROCS=4; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-8-cpu-4-d7c95708d556.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=8/cpu=4: 20.86 µs before, 20.66 µs after, -0.93% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-8-cpu-4-4cdf5dadb7a7.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=8/cpu=4: 21.05 µs before, 21.67 µs after, +2.93% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=8/cpu=16">Graph viewport</strong><br>
 Render 8 cached branching graph rows with GOMAXPROCS=16; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-8-cpu-16-6809bf991631.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=8/cpu=16: 37.67 µs before, 22.7 µs after, -39.73% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-8-cpu-16-39690868d3b6.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=8/cpu=16: 36.9 µs before, 27.82 µs after, -24.59% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=40">Graph viewport</strong><br>
 Render 40 cached branching graph rows with GOMAXPROCS=1; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-40-e064aa3992c7.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=40: 140.4 µs before, 132.9 µs after, -5.30% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-40-4ac0a67ef512.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=40: 142.1 µs before, 133.2 µs after, -6.23% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=40/cpu=4">Graph viewport</strong><br>
 Render 40 cached branching graph rows with GOMAXPROCS=4; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-40-cpu-4-3644739123c6.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=40/cpu=4: 78.27 µs before, 68.05 µs after, -13.05% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-40-cpu-4-7f650e2fae5a.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=40/cpu=4: 76.99 µs before, 68.71 µs after, -10.75% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=40/cpu=16">Graph viewport</strong><br>
 Render 40 cached branching graph rows with GOMAXPROCS=16; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-40-cpu-16-b133ce29b338.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=40/cpu=16: 174.6 µs before, 104 µs after, -40.44% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-40-cpu-16-853d7007e895.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=40/cpu=16: 176.3 µs before, 110.2 µs after, -37.48% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=120">Graph viewport</strong><br>
 Render 120 cached branching graph rows with GOMAXPROCS=1; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-120-b78e3a37c7e9.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=120: 542.7 µs before, 529.3 µs after, -2.48% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-120-93866275c087.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=120: 547.1 µs before, 492.7 µs after, -9.94% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=120/cpu=4">Graph viewport</strong><br>
 Render 120 cached branching graph rows with GOMAXPROCS=4; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-120-cpu-4-2f3b6f104471.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=120/cpu=4: 289.5 µs before, 259.4 µs after, -10.40% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-120-cpu-4-ea6c6ff52d39.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=120/cpu=4: 302.7 µs before, 262 µs after, -13.44% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=120/cpu=16">Graph viewport</strong><br>
 Render 120 cached branching graph rows with GOMAXPROCS=16; layout excluded.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-120-cpu-16-ef74a9025aeb.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=120/cpu=16: 485.7 µs before, 431.9 µs after, -11.07% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkGraphViewport-branches-true-rows-120-cpu-16-686bddcfe924.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkGraphViewport/branches=true/rows=120/cpu=16: 493.2 µs before, 438.9 µs after, -11.02% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkRenderCommitGraph">Render commit graph</strong><br>
 Render a graph of 50 commits generated with seed 1234.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraph-740ee33a1e05.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraph: 89.47 µs before, 78.48 µs after, -12.28% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraph-882b6dc87d2f.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraph: 90.18 µs before, 60.41 µs after, -33.01% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=box/selected=false">Render commit graph variants</strong><br>
 Render 50 commits generated with seed 1234, using box symbols; no selected commit.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-50-symbols-box-selected-false-8e967511e64f.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=box/selected=false: 87.86 µs before, 78.8 µs after, -10.31% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-50-symbols-box-selected-false-861282eb9fd0.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=box/selected=false: 88.51 µs before, 60.06 µs after, -32.14% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=box/selected=true">Render commit graph variants</strong><br>
 Render 50 commits generated with seed 1234, using box symbols; select the middle commit.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-50-symbols-box-selected-true-d1fcb166bd38.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=box/selected=true: 92.93 µs before, 85.7 µs after, -7.78% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-50-symbols-box-selected-true-0621cb2aae16.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=box/selected=true: 93.26 µs before, 65.39 µs after, -29.88% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=branch/selected=false">Render commit graph variants</strong><br>
 Render 50 commits generated with seed 1234, using branch symbols; no selected commit.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-50-symbols-branch-selected-false-6c6ec5a51174.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=branch/selected=false: 93.23 µs before, 82.93 µs after, -11.05% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-50-symbols-branch-selected-false-8481d564fc12.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=branch/selected=false: 94.05 µs before, 63.76 µs after, -32.21% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=branch/selected=true">Render commit graph variants</strong><br>
 Render 50 commits generated with seed 1234, using branch symbols; select the middle commit.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-50-symbols-branch-selected-true-0ef82bcfcf89.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=branch/selected=true: 97.44 µs before, 88.94 µs after, -8.72% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-50-symbols-branch-selected-true-c1fa9bf50b45.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=50/symbols=branch/selected=true: 100.7 µs before, 68.72 µs after, -31.79% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=box/selected=false">Render commit graph variants</strong><br>
 Render 500 commits generated with seed 1234, using box symbols; no selected commit.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-500-symbols-box-selected-false-984210d130de.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=box/selected=false: 6.309 ms before, 3.525 ms after, -44.12% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-500-symbols-box-selected-false-45087f7a544e.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=box/selected=false: 6.3 ms before, 3.501 ms after, -44.44% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=box/selected=true">Render commit graph variants</strong><br>
 Render 500 commits generated with seed 1234, using box symbols; select the middle commit.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-500-symbols-box-selected-true-2a42e369e2e0.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=box/selected=true: 6.361 ms before, 3.543 ms after, -44.30% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-500-symbols-box-selected-true-fc79f91a2666.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=box/selected=true: 6.454 ms before, 3.544 ms after, -45.09% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=branch/selected=false">Render commit graph variants</strong><br>
 Render 500 commits generated with seed 1234, using branch symbols; no selected commit.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-500-symbols-branch-selected-false-82f44ccd87fc.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=branch/selected=false: 6.513 ms before, 3.749 ms after, -42.43% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-500-symbols-branch-selected-false-875d1a3719cf.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=branch/selected=false: 6.622 ms before, 3.771 ms after, -43.05% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=branch/selected=true">Render commit graph variants</strong><br>
 Render 500 commits generated with seed 1234, using branch symbols; select the middle commit.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-500-symbols-branch-selected-true-27e063ff48df.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=branch/selected=true: 6.596 ms before, 3.784 ms after, -42.64% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/gui-presentation-graph-BenchmarkRenderCommitGraphVariants-commits-500-symbols-branch-selected-true-0d67c4979a57.svg" width="420" height="60" align="middle" alt="gui/presentation/graph/BenchmarkRenderCommitGraphVariants/commits=500/symbols=branch/selected=true: 6.655 ms before, 3.868 ms after, -41.87% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="utils/BenchmarkEscapeSpecialChars/controls">Escape special chars</strong><br>
 Escape control characters in a filename containing tabs and newlines.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/utils-BenchmarkEscapeSpecialChars-controls-ea14aed8796e.svg" width="420" height="60" align="middle" alt="utils/BenchmarkEscapeSpecialChars/controls: 1.104 µs before, 68.8 ns after, -93.77% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/utils-BenchmarkEscapeSpecialChars-controls-d333fb93e862.svg" width="420" height="60" align="middle" alt="utils/BenchmarkEscapeSpecialChars/controls: 1.118 µs before, 69.37 ns after, -93.80% change"></td>
 </tr>
 <tr>
 <td width="380" valign="top"><p><strong title="utils/BenchmarkEscapeSpecialChars/ordinary">Escape special chars</strong><br>
 Escape control characters in a plain filename.</p></td>
-<td><img src="docs-master/dev/performance-comparisons/utils-BenchmarkEscapeSpecialChars-ordinary-a3c74df4d1d4.svg" width="420" height="60" align="middle" alt="utils/BenchmarkEscapeSpecialChars/ordinary: 989.2 ns before, 14.32 ns after, -98.55% change"></td>
+<td><img src="docs-master/dev/performance-comparisons/utils-BenchmarkEscapeSpecialChars-ordinary-df5431b11a68.svg" width="420" height="60" align="middle" alt="utils/BenchmarkEscapeSpecialChars/ordinary: 996.6 ns before, 14.39 ns after, -98.56% change"></td>
 </tr>
 </tbody>
 </table>
