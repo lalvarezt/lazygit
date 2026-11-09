@@ -126,21 +126,26 @@ function measure() {
   const pattern = `^(${[...families].join('|')})$`;
   const samples = { before: new Map(), after: new Map() };
 
+  function recordSamples(output, pkg, side) {
+    for (const line of output.split('\n')) {
+      const match = line.match(/^(Benchmark\S+?)(?:-\d+)?\s+\d+\s+([\d.]+) ns\/op/);
+      if (!match) continue;
+      const id = `${pkg.slice(6)}/${match[1]}`;
+      const row = { ns: Number(match[2]), bytes: Number(line.match(/(\d+) B\/op/)?.[1]), allocations: Number(line.match(/(\d+) allocs\/op/)?.[1]) };
+      if (!Number.isFinite(row.bytes) || !Number.isFinite(row.allocations)) throw new Error(`Incomplete sample: ${id}`);
+      if (!samples[side].has(id)) samples[side].set(id, []);
+      samples[side].get(id).push(row);
+    }
+  }
+
+
   for (const pkg of packages) {
     for (const side of ['before', 'after']) {
       console.log(`${side}: ${pkg}`);
       const output = go(checkouts[side], 'test', pkg, '-run=^$', `-bench=${pattern}`, '-benchmem', `-benchtime=${settings.benchtime}`, `-count=${settings.samples}`, '-cpu=1');
       const filename = `${side}-${pkg.slice(2).replaceAll('/', '-')}.txt`;
       fs.writeFileSync(path.join(workspace, filename), output);
-      for (const line of output.split('\n')) {
-        const match = line.match(/^(Benchmark\S+?)(?:-\d+)?\s+\d+\s+([\d.]+) ns\/op/);
-        if (!match) continue;
-        const id = `${pkg.slice(6)}/${match[1]}`;
-        const row = { ns: Number(match[2]), bytes: Number(line.match(/(\d+) B\/op/)?.[1]), allocations: Number(line.match(/(\d+) allocs\/op/)?.[1]) };
-        if (!Number.isFinite(row.bytes) || !Number.isFinite(row.allocations)) throw new Error(`Incomplete sample: ${id}`);
-        if (!samples[side].has(id)) samples[side].set(id, []);
-        samples[side].get(id).push(row);
-      }
+      recordSamples(output, pkg, side);
       console.log(`${side}: ${pkg} complete`);
     }
   }
