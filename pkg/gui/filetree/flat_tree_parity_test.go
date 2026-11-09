@@ -3,10 +3,12 @@ package filetree
 import (
 	"cmp"
 	"fmt"
+	"math/rand"
 	"slices"
 	"testing"
 
 	"github.com/jesseduffield/lazygit/pkg/commands/models"
+	"github.com/jesseduffield/lazygit/pkg/common"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -53,6 +55,46 @@ func TestFlatTreesPreserveHierarchicalLeafOrder(t *testing.T) {
 	}
 }
 
+func TestFlatTreeOrderAcrossPathShapes(t *testing.T) {
+	shapes := make([][]string, 0, 12)
+	shapes = append(shapes,
+		[]string{"same", "same"},
+		[]string{"file", "file/child"},
+		[]string{"file/child", "file"},
+		[]string{"Kelvin/one", "İstanbul/two", "界/leaf", "UPPER/file", "alpha/z", "alpha/Key/last"},
+	)
+	for seed := range int64(8) {
+		rng := rand.New(rand.NewSource(seed))
+		paths := make([]string, 100)
+		for i := range paths {
+			paths[i] = fmt.Sprintf("dir-%d/sub-%d/file-%d", rng.Intn(8), rng.Intn(8), i)
+		}
+		rng.Shuffle(len(paths), func(i, j int) { paths[i], paths[j] = paths[j], paths[i] })
+		shapes = append(shapes, paths)
+	}
+	for shape, paths := range shapes {
+		for _, sortOrder := range []string{"mixed", "filesFirst", "foldersFirst"} {
+			for _, caseSensitive := range []bool{false, true} {
+				for _, showRoot := range []bool{false, true} {
+					t.Run(fmt.Sprintf("shape=%d/order=%s/case=%t/root=%t", shape, sortOrder, caseSensitive, showRoot), func(t *testing.T) {
+						files := make([]*models.CommitFile, len(paths))
+						for i, path := range paths {
+							files[i] = &models.CommitFile{Path: path}
+						}
+						order := NewNodeSortOrder(sortOrder, caseSensitive)
+						want := BuildTreeFromCommitFiles(files, showRoot, order).GetLeaves()
+						got := BuildFlatTreeFromCommitFiles(files, showRoot, order).Children
+						assert.Equal(t, want, got)
+						for i := range got {
+							assert.Same(t, want[i].File, got[i].File)
+						}
+					})
+				}
+			}
+		}
+	}
+}
+
 func BenchmarkBuildFlatFileTrees(b *testing.B) {
 	for _, count := range []int{100, 1000, 10000} {
 		for _, deep := range []bool{false, true} {
@@ -81,6 +123,36 @@ func BenchmarkBuildFlatFileTrees(b *testing.B) {
 					}
 				})
 			}
+		}
+	}
+}
+
+func BenchmarkFlatTreeRefresh(b *testing.B) {
+	for _, count := range []int{100, 10000} {
+		for _, commitFiles := range []bool{false, true} {
+			b.Run(fmt.Sprintf("files=%d/commits=%t", count, commitFiles), func(b *testing.B) {
+				files := make([]*models.File, count)
+				commits := make([]*models.CommitFile, count)
+				for i := range files {
+					path := fmt.Sprintf("dir-%05d/sub/file", i)
+					files[i] = &models.File{Path: path}
+					commits[i] = &models.CommitFile{Path: path}
+				}
+				c := common.NewDummyCommon()
+				working := NewFileTreeViewModel(func() []*models.File { return files }, c, false)
+				committed := NewCommitFileTreeViewModel(func() []*models.CommitFile { return commits }, c, false)
+				working.SetTree()
+				committed.SetTree()
+				b.ReportAllocs()
+				b.ResetTimer()
+				for b.Loop() {
+					if commitFiles {
+						committed.SetTree()
+					} else {
+						working.SetTree()
+					}
+				}
+			})
 		}
 	}
 }

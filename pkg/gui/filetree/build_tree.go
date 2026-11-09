@@ -1,6 +1,7 @@
 package filetree
 
 import (
+	"slices"
 	"sort"
 	"strings"
 
@@ -86,7 +87,72 @@ func BuildFlatTreeFromCommitFiles(
 }
 
 func flatTreeLeaves[T any](files []*T, getPath func(*T) string, showRootItem bool, order NodeSortOrder) []*Node[T] {
-	return buildTree(files, getPath, showRootItem, order).GetLeaves()
+	type flatFile struct {
+		file     *T
+		path     string
+		sortPath string
+	}
+	type pathKind struct {
+		original string
+		dir      bool
+	}
+	paths := make(map[string]pathKind, len(files))
+	entries := make([]flatFile, 0, len(files))
+	for _, file := range files {
+		path := InternalTreePathForFilePath(getPath(file), showRootItem)
+		sortPath := order.sortPath(path)
+		rawRest, sortRest := path, sortPath
+		rawEnd, sortEnd := 0, 0
+		duplicate := false
+		for {
+			rawName, rawTail, dir := strings.Cut(rawRest, "/")
+			sortName, sortTail, _ := strings.Cut(sortRest, "/")
+			rawEnd += len(rawName)
+			sortEnd += len(sortName)
+			original := path[:rawEnd]
+			key := sortPath[:sortEnd]
+			if previous, found := paths[key]; found {
+				if previous.original != original || previous.dir != dir {
+					// Case aliases and file/directory collisions depend on the
+					// hierarchy's insertion and sibling-sort order.
+					return buildTree(files, getPath, showRootItem, order).GetLeaves()
+				}
+				duplicate = !dir
+			} else {
+				paths[key] = pathKind{original: original, dir: dir}
+			}
+			if !dir {
+				break
+			}
+			rawEnd++
+			sortEnd++
+			rawRest, sortRest = rawTail, sortTail
+		}
+		if !duplicate {
+			entries = append(entries, flatFile{file: file, path: path, sortPath: sortPath})
+		}
+	}
+	// Each sort key has already been normalized for the requested case mode.
+	order.caseSensitive = true
+	slices.SortFunc(entries, func(a, b flatFile) int {
+		left, right := a.sortPath, b.sortPath
+		for {
+			aName, aTail, aDir := strings.Cut(left, "/")
+			bName, bTail, bDir := strings.Cut(right, "/")
+			if aName != bName || aDir != bDir {
+				return order.compare(aName, bName, aDir, bDir)
+			}
+			if !aDir {
+				return 0
+			}
+			left, right = aTail, bTail
+		}
+	})
+	leaves := make([]*Node[T], len(entries))
+	for i, entry := range entries {
+		leaves[i] = &Node[T]{File: entry.file, path: entry.path}
+	}
+	return leaves
 }
 
 func BuildTreeFromCommitFiles(
