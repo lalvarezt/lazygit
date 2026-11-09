@@ -69,7 +69,12 @@ func GetPipeSets(commits []*models.Commit, getStyle func(c *models.Commit) *styl
 }
 
 func RenderAux(pipeSets [][]Pipe, commits []*models.Commit, selectedCommitHashPtr *string, symbolSet SymbolSet) []string {
-	maxProcs := runtime.GOMAXPROCS(0)
+	const pipesPerWorker = 128
+	pipeCount := 0
+	for _, pipes := range pipeSets {
+		pipeCount += len(pipes)
+	}
+	maxProcs := min(runtime.GOMAXPROCS(0), max(1, pipeCount/pipesPerWorker), max(1, len(pipeSets)))
 	lines := make([]string, len(pipeSets))
 	render := func(from, to int) {
 		for k := from; k < to; k++ {
@@ -79,6 +84,10 @@ func RenderAux(pipeSets [][]Pipe, commits []*models.Commit, selectedCommitHashPt
 			}
 			lines[k] = renderPipeSet(pipeSets[k], selectedCommitHashPtr, prevCommit, symbolSet)
 		}
+	}
+	if maxProcs == 1 {
+		render(0, len(pipeSets))
+		return lines
 	}
 	perProc := len(pipeSets) / maxProcs
 
