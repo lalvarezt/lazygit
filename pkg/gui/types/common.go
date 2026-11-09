@@ -1,6 +1,7 @@
 package types
 
 import (
+	"github.com/jesseduffield/generics/set"
 	"github.com/jesseduffield/lazygit/pkg/commands"
 	"github.com/jesseduffield/lazygit/pkg/commands/git_commands"
 	"github.com/jesseduffield/lazygit/pkg/commands/models"
@@ -358,6 +359,8 @@ func (self *MenuItem) ID() string {
 	return self.Label
 }
 
+// Model holds UI-thread repository state. Its commit, branch, and main-branch
+// setters also update the ancestry used to render branch markers.
 type Model struct {
 	CommitFiles     []*models.CommitFile
 	Files           []*models.File
@@ -395,6 +398,10 @@ type Model struct {
 	Authors map[string]*models.Author
 
 	HashPool *utils.StringPool
+
+	mainBranchNames         []string
+	commitsMergedLocally    set.Set[string]
+	subCommitsMergedLocally set.Set[string]
 }
 
 type Mutexes struct {

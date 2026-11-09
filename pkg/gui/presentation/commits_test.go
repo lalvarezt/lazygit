@@ -10,6 +10,7 @@ import (
 	"github.com/jesseduffield/lazygit/pkg/commands/git_commands"
 	"github.com/jesseduffield/lazygit/pkg/commands/models"
 	"github.com/jesseduffield/lazygit/pkg/common"
+	"github.com/jesseduffield/lazygit/pkg/gui/branchstack"
 	"github.com/jesseduffield/lazygit/pkg/gui/presentation/authors"
 	"github.com/jesseduffield/lazygit/pkg/gui/presentation/graph"
 	"github.com/jesseduffield/lazygit/pkg/gui/style"
@@ -628,6 +629,7 @@ func TestGetCommitListDisplayStrings(t *testing.T) {
 					common,
 					commits,
 					s.branches,
+					branchstack.CommitsMergedIntoLocalMainBranch(commits, s.branches, common.UserConfig().Git.MainBranches),
 					s.currentBranchName,
 					s.hasUpdateRefConfig,
 					s.fullDescription,

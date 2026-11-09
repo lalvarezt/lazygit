@@ -49,7 +49,7 @@ func (self *SubCommitsHelper) ViewSubCommits(opts ViewSubCommitsOpts) error {
 		return err
 	}
 
-	self.c.Model().SubCommits = commits
+	self.c.Model().SetSubCommits(commits)
 	self.refreshHelper.RefreshAuthors(commits)
 
 	subCommitsContext := self.c.Contexts().SubCommits

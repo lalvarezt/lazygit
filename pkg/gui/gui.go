@@ -391,6 +391,7 @@ func (gui *Gui) onNewRepo(startArgs appTypes.StartArgs, contextKey types.Context
 			if didChange && reloadErr == nil {
 				gui.c.Log.Info("User config changed - reloading")
 				reloadErr = gui.onUserConfigLoaded()
+				gui.State.Model.SetMainBranchNames(gui.c.UserConfig().Git.MainBranches)
 				gui.reloadSidePanels()
 				gui.resetKeybindings()
 
@@ -619,6 +620,7 @@ func (gui *Gui) resetState(startArgs appTypes.StartArgs) types.Context {
 
 	if state := gui.RepoStateMap[Repo(worktreePath)]; state != nil {
 		gui.State = state
+		gui.State.Model.SetMainBranchNames(gui.c.UserConfig().Git.MainBranches)
 		gui.State.ViewsSetup = false
 
 		// The repo we're switching to may have a per-repo config with a different
@@ -666,6 +668,7 @@ func (gui *Gui) resetState(startArgs appTypes.StartArgs) types.Context {
 	}
 
 	gui.RepoStateMap[Repo(worktreePath)] = gui.State
+	gui.State.Model.SetMainBranchNames(gui.c.UserConfig().Git.MainBranches)
 
 	gui.applySidePanelConfig()
 

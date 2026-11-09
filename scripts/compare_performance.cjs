@@ -53,7 +53,7 @@ function fixtureSource(file, text) {
   return `package ${path.basename(path.dirname(file))}\n\nimport (\n${fixture.imports.map(name => `\t"${name}"`).join('\n')}\n)\n\n${declarations.join('\n\n')}\n`;
 }
 
-function benchmarkSource(file, text) {
+function benchmarkSource(file, text, rendererSource = '') {
   // Seeding this existing-text fixture is outside the timed edit pair.
   // Direct initialization avoids benchmarking TypeString during setup.
   if (file === 'pkg/gocui/edit_bench_test.go') {
@@ -113,6 +113,29 @@ function benchmarkSource(file, text) {
     if (!text.includes('v.RefreshSearch()')) throw new Error('The streaming-search fixture changed');
     text = text.replaceAll('v.RefreshSearch()', 'v.GetSearchStatus()');
   }
+  if (file === 'pkg/gui/presentation/commits_bench_test.go' && rendererSource.includes('mergedIntoLocalMainBranch *set.Set[string]')) {
+    const parameters = rendererSource.match(/func GetCommitListDisplayStrings\(([\s\S]*?)\) \[\]\[\]string/)?.[1];
+    const loop = /for b\.Loop\(\) \{\s*GetCommitListDisplayStrings\(([^\n]+)\)\s*\}/;
+    const argumentsText = text.match(loop)?.[1];
+    const setup = 'mergedLocally := branchstack.CommitsMergedIntoLocalMainBranch(commits, branches, c.UserConfig().Git.MainBranches)';
+    if (!parameters || !argumentsText?.includes('branches, mergedLocally,') || !text.includes(setup)) throw new Error('The commit-viewport fixture changed');
+    // This fixture's unmerged main tip has only a merged parent. Prepare its
+    // known ancestry outside timing, without importing a newer package.
+    text = text.replace(/\s*"github.com\/jesseduffield\/lazygit\/pkg\/gui\/branchstack"/, '');
+    text = text.replace(setup, 'mergedLocally := set.New[string]()\n if main == "unmerged" { mergedLocally.Add(tip) }');
+    const legacyParameters = parameters.split('\n').filter(line => !line.includes('mergedIntoLocalMainBranch ')).join('\n');
+    const legacyArguments = argumentsText.replace('branches, mergedLocally,', 'branches,');
+    // Select the typed call before timing. Both revisions run the same fixture
+    // and call a function value once per operation.
+    text = text.replace(loop, `switch render := any(GetCommitListDisplayStrings).(type) {
+      case func(${parameters}) [][]string:
+        for b.Loop() { render(${argumentsText}) }
+      case func(${legacyParameters}) [][]string:
+        for b.Loop() { render(${legacyArguments}) }
+      default:
+        b.Fatal("Unsupported commit renderer interface")
+      }`);
+  }
   return text;
 }
 
@@ -170,7 +193,8 @@ function measure() {
   }
 
   for (const file of files) {
-    const text = benchmarkSource(file, fixtureSource(file, source(revisions.after, file)));
+    const rendererSource = file === 'pkg/gui/presentation/commits_bench_test.go' ? source(revisions.after, 'pkg/gui/presentation/commits.go') : '';
+    const text = benchmarkSource(file, fixtureSource(file, source(revisions.after, file)), rendererSource);
     for (const match of text.matchAll(/^func (Benchmark\w+)\(/gm)) families.add(match[1]);
     const digest = sha256(text);
     for (const directory of Object.values(checkouts)) {

@@ -9,6 +9,7 @@ import (
 	"github.com/jesseduffield/lazygit/pkg/commands/git_commands"
 	"github.com/jesseduffield/lazygit/pkg/commands/models"
 	"github.com/jesseduffield/lazygit/pkg/common"
+	"github.com/jesseduffield/lazygit/pkg/gui/branchstack"
 	"github.com/jesseduffield/lazygit/pkg/gui/presentation/graph"
 	"github.com/jesseduffield/lazygit/pkg/utils"
 )
@@ -43,10 +44,11 @@ func BenchmarkCommitViewport(b *testing.B) {
 					picked := set.New[string]()
 					bisect := git_commands.NewNullBisectInfo()
 					now := time.Unix(1700000000, 0)
+					mergedLocally := branchstack.CommitsMergedIntoLocalMainBranch(commits, branches, c.UserConfig().Git.MainBranches)
 					b.ReportAllocs()
 					b.ResetTimer()
 					for b.Loop() {
-						GetCommitListDisplayStrings(c, commits, branches, "feature", false, false, picked, "", "", "", "", now, false, nil, count/2, count/2+40, false, graph.BoxDrawingSymbols, bisect)
+						GetCommitListDisplayStrings(c, commits, branches, mergedLocally, "feature", false, false, picked, "", "", "", "", now, false, nil, count/2, count/2+40, false, graph.BoxDrawingSymbols, bisect)
 					}
 				})
 			}

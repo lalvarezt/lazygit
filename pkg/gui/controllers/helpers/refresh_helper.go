@@ -889,7 +889,7 @@ func (self *RefreshHelper) refreshCommitsWithLimit(captured capturedCommitState,
 		}
 
 		self.c.Model().BisectInfo = bisectInfo
-		self.c.Model().Commits = commits
+		self.c.Model().SetCommits(commits)
 		self.c.Contexts().LocalCommits.SetLoadedCommitLimit(limit)
 		self.c.Model().CommitsWereFilteredAtLastRefresh = captured.filterPath != "" || captured.filterAuthor != ""
 		self.RefreshAuthors(commits)
@@ -1105,7 +1105,7 @@ func (self *RefreshHelper) refreshSubCommitsWithLimit(captured capturedSubCommit
 		return err
 	}
 	self.onUIThreadUnlessRepoChanged(env, func() {
-		self.c.Model().SubCommits = commits
+		self.c.Model().SetSubCommits(commits)
 		self.c.Contexts().SubCommits.SetLoadedCommitLimit(limit)
 		self.RefreshAuthors(commits)
 	})
@@ -1183,7 +1183,7 @@ func (self *RefreshHelper) refreshRebaseCommits(hashPool *utils.StringPool, comm
 	workingTreeState := env.git.Status.WorkingTreeState()
 
 	self.onUIThreadUnlessRepoChanged(env, func() {
-		self.c.Model().Commits = updatedCommits
+		self.c.Model().SetCommits(updatedCommits)
 		self.c.Model().WorkingTreeStateAtLastCommitRefresh = workingTreeState
 	})
 
@@ -1267,7 +1267,7 @@ func (self *RefreshHelper) refreshBranches(captured capturedBranchState, waitFor
 		// the UI thread.
 		prevSelectedBranch := self.c.Contexts().Branches.GetSelected()
 
-		self.c.Model().Branches = branches
+		self.c.Model().SetBranches(branches)
 		// Rebuilding here (rather than on the worker) means the map is built from
 		// the branches we just wrote, on the UI thread.
 		self.rebuildPullRequestsMap()

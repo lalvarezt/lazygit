@@ -9,7 +9,6 @@ import (
 	"github.com/jesseduffield/lazygit/pkg/commands/git_commands"
 	"github.com/jesseduffield/lazygit/pkg/commands/models"
 	"github.com/jesseduffield/lazygit/pkg/common"
-	"github.com/jesseduffield/lazygit/pkg/gui/branchstack"
 	"github.com/jesseduffield/lazygit/pkg/gui/presentation/authors"
 	"github.com/jesseduffield/lazygit/pkg/gui/presentation/graph"
 	"github.com/jesseduffield/lazygit/pkg/gui/presentation/icons"
@@ -41,6 +40,7 @@ func GetCommitListDisplayStrings(
 	common *common.Common,
 	commits []*models.Commit,
 	branches []*models.Branch,
+	mergedIntoLocalMainBranch *set.Set[string],
 	currentBranchName string,
 	hasRebaseUpdateRefsConfig bool,
 	fullDescription bool,
@@ -182,14 +182,6 @@ func GetCommitListDisplayStrings(
 	reservedWidths := getReservedColumnWidths(
 		commits, common.UserConfig().Gui.CommitHashLength, fullDescription,
 		timeFormat, shortTimeFormat, now, bisectInfo)
-
-	mergedIntoLocalMainBranch := set.New[string]()
-	if lo.SomeBy(filteredCommits, func(commit *models.Commit) bool {
-		return !commit.IsTODO() && commit.Status != models.StatusMerged && branchHeadsToVisualize.Includes(commit.Hash())
-	}) {
-		mergedIntoLocalMainBranch = branchstack.CommitsMergedIntoLocalMainBranch(
-			commits, branches, common.UserConfig().Git.MainBranches)
-	}
 
 	lines := make([][]string, 0, len(filteredCommits))
 	var bisectStatus BisectStatus

@@ -93,6 +93,7 @@ func NewSubCommitsContext(
 			c.Common,
 			c.Model().SubCommits,
 			branches,
+			c.Model().SubCommitsMergedIntoLocalMainBranch(),
 			viewModel.GetRef().RefName(),
 			hasRebaseUpdateRefsConfig,
 			c.State().GetRepoState().GetScreenMode() != types.SCREEN_NORMAL,

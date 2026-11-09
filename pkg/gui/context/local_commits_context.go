@@ -179,6 +179,7 @@ func NewLocalCommitsContext(c *ContextCommon) *LocalCommitsContext {
 			c.Common,
 			c.Model().Commits,
 			c.Model().Branches,
+			c.Model().CommitsMergedIntoLocalMainBranch(),
 			c.Model().CheckedOutBranch,
 			hasRebaseUpdateRefsConfig,
 			c.State().GetRepoState().GetScreenMode() != types.SCREEN_NORMAL,
