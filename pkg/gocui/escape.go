@@ -7,9 +7,11 @@ package gocui
 import (
 	"strconv"
 	"strings"
+	"unicode"
 	"unicode/utf8"
 
 	"github.com/go-errors/errors"
+	"github.com/rivo/uniseg"
 )
 
 type escapeInterpreter struct {
@@ -253,7 +255,7 @@ func (ei *escapeInterpreter) instructionRead() {
 	ei.instruction = noInstruction{}
 }
 
-// parseSGR consumes a complete SGR without grapheme segmentation. Incomplete
+// parseSGR consumes a complete SGR without segmenting each byte. Incomplete
 // sequences and non-SGR instructions belong to the streaming interpreter.
 func (ei *escapeInterpreter) parseSGR(p []byte) int {
 	if ei.state != stateNone || len(p) < 3 || p[0] != '\x1b' || p[1] != '[' || len(ei.orphanedMetadata) != 0 {
@@ -279,7 +281,18 @@ func (ei *escapeInterpreter) parseSGR(p []byte) int {
 		case p[end] == 'm':
 			// A Unicode continuation can extend the final ASCII grapheme.
 			if end+1 < len(p) && p[end+1] >= utf8.RuneSelf {
-				return 0
+				r, size := utf8.DecodeRune(p[end+1:])
+				if r == utf8.RuneError && size == 1 && !utf8.FullRune(p[end+1:]) {
+					return 0
+				}
+				// Common combining diacritics need only a range check.
+				if r >= '\u0300' && r <= '\u036f' || unicode.IsMark(r) || r == '\u200d' {
+					return 0
+				}
+				cluster, _, _, _ := uniseg.FirstGraphemeCluster(p[end:end+1+size], -1)
+				if len(cluster) != 1 {
+					return 0
+				}
 			}
 			ei.csiParam = strings.Split(string(p[2:end]), ";")
 			if end == 2 {
