@@ -5,10 +5,11 @@ Delta's upstream integration is complete. Its
 records the accepted costs of corrected output. This note records the lazygit
 follow-up and fresh measurements from 2026-11-12.
 
-The boundary prototype passes the correctness checks below and improves Delta
-ingestion. It also adds a reproducible cost to the combining-mark fallback.
-The parser change remains uncommitted pending a decision about that tradeoff.
-The benchmark coverage and investigation evidence are committed separately.
+The implementation is committed as `011f797f8`, a reviewable fixup for the
+original SGR fast path. It passes the correctness checks below and improves
+Delta ingestion. The initial prototype's confirmed combining-mark slowdown
+does not reproduce after tuning. The remaining measurement uncertainty does
+not establish zero overhead.
 
 ## Why the delta update exposes more work
 
@@ -34,7 +35,7 @@ parser also takes an avoidable slow path.
 The delta deleted-file syntax-highlighting cost is a separate renderer issue.
 Changing lazygit's ANSI handling will not remove that parsing cost.
 
-## Boundary prototype
+## Unicode boundary check
 
 Focus on `escapeInterpreter.parseSGR` in `pkg/gocui/escape.go`. Its fast path
 rejects a completed SGR escape whenever a non-ASCII byte follows the final `m`.
@@ -45,17 +46,18 @@ That guard protects a real invariant: a following combining rune can extend
 the grapheme containing `m`. Preserve that behavior while recognizing complete
 escapes before ordinary Unicode characters.
 
-The existing boundary-only prototype checks that the next rune is complete,
-then applies `uniseg.FirstGraphemeCluster` to just `m` and that rune. It accepts
-the fast path when `m` is a separate grapheme and keeps the streaming fallback
-for incomplete UTF-8 or an extending grapheme. It introduces no cache.
+The boundary check decodes the following rune once. It rejects incomplete
+UTF-8, Unicode marks, and ZWJ before calling the grapheme engine. Common
+combining diacritics use a range check that avoids the Unicode property lookup.
+Other runes go through `uniseg.FirstGraphemeCluster` with just `m` and that rune.
+The fast path accepts the escape when `m` is a separate grapheme. The change
+introduces no cache.
 
 The [reviewable prototype patch](../../../delta/etc/performance/data/lazygit-sgr-unicode-boundary-prototype.patch)
-is in the sibling delta repository. The working lazygit candidate applies that
-boundary check, corrects its function comment, and adds direct test coverage.
-Commit `44945495c` introduced the fast path and is still the last commit to
-change `pkg/gocui/escape.go`. Its refinement belongs in a separate reviewable
-fixup for that commit.
+is in the sibling delta repository. It records the initial check before the
+fallback tuning. Commit `44945495c` introduced the fast path and was the last
+commit to change `pkg/gocui/escape.go` at task start. Fixup `011f797f8` refines
+that implementation and adds direct test coverage.
 
 Historical prototype checks passed the gocui view tests and selected snapshots
 captured from the original consumer at chunk boundaries. On that prototype,
@@ -64,7 +66,7 @@ case still measured 30.76 and 32.21 ms. These are exploratory observations with
 incomplete coverage, not proof that the regression is resolved or a direct
 paired comparison against the original implementation.
 
-## Fresh paired measurements
+## Final paired measurements
 
 The baseline is the task-start revision,
 `eb0320973ffe795970ad95c047ad147a15c53e81`. Baseline and candidate test
@@ -81,25 +83,27 @@ precede 15 serial pairs with alternating execution order. The governor is
 
 These values are medians in milliseconds:
 
-| Input stream | Original parser | Boundary prototype |
+| Input stream | Original parser | Tuned parser |
 | --- | ---: | ---: |
-| 1,000-line Go, previous Delta output | 35.90 | 32.39 |
-| 1,000-line Go, corrected Delta output | 46.56 | 32.83 |
-| 12,000-line Go, previous Delta output | 474.29 | 427.65 |
-| 12,000-line Go, corrected Delta output | 601.02 | 446.10 |
+| 1,000-line Go, previous Delta output | 35.44 | 31.88 |
+| 1,000-line Go, corrected Delta output | 47.35 | 34.39 |
+| 12,000-line Go, previous Delta output | 487.93 | 442.35 |
+| 12,000-line Go, corrected Delta output | 599.17 | 458.02 |
 
 On the large corrected stream, allocated bytes per operation fall from
 713,661,256 to 674,253,856, and allocations fall from 5,023,819 to 2,967,712.
-Seven alternating memory probes show median sampled process peaks of 567,348
-and 535,600 KiB. These sample Linux `VmHWM` every 2 ms and can miss a final peak.
+Sampled process peaks vary between runs. A subsequent 21-pair check uses Linux
+`wait4` resource usage to capture exact process peaks, with medians of 551,200
+and 557,708 KiB. The paired median change is -1.07%, with a bootstrap interval
+of -2.74% to +1.82%. This does not establish a consistent peak-memory benefit.
 Allocated bytes are cumulative allocation volume, not peak resident memory.
 
-CPU profiles confirm less time in `parseOne`. SGR parameter splitting remains
-visible after the change, but the profile does not establish that another
+Initial prototype profiles show less time in `parseOne`. SGR parameter
+splitting remains visible, but the profile does not establish that another
 optimization is warranted. The corrected stream still takes more work than
-the previous stream with the candidate parser.
+the previous stream with the tuned parser.
 
-## Confirmed fallback tradeoff
+## Fallback tuning
 
 `BenchmarkViewWriteSGR` covers repeated and distinct RGB sequences followed by
 ASCII, ordinary Unicode, or a combining mark, with one-line and 2,000-line
@@ -107,22 +111,38 @@ updates. Existing `BenchmarkViewWrite` cases cover plain text, colored text,
 Unicode without ANSI, and metadata.
 
 An initial 11-pair matrix found a possible combining-mark slowdown. A separate
-31-pair recheck uses three warmup pairs and 200 ms benchmark samples:
+31-pair recheck confirmed it with three warmup pairs and 200 ms samples:
 
-| Fallback input | Original median | Prototype median | Paired median change |
+| Fallback input | Original median | Initial prototype median | Paired median change |
 | --- | ---: | ---: | ---: |
 | One line | 2,771 ns | 2,819 ns | +1.90% |
 | 2,000 lines | 5.126 ms | 5.281 ms | +3.22% |
 
-The deterministic paired bootstrap intervals exclude zero for both fallback
-cases. ASCII rechecks do not show a consistent slowdown. Allocation counts
-remain unchanged on the fallback. This stress case puts a combining mark
-immediately after the SGR terminator, where the candidate checks the boundary
-before falling back to streaming interpretation.
+The paired bootstrap intervals exclude zero for both initial fallback cases.
+This stress case puts a combining mark immediately after the SGR terminator.
+The initial prototype checks the grapheme boundary before falling back to
+streaming interpretation.
 
-The decision is whether to reduce this extra boundary-check cost before
-adoption or explicitly accept it in exchange for the measured ingestion gains.
-The current recommendation is to tune the boundary check first.
+The user chose further tuning. Decoding once and rejecting marks early reduces
+the cost. The range check for common combining diacritics avoids the property
+lookup on that path. The final fallback comparisons are:
+
+| Fallback input | Original median | Tuned median | Paired median change | Bootstrap interval |
+| --- | ---: | ---: | ---: | ---: |
+| One line, 31 pairs at 200 ms | 2,776 ns | 2,787 ns | +0.40% | -0.22% to +0.65% |
+| 2,000 lines, 31 pairs at 500 ms | 5.159 ms | 5.193 ms | +1.23% | -0.40% to +2.05% |
+
+The original confirmed loss no longer reproduces, but these intervals do not
+prove zero overhead. Fallback allocation counts remain unchanged. Other
+fallback classes have correctness coverage without dedicated performance
+rechecks.
+
+The final short matrix also flags plain text and Unicode without ANSI. Longer
+31-pair, 500 ms rechecks do not reproduce those slowdowns. Their paired median
+changes are -0.78% and -0.11%, and both intervals include zero. One-line ASCII
+SGR updates show a sub-1% paired difference in the 31-pair check, about 4 ns
+between medians. No material common-path loss was established. All original
+samples remain in the evidence.
 
 ## Correctness checks completed
 
@@ -131,6 +151,11 @@ the streaming interpreter in normal, 256-color, and true-color modes. They
 cover box characters, wide characters, emoji, flags, prepend characters,
 combining marks, variation selectors, ZWJ sequences, spacing marks, malformed
 UTF-8, incomplete UTF-8, resets, and extended colors.
+
+An exhaustive probe checks all 1,112,064 valid Unicode scalars against the
+existing grapheme engine. It finds no unsafe fast-path acceptance. There are
+124 conservative mark rejections where the engine would allow the fast path.
+These keep the original streaming behavior.
 
 The preserved original executable and candidate match in 33,009 synthetic
 chunk cases. Each comparison includes cells, attributes, links, row metadata,
@@ -199,19 +224,25 @@ the behavior this optimization is intended to preserve.
 
 ## Evidence and reproduction
 
-The [fresh raw measurements](data/delta-ansi-ingestion-2026-11-12.json) retain all
-384 initial benchmark samples, 248 recheck samples, memory samples, controls,
-fixture and executable hashes, commands, and correctness results. They also
-record the identity of the local bundle at
-`.git/delta-ansi-ingestion-2026-11-12.tar.gz`, relative to the repository root.
-That bundle contains preserved test executables, source overlays, fixtures,
-snapshot comparisons, probes, profiles, and logs.
+The [final raw measurements](data/delta-ansi-ingestion-tuned-2026-11-12.json)
+retain all 384 final matrix samples, tuning experiments and rechecks, memory
+samples, controls, source and executable hashes, commands, and correctness
+results. They record the implementation commit and the identity of the local
+bundle at `.git/delta-ansi-ingestion-tuned-2026-11-12.tar.gz`, relative to the
+repository root. That bundle contains preserved test executables, source
+overlays, fixtures, snapshot comparisons, probes, and logs.
 
-The working extraction is `.git/delta-ansi-follow-up/`. Its `measure.cjs`,
-`recheck.cjs`, and `memory.cjs` replay the measurements with the preserved test
-executables. The overlay JSON files reproduce the test harness builds against
-the pinned source. The synthetic snapshot test writes its output to
-`DELTA_ANSI_SNAPSHOTS`; the consumer probe reads `DELTA_ANSI_FIXTURE`.
+The working extraction is `.git/delta-ansi-tuning/`. The `compare.cjs` script
+replays tuning comparisons. Its arguments select the output label, pair count,
+sample duration, benchmark pattern, and executable names. The final directory
+contains `measure.cjs` and `memory.cjs`, preserved executables, and reproduction
+overlays. `rssprobe.go` captures exact child-process resource usage. Synthetic
+snapshot tests write `DELTA_ANSI_SNAPSHOTS`; consumer probes read
+`DELTA_ANSI_FIXTURE`.
+
+The [initial prototype evidence](data/delta-ansi-ingestion-2026-11-12.json)
+retains its 384 matrix samples, 248 fallback recheck samples, profiles, and
+bundle identity. Its working extraction is `.git/delta-ansi-follow-up/`.
 
 The sibling delta repository holds the [historical regression report](../../../delta/etc/performance/upstream-benchmarks-2026-11-11.md)
 and [raw evidence with exploratory scripts](../../../delta/etc/performance/data/upstream-benchmarks-2026-11-11.json).
