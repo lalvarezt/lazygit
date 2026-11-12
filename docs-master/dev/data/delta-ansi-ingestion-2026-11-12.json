@@ -1,0 +1,6571 @@
+{
+  "status": "Boundary prototype measured; fallback performance tradeoff awaits user decision",
+  "baseline": "eb0320973ffe795970ad95c047ad147a15c53e81",
+  "candidateSourceHashes": {
+    "pkg/gocui/escape.go": "25fb43e1adef82575da8b289a8c847f91814263783d81497462e3adf7009ee57",
+    "pkg/gocui/escape_sgr_test.go": "fc4ba008de9039c044dc14b28540cbe8abe98aa6a18b7df5a4f9dbdf7b0b0a0f",
+    "pkg/gocui/view_write_sgr_bench_test.go": "25b286cadcef33a5b6eac0c3b21a7017b5f924ba8f28888605f47a010ceafbd1"
+  },
+  "controls": {
+    "cpu": 2,
+    "GOMAXPROCS": "1",
+    "GOGC": "100",
+    "GOMEMLIMIT": "off",
+    "FORCE_COLOR": "1",
+    "CLICOLOR_FORCE": "1",
+    "NO_COLOR": null,
+    "warmups": 2,
+    "sampling": "serial alternating baseline/candidate order",
+    "consumerPairs": 15,
+    "commonPairs": 11,
+    "consumerIterations": 2,
+    "commonBenchtime": "100ms"
+  },
+  "toolchain": "go version go1.27.4 linux/amd64",
+  "host": "Linux 7.2.14-arch1-1 x86_64 GNU/Linux",
+  "governor": "powersave",
+  "binaryHashes": {
+    "baseline-gocui.test": "bc19f8c38fc25d554bdb3b21f82ce866688309a1c50d55001901d177544eeaeb",
+    "candidate-gocui.test": "fd07df98f2601ddf46b609ca92f477bd0b47ac9f1fc85d01062a30e1e35e9a60",
+    "baseline-consumer.test": "9ed14af162eed73c322fef711f6d340c80f5cb1c55bf75cd690d7996b4e5ef80",
+    "candidate-consumer.test": "2d85da46d2262496b92a282ed1777b0b5053ea59215a754747c13a55ca66f6f9",
+    "baseline-escape.go": "e8f79313eae41285b654ff1aa07bbd74e8dcb8839251b8525bd1dab9a80df34b",
+    "gocui_probe_test.go": "95113e95237d77fcfde717d70fc1b72492cc4c9f4ab0403e0dc83f10d3adb8a2",
+    "consumer_probe_test.go": "2e094b2935cb08a907d33723efe9b8df088ae955a63fa0d0776370602fc08aac",
+    "measure.cjs": "6d12a4ca4c7d3b0796d41bd212c1c7c099c51791c2c8ebe90f1917c9ddf21e1c"
+  },
+  "fixtures": [
+    {
+      "name": "go-1000-before.bin",
+      "bytes": 1246082,
+      "sha256": "873b1563180b0167297accd13dfacfbf5584804f1b804cf8ac5a674fb070f150"
+    },
+    {
+      "name": "go-1000-after.bin",
+      "bytes": 1572022,
+      "sha256": "9d59fa935fe027c38654ee69de79615e2d2b8b70e1f8714191e83cf81e9943e4"
+    },
+    {
+      "name": "go-12000-before.bin",
+      "bytes": 15016960,
+      "sha256": "e7d8f30f56c821a0dba668296a82ad4d0f05f7840b84e3e9f6f1e6d098f00d7f"
+    },
+    {
+      "name": "go-12000-after.bin",
+      "bytes": 19125954,
+      "sha256": "5fb0c65e7d9a6810d32b258a04b06f46280ae6f836fb0e5d24560d69ba3a17fc"
+    }
+  ],
+  "commands": [
+    [
+      "taskset",
+      "-c",
+      "2",
+      "/home/lalvarezt/git-repos/lazygit/.git/delta-ansi-follow-up/baseline-consumer.test",
+      "-test.run=^$",
+      "-test.bench=^BenchmarkDeltaANSIConsumer$",
+      "-test.benchtime=2x",
+      "-test.count=1"
+    ],
+    [
+      "taskset",
+      "-c",
+      "2",
+      "/home/lalvarezt/git-repos/lazygit/.git/delta-ansi-follow-up/candidate-consumer.test",
+      "-test.run=^$",
+      "-test.bench=^BenchmarkDeltaANSIConsumer$",
+      "-test.benchtime=2x",
+      "-test.count=1"
+    ],
+    [
+      "taskset",
+      "-c",
+      "2",
+      "/home/lalvarezt/git-repos/lazygit/.git/delta-ansi-follow-up/baseline-gocui.test",
+      "-test.run=^$",
+      "-test.bench=^(BenchmarkViewWrite|BenchmarkViewWriteSGR)$",
+      "-test.benchtime=100ms",
+      "-test.count=1"
+    ],
+    [
+      "taskset",
+      "-c",
+      "2",
+      "/home/lalvarezt/git-repos/lazygit/.git/delta-ansi-follow-up/candidate-gocui.test",
+      "-test.run=^$",
+      "-test.bench=^(BenchmarkViewWrite|BenchmarkViewWriteSGR)$",
+      "-test.benchtime=100ms",
+      "-test.count=1"
+    ]
+  ],
+  "results": [
+    {
+      "name": "go-1000-before|BenchmarkDeltaANSIConsumer",
+      "pairs": 15,
+      "baselineMS": 35.904784,
+      "candidateMS": 32.394238,
+      "pairedPercent": -8.787479803825438,
+      "baselineBytes": 52595528,
+      "candidateBytes": 51936224,
+      "baselineAllocs": 260934,
+      "candidateAllocs": 232801
+    },
+    {
+      "name": "go-1000-after|BenchmarkDeltaANSIConsumer",
+      "pairs": 15,
+      "baselineMS": 46.56381,
+      "candidateMS": 32.831658,
+      "pairedPercent": -31.066882908490946,
+      "baselineBytes": 56900208,
+      "candidateBytes": 53740288,
+      "baselineAllocs": 404954,
+      "candidateAllocs": 240381
+    },
+    {
+      "name": "go-12000-before|BenchmarkDeltaANSIConsumer",
+      "pairs": 15,
+      "baselineMS": 474.285302,
+      "candidateMS": 427.65393,
+      "pairedPercent": -9.398633506245579,
+      "baselineBytes": 659384920,
+      "candidateBytes": 651511696,
+      "baselineAllocs": 3208217,
+      "candidateAllocs": 2872154
+    },
+    {
+      "name": "go-12000-after|BenchmarkDeltaANSIConsumer",
+      "pairs": 15,
+      "baselineMS": 601.023186,
+      "candidateMS": 446.100678,
+      "pairedPercent": -25.722209119523953,
+      "baselineBytes": 713661256,
+      "candidateBytes": 674253856,
+      "baselineAllocs": 5023819,
+      "candidateAllocs": 2967712
+    },
+    {
+      "name": "common|BenchmarkViewWrite/plain",
+      "pairs": 11,
+      "baselineMS": 2.795606,
+      "candidateMS": 2.806447,
+      "pairedPercent": -0.060663622178824816,
+      "baselineBytes": 10671232,
+      "candidateBytes": 10671232,
+      "baselineAllocs": 2019,
+      "candidateAllocs": 2019
+    },
+    {
+      "name": "common|BenchmarkViewWrite/colored",
+      "pairs": 11,
+      "baselineMS": 3.474563,
+      "candidateMS": 3.561533,
+      "pairedPercent": -0.4323047920061329,
+      "baselineBytes": 9423237,
+      "candidateBytes": 9423237,
+      "baselineAllocs": 22019,
+      "candidateAllocs": 22019
+    },
+    {
+      "name": "common|BenchmarkViewWrite/unicode",
+      "pairs": 11,
+      "baselineMS": 3.421184,
+      "candidateMS": 3.408151,
+      "pairedPercent": -0.3104046697592122,
+      "baselineBytes": 8964576,
+      "candidateBytes": 8964576,
+      "baselineAllocs": 16019,
+      "candidateAllocs": 16019
+    },
+    {
+      "name": "common|BenchmarkViewWrite/metadata",
+      "pairs": 11,
+      "baselineMS": 2.436399,
+      "candidateMS": 2.432298,
+      "pairedPercent": 1.5206333541012196,
+      "baselineBytes": 3599216,
+      "candidateBytes": 3599216,
+      "baselineAllocs": 10018,
+      "candidateAllocs": 10018
+    },
+    {
+      "name": "common|BenchmarkViewWriteSGR/ascii/lines-1",
+      "pairs": 11,
+      "baselineMS": 0.0006182000000000001,
+      "candidateMS": 0.0006192000000000001,
+      "pairedPercent": 0.9705596894209023,
+      "baselineBytes": 2208,
+      "candidateBytes": 2208,
+      "baselineAllocs": 10,
+      "candidateAllocs": 10
+    },
+    {
+      "name": "common|BenchmarkViewWriteSGR/ascii/lines-2000",
+      "pairs": 11,
+      "baselineMS": 0.961876,
+      "candidateMS": 0.954296,
+      "pairedPercent": -0.8383371658004624,
+      "baselineBytes": 2447232,
+      "candidateBytes": 2447232,
+      "baselineAllocs": 8019,
+      "candidateAllocs": 8019
+    },
+    {
+      "name": "common|BenchmarkViewWriteSGR/unicode/lines-1",
+      "pairs": 11,
+      "baselineMS": 0.001588,
+      "candidateMS": 0.001019,
+      "pairedPercent": -35.790800252047895,
+      "baselineBytes": 2272,
+      "candidateBytes": 2108,
+      "baselineAllocs": 29,
+      "candidateAllocs": 20
+    },
+    {
+      "name": "common|BenchmarkViewWriteSGR/unicode/lines-2000",
+      "pairs": 11,
+      "baselineMS": 2.818281,
+      "candidateMS": 1.669085,
+      "pairedPercent": -40.83207809219004,
+      "baselineBytes": 2575233,
+      "candidateBytes": 2247236,
+      "baselineAllocs": 46019,
+      "candidateAllocs": 28019
+    },
+    {
+      "name": "common|BenchmarkViewWriteSGR/combining/lines-1",
+      "pairs": 11,
+      "baselineMS": 0.002819,
+      "candidateMS": 0.002866,
+      "pairedPercent": 1.9808984789529527,
+      "baselineBytes": 8272,
+      "candidateBytes": 8272,
+      "baselineAllocs": 29,
+      "candidateAllocs": 29
+    },
+    {
+      "name": "common|BenchmarkViewWriteSGR/combining/lines-2000",
+      "pairs": 11,
+      "baselineMS": 5.252217,
+      "candidateMS": 5.410062,
+      "pairedPercent": 2.5207337236296867,
+      "baselineBytes": 9873590,
+      "candidateBytes": 9873591,
+      "baselineAllocs": 38023,
+      "candidateAllocs": 38023
+    },
+    {
+      "name": "common|BenchmarkViewWriteSGR/unique/lines-1",
+      "pairs": 11,
+      "baselineMS": 0.001225,
+      "candidateMS": 0.0008265,
+      "pairedPercent": -32.280557834290406,
+      "baselineBytes": 2448,
+      "candidateBytes": 2293,
+      "baselineAllocs": 18,
+      "candidateAllocs": 13
+    },
+    {
+      "name": "common|BenchmarkViewWriteSGR/unique/lines-2000",
+      "pairs": 11,
+      "baselineMS": 2.446138,
+      "candidateMS": 1.270128,
+      "pairedPercent": -47.72632309395106,
+      "baselineBytes": 2933633,
+      "candidateBytes": 2619176,
+      "baselineAllocs": 27139,
+      "candidateAllocs": 14019
+    }
+  ],
+  "samples": [
+    {
+      "suite": "go-1000-before",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 36142308,
+      "bytes": 52595528,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32394238,
+      "bytes": 51936240,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32316602,
+      "bytes": 51936232,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35977812,
+      "bytes": 52595528,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 36117231,
+      "bytes": 52595528,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 30974387,
+      "bytes": 51936224,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 34812562,
+      "bytes": 51936208,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35920633,
+      "bytes": 52595528,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35904784,
+      "bytes": 52595520,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 31566410,
+      "bytes": 51936232,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 33252900,
+      "bytes": 51936240,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35977282,
+      "bytes": 52595520,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35613180,
+      "bytes": 52595528,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32483679,
+      "bytes": 51936224,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32873834,
+      "bytes": 51936232,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35878284,
+      "bytes": 52595536,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35209822,
+      "bytes": 52595528,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32127347,
+      "bytes": 51936224,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32352816,
+      "bytes": 51936216,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35848046,
+      "bytes": 52595520,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35825331,
+      "bytes": 52595536,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32148142,
+      "bytes": 51936232,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 11,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 30711073,
+      "bytes": 51936208,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 11,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35917868,
+      "bytes": 52595520,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 12,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35653736,
+      "bytes": 52595528,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 12,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32695498,
+      "bytes": 51936232,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 13,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 34581908,
+      "bytes": 51936224,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 13,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 36069967,
+      "bytes": 52595520,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 14,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 35759776,
+      "bytes": 52595528,
+      "allocs": 260934
+    },
+    {
+      "suite": "go-1000-before",
+      "pair": 14,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 33657269,
+      "bytes": 51936224,
+      "allocs": 232801
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 45424150,
+      "bytes": 56900216,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 31101336,
+      "bytes": 53740280,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 33335595,
+      "bytes": 53740304,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 44505872,
+      "bytes": 56900200,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 46605450,
+      "bytes": 56900216,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 33512505,
+      "bytes": 53740288,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 33958352,
+      "bytes": 53740280,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 46784594,
+      "bytes": 56900208,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 45165859,
+      "bytes": 56900208,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 33661848,
+      "bytes": 53740296,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 31100228,
+      "bytes": 53740288,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 46593108,
+      "bytes": 56900216,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 46563810,
+      "bytes": 56900200,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 31307646,
+      "bytes": 53740296,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 31111024,
+      "bytes": 53740304,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 45132188,
+      "bytes": 56900216,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 45696398,
+      "bytes": 56900200,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 31144707,
+      "bytes": 53740288,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 31049014,
+      "bytes": 53740288,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 45054141,
+      "bytes": 56900216,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 45475468,
+      "bytes": 56900200,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 31871136,
+      "bytes": 53740288,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 11,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32831658,
+      "bytes": 53740288,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 11,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 47944856,
+      "bytes": 56900200,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 12,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 47235694,
+      "bytes": 56900232,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 12,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 33169126,
+      "bytes": 53740304,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 13,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 32965218,
+      "bytes": 53740288,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 13,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 48415272,
+      "bytes": 56900208,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 14,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 46769876,
+      "bytes": 56900200,
+      "allocs": 404954
+    },
+    {
+      "suite": "go-1000-after",
+      "pair": 14,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 33502316,
+      "bytes": 53740288,
+      "allocs": 240381
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 487115798,
+      "bytes": 659384912,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 454354936,
+      "bytes": 651511696,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 425134338,
+      "bytes": 651511680,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 490123270,
+      "bytes": 659384912,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 472714817,
+      "bytes": 659384920,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 425389904,
+      "bytes": 651511688,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 426880406,
+      "bytes": 651511704,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 463680852,
+      "bytes": 659384928,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 477346904,
+      "bytes": 659384920,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 418316386,
+      "bytes": 651511712,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 427596196,
+      "bytes": 651511680,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 459801076,
+      "bytes": 659384936,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 461421593,
+      "bytes": 659384920,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 446446470,
+      "bytes": 651511696,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 430010994,
+      "bytes": 651511696,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 474285302,
+      "bytes": 659384912,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 478265374,
+      "bytes": 659384920,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 437946555,
+      "bytes": 651511680,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 410947145,
+      "bytes": 651511696,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 468844970,
+      "bytes": 659384936,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 472017086,
+      "bytes": 659384936,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 427653930,
+      "bytes": 651511696,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 11,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 391166986,
+      "bytes": 651511704,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 11,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 462204173,
+      "bytes": 659384920,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 12,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 481018004,
+      "bytes": 659384936,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 12,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 429032132,
+      "bytes": 651511704,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 13,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 429101875,
+      "bytes": 651511696,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 13,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 488407978,
+      "bytes": 659384920,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 14,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 482509496,
+      "bytes": 659384912,
+      "allocs": 3208217
+    },
+    {
+      "suite": "go-12000-before",
+      "pair": 14,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 459404326,
+      "bytes": 651511688,
+      "allocs": 2872154
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 595939616,
+      "bytes": 713661264,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 440891540,
+      "bytes": 674253864,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 443651978,
+      "bytes": 674253856,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 599930748,
+      "bytes": 713661256,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 602507902,
+      "bytes": 713661240,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 445414166,
+      "bytes": 674253848,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 428967170,
+      "bytes": 674253856,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 594205959,
+      "bytes": 713661272,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 608864868,
+      "bytes": 713661256,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 428257106,
+      "bytes": 674253856,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 446100678,
+      "bytes": 674253848,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 597780357,
+      "bytes": 713661256,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 596382866,
+      "bytes": 713661264,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 451526218,
+      "bytes": 674253864,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 452490925,
+      "bytes": 674253848,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 614706395,
+      "bytes": 713661264,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 594830830,
+      "bytes": 713661248,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 441827200,
+      "bytes": 674253864,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 450654482,
+      "bytes": 674253856,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 603215148,
+      "bytes": 713661232,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 596995780,
+      "bytes": 713661264,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 448857424,
+      "bytes": 674253856,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 11,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 448067617,
+      "bytes": 674253864,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 11,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 601891643,
+      "bytes": 713661248,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 12,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 608794502,
+      "bytes": 713661248,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 12,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 456583098,
+      "bytes": 674253864,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 13,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 444510020,
+      "bytes": 674253848,
+      "allocs": 2967712
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 13,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 603129530,
+      "bytes": 713661264,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 14,
+      "version": "baseline",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 601023186,
+      "bytes": 713661248,
+      "allocs": 5023819
+    },
+    {
+      "suite": "go-12000-after",
+      "pair": 14,
+      "version": "candidate",
+      "benchmark": "BenchmarkDeltaANSIConsumer",
+      "iterations": 2,
+      "ns": 448507556,
+      "bytes": 674253864,
+      "allocs": 2967712
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 46,
+      "ns": 2550162,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3514478,
+      "bytes": 9423237,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 40,
+      "ns": 3232192,
+      "bytes": 8964573,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 66,
+      "ns": 2493726,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 203731,
+      "ns": 600.5,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 123,
+      "ns": 961001,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 78223,
+      "ns": 1577,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 55,
+      "ns": 2900669,
+      "bytes": 2575234,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42836,
+      "ns": 2819,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 22,
+      "ns": 5171704,
+      "bytes": 9873590,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 96595,
+      "ns": 1225,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 66,
+      "ns": 2454999,
+      "bytes": 2933635,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 43,
+      "ns": 2813468,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 37,
+      "ns": 3411460,
+      "bytes": 9423237,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 37,
+      "ns": 3646677,
+      "bytes": 8964574,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 66,
+      "ns": 2370242,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 201204,
+      "ns": 623.4,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 124,
+      "ns": 954296,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 117489,
+      "ns": 1015,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 91,
+      "ns": 1653983,
+      "bytes": 2247236,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 41714,
+      "ns": 2907,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5350147,
+      "bytes": 9873590,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 152926,
+      "ns": 836.3,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 0,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1295037,
+      "bytes": 2619177,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 45,
+      "ns": 2629048,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 43,
+      "ns": 3773337,
+      "bytes": 9423236,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 38,
+      "ns": 3318606,
+      "bytes": 8964576,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 62,
+      "ns": 2457142,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 187042,
+      "ns": 624.2,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 126,
+      "ns": 950291,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 116792,
+      "ns": 1018,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 90,
+      "ns": 1671074,
+      "bytes": 2247237,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42052,
+      "ns": 2866,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 22,
+      "ns": 5138566,
+      "bytes": 9873591,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 155024,
+      "ns": 819.2,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1268925,
+      "bytes": 2619176,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 43,
+      "ns": 2789872,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 40,
+      "ns": 3408303,
+      "bytes": 9423237,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 43,
+      "ns": 3642140,
+      "bytes": 8964576,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 51,
+      "ns": 2373141,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 200582,
+      "ns": 618.2,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 126,
+      "ns": 946053,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 78595,
+      "ns": 1570,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 57,
+      "ns": 2812461,
+      "bytes": 2575233,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42147,
+      "ns": 2829,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 20,
+      "ns": 5196433,
+      "bytes": 9873592,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 96998,
+      "ns": 1228,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 1,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 66,
+      "ns": 2451136,
+      "bytes": 2933633,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 43,
+      "ns": 2795606,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 38,
+      "ns": 3383395,
+      "bytes": 9423238,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 43,
+      "ns": 3418763,
+      "bytes": 8964576,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 68,
+      "ns": 2436399,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 202812,
+      "ns": 610.9,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 124,
+      "ns": 961876,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 73906,
+      "ns": 1597,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 57,
+      "ns": 2799169,
+      "bytes": 2575233,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42867,
+      "ns": 2788,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5669442,
+      "bytes": 9873590,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 100922,
+      "ns": 1230,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 66,
+      "ns": 2417629,
+      "bytes": 2933633,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 40,
+      "ns": 2871416,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3355043,
+      "bytes": 9423238,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 38,
+      "ns": 3408151,
+      "bytes": 8964576,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 66,
+      "ns": 2548254,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 191084,
+      "ns": 614,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 127,
+      "ns": 937384,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 118228,
+      "ns": 1016,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 91,
+      "ns": 1649929,
+      "bytes": 2247236,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42279,
+      "ns": 2854,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5929007,
+      "bytes": 9873589,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 146106,
+      "ns": 826.5,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 2,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1264917,
+      "bytes": 2619177,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 36,
+      "ns": 2798991,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3659051,
+      "bytes": 9423236,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 43,
+      "ns": 3540323,
+      "bytes": 8964574,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 66,
+      "ns": 2432298,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 196212,
+      "ns": 619.2,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 126,
+      "ns": 946458,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 119674,
+      "ns": 1017,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 96,
+      "ns": 1644348,
+      "bytes": 2247236,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42484,
+      "ns": 2850,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 20,
+      "ns": 5410062,
+      "bytes": 9873592,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 147064,
+      "ns": 822.7,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1268564,
+      "bytes": 2619176,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 37,
+      "ns": 2800690,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3605152,
+      "bytes": 9423238,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 38,
+      "ns": 3376546,
+      "bytes": 8964577,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 67,
+      "ns": 2496933,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 187860,
+      "ns": 609.3,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 123,
+      "ns": 958869,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 78298,
+      "ns": 1588,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 55,
+      "ns": 2816923,
+      "bytes": 2575233,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42978,
+      "ns": 2809,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 20,
+      "ns": 5252217,
+      "bytes": 9873592,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 102166,
+      "ns": 1207,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 3,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 67,
+      "ns": 2426774,
+      "bytes": 2933634,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 34,
+      "ns": 3019192,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 42,
+      "ns": 3492226,
+      "bytes": 9423236,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 43,
+      "ns": 3465635,
+      "bytes": 8964571,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 67,
+      "ns": 2464809,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 188178,
+      "ns": 631.9,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 122,
+      "ns": 971089,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 71836,
+      "ns": 1625,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 55,
+      "ns": 2818281,
+      "bytes": 2575233,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 43058,
+      "ns": 2832,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 21,
+      "ns": 5470673,
+      "bytes": 9873589,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 101967,
+      "ns": 1219,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 66,
+      "ns": 2425082,
+      "bytes": 2933633,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 36,
+      "ns": 2840750,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3642550,
+      "bytes": 9423235,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 32,
+      "ns": 4122589,
+      "bytes": 8964577,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 55,
+      "ns": 2535461,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 193585,
+      "ns": 614.9,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 123,
+      "ns": 962948,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 119485,
+      "ns": 1026,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 91,
+      "ns": 1669730,
+      "bytes": 2247236,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42403,
+      "ns": 2948,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5573483,
+      "bytes": 9873593,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 152457,
+      "ns": 825.5,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 4,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1258466,
+      "bytes": 2619177,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 46,
+      "ns": 2568366,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 38,
+      "ns": 3487940,
+      "bytes": 9423239,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 44,
+      "ns": 3303537,
+      "bytes": 8964574,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 67,
+      "ns": 2340110,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 199681,
+      "ns": 611.5,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 126,
+      "ns": 941800,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 119241,
+      "ns": 1013,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 96,
+      "ns": 1662747,
+      "bytes": 2247235,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 41689,
+      "ns": 2869,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 20,
+      "ns": 5340090,
+      "bytes": 9873592,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 154408,
+      "ns": 817,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1269437,
+      "bytes": 2619176,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 43,
+      "ns": 2689857,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3503084,
+      "bytes": 9423237,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 40,
+      "ns": 3485689,
+      "bytes": 8964576,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 72,
+      "ns": 2449636,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 193807,
+      "ns": 631.2,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 122,
+      "ns": 966372,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 78134,
+      "ns": 1578,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 56,
+      "ns": 2810217,
+      "bytes": 2575233,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42472,
+      "ns": 2914,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5268280,
+      "bytes": 9873589,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 100918,
+      "ns": 1223,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 5,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 64,
+      "ns": 2446138,
+      "bytes": 2933633,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 37,
+      "ns": 2828494,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 38,
+      "ns": 3474563,
+      "bytes": 9423237,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 40,
+      "ns": 3278923,
+      "bytes": 8964577,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 64,
+      "ns": 2427186,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 169508,
+      "ns": 631.8,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 123,
+      "ns": 963763,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 78003,
+      "ns": 1587,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 55,
+      "ns": 2859862,
+      "bytes": 2575234,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42770,
+      "ns": 2834,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 21,
+      "ns": 5136969,
+      "bytes": 9873591,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 98893,
+      "ns": 1222,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 66,
+      "ns": 2337547,
+      "bytes": 2933634,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 38,
+      "ns": 2917355,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 38,
+      "ns": 3403027,
+      "bytes": 9423237,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 40,
+      "ns": 3627662,
+      "bytes": 8964574,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 64,
+      "ns": 2421575,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 201084,
+      "ns": 612,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 126,
+      "ns": 942584,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 118876,
+      "ns": 1019,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 93,
+      "ns": 1705269,
+      "bytes": 2247234,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 41944,
+      "ns": 2859,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 20,
+      "ns": 5228295,
+      "bytes": 9873592,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 137378,
+      "ns": 835.4,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 6,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1270128,
+      "bytes": 2619178,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 42,
+      "ns": 2806447,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 40,
+      "ns": 3296799,
+      "bytes": 9423238,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 44,
+      "ns": 3226977,
+      "bytes": 8964577,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 66,
+      "ns": 2338638,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 179953,
+      "ns": 652.4,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 100,
+      "ns": 1048052,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 118166,
+      "ns": 1022,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 87,
+      "ns": 1701704,
+      "bytes": 2247233,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42692,
+      "ns": 2816,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5423034,
+      "bytes": 9873591,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 155317,
+      "ns": 818.6,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1306945,
+      "bytes": 2619176,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 39,
+      "ns": 2847105,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3321987,
+      "bytes": 9423236,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 43,
+      "ns": 3528330,
+      "bytes": 8964575,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 68,
+      "ns": 2356628,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 197902,
+      "ns": 604.1,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 124,
+      "ns": 954296,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 79380,
+      "ns": 1574,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 57,
+      "ns": 2801265,
+      "bytes": 2575232,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 43384,
+      "ns": 2779,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 22,
+      "ns": 5089618,
+      "bytes": 9873591,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 102003,
+      "ns": 1224,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 7,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 66,
+      "ns": 2429157,
+      "bytes": 2933633,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 44,
+      "ns": 2761587,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 42,
+      "ns": 3372841,
+      "bytes": 9423236,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 43,
+      "ns": 3446939,
+      "bytes": 8964576,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 68,
+      "ns": 2423065,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 188947,
+      "ns": 626.7,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 123,
+      "ns": 962351,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 77305,
+      "ns": 1592,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 54,
+      "ns": 2828374,
+      "bytes": 2575233,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42535,
+      "ns": 2827,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5411956,
+      "bytes": 9873589,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 100084,
+      "ns": 1227,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 66,
+      "ns": 2501292,
+      "bytes": 2933633,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 38,
+      "ns": 2936013,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 38,
+      "ns": 4403634,
+      "bytes": 9423236,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 36,
+      "ns": 5062199,
+      "bytes": 8964578,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 57,
+      "ns": 2730648,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 158046,
+      "ns": 698.2,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 100,
+      "ns": 1033345,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 116844,
+      "ns": 1161,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 84,
+      "ns": 1802858,
+      "bytes": 2247234,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 41955,
+      "ns": 2883,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5548377,
+      "bytes": 9873592,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 147411,
+      "ns": 839.4,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 8,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1279101,
+      "bytes": 2619176,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 42,
+      "ns": 2738218,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3674777,
+      "bytes": 9423237,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 42,
+      "ns": 3354683,
+      "bytes": 8964577,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 66,
+      "ns": 2419134,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 195853,
+      "ns": 617.9,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 124,
+      "ns": 957587,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 120998,
+      "ns": 1025,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 92,
+      "ns": 1667262,
+      "bytes": 2247236,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 41559,
+      "ns": 2864,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5382271,
+      "bytes": 9873590,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 145424,
+      "ns": 861.1,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1311203,
+      "bytes": 2619178,
+      "allocs": 14019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 45,
+      "ns": 2618082,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 38,
+      "ns": 3383873,
+      "bytes": 9423238,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 43,
+      "ns": 3374296,
+      "bytes": 8964575,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 66,
+      "ns": 2378662,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 201129,
+      "ns": 619.6,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 123,
+      "ns": 965945,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 77343,
+      "ns": 1601,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 55,
+      "ns": 2838318,
+      "bytes": 2575233,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 43106,
+      "ns": 2806,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 21,
+      "ns": 5221143,
+      "bytes": 9873590,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 99829,
+      "ns": 1239,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 9,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 61,
+      "ns": 2465951,
+      "bytes": 2933634,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 40,
+      "ns": 2803466,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3653029,
+      "bytes": 9423234,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 36,
+      "ns": 3421184,
+      "bytes": 8964577,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 66,
+      "ns": 2454109,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 194112,
+      "ns": 614.1,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 124,
+      "ns": 954557,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 77457,
+      "ns": 1594,
+      "bytes": 2272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 56,
+      "ns": 2847649,
+      "bytes": 2575233,
+      "allocs": 46019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 42664,
+      "ns": 2815,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5519044,
+      "bytes": 9873592,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 100735,
+      "ns": 1242,
+      "bytes": 2448,
+      "allocs": 18
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "baseline",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 62,
+      "ns": 2567156,
+      "bytes": 2933633,
+      "allocs": 27139
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/plain",
+      "iterations": 43,
+      "ns": 2742755,
+      "bytes": 10671232,
+      "allocs": 2019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/colored",
+      "iterations": 39,
+      "ns": 3561533,
+      "bytes": 9423236,
+      "allocs": 22019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/unicode",
+      "iterations": 37,
+      "ns": 3234493,
+      "bytes": 8964572,
+      "allocs": 16019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWrite/metadata",
+      "iterations": 66,
+      "ns": 2491427,
+      "bytes": 3599216,
+      "allocs": 10018
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+      "iterations": 177244,
+      "ns": 643.7,
+      "bytes": 2208,
+      "allocs": 10
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+      "iterations": 120,
+      "ns": 987690,
+      "bytes": 2447232,
+      "allocs": 8019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-1",
+      "iterations": 118324,
+      "ns": 1048,
+      "bytes": 2108,
+      "allocs": 20
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unicode/lines-2000",
+      "iterations": 90,
+      "ns": 1669085,
+      "bytes": 2247235,
+      "allocs": 28019
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+      "iterations": 41457,
+      "ns": 2915,
+      "bytes": 8272,
+      "allocs": 29
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+      "iterations": 19,
+      "ns": 5430877,
+      "bytes": 9873589,
+      "allocs": 38023
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-1",
+      "iterations": 152524,
+      "ns": 836.6,
+      "bytes": 2293,
+      "allocs": 13
+    },
+    {
+      "suite": "common",
+      "pair": 10,
+      "version": "candidate",
+      "benchmark": "BenchmarkViewWriteSGR/unique/lines-2000",
+      "iterations": 100,
+      "ns": 1270603,
+      "bytes": 2619176,
+      "allocs": 14019
+    }
+  ],
+  "fallbackRecheck": {
+    "pairs": 31,
+    "warmups": 3,
+    "benchtime": "200ms",
+    "summary": [
+      {
+        "name": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "pairs": 31,
+        "baselineNS": 602.7,
+        "candidateNS": 604.7,
+        "pairedPercent": 0.7158315298817941,
+        "ci95": [
+          -0.21764607399965552,
+          0.8673894912427205
+        ],
+        "range": [
+          0.7713192644699495,
+          1.0601503759398498
+        ]
+      },
+      {
+        "name": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "pairs": 31,
+        "baselineNS": 930971,
+        "candidateNS": 919880,
+        "pairedPercent": -0.1522960173667487,
+        "ci95": [
+          -0.7407647195291078,
+          0.07158086616125825
+        ],
+        "range": [
+          0.9030865067017807,
+          1.1927331785845101
+        ]
+      },
+      {
+        "name": "BenchmarkViewWriteSGR/combining/lines-1",
+        "pairs": 31,
+        "baselineNS": 2771,
+        "candidateNS": 2819,
+        "pairedPercent": 1.8982808022922626,
+        "ci95": [
+          0.7988380537400142,
+          2.5127458120903112
+        ],
+        "range": [
+          0.9218141346688926,
+          1.290909090909091
+        ]
+      },
+      {
+        "name": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "pairs": 31,
+        "baselineNS": 5125714,
+        "candidateNS": 5281432,
+        "pairedPercent": 3.222054202651403,
+        "ci95": [
+          1.6690850195634654,
+          5.746793704871256
+        ],
+        "range": [
+          0.9658720833868379,
+          1.4312060630760972
+        ]
+      }
+    ],
+    "samples": [
+      {
+        "pair": 0,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 377901,
+        "ns": 601.3,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 0,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 246,
+        "ns": 942477,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 0,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86150,
+        "ns": 2764,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 0,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 43,
+        "ns": 5116433,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 0,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 371268,
+        "ns": 622.7,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 0,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 919007,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 0,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85280,
+        "ns": 2824,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 0,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 39,
+        "ns": 5234636,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 1,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 380076,
+        "ns": 604,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 1,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 917972,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 1,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86582,
+        "ns": 2782,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 1,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5211697,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 1,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 374152,
+        "ns": 599.4,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 1,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 247,
+        "ns": 936913,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 1,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86402,
+        "ns": 2763,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 1,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5049015,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 2,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 376882,
+        "ns": 602.1,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 2,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 256,
+        "ns": 925799,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 2,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87134,
+        "ns": 2751,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 2,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5113245,
+        "bytes": 9873588,
+        "allocs": 38023
+      },
+      {
+        "pair": 2,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 375321,
+        "ns": 613.2,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 2,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 933284,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 2,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 83720,
+        "ns": 2879,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 2,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 40,
+        "ns": 5289292,
+        "bytes": 9873589,
+        "allocs": 38023
+      },
+      {
+        "pair": 3,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 378838,
+        "ns": 605.1,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 3,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 259,
+        "ns": 919880,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 3,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86025,
+        "ns": 2812,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 3,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 39,
+        "ns": 5260117,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 3,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 385156,
+        "ns": 600.6,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 3,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 256,
+        "ns": 926745,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 3,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86838,
+        "ns": 2841,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 3,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 43,
+        "ns": 5151909,
+        "bytes": 9873589,
+        "allocs": 38023
+      },
+      {
+        "pair": 4,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 382369,
+        "ns": 607,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 4,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 255,
+        "ns": 923556,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 4,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86761,
+        "ns": 2765,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 4,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 40,
+        "ns": 5133701,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 4,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 387162,
+        "ns": 598.3,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 4,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 923379,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 4,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85875,
+        "ns": 2782,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 4,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 46,
+        "ns": 5430654,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 5,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 387884,
+        "ns": 603.1,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 5,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 260,
+        "ns": 917836,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 5,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86490,
+        "ns": 2792,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 5,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5146564,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 5,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 390633,
+        "ns": 603.3,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 5,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 260,
+        "ns": 913736,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 5,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 84986,
+        "ns": 2771,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 5,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 43,
+        "ns": 5108785,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 6,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 398421,
+        "ns": 617.9,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 6,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 259,
+        "ns": 916440,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 6,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86677,
+        "ns": 2797,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 6,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5039287,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 6,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 380046,
+        "ns": 604.3,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 6,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 259,
+        "ns": 916565,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 6,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85515,
+        "ns": 2920,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 6,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 43,
+        "ns": 5281432,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 7,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 390766,
+        "ns": 626.6,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 7,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 918518,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 7,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85833,
+        "ns": 2815,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 7,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5130958,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 7,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 382693,
+        "ns": 599.2,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 7,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 919919,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 7,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87522,
+        "ns": 2746,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 7,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 48,
+        "ns": 5126120,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 8,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 385189,
+        "ns": 593.1,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 8,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 255,
+        "ns": 956848,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 8,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85255,
+        "ns": 2767,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 8,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5038350,
+        "bytes": 9873592,
+        "allocs": 38023
+      },
+      {
+        "pair": 8,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 380740,
+        "ns": 603.2,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 8,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 260,
+        "ns": 916583,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 8,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85602,
+        "ns": 2815,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 8,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5231869,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 9,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 385220,
+        "ns": 598.1,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 9,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 261,
+        "ns": 915704,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 9,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 82299,
+        "ns": 2851,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 9,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5204552,
+        "bytes": 9873589,
+        "allocs": 38023
+      },
+      {
+        "pair": 9,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 391856,
+        "ns": 594.6,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 9,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 260,
+        "ns": 915049,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 9,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87612,
+        "ns": 2734,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 9,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5125714,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 10,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 358674,
+        "ns": 620.3,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 10,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 259,
+        "ns": 917217,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 10,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87664,
+        "ns": 2793,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 10,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5040114,
+        "bytes": 9873592,
+        "allocs": 38023
+      },
+      {
+        "pair": 10,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 380779,
+        "ns": 599.8,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 10,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 259,
+        "ns": 919771,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 10,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86622,
+        "ns": 2784,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 10,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5389344,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 11,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 388480,
+        "ns": 596,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 11,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 919355,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 11,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86119,
+        "ns": 2776,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 11,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 40,
+        "ns": 5403743,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 11,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 397328,
+        "ns": 597.3,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 11,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 922248,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 11,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87043,
+        "ns": 2754,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 11,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5087829,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 12,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 385936,
+        "ns": 599.4,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 12,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 255,
+        "ns": 922048,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 12,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86424,
+        "ns": 2748,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 12,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5161533,
+        "bytes": 9873589,
+        "allocs": 38023
+      },
+      {
+        "pair": 12,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 385333,
+        "ns": 614.1,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 12,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 919138,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 12,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85268,
+        "ns": 2819,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 12,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5109435,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 13,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 389649,
+        "ns": 596.1,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 13,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 260,
+        "ns": 927299,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 13,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85000,
+        "ns": 2780,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 13,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5210382,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 13,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 381757,
+        "ns": 606.2,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 13,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 238,
+        "ns": 954980,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 13,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 82780,
+        "ns": 2812,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 13,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5155521,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 14,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 398022,
+        "ns": 599.5,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 14,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 259,
+        "ns": 967479,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 14,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87718,
+        "ns": 2751,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 14,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5100579,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 14,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 381604,
+        "ns": 604.7,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 14,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 260,
+        "ns": 932688,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 14,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 83811,
+        "ns": 2840,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 14,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5185712,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 15,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 389962,
+        "ns": 603.6,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 15,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 919967,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 15,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 84220,
+        "ns": 2850,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 15,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5175207,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 15,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 388316,
+        "ns": 598.7,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 15,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 259,
+        "ns": 916251,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 15,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87310,
+        "ns": 2846,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 15,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5090166,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 16,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 379917,
+        "ns": 595,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 16,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 260,
+        "ns": 914380,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 16,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 88212,
+        "ns": 2799,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 16,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 43,
+        "ns": 5082075,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 16,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 393666,
+        "ns": 600,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 16,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 260,
+        "ns": 914698,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 16,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86637,
+        "ns": 2775,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 16,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 46,
+        "ns": 5476345,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 17,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 382030,
+        "ns": 597,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 17,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 260,
+        "ns": 912607,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 17,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86690,
+        "ns": 2774,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 17,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5229219,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 17,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 381702,
+        "ns": 600.7,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 17,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 921929,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 17,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87895,
+        "ns": 2736,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 17,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5268135,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 18,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 385087,
+        "ns": 607.6,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 18,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 920642,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 18,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86698,
+        "ns": 2771,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 18,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 40,
+        "ns": 5195178,
+        "bytes": 9873592,
+        "allocs": 38023
+      },
+      {
+        "pair": 18,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 376737,
+        "ns": 615.9,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 18,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 259,
+        "ns": 916720,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 18,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85926,
+        "ns": 2836,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 18,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 43,
+        "ns": 5522169,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 19,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 370944,
+        "ns": 618.9,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 19,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 254,
+        "ns": 930339,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 19,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 84969,
+        "ns": 2819,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 19,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5251768,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 19,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 385582,
+        "ns": 603.5,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 19,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 256,
+        "ns": 934040,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 19,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87628,
+        "ns": 2761,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 19,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 40,
+        "ns": 5122099,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 20,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 377625,
+        "ns": 600.7,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 20,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 254,
+        "ns": 938743,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 20,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86090,
+        "ns": 2777,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 20,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5115331,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 20,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 377114,
+        "ns": 605,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 20,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 256,
+        "ns": 923163,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 20,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85966,
+        "ns": 2809,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 20,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5144814,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 21,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 385437,
+        "ns": 597.8,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 21,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 259,
+        "ns": 916921,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 21,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 81289,
+        "ns": 2945,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 21,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 43,
+        "ns": 5402614,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 21,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 390081,
+        "ns": 602.7,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 21,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 247,
+        "ns": 939419,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 21,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87969,
+        "ns": 2745,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 21,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 40,
+        "ns": 5086139,
+        "bytes": 9873592,
+        "allocs": 38023
+      },
+      {
+        "pair": 22,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 378615,
+        "ns": 598.6,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 22,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 258,
+        "ns": 920518,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 22,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86841,
+        "ns": 2828,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 22,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5114553,
+        "bytes": 9873592,
+        "allocs": 38023
+      },
+      {
+        "pair": 22,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 379418,
+        "ns": 592.5,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 22,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 261,
+        "ns": 910011,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 22,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87612,
+        "ns": 2769,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 22,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5302208,
+        "bytes": 9873592,
+        "allocs": 38023
+      },
+      {
+        "pair": 23,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 382000,
+        "ns": 625,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 23,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 229,
+        "ns": 1141225,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 23,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 74006,
+        "ns": 3313,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 23,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 40,
+        "ns": 7850724,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 23,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 253812,
+        "ns": 810.3,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 23,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 201,
+        "ns": 1263694,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 23,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 64593,
+        "ns": 3594,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 23,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 36,
+        "ns": 6675342,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 24,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 298052,
+        "ns": 716.8,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 24,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 218,
+        "ns": 1076495,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 24,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 76910,
+        "ns": 3364,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 24,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 36,
+        "ns": 6782284,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 24,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 284890,
+        "ns": 753.5,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 24,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 217,
+        "ns": 1097491,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 24,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 72855,
+        "ns": 3516,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 24,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 34,
+        "ns": 6652209,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 25,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 323287,
+        "ns": 716.6,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 25,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 194,
+        "ns": 1204635,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 25,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 72403,
+        "ns": 3623,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 25,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 30,
+        "ns": 7420178,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 25,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 320895,
+        "ns": 774.9,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 25,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 222,
+        "ns": 1036566,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 25,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 80653,
+        "ns": 2846,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 25,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5184563,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 26,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 367999,
+        "ns": 611.8,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 26,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 254,
+        "ns": 937729,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 26,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86065,
+        "ns": 2784,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 26,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5199789,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 26,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 364837,
+        "ns": 648.6,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 26,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 231,
+        "ns": 983187,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 26,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 83158,
+        "ns": 2849,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 26,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 46,
+        "ns": 5563557,
+        "bytes": 9873589,
+        "allocs": 38023
+      },
+      {
+        "pair": 27,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 383485,
+        "ns": 611.3,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 27,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 237,
+        "ns": 960135,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 27,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 84884,
+        "ns": 2819,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 27,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5122293,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 27,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 389406,
+        "ns": 612,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 27,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 253,
+        "ns": 952207,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 27,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 85987,
+        "ns": 2785,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 27,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 49,
+        "ns": 5303283,
+        "bytes": 9873589,
+        "allocs": 38023
+      },
+      {
+        "pair": 28,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 390241,
+        "ns": 607.6,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 28,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 255,
+        "ns": 934357,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 28,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 87490,
+        "ns": 2750,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 28,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5136242,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 28,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 380630,
+        "ns": 610.7,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 28,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 255,
+        "ns": 935071,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 28,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 64002,
+        "ns": 3550,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 28,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 36,
+        "ns": 7014866,
+        "bytes": 9873589,
+        "allocs": 38023
+      },
+      {
+        "pair": 29,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 333939,
+        "ns": 660.5,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 29,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 213,
+        "ns": 1110400,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 29,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 72970,
+        "ns": 3062,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 29,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 42,
+        "ns": 5474254,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 29,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 344770,
+        "ns": 627.4,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 29,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 255,
+        "ns": 930971,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 29,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 83773,
+        "ns": 2816,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 29,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 40,
+        "ns": 5473506,
+        "bytes": 9873591,
+        "allocs": 38023
+      },
+      {
+        "pair": 30,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 390910,
+        "ns": 606.7,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 30,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 255,
+        "ns": 932287,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 30,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 86937,
+        "ns": 2792,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 30,
+        "version": "baseline",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 45,
+        "ns": 5147218,
+        "bytes": 9873590,
+        "allocs": 38023
+      },
+      {
+        "pair": 30,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-1",
+        "iterations": 382504,
+        "ns": 601.8,
+        "bytes": 2208,
+        "allocs": 10
+      },
+      {
+        "pair": 30,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/ascii/lines-2000",
+        "iterations": 253,
+        "ns": 930897,
+        "bytes": 2447232,
+        "allocs": 8019
+      },
+      {
+        "pair": 30,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-1",
+        "iterations": 84049,
+        "ns": 2845,
+        "bytes": 8272,
+        "allocs": 29
+      },
+      {
+        "pair": 30,
+        "version": "candidate",
+        "benchmark": "BenchmarkViewWriteSGR/combining/lines-2000",
+        "iterations": 44,
+        "ns": 5443018,
+        "bytes": 9873591,
+        "allocs": 38023
+      }
+    ],
+    "statistics": {
+      "quantity": "median of paired candidate/baseline ratios",
+      "bootstrapReplicates": 10000,
+      "seed": 71477,
+      "generator": "32-bit LCG, multiplier 1664525, increment 1013904223",
+      "interval": "bootstrap percentiles 2.5 and 97.5; upper middle observation for even medians"
+    }
+  },
+  "memory": {
+    "method": "Linux VmHWM sampled every 2ms; can miss final peak; process only",
+    "samples": [
+      {
+        "pair": 0,
+        "version": "baseline",
+        "peakKiB": 575044
+      },
+      {
+        "pair": 0,
+        "version": "candidate",
+        "peakKiB": 529000
+      },
+      {
+        "pair": 1,
+        "version": "candidate",
+        "peakKiB": 524708
+      },
+      {
+        "pair": 1,
+        "version": "baseline",
+        "peakKiB": 570820
+      },
+      {
+        "pair": 2,
+        "version": "baseline",
+        "peakKiB": 559640
+      },
+      {
+        "pair": 2,
+        "version": "candidate",
+        "peakKiB": 563500
+      },
+      {
+        "pair": 3,
+        "version": "candidate",
+        "peakKiB": 528696
+      },
+      {
+        "pair": 3,
+        "version": "baseline",
+        "peakKiB": 567348
+      },
+      {
+        "pair": 4,
+        "version": "baseline",
+        "peakKiB": 560308
+      },
+      {
+        "pair": 4,
+        "version": "candidate",
+        "peakKiB": 558380
+      },
+      {
+        "pair": 5,
+        "version": "candidate",
+        "peakKiB": 554176
+      },
+      {
+        "pair": 5,
+        "version": "baseline",
+        "peakKiB": 561840
+      },
+      {
+        "pair": 6,
+        "version": "baseline",
+        "peakKiB": 569840
+      },
+      {
+        "pair": 6,
+        "version": "candidate",
+        "peakKiB": 535600
+      }
+    ]
+  },
+  "correctness": {
+    "syntheticSnapshots": {
+      "count": 33009,
+      "differences": []
+    },
+    "consumerSnapshots": [
+      {
+        "file": "consumer-before-sbs",
+        "snapshots": 24,
+        "same": true
+      },
+      {
+        "file": "consumer-after-sbs",
+        "snapshots": 24,
+        "same": true
+      },
+      {
+        "file": "consumer-after-hunk",
+        "snapshots": 24,
+        "same": true
+      },
+      {
+        "file": "go-1000-before",
+        "snapshots": 24,
+        "same": true
+      },
+      {
+        "file": "go-1000-after",
+        "snapshots": 24,
+        "same": true
+      },
+      {
+        "file": "go-12000-before",
+        "snapshots": 24,
+        "same": true
+      },
+      {
+        "file": "go-12000-after",
+        "snapshots": 24,
+        "same": true
+      }
+    ],
+    "checks": [
+      "just format",
+      "just build",
+      "just unit-test with NO_COLOR unset, FORCE_COLOR=1 and CLICOLOR_FORCE=1",
+      "just lint",
+      "go test -race ./pkg/gocui ./pkg/gui/controllers/helpers -short",
+      "just e2e diff/diff_renderer_metadata diff/copy_to_clipboard main_view/stage_diff_lines",
+      "Actual corrected Delta copy/edit/stage integration via overlay, both baseline and candidate"
+    ],
+    "rejectedProbes": [
+      "Unit tests without forced color failed color assertions; rerun with required controls passed.",
+      "Integration renderer width 100 exceeded pane width and invalidated NavigateToLine; width={{width}} passed both parsers."
+    ],
+    "limitations": [
+      "Windows",
+      "Physical terminal redraw",
+      "Complete key-to-pixel latency",
+      "Cancellation through the real renderer not remeasured"
+    ]
+  },
+  "artifacts": {
+    "path": ".git/delta-ansi-ingestion-2026-11-12.tar.gz",
+    "sha256": "6a9419de8c89b3787ece80f209dbcf390637e67b2dff9a09e7b804f20c4945e4",
+    "bytes": 24602214
+  }
+}
