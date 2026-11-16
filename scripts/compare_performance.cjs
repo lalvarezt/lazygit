@@ -227,6 +227,8 @@ function measure() {
     BenchmarkViewDraw: p => `Redraw a ${p[0]} view with ${p[1]} content.`,
     BenchmarkGuiFlush: p => `Flush two panes through a mock terminal at ${p[0]}, changing selection and scroll position.`,
     BenchmarkDrawSearchedView: p => `Redraw an 80 × 24 searched viewport within ${value(p, 'lines')} lines.`,
+    BenchmarkSearchDrawViewport: p => `Redraw an 80 × 24 ${p[1]} search viewport at the ${p[3]} of ${value(p, 'lines')} lines; wrap=${value(p, 'wrap')}.`,
+    BenchmarkSearchDrawHorizontalScroll: p => `Redraw ${value(p, 'rows')} searched rows at the ${p[2]} of ${value(p, 'columns')}-column lines.`,
     BenchmarkViewWrite: p => `Write 2,000 ${p[0]} lines into a new view.`,
     BenchmarkViewWriteLongLine: () => 'Write one 13,001-byte line into a new view.',
     BenchmarkViewWriteGitColoredDiff: () => 'Stream 50,000 mixed Unicode lines with separately colored Git prefixes into a new view.',

@@ -5,11 +5,11 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+	"unicode"
 
 	"github.com/jesseduffield/lazygit/pkg/commands/git_commands"
 	"github.com/jesseduffield/lazygit/pkg/gocui"
 	"github.com/jesseduffield/lazygit/pkg/gui/types"
-	"github.com/samber/lo"
 )
 
 type CommitsHelper struct {
@@ -48,6 +48,15 @@ func (self *CommitsHelper) SplitCommitMessageAndDescription(message string) (str
 	return summary, description
 }
 
+// joinCommitMessageAndDescription is the inverse of
+// SplitCommitMessageAndDescription.
+func (self *CommitsHelper) joinCommitMessageAndDescription(summary string, description string) string {
+	if len(description) == 0 {
+		return summary
+	}
+	return summary + "\n\n" + description
+}
+
 // SplitPreservedCommitMessage splits a message in our preservation format
 // (summary and description joined by a single "\n") into summary and description.
 // It is lossless: round-tripping through JoinCommitMessageAndUnwrappedDescription
@@ -80,7 +89,18 @@ func (self *CommitsHelper) JoinCommitMessageAndUnwrappedDescription() string {
 	return self.getCommitSummary() + "\n" + self.getUnwrappedCommitDescription()
 }
 
-func TryRemoveHardLineBreaks(message string, autoWrapWidth int) string {
+// TryRemoveHardLineBreaksIfAutoWrapping replaces the hard line breaks of a
+// message with spaces wherever auto-wrapping would break the line at the same
+// place, so that the paragraphs reflow when the user edits them in the panel.
+func (self *CommitsHelper) TryRemoveHardLineBreaksIfAutoWrapping(message string) string {
+	commitConfig := self.c.UserConfig().Git.Commit
+	if !commitConfig.AutoWrapCommitMessage {
+		return message
+	}
+	return tryRemoveHardLineBreaks(message, commitConfig.AutoWrapWidth)
+}
+
+func tryRemoveHardLineBreaks(message string, autoWrapWidth int) string {
 	lastHardLineStart := 0
 	result := message
 	for i, b := range message {
@@ -103,9 +123,7 @@ func TryRemoveHardLineBreaks(message string, autoWrapWidth int) string {
 }
 
 func (self *CommitsHelper) SwitchToEditor() error {
-	message := lo.Ternary(len(self.getCommitDescription()) == 0,
-		self.getCommitSummary(),
-		self.getCommitSummary()+"\n\n"+self.getCommitDescription())
+	message := self.joinCommitMessageAndDescription(self.getCommitSummary(), self.getCommitDescription())
 	filepath := filepath.Join(self.c.OS().GetTempDir(), self.c.Git().RepoPaths.RepoName(), time.Now().Format("Jan _2 15.04.05.000000000")+".msg")
 	err := self.c.OS().CreateFileWithContent(filepath, message)
 	if err != nil {
@@ -243,11 +261,26 @@ func (self *CommitsHelper) OpenCommitMenu(suggestionFunc func(string) []*types.S
 			Keys: menuKey('c'),
 		},
 		{
+			Label: self.c.Tr.CopyCommitMessageToClipboard,
+			OnPress: func() error {
+				return self.copyCommitMessageToClipboard()
+			},
+			Keys: menuKey('C'),
+		},
+		{
 			Label: self.c.Tr.PasteCommitMessageFromClipboard,
 			OnPress: func() error {
 				return self.pasteCommitMessageFromClipboard()
 			},
-			Keys: menuKey('p'),
+			Keys: menuKey('V'),
+		},
+		{
+			Label: self.c.Tr.ClearCommitMessage,
+			OnPress: func() error {
+				self.setSummaryAndDescriptionInView("", "")
+				return nil
+			},
+			Keys: menuKey('d'),
 		},
 	}
 	return self.c.Menu(types.CreateMenuOptions{
@@ -271,6 +304,70 @@ func (self *CommitsHelper) addCoAuthor(suggestionFunc func(string) []*types.Sugg
 	return nil
 }
 
+func (self *CommitsHelper) copyCommitMessageToClipboard() error {
+	// The panel keeps the space at the end of each line that it wraps. Git
+	// strips trailing whitespace when it commits, so do the same here; this
+	// makes the copied message look like the committed one.
+	message := stripTrailingWhitespace(
+		self.joinCommitMessageAndDescription(self.getCommitSummary(), self.getCommitDescription()))
+
+	self.c.LogAction(self.c.Tr.Actions.CopyCommitMessageToClipboard)
+	if err := self.c.OS().CopyToClipboard(message); err != nil {
+		return err
+	}
+
+	self.c.Toast(self.c.Tr.CommitMessageCopiedToClipboard)
+	return nil
+}
+
+// HandlePasteIntoSummary inserts text that the user pasted into the summary
+// with the terminal's paste command. If the text has several lines, the rest
+// of them goes into the description.
+func (self *CommitsHelper) HandlePasteIntoSummary(text string) {
+	summary, rest, hasMoreLines := strings.Cut(text, "\n")
+
+	view := self.c.Views().CommitMessage
+	view.TextArea.TypeString(replaceTabsInPastedText(summary))
+	view.RenderTextArea()
+	self.c.Contexts().CommitMessage.RenderSubtitle()
+
+	if hasMoreLines {
+		self.c.Context().Replace(self.c.Contexts().CommitDescription)
+		self.HandlePasteIntoDescription(rest)
+	}
+}
+
+// HandlePasteIntoDescription inserts text that the user pasted into the
+// description with the terminal's paste command.
+func (self *CommitsHelper) HandlePasteIntoDescription(text string) {
+	view := self.c.Views().CommitDescription
+	if view.TextArea.GetUnwrappedContent() == "" {
+		// This drops the blank line between subject and body when the user
+		// pastes a whole commit message into the summary
+		text = strings.TrimLeft(text, "\n")
+	}
+	// Remove the hard line breaks of the pasted text on its own, even if it
+	// goes into the middle of a line. Its line breaks come from the layout of
+	// the text that it was copied from, not from the line that it goes into.
+	text = self.TryRemoveHardLineBreaksIfAutoWrapping(replaceTabsInPastedText(text))
+	view.TextArea.TypeString(text)
+	view.RenderTextArea()
+}
+
+// Replace each tab with four spaces, without aligning to tab stops. This works
+// well enough for leading indentation, which is common in pasted code snippets.
+func replaceTabsInPastedText(text string) string {
+	return strings.ReplaceAll(text, "\t", "    ")
+}
+
+func stripTrailingWhitespace(message string) string {
+	lines := strings.Split(message, "\n")
+	for i, line := range lines {
+		lines[i] = strings.TrimRightFunc(line, unicode.IsSpace)
+	}
+	return strings.Join(lines, "\n")
+}
+
 func (self *CommitsHelper) pasteCommitMessageFromClipboard() error {
 	message, err := self.c.OS().PasteFromClipboard()
 	if err != nil {
@@ -285,7 +382,7 @@ func (self *CommitsHelper) pasteCommitMessageFromClipboard() error {
 		Title:  self.c.Tr.PasteCommitMessageFromClipboard,
 		Prompt: self.c.Tr.SurePasteCommitMessage,
 		HandleConfirm: func() error {
-			self.SetMessageAndDescriptionInView(message)
+			self.SetMessageAndDescriptionInView(self.TryRemoveHardLineBreaksIfAutoWrapping(message))
 			return nil
 		},
 	})
